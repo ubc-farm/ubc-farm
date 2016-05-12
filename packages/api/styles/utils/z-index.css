@@ -1,0 +1,10 @@
+/**
+ * z-indexes are ONLY set in this file through Assignments.
+ * This keeps the indexes all in one files. Each assignment
+ * has a descrptive name representing its use.
+ *
+ * Only z-indexes 1-9 can be used.
+ *
+ * Assignments example:
+ * --screenForeground: 1;
+ */

@@ -1,0 +1,13 @@
+/**
+ * Color variables: contains brand and text colors for use in other CSS.
+ */
+:root {
+	/* Temporary shades of gray before deciding colors */
+	--primary-color: #757575;
+	--accent-color: #616161;
+	--dark-gray: #424242;
+	--light-gray: #fafafa;
+	
+	--light-text: #fff;
+	--dark-text: #212121;
+}
