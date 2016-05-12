@@ -1,0 +1,15 @@
+@import 'utils/color.css';
+
+.sidebar {
+	width: 256px;
+	height: 100vh;
+}
+
+.main {
+	margin-left: 256px;
+}
+
+.banner {
+	background-color: var(--primary-color);
+	color: var(--light-text);
+}
