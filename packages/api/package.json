@@ -1,0 +1,38 @@
+{
+	"name": "ubc-farm",
+	"version": "0.1.0",
+	"main": "backend/index.js",
+	"directories": {
+		"lib": "backend",
+		"test": "test",
+		"doc": "docs"
+	},
+	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+	"private": true,
+	"license": "MIT",
+	"dependencies": {
+		"koa": "^2.0.0",
+		"koa-router": "^7.0.1",
+		"koa-send": "^3.2.0",
+		"marko": "^3.3.0",
+		"knex": "^0.11.1",
+		"bluebird": "^3.3.5"
+	},
+	"devDependencies": {
+		"postcss": "^5.0.21",
+		"postcss-import": "^8.1.2",
+		"postcss-css-variables": "^0.5.1",
+		
+		"mocha": "^2.4.5",
+		"chai": "^3.5.0",
+		"chai-as-promised": "^5.3.0",
+		"chai-http": "^2.0.1",
+		
+		"gulp": "^3.9.1",
+		"gulp-rev": "^7.0.0",
+		"gulp-postcss": "^6.1.1",
+		"gulp-imagemin": "^3.0.1",
+		"gulp-concat": "^2.6.0",
+		"gulp-uglify": "^1.5.3"
+	}
+}
