@@ -1,8 +1,17 @@
 @import 'utils/color.css';
 
+body {
+	margin: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	color: var(--dark-text);
+}
+
 .sidebar {
 	width: 256px;
 	height: 100vh;
+	box-shadow: 2px 0 2px rgba(0, 0, 0, .2);
+	float: left;
 }
 
 .main {
@@ -12,4 +21,15 @@
 .banner {
 	background-color: var(--primary-color);
 	color: var(--light-text);
+	padding: 1rem 1.5rem;
+}
+
+.icon-label {
+	display: block;
+	text-decoration: none;
+	color: var(--dark-text);
+}
+
+.icon {
+	padding: 0.5em;
 }
