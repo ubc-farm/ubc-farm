@@ -1,0 +1,15 @@
+<script marko-init>
+	var ic = require('../../_helpers/icon.js');
+</script>
+<macro mapButton(icon, title)>
+	<button id="map-${icon}" title="${title}" aria-label="${title}">
+		<img src="${ic.format(icon)}" alt=""/>	
+	</button>	
+</macro>
+
+<menu class="js">
+	<mapButton id="map-locate"/>
+	<mapButton id="map-zoom-in"/>
+	<mapButton id="map-zoom-out"/>
+	<mapButton id="map-street-view"/>
+</menu>
