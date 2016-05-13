@@ -1,7 +1,7 @@
-let router = module.exports = require('koa-router')();
+let router = require('koa-router')();
 const send = require('koa-send');
 const fs = require('fs');
-const path = require('path');
+const path = require('path').posix;
 const Promise = require('bluebird');
 
 const staticDir = process.env.WWW_STATIC || 'static';
@@ -57,3 +57,5 @@ router.get('/:file.:ext',
 		return next();
 	},
 	sendFile)
+	
+	module.exports = router;
