@@ -5,7 +5,7 @@ const path = require('path');
 const renderer = require('./helper.js');
 const folder = require('./folder.js')
 
-const viewDir = '../../views';
+const viewDir = path.join(__dirname, '../../views');
 
 /**
  * Streams out a marko template as body if the path matches a view directory 
