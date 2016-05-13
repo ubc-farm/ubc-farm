@@ -1,3 +1,4 @@
+const path = require('path');
 /**
  * Formats an icon src to use an svg in /assets/images/icons
  * @param {string} icon - name of icon (or bad url)

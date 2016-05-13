@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path').posix;
 const Promise = require('bluebird');
 
-const staticDir = process.env.WWW_STATIC || 'static';
+const staticDir = process.env.WWW_STATIC;
 //const hashRegexp = /.*-\w{10}\..*/g;
 
 /**
@@ -33,29 +33,39 @@ function sendFile(ctx, next) {
 function sendSigned(ctx, next) {
 	//TODO
 }
-
-router.get('/:sdir(assets|js|css)', sendFile, sendSigned);
-
-router.get('/:file.:ext', 
-	/** Filter out requests for index.html */
-	(ctx, next) => {
-		if (
-			ctx.params.file == 'index' &&
-			(ctx.params.ext == 'html' || ctx.request.type.includes('html'))
-		) {
-			//TODO: respond with root instead of redirecting
-			ctx.status = 301;
-			ctx.redirect('/');
-			ctx.body = '';
-		} else {
-			return next();
-		}
-	},
-	/** Rewrite path for sendFile */
-	(ctx, next) => {
-		ctx.path = path.join('/root', ctx.path);
-		return next();
-	},
-	sendFile)
 	
-	module.exports = router;
+module.exports = [
+	{
+		method: "GET",
+		opts: {name: "static"},
+		path: '/:sdir(assets|js|css)',
+		handler: [sendFile, sendSigned]
+	},
+	{
+		method: "GET",
+		opts: {name: "static_root"},
+		path: '/:file.:ext',
+		handler: [
+			/** Filter out requests for index.html */
+			(ctx, next) => {
+				if (
+					ctx.params.file == 'index' &&
+					(ctx.params.ext == 'html' || ctx.request.type.includes('html'))
+				) {
+					//TODO: respond with root instead of redirecting
+					ctx.status = 301;
+					ctx.redirect('/');
+					ctx.body = '';
+				} else {
+					return next();
+				}
+			},
+			/** Rewrite path for sendFile */
+			(ctx, next) => {
+				ctx.path = path.join('/root', ctx.path);
+				return next();
+			},
+			sendFile
+		]
+	}
+]
