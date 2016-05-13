@@ -18,5 +18,5 @@ exports.stream = function(filename, data = {}) {
  * @returns {Promise<string>} output of rendering
  */
 exports.promise = function(filename, data = {}) {
-	return Promise.promisify(require(filename).render)(data);
+	return Promise.fromCallback(cb => require(filename).render(data, cb));
 }
