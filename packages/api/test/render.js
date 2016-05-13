@@ -35,6 +35,13 @@ module.exports = {
 			'should let data be optional': () => {
 				return helper.promise(testDir+'/index.marko').should.be.fufilled;
 			}
+		},
+		'#stream': {
+			'should run': done => {
+				let s = helper.stream(testDir+'/index.marko');
+				s.pipe(process.stdout);
+				s.on('end', done);
+			}
 		}
 	}
 }
