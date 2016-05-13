@@ -29,6 +29,9 @@ node_modules
 ehthumbs.db
 Thumbs.db
 
+# Marko compiled templates
+*.marko.js
+
 # Project-specific ignores
 docs
 frontend/demo
