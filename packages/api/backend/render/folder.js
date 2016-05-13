@@ -2,17 +2,13 @@ const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
-const renderer = require('./');
-
-const viewDir = '../../views';
-
 /**
  * Checks if directory contains the file
  * @param {string} dir - path to directory
  * @param {string|string[]} filename - name of file, or array of possible files
  * @returns {Promise<boolean>} wheter or not the file(s) are present
  */
-function dirContains(dir, filename) {
+exports.contains = function(dir, filename) {
 	if (typeof filename == 'string') filename = [filename];
 	
 	return fs.readdirAsync(dir).then(list => {
@@ -21,17 +17,14 @@ function dirContains(dir, filename) {
 }
 
 /**
- * Streams out a marko template as body if the path matches a view directory 
- * that contains a index.marko file.
+ * Lists immediate subdirectories of dir
+ * @param {string} dir - path to directory
+ * @returns {Promise<string[]>} names of subdirectories
  */
-module.exports = (ctx, next) => {
-	let dir = path.join(viewDir, ctx.path);
-	if (dirContains(dir, ['index.marko', 'index.marko.js'])) {
-		return next().then(() => {
-			ctx.type = 'text/html';
-			ctx.body = renderer.stream(path.join(dir, 'index.marko'));
-		})
-	} else {
-		return next();
-	}
+exports.list = function(dir) {
+	return fs.readdirAsync(dir).filter(name => {
+		return fs.statAsync(path.join(dir, name))
+			.then(stat => stat.isDirectory())
+			.catch(() => false)
+	})
 }
