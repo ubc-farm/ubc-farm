@@ -31,5 +31,6 @@ Configuration is stored in different enviornment variables.
 * `GOOGLE_TOKEN`, the key for Google APIs
 
 ## Configuration
+* `NODE_PORT`, the port the koa server runs on
 * `WWW_STATIC`, the directory to output static files
 * `REV_MANIFEST`, the full path to assest manifest json
