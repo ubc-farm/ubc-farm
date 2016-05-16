@@ -1,4 +1,12 @@
-function addRevExpBars(row, revenue, expense, max) {
+/**
+ * Creates two divs to be used as bar chart bars,
+ * with widths as percentages of the chart width
+ * @param {number} revenue - first bar's value
+ * @param {number} expense - second bar's value
+ * @param {number} max - max value of the bars (used to turn value into percent)
+ * @returns {DocumentFragment}
+ */
+function addRevExpBars(revenue, expense, max) {
 	var revPercent = revenue/max, expPercent = expense/max;
 	
 	var revBar = document.createElement("div");
