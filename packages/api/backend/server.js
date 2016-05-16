@@ -1,19 +1,17 @@
 const Promise = require('bluebird');
 const Koa = require('koa');
 const router = require('koa-router')();
-const app = module.exports = new Koa();
+const layers = require('./routes');
 
 const port = process.env.NODE_PORT || 3000;
-
-let markoC = Promise.resolve(require('./routes/marko.js'));
-let staticC = Promise.resolve(require('./routes/static.js'));
+let app = module.exports = new Koa();
 
 Promise.all([markoC, staticC])
 	.then(configs => [].concat(...configs))
 	.map(config => {
-		let {method, path, handler, opts} = config;
+		let {method, path, middleware, opts} = config;
 		if (!Array.isArray(method)) method = [method];
-		router.register(path, method, handler, opts);
+		router.register(path, method, middleware, opts);
 	})
 	.then(() => {
 		app.use(router.routes());
