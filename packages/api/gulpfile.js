@@ -1,14 +1,12 @@
 const gulp = require('gulp'),
-	//rev = require('gulp-rev'),
-	
+	rev = require('gulp-rev'),
 	postcss = require('gulp-postcss'),
 	cssimport = require('postcss-import'),
 	cssvars = require('postcss-css-variables'),
-	
 	imagemin = require('gulp-imagemin'),
-	
 	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify')
+	uglify = require('gulp-uglify'),
+	shell = require('gulp-shell');
 	
 const path = require('path');
 const outputPath = process.env.WWW_STATIC;
@@ -78,6 +76,12 @@ gulp.task('other-assets', () => {
 /** Run all asset related tasks */
 gulp.task('assets', ['images', 'misc-assets', 'other-assets']);
 
+gulp.task('marko', shell.task([
+	'markoc views/'
+]))
+
+gulp.task('build', ['marko', 'assets', 'scripts', 'styles']);
+
 gulp.task('watch', () => {
 	gulp.watch([
 		'./frontend/**.js',
@@ -94,3 +98,5 @@ gulp.task('watch', () => {
 		'!./assets/misc/**'
 	], ['other-assets']);
 })
+
+gulp.task('test', shell.task(['mocha']))
