@@ -1,0 +1,30 @@
+<script marko-init>var cal = require('../_helpers/calendar_array.js')</script>
+
+<layout-use("../_layouts/default.marko")>
+<layout-put into="title">Events</layout-put>
+<layout-put into="content">
+	<link href="/css/calendar.css" rel="stylesheet" type="text/css"/>
+	<table class="small-calendar">
+		<tr class="week-title">
+			<th scope="col">S</th>
+			<th scope="col">M</th>
+			<th scope="col">T</th>
+			<th scope="col">W</th>
+			<th scope="col">T</th>
+			<th scope="col">F</th>
+			<th scope="col">S</th>
+		</tr>
+		<tr for(row in cal(data.dateVal)) class="cal-week">
+			<td for(date in row) class=[
+				'circle', 'hover-light',
+				(date === 0? null : 'cal-day'), 
+				(data.event? data.event[date] : null)]
+				>${date === 0? '' : date}</td>	
+		</tr>
+	</table>
+	
+	<article class="agenda" id="agenda">
+		
+	</article>
+</layout-put>
+</layout-use>
