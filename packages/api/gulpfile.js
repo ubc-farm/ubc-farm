@@ -11,7 +11,7 @@ const gulp = require('gulp'),
 	uglify = require('gulp-uglify')
 	
 const path = require('path');
-const outputPath = 'static' //process.env.WWW_STATIC || 'static';
+const outputPath = process.env.WWW_STATIC;
 //const manifestPath = process.env.REV_MANIFEST;
 //const manifestFolder = path.dirname(manifestPath);
 
