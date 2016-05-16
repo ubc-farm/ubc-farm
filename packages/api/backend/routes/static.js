@@ -1,11 +1,7 @@
-let router = require('koa-router')();
 const send = require('koa-send');
-const fs = require('fs');
 const path = require('path').posix;
-const Promise = require('bluebird');
 
 const staticDir = process.env.WWW_STATIC;
-//const hashRegexp = /.*-\w{10}\..*/g;
 
 /**
  * Uses koa-send to send a file. 
@@ -17,9 +13,9 @@ function sendFile(ctx, next) {
 			root: staticDir,
 			setHeaders: res => {
 				if (ctx.signed) {
-					res.set('Cache-Control', 'max-age=31536000');
+					res.setHeader('Cache-Control', 'max-age=31536000');
 				} else {
-					res.set('Cache-Control', 'no-cache');
+					res.setHeader('Cache-Control', 'no-cache');
 				}
 			}
 		})
@@ -32,20 +28,37 @@ function sendFile(ctx, next) {
  */
 function sendSigned(ctx, next) {
 	//TODO
+	ctx.signed = false;
+	return next();
 }
+
+/**
+ * A route configuration similar to koa-route Layers
+ * @typedef {Object} Layer
+ * @property {string|string[]} method - methods that this route accepts
+ * @property {string} path - path for the route, parsed through path-to-regexp
+ * @property {function|function[]} middleware - middleware used for this route
+ * @property {Object} [opts] - options passed to koa-router
+ * @property {string} [opts.name] - name of the route
+ */
 	
+/**
+ * Sets up routes that correspond to folders with static content:
+ * /assets, /js, /css, and files in the root.
+ * @type {Layer[]}
+ */
 module.exports = [
 	{
 		method: "GET",
 		opts: {name: "static"},
-		path: '/:sdir(assets|js|css)',
-		handler: [sendFile, sendSigned]
+		path: '/:sdir(assets|js|css)/*',
+		middleware: [sendFile, sendSigned]
 	},
 	{
 		method: "GET",
 		opts: {name: "static_root"},
 		path: '/:file.:ext',
-		handler: [
+		middleware: [
 			/** Filter out requests for index.html */
 			(ctx, next) => {
 				if (
