@@ -4,9 +4,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><layout-placeholder name="title"/></title>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+	<link href="/css/simple.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/main.css" rel="stylesheet" type="text/css"/>
+	<script async src="/js/vendor/analytics.js"></script>
+	<script src="/js/utils.js"></script>
+	<layout-placeholder name="head"/>
 </head>
 <body>
+	<link href="/css/sidebar.css" rel="stylesheet" type="text/css"/>
 	<include("../_partials/sidebar.marko")/>
 	<main class="main">
 		<layout-placeholder name="content"/>
