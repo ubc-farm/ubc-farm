@@ -1,6 +1,5 @@
 const gulp = require('gulp'),
-	hash = require('gulp-hash'),
-	rev = require('gulp-rev'),
+	//rev = require('gulp-rev'),
 	
 	postcss = require('gulp-postcss'),
 	cssimport = require('postcss-import'),
@@ -51,8 +50,7 @@ gulp.task('sw', () => {
 })
 
 /** Run all frontend script related tasks */
-gulp.task('scripts', 
-	gulp.parallel('main-js', 'sw'));
+gulp.task('scripts', ['main-js', 'sw']);
 	
 /** Minify images and copy to static */
 gulp.task('images', () => {
@@ -78,4 +76,21 @@ gulp.task('other-assets', () => {
 })
 
 /** Run all asset related tasks */
-gulp.task('assets', gulp.parallel('images', 'misc-assets', 'other-assets'));
+gulp.task('assets', ['images', 'misc-assets', 'other-assets']);
+
+gulp.task('watch', () => {
+	gulp.watch([
+		'./frontend/**.js',
+		'!./frontend/typings/**',
+		'!./frontend/demo/**',
+		'!./frontend/workers/sw.js'
+	], ['main-js']);
+	gulp.watch('./frontend/workers/sw.js', ['sw']);
+	gulp.watch('./assets/images/**', ['images']);
+	gulp.watch('./assets/misc/**', ['misc-assets']);
+	gulp.watch([
+		'./assets/**',
+		'!./assets/images/**',
+		'!./assets/misc/**'
+	], ['other-assets']);
+})
