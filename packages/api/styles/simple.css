@@ -1,3 +1,9 @@
 .clear-margin {margin:0}
 
 .mid {vertical-align: middle}
+
+.normal-text {font-weight:normal}
+
+.relative {position: relative}
+
+.circle {border-radius: 50%}

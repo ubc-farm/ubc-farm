@@ -1,0 +1,18 @@
+@import 'utils/color.css';
+
+.hover-light {position: relative}
+
+.hover-light::before {
+	position: absolute;
+	width: 100%; height: 100%;
+	background: var(--dark-gray);
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+.circle.hover-light::before {
+	border-radius: 50%;
+}
+
+.hover-light:hover::before {
+	opacity: 0.2;
+}
