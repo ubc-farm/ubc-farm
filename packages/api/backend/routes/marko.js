@@ -20,11 +20,7 @@ let render = require('../render');
  * is in the render folder.
  * @type {Promise<Layer[]>}
  */
-module.exports = folder.list(path.join(__dirname, '../../views')).then(list => {
-	//TODO: Clean this up so root is handled better
-	list.push('');
-	return list;
-}).map(name => {
+module.exports = folder.list(path.join(__dirname, '../../views')).map(name => {
 	return {
 		method: "GET",
 		path: path.posix.join('/', name),

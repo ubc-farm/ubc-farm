@@ -15,7 +15,7 @@ const Promise = require('bluebird');
  * non-promises into promises.
  */
 let configs = [
-	require('./api.js'),
+	//require('./api.js'),
 	require('./static.js'),
 	require('./marko.js')
 ].map(val => Promise.resolve(val));
