@@ -8,7 +8,10 @@ let render = require('../render');
 	router.get(name, path.posix.join('/', name), render);
 }).then(module.exports = router);*/
 
-module.exports = folder.list(path.join(__dirname, '../../views')).map(name => {
+module.exports = folder.list(path.join(__dirname, '../../views')).then(list => {
+	list.push('');
+	return list;
+}).map(name => {
 	return {
 		method: "GET",
 		opts: {name: name},
