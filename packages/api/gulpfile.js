@@ -47,6 +47,17 @@ gulp.task('sw', () => {
 		.pipe(gulp.dest(path.join(outputPath, 'root')))
 })
 
+gulp.task('jsdoc-backend', () => {
+	return gulp.src('./backend/**.js', {read:false})
+		.pipe(shell([
+			'jsdoc2md ./backend/<%= file.path %> > ./docs/JSDoc/Node/<%= m(file.path) %>'
+		], {
+			templateData: {
+				m: s => s.replace(/$/, '.md')
+			}
+		}))
+})
+
 /** Run all frontend script related tasks */
 gulp.task('scripts', ['main-js', 'sw']);
 	
@@ -76,10 +87,12 @@ gulp.task('other-assets', () => {
 /** Run all asset related tasks */
 gulp.task('assets', ['images', 'misc-assets', 'other-assets']);
 
+/** Compile all marko files */
 gulp.task('marko', shell.task([
 	'markoc views/'
 ]))
 
+/** Do everything */
 gulp.task('build', ['marko', 'assets', 'scripts', 'styles']);
 
 gulp.task('watch', () => {
@@ -97,6 +110,7 @@ gulp.task('watch', () => {
 		'!./assets/images/**',
 		'!./assets/misc/**'
 	], ['other-assets']);
+	gulp.watch('./views/**.marko', ['marko']);
 })
 
 gulp.task('test', shell.task(['mocha']))
