@@ -12,46 +12,51 @@
 	line-height: 4em;
 }
 
+.sticky-banner {
+	position: fixed;
+	width: 100%;
+}
+
 .banner-title {
-	margin: 0 .5em;
-	display: inline-block;
 	font-weight: 400;
 	font-size: 1.25em;
 	border-right: 1px solid var(--dark-divider);
+	
+	margin: 0 .5em;
 	padding: 0 2em;
+	vertical-align: top;
 }
 
 .icon-label {
-	display: inline-block;
-	text-decoration: none;
-	color: var(--white-primary);
 	text-transform: uppercase;
 	font-size: 0.9em;
+	
 	padding: 0 1.5em;
 	position: relative;
 }
 
 .icon {
-	transform: scale(0);
+	width: 2.25rem; 
+	height: 2.25rem;
+	
 	transition: transform 0.2s ease;
-	width: 2.25rem; height: 2.25rem;
 }
 
 .icon-text {
-	display: inline-block;
 	opacity: 0.75;
-	transform: scale(1);
 	transition: opacity 0.1s ease, transform 0.2s ease;
 }
 
 .icon-label::after {
-	position: absolute;
-	content: '';
 	width: 100%;
-	bottom: 0; 
-	left: 0;
 	height: .25rem;
 	background-color: var(--accent-color);
+	
+	position: absolute;
+	content: '';
+	bottom: 0; 
+	left: 0;
+
 	opacity: 0;
 	transition: opacity 0.2s ease;
 }
@@ -68,7 +73,8 @@
 
 .icon-label.this .icon,
 .icon-label:active .icon,
-.icon-label:focus .icon {
+.icon-label:focus .icon,
+.icon-text {
 	transform: scale(1);
 }
 
@@ -78,7 +84,8 @@
 
 .icon-label.this .icon-text,
 .icon-label:active .icon-text,
-.icon-label:focus .icon-text {
+.icon-label:focus .icon-text,
+.icon {
 	transform: scale(0);
 }
 

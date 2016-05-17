@@ -1,12 +1,1 @@
-@import 'utils/color.css';
 
-body {
-	margin: 0;
-	font-family: 'Open Sans', sans-serif;
-	color: var(--dark-primary);
-	background-color: var(--light-gray);
-}
-
-.main {
-	padding: 1rem 2rem;
-}

@@ -1,0 +1,14 @@
+@import 'utils/color.css';
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: var(--dark-primary);
+	background-color: var(--light-gray);
+	
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
