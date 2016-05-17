@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path').posix;
 const iconHelper = require('../../_helpers/icon.js')
 
 const template = require('./template.marko');
