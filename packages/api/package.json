@@ -7,6 +7,10 @@
 		"test": "test",
 		"doc": "docs"
 	},
+	"scripts": {
+		"start": "node backend/index.js",
+		"test": "mocha"
+	},
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"private": true,
 	"license": "MIT",
