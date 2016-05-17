@@ -1,10 +1,8 @@
 @import 'utils/color.css';
 
 .banner {
-	/*box-shadow: 0 2px 2px rgba(0, 0, 0, .2);*/
 	background-color: var(--primary-color);
-	color: var(--light-text);
-	fill: var(--light-text);
+	color: var(--white-primary);
 }
 
 .banner-title {
@@ -13,14 +11,14 @@
 	font-weight: 400;
 	font-size: 1.25em;
 	line-height: 4rem;
-	border-right: 1px solid rgba(0,0,0,.5);
+	border-right: 1px solid var(--dark-divider);
 	padding: 0 2em;
 }
 
 .icon-label {
 	display: inline-block;
 	text-decoration: none;
-	color: var(--light-text);
+	color: var(--white-primary);
 	text-transform: uppercase;
 	line-height: 4rem;
 	font-size: 0.9em;
@@ -48,7 +46,7 @@
 	bottom: 0; 
 	left: 0;
 	height: .25rem;
-	background-color: white;
+	background-color: var(--accent-color);
 	opacity: 0;
 	transition: opacity 0.2s ease;
 }

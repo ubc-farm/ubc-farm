@@ -4,7 +4,7 @@ body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
-	color: var(--dark-text);
+	color: var(--dark-primary);
 	background-color: var(--light-gray);
 }
 
