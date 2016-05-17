@@ -58,6 +58,7 @@
 
 .icon-label.this::after,
 .icon-label:hover::after,
+.icon-label:active::after,
 
 .icon-label:hover .icon-text {
 	opacity: 1;

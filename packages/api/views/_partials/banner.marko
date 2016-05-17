@@ -1,10 +1,10 @@
 <header class="banner">
 	<h1 class="banner-title mid">UBC Farm</h1>
 	<nav class="inline nav mid" role="navigation">
-		<icon-label href="/fields" text="Fields" icon="map"/>
-		<icon-label href="/plan" text="Planning" icon="assignment"/>
-		<icon-label href="/finances" text="Finances" icon="money"/>
-		<icon-label href="/events" text="Events" icon="event"/>
-		<icon-label href="/logging" text="Logging" icon="edit"/>
+		<icon-label href="/fields" text="Fields" icon="map" active=(data.active == 'fields')/>
+		<icon-label href="/plan" text="Planning" icon="assignment" active=(data.active == 'plan')/>
+		<icon-label href="/finances" text="Finances" icon="money" active=(data.active == 'finances')/>
+		<icon-label href="/events" text="Events" icon="event" active=(data.active == 'events')/>
+		<icon-label href="/logging" text="Logging" icon="edit" active=(data.active == 'logging')/>
 	</nav>
 </header>

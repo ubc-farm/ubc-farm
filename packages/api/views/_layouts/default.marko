@@ -13,7 +13,11 @@
 </head>
 <body>
 	<link href="/css/banner.css" rel="stylesheet" type="text/css"/>
-	<include("../_partials/banner.marko")/>
+	<if(data.this)>
+		<include("../_partials/banner.marko") active=data.this />
+	</if><else>
+		<include("../_partials/banner.marko") active=''/>
+	</else>
 	<main class="main">
 		<layout-placeholder name="content"/>
 	</main>
