@@ -7,3 +7,5 @@
 .relative {position: relative}
 
 .circle {border-radius: 50%}
+
+.inline {display: inline-block}
