@@ -1,3 +1,5 @@
+@import 'utils/color.css';
+
 .small-calendar {
 	border-spacing: .75em;
 	text-align: center;
@@ -6,7 +8,11 @@
 .cal-day {
 	width: 2em;
 	height: 2em;
-	border: 1px solid var(--dark-secondary);
+	border: 1px solid transparent;
+}
+
+.cal-event {
+	border-color: var(--dark-secondary);
 }
 
 .agenda {

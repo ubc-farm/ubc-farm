@@ -18,6 +18,7 @@
 			<td for(date in row) class=[
 				'circle', 'hover-light',
 				(date === 0? null : 'cal-day'), 
+				(date == 5 || date == 10 ? 'cal-event' : null),
 				(data.event? data.event[date] : null)]
 				>${date === 0? '' : date}</td>	
 		</tr>
