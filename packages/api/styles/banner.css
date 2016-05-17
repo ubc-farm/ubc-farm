@@ -40,3 +40,29 @@
 	opacity: 0.75;
 	transition: opacity 0.2s ease;
 }
+
+.icon-label::after {
+	position: absolute;
+	content: '';
+	width: 100%;
+	bottom: 0;
+	height: .25rem;
+	background-color: white;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+}
+
+.icon-label.this .icon,
+.icon-label:active .icon,
+
+.icon-label.this::after,
+.icon-label:hover::after,
+
+.icon-label:hover .icon-text {
+	opacity: 1;
+}
+
+.icon-label.this .icon-text,
+.icon-label:active .icon-text {
+	opacity: 0;
+}
