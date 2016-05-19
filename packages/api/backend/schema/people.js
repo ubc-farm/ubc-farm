@@ -1,6 +1,3 @@
-const Promise = require('bluebird');
-const knex = require('knex')({});
-
 /**
  * @external CreateTableBuilder
  * @see http://knexjs.org/
