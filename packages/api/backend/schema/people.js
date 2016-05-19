@@ -9,6 +9,7 @@
 
 /**
  * @name person
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -26,6 +27,7 @@ exports.person = function(table) {
 /**
  * @name employee
  * @see person
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -46,6 +48,7 @@ exports.employee = function(table) {
 /**
  * @name researcher
  * @see person
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -66,6 +69,7 @@ exports.researcher = function(table) {
  * Many-to-many join helper table
  * @name assignment
  * @see employee
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */

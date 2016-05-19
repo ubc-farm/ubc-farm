@@ -9,6 +9,7 @@
 
 /**
  * @name plant
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -21,6 +22,7 @@ exports.plant = function(table) {
 
 /**
  * @name inventory
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -37,6 +39,7 @@ exports.inventory = function(table) {
 
 /**
  * @name location
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -49,6 +52,7 @@ exports.inventory = function(table) {
 /**
  * Represents UBC Farm programs
  * @name program
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
@@ -60,6 +64,7 @@ exports.program = function(table) {
 
 /**
  * @name chemical
+ * @version 1
  * @param {external:CreateTableBuilder} table
  * @returns {external:SchemaBuilder}
  */
