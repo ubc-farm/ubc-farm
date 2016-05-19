@@ -1,11 +1,11 @@
 <header class={'banner': true, 'sticky-banner': data.stick}>
-	<h1 class="banner-title inline">UBC Farm</h1>
-	<nav class="inline nav" role="navigation">
-		<icon-label href="/fields" text="Fields" icon="map" active=(data.active == 'fields') tab/>
-		<icon-label href="/plan" text="Planning" icon="assignment" active=(data.active == 'plan') tab/>
-		<icon-label href="/finances" text="Finances" icon="money" active=(data.active == 'finances') tab/>
-		<icon-label href="/events" text="Events" icon="event" active=(data.active == 'events') tab/>
-		<icon-label href="/logging" text="Logging" icon="edit" active=(data.active == 'logging') tab/>
+	<h1 class="inline banner-title">UBC Farm</h1>
+	<nav class="inline banner-nav nav" role="navigation">
+		<icon-tab text="Fields" icon="map" active=(data.active == 'fields')/>
+		<icon-tab text="Planning" icon="assignment" active=(data.active == 'plan')/>
+		<icon-tab text="Finances" icon="money" active=(data.active == 'finances')/>
+		<icon-tab text="Events" icon="event" active=(data.active == 'events')/>
+		<icon-tab text="Logging" icon="edit" active=(data.active == 'logging')/>
 	</nav>
 	<span class="user-button">${data.user || 'John Doe'}</span>
 </header>

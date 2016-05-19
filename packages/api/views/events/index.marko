@@ -1,9 +1,22 @@
 <script marko-init>var cal = require('../_helpers/calendar_array.js')</script>
 
+<script marko-init>
+	var demo = [
+		{
+			month: 5,
+			date: 19,
+			day: 4,
+			events: [
+				
+			]
+		}
+	];
+</script>
+
 <layout-use("../_layouts/default.marko") this='events' sticky>
 <layout-put into="title">Events</layout-put>
 <layout-put into="content">
-	<link href="/css/calendar.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/layout/calendar.css" rel="stylesheet" type="text/css"/>
 	<table class="small-calendar">
 		<tr class="week-title">
 			<th scope="col">S</th>
@@ -24,8 +37,12 @@
 		</tr>
 	</table>
 	
-	<article class="agenda" id="agenda">
-		
-	</article>
+	<section class="agenda" id="agenda">
+		<link href="/css/modules/icon-button.css" rel="stylesheet" type="text/css">
+		<section class="day" for(day in demo)>
+			<time class="agenda-head"></time>
+			
+		</section>
+	</section>
 </layout-put>
 </layout-use>

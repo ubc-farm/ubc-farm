@@ -1,0 +1,15 @@
+.banner {
+	line-height: 4em;
+}
+
+.banner .inline {vertical-align: top}
+
+.banner-title {
+	font-size: 1.25em;
+	margin: 0 .5em;
+	padding: 0 2em;
+}
+
+.banner .i-tab {
+	padding: 0 1.5em;
+}

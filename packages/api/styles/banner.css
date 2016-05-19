@@ -30,7 +30,9 @@
 .icon-label {
 	text-transform: uppercase;
 	font-size: 0.9em;
-	
+}
+
+.nav-tab {
 	padding: 0 1.5em;
 	position: relative;
 }

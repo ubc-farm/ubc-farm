@@ -1,0 +1,8 @@
+<button id=data.id class="${data.className}">
+	<if(data.icon)>
+		<img class="icon i-button-img"
+		     alt="" src="${data.icon}" 
+		     width="${data.size}" height="${data.size}"/>
+	</if>
+	<span if(data.label) class="i-button-label">${data.label}</span>
+</button>
