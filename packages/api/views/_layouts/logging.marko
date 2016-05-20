@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<include("../_partials/head.marko") />
+	<title><layout-placeholder name="title"/></title>
+	<layout-placeholder name="head"/>
+</head>
+<body>
+	<link href="/css/modules/icon-tab.css" rel="stylesheet" type="text/css"/>
+	<link href="/css/modules/icon-text.css" rel="stylesheet" type="text/css"/>
+	<header class="large-banner">
+		<div class="large-banner-container">
+			<layout-placeholder name="banner"/>
+		</div>
+	</header>
+	<unless(data.swapsize)>
+		<main class="log-fields">
+			
+		</main>
+		<aside class="log-sideinfo">
+			
+		</aside>
+	</unless><else>
+		<section class="log-fields thin">
+			
+		</section>
+		<section class="log-sideinfo expand">
+			
+		</section>
+	</else>
+</body>
+</html>
