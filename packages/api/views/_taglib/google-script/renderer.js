@@ -5,10 +5,11 @@ const apis = {
 /**
  * @param {Object} input
  * @param {string} input.api - string corresponding to apis' properties
- * @param {string|string[]} input.libraries - list of libraries to use
+ * @param {string|string[]} [input.libraries] - list of libraries to use
+ * @param {string} [cb=calling.map] - specify the callback's name
  */
 exports.render = (input, out) => {
-	let {api, libraries} = input;
+	let {api, libraries, cb} = input;
 	if (!Array.isArray(libraries)) libraries = [libraries];
 	
 	out.write('<script async src="');
@@ -19,4 +20,6 @@ exports.render = (input, out) => {
 		out.write('&libraries=');
 		out.write(libraries.join(','));
 	}
+	out.write('&callback=');
+	out.write(cb || 'calling.map');
 }
