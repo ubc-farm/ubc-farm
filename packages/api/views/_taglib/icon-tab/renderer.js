@@ -9,9 +9,10 @@ const template = require('./template.marko');
  * @param {string} input.href - url for the tab's link
  * @param {boolean} input.active - does this tab represent the current page?
  * @param {boolean} local - generate local links
+ * @param {boolean} radio - generate radio tabs instead of links
  */
 exports.renderer = (input, out) => {
-	let {text, icon, href, active, local} = input;
+	let {text, icon, href, active, local, radio} = input;
 	icon = icon? icon : text.toLowerCase();
 	let pre = local? '#' : '/';
 	if (!href) {
@@ -24,9 +25,12 @@ exports.renderer = (input, out) => {
 		text: text,
 		icon: iconHelper.format(icon),
 		href: href,
+		name: name ? name : 'icon-tab',
 		className: {
 			"inline icon-text i-tab": true, 
-			"this": active
-		}
+			"this": active,
+			"i-radio-label": radio
+		},
+		radio: radio
 	}, out);
 }

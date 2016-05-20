@@ -1,4 +1,15 @@
-<a class="${data.className}" href="${data.href}">
-	<img class="i-tab-img icon" alt="" src="${data.icon}" width="36" height="36">
-	<span class="i-tab-label">${data.text}</span>
+<macro tab(icon, text)>
+	<img class="i-tab-img icon" alt="" src="${icon}" width="36" height="36">
+	<span class="i-tab-label">${text}</span>
+</macro>
+
+<a class="${data.className}" href="${data.href}" unless(data.radio)>
+	<tab(data.icon, data.text)/>
 </a>
+
+<else>
+	<input type="radio" class="i-radio" id="${data.href}" name="${data.name}">
+	<label for="${data.href}" class="${data.className}">
+		<tab(data.icon, data.text)/>	
+	</label>
+</else>
