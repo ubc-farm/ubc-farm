@@ -4,6 +4,8 @@
 
 .left {float: left}
 
+.rel {position: relative}
+
 @import 'utils/color.css';
 
 body {
