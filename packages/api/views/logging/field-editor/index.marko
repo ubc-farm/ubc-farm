@@ -6,9 +6,19 @@
 		</section>
 </macro>
 
+<macro grid-bar(dir)>
+	<div class=['drag-grid', dir]>
+		<input class="" type="number" autocomplete="on">
+	</div>
+</macro>
+
 <layout-use("../../_layouts/logging.marko")>
 	<layout-put into="head">
-		<google-script api="maps" libraries="drawing"/>
+		<script>
+			var loadMap = new Deferred();
+			function mapReady() {loadMap.resolve()}
+		</script>
+		<google-script api="maps" libraries="drawing" cb="mapReady"/>
 	</layout-put>
 
 	<layout-put into="title">Field Editor</layout-put>
@@ -17,11 +27,38 @@
 		<link href="/css/modules/icon-tab.css" rel="stylesheet" type="text/css"/>
 		<div>
 			<tab-wrapper text="Add">
-				Draw the new field on the map
+				Draw the new field area on the map
 			</tab-wrapper>
 			
 			<tab-wrapper text="Edit">
+				<input class="label-input" id="input-field-name" type="text" 
+				       autocapitalize="sentences" autocomplete="on" 
+							 placeholder="Field #2">
+				<label class="label" for="input-field-name">
+					Field name
+				</label>
 				
+				<section class="expanding-panel" id="grid-expandee">
+					<div class="expanding-panel-shown">
+						<input class="label-input" id="input-grid-width" type="number" 
+								autocomplete="on" placeholder="2">
+						<abbr class="after-input" title="metres">m</abbr>
+						<label class="label" for="input-grid-width">
+							Grid width
+						</label>
+						
+						<input class="label-input" id="input-grid-height" type="number" 
+								autocomplete="on" placeholder="3">
+						<abbr class="after-input" title="metres">m</abbr>
+						<label class="label" for="input-grid-height">
+							Grid height
+						</label>
+					</div>
+					<icon-button text="Grid details" id="grid-expander"/>
+					<div class="expanding-panel-hidden">
+						
+					</div>
+				</section>
 			</tab-wrapper>
 			
 			<tab-wrapper text="List">
