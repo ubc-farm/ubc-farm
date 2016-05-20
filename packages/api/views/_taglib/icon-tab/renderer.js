@@ -12,7 +12,6 @@ const template = require('./template.marko');
  */
 exports.renderer = (input, out) => {
 	let {text, icon, href, active, local} = input;
-	let thisC = active ? "this" : "";
 	icon = icon? icon : text.toLowerCase();
 	let pre = local? '#' : '/';
 	if (!href) {
@@ -25,6 +24,9 @@ exports.renderer = (input, out) => {
 		text: text,
 		icon: iconHelper.format(icon),
 		href: href,
-		className: "inline icon-text i-tab" + thisC
+		className: {
+			"inline icon-text i-tab": true, 
+			"this": active
+		}
 	}, out);
 }
