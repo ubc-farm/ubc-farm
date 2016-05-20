@@ -104,6 +104,15 @@ Field.prototype.editGridLength = function(lengths) {
 }
 
 /**
+ * Checks if a point is within the polygon
+ * @param {LatLngLiteral} point
+ * @returns {boolean}
+ */
+Field.prototype.within = function(point) {
+	return google.maps.geometry.containsLocation(point, this.polygon);
+}
+
+/**
  * Responds to a new polygon drawing creating a field
  * from the polygon and editing it
  * @listens polygonComplete

@@ -18,14 +18,14 @@
 			var loadMap = new Deferred();
 			function mapReady() {loadMap.resolve()}
 		</script>
-		<google-script api="maps" libraries="drawing" cb="mapReady"/>
+		<google-script api="maps" libraries=["drawing", "geometry"] cb="mapReady"/>
 	</layout-put>
 
 	<layout-put into="title">Field Editor</layout-put>
 	<layout-put into="banner">
-		<h1>Field Editor</h1>
+		<h1 class="banner-title">Field Editor</h1>
 		<link href="/css/modules/icon-tab.css" rel="stylesheet" type="text/css"/>
-		<div>
+		<div class="rel">
 			<tab-wrapper text="Add">
 				Draw the new field area on the map
 			</tab-wrapper>
