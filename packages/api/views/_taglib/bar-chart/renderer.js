@@ -1,5 +1,4 @@
 const template = require('./template.marko');
-const money = require('../../_helpers/money.js')
 
 /**
  * @typedef {Object} ChartRow
@@ -17,17 +16,22 @@ const money = require('../../_helpers/money.js')
 exports.renderer = (input, out) => {
 	let {data, color} = input;
 	
+	let maxList = [];
+	let minList = [];
 	for (row in data) {
 		let {revenue, expenses} = row;
-		let profit = revenue - expenses;
+		let profit = row.profit = revenue - expenses;
 		
-		row.revenue = money.toMoney(revenue);
-		row.expenses = money.toMoney(expenses);
-		row.profit = money.toMoney(profit);
+		maxList.push(revenue);
+		minList.push(profit);
 	}
+	
+	let min = Math.min(minList);
 	
 	template.render({
 		data: data,
+		max: Math.max(maxList),
+		min: min < 0 ? min : 0,
 		color: color
 	}, out);
 }

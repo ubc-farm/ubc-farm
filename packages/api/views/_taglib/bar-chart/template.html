@@ -1,13 +1,21 @@
+<script marko-init>
+	const toMoney = require('../../_helpers/money.js').toMoney
+</script>
+
 <ul class="bar-chart">
 	<li class="bar-chart-row" for(row in data.data)>
 		<a class="bar-chart-item" href=row.url>${row.name}</a>
-		<div class="bar-chart-bar">
-			<div class="bar-chart-inner-bar"></div>
-			<ul class="bar-chart-overlay">
-				<li>Revenue: ${row.revenue}</li>
-				<li>Expenses: ${row.expenses}</li>
-				<li>Total Profit: ${row.profit}</li>
-			</ul>
+		<div class="bar-chart-bar-container">
+			<div class="bar-chart-bar"
+			     style="width: calc(${row.profit / data.max} * 100%)">
+				<div class="bar-chart-inner-bar"
+				     style="width: calc(${row.expenses / data.max} * 100%)"></div>
+				<ul class="bar-chart-overlay">
+					<li>Revenue: ${toMoney(row.revenue)}</li>
+					<li>Expenses: ${toMoney(row.expenses)}</li>
+					<li>Total Profit: ${toMoney(row.profit)}</li>
+				</ul>
+			</div>
 		</div>
 	</li>
 </ul>
