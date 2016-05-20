@@ -1,5 +1,13 @@
 <ul class="bar-chart">
 	<li class="bar-chart-row" for(row in data.data)>
 		<a class="bar-chart-item" href=row.url>${row.name}</a>
+		<div class="bar-chart-bar">
+			<div class="bar-chart-inner-bar"></div>
+			<ul class="bar-chart-overlay">
+				<li>Revenue: ${row.revenue}</li>
+				<li>Expenses: ${row.expenses}</li>
+				<li>Total Profit: ${row.profit}</li>
+			</ul>
+		</div>
 	</li>
 </ul>
