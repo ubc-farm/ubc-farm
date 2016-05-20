@@ -1,19 +1,10 @@
-/** @namespace farm.map */
-farm = farm || {};
-/** @namespace farm.map */
-farm.map = farm.map || {};
-
-/**
- * @namespace
- * @memberof farm.map
- */
-farm.map.edit = {};
+// needs maps
 
 /**
  * @param {google.maps.Map} [map] - assigned to DrawingManager
  * @returns {google.maps.drawing.DrawingManager}
  */
-farm.map.edit.drawManager = function(map) {
+drawManager = function(map) {
 	return new google.maps.drawing.DrawingManager({
 		drawingControl: false,
 		polygonOptions: {
