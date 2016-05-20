@@ -8,16 +8,23 @@ const template = require('./template.marko');
  * @param {string} input.icon - icon name, passed to iconHelper
  * @param {string} input.href - url for the tab's link
  * @param {boolean} input.active - does this tab represent the current page?
+ * @param {boolean} local - generate local links
  */
 exports.renderer = (input, out) => {
-	let {text, icon, href, active} = input;
+	let {text, icon, href, active, local} = input;
 	let thisC = active ? "this" : "";
-	href = href? href : '/' + text.toLowerCase();
+	icon = icon? icon : text.toLowerCase();
+	let pre = local? '#' : '/';
+	if (!href) {
+		href = pre + text.toLowerCase();
+	} else if (local && !href.startsWith(pre)) {
+		href = pre + href;
+	}
 	
 	template.render({
 		text: text,
 		icon: iconHelper.format(icon),
 		href: href,
-		className: "inline icon-text i-tab" + thisC;
+		className: "inline icon-text i-tab" + thisC
 	}, out);
 }
