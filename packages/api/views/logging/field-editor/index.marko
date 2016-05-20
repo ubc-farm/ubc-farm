@@ -1,13 +1,33 @@
+<macro tab-wrapper(text)>
+	<div class="tab-wrapper">
+		<icon-tab text="${text}" radio/>
+		<section id="${text.toLowerCase()}" class="tab-page">
+			<macro-body/>
+		</section>
+</macro>
+
 <layout-use("../../_layouts/logging.marko")>
+	<layout-put into="head">
+		<google-script api="maps" libraries="drawing"/>
+	</layout-put>
+
 	<layout-put into="title">Field Editor</layout-put>
 	<layout-put into="banner">
 		<h1>Field Editor</h1>
 		<link href="/css/modules/icon-tab.css" rel="stylesheet" type="text/css"/>
-		<menu>
-			<icon-tab text="Add" local/>
-			<icon-tab text="Edit" local/>
-			<icon-tab text="List" local/>
-		</menu>	
+		<div>
+			<tab-wrapper text="Add">
+				Draw the new field on the map
+			</tab-wrapper>
+			
+			<tab-wrapper text="Edit">
+				
+			</tab-wrapper>
+			
+			<tab-wrapper text="List">
+				
+			</tab-wrapper>
+		</div>	
 	</layout-put>
 	
 	<layout-put into="fields">
@@ -15,6 +35,6 @@
 	</layout-put>
 	
 	<layout-put into="sideinfo">
-			
+		<google-map/>
 	</layout-put>
 </layout-use>
