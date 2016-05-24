@@ -9,19 +9,75 @@ const gulp = require('gulp'),
 	shell = require('gulp-shell');
 	
 const path = require('path');
+const stream = require('stream');
+const marko = require('marko');
+const Promise = require('bluebird');
 const outputPath = process.env.WWW_STATIC;
+const devPath = './static-dev/';
 //const manifestPath = process.env.REV_MANIFEST;
 //const manifestFolder = path.dirname(manifestPath);
+
+/**
+ * Transforms a stream into a promise
+ * @param {stream.Readable} stream
+ * @returns {Promise<string>}
+ */
+function streamToString(stream) {
+	let body = '';
+	return new Promise((resolve, reject) => {
+		stream.on('data', data => {body += data.toString()});
+		stream.on('end', () => {resolve(body)});
+		stream.on('error', err => {reject(err)})
+	})
+}
+
+/**
+ * Gulp plugin for rendering marko files
+ */
+const markorender = new stream.Transform({
+	objectMode: true,
+	encoding: 'utf8',
+	transform: function(file, encoding, callback) {
+		let template;
+		if (file.extname.endsWith('.js')) {
+			template = require(file.path);
+		} else {
+			if (file.isNull()) {
+				template = marko.load(file.path);
+			} else if (file.isBuffer()) {
+				template = marko.load(file.path, file.contents.toString());
+			} else if (file.isStream()) {
+				template = stream.streamToString(file.contents).then(body => {
+					return marko.load(file.path, body);
+				})
+			}
+		}
+		
+		Promise.resolve(template).then(template => {
+			template.render({}, callback);
+		})
+	}
+});
 
 gulp.task('dev-css', () => {
 	return gulp.src([
 		'./styles/**/*.css',
-	]).pipe(gulp.dest(path.join(outputPath, 'css')))
+	]).pipe(gulp.dest(path.join(devPath, 'css')))
 })
 gulp.task('dev-js', () => {
 	return gulp.src([
-		'./frontend/**/.js'
-	]).pipe(gulp.dest(path.join(outputPath, 'js')))
+		'./frontend/**/*.js'
+	]).pipe(gulp.dest(path.join(devPath, 'js')))
+})
+gulp.task('dev-html', ['marko'], () => {
+	return gulp.src([
+		'./views/**/*.marko.js'
+	]).pipe(gulp.dest(devPath))
+})
+gulp.task('dev-watch', () => {
+	gulp.watch('./styles/**/*.css', ['dev-css'])
+	gulp.watch('./frontend/**/*.js', ['dev-js'])
+	gulp.watch('./views/**/*.marko.js', ['dev-html'])
 })
 
 /** 
