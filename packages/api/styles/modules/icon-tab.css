@@ -1,4 +1,4 @@
-@import 'utils/color.css';
+@import '../utils/color.css';
 
 .i-tab {
 	position: relative;
@@ -25,6 +25,7 @@
 }
 
 .i-tab-label {
+	display: inline-block;
 	transition: opacity 0.1s ease, transform 0.2s ease;
 	opacity: 0.75;
 }

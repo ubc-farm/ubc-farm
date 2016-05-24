@@ -1,4 +1,4 @@
-@import 'utils/color.css';
+@import '../utils/color.css';
 
 .bar-chart {
 	display: table;

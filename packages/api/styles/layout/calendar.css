@@ -1,4 +1,4 @@
-@import 'utils/color.css';
+@import '../utils/color.css';
 
 .small-calendar {
 	border-spacing: .75em;

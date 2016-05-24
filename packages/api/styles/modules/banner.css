@@ -1,6 +1,6 @@
-@import 'utils/color.css';
+@import '../utils/color.css';
 
 .banner {
-	background: var(----primary-color);
+	background: var(--primary-color);
 	color: var(--white-primary);
 }
