@@ -9,76 +9,10 @@ const gulp = require('gulp'),
 	shell = require('gulp-shell');
 	
 const path = require('path');
-const stream = require('stream');
-const marko = require('marko');
-const Promise = require('bluebird');
 const outputPath = process.env.WWW_STATIC;
-const devPath = './static-dev/';
+require('marko/node-require').install();
 //const manifestPath = process.env.REV_MANIFEST;
 //const manifestFolder = path.dirname(manifestPath);
-
-/**
- * Transforms a stream into a promise
- * @param {stream.Readable} stream
- * @returns {Promise<string>}
- */
-function streamToString(stream) {
-	let body = '';
-	return new Promise((resolve, reject) => {
-		stream.on('data', data => {body += data.toString()});
-		stream.on('end', () => {resolve(body)});
-		stream.on('error', err => {reject(err)})
-	})
-}
-
-/**
- * Gulp plugin for rendering marko files
- */
-const markorender = new stream.Transform({
-	objectMode: true,
-	encoding: 'utf8',
-	transform: function(file, encoding, callback) {
-		let template;
-		if (file.extname.endsWith('.js')) {
-			template = require(file.path);
-		} else {
-			if (file.isNull()) {
-				template = marko.load(file.path);
-			} else if (file.isBuffer()) {
-				template = marko.load(file.path, file.contents.toString());
-			} else if (file.isStream()) {
-				template = stream.streamToString(file.contents).then(body => {
-					return marko.load(file.path, body);
-				})
-			}
-		}
-		
-		Promise.resolve(template).then(template => {
-			template.render({}, callback);
-		})
-	}
-});
-
-gulp.task('dev-css', () => {
-	return gulp.src([
-		'./styles/**/*.css',
-	]).pipe(gulp.dest(path.join(devPath, 'css')))
-})
-gulp.task('dev-js', () => {
-	return gulp.src([
-		'./frontend/**/*.js'
-	]).pipe(gulp.dest(path.join(devPath, 'js')))
-})
-gulp.task('dev-html', ['marko'], () => {
-	return gulp.src([
-		'./views/**/*.marko.js'
-	]).pipe(gulp.dest(devPath))
-})
-gulp.task('dev-watch', () => {
-	gulp.watch('./styles/**/*.css', ['dev-css'])
-	gulp.watch('./frontend/**/*.js', ['dev-js'])
-	gulp.watch('./views/**/*.marko.js', ['dev-html'])
-})
 
 /** 
  * Compile CSS with postcss-import and postcss-css-variables,
@@ -86,10 +20,10 @@ gulp.task('dev-watch', () => {
  */
 gulp.task('styles', () => {
 	return gulp.src([
-		'./styles/**.css',
-		'!./styles/utils/*.css'
+		'./styles/**/*.css',
+//		'!./styles/utils/*.css'
 	], {base: './styles'})
-		.pipe(postcss([cssimport(), cssvars()]))
+//		.pipe(postcss([cssimport(), cssvars()]))
 		.pipe(gulp.dest(path.join(outputPath, 'css')))
 })
 
@@ -98,12 +32,12 @@ gulp.task('styles', () => {
  */
 gulp.task('main-js', () => {
 	return gulp.src([
-		'./frontend/**.js',
+		'./frontend/**/*.js',
 		'!./frontend/typings/**',
 		'!./frontend/demo/**',
 		'!./frontend/workers/sw.js'
 	], {base: './frontend'})
-		.pipe(uglify())
+//		.pipe(uglify())
 		.pipe(gulp.dest(path.join(outputPath, 'js')))
 })
 
@@ -115,7 +49,7 @@ gulp.task('sw', () => {
 })
 
 gulp.task('jsdoc-backend', () => {
-	return gulp.src('./backend/**.js', {read:false})
+	return gulp.src('./backend/**/*.js', {read:false})
 		.pipe(shell([
 			'jsdoc2md ./backend/<%= file.path %> > ./docs/JSDoc/Node/<%= m(file.path) %>'
 		], {
@@ -163,8 +97,9 @@ gulp.task('marko', shell.task([
 gulp.task('build', ['marko', 'assets', 'scripts', 'styles']);
 
 gulp.task('watch', () => {
+	gulp.watch('./styles/**/*.css', ['styles'])
 	gulp.watch([
-		'./frontend/**.js',
+		'./frontend/**/*.js',
 		'!./frontend/typings/**',
 		'!./frontend/demo/**',
 		'!./frontend/workers/sw.js'
@@ -177,7 +112,7 @@ gulp.task('watch', () => {
 		'!./assets/images/**',
 		'!./assets/misc/**'
 	], ['other-assets']);
-	gulp.watch('./views/**.marko', ['marko']);
+	gulp.watch('./views/**/*.marko', ['marko']);
 })
 
 gulp.task('test', shell.task(['mocha']))
