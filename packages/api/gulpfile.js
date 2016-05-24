@@ -13,6 +13,17 @@ const outputPath = process.env.WWW_STATIC;
 //const manifestPath = process.env.REV_MANIFEST;
 //const manifestFolder = path.dirname(manifestPath);
 
+gulp.task('dev-css', () => {
+	return gulp.src([
+		'./styles/**/*.css',
+	]).pipe(gulp.dest(path.join(outputPath, 'css')))
+})
+gulp.task('dev-js', () => {
+	return gulp.src([
+		'./frontend/**/.js'
+	]).pipe(gulp.dest(path.join(outputPath, 'js')))
+})
+
 /** 
  * Compile CSS with postcss-import and postcss-css-variables,
  * then output to the static folder.
