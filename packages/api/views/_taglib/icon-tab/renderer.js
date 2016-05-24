@@ -12,7 +12,7 @@ const template = require('./template.marko');
  * @param {boolean} radio - generate radio tabs instead of links
  */
 exports.renderer = (input, out) => {
-	let {text, icon, href, active, local, radio} = input;
+	let {text, icon, href, active, local, radio, name} = input;
 	icon = icon? icon : text.toLowerCase();
 	let pre = local? '#' : '/';
 	if (!href) {
