@@ -1,0 +1,37 @@
+{
+	"name": "ubc-farm-api",
+	"version": "2.0.0",
+	"description": "API server and database",
+	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+	"private": true,
+	"license": "MIT",
+	"repository": "https://github.com/ubc-farm/api",
+	"main": "index.node.js",
+	"jsnext:main": "index.es.js",
+	"dependencies": {
+		"hapi": "14.2.0",
+		"joi": "9.0.4",
+		"knex": "0.11.10",
+		"objection": "0.5.5",
+		"pg": "6.0.3",
+		"sqlite": "2.2.0",
+		"ubc-farm-utils": "ubc-farm/utils"
+	},
+	"devDependencies": { 
+		"rollup": "0.34.2",
+		"rollup-plugin-node-resolve": "^2.0.0",
+		"rollup-plugin-commonjs": "^3.3.1"
+	},
+	"scripts": {
+		"test": "tape \"**/*.spec.js\"",
+		"prepublish": "rollup -c",
+		"start": "node index.node.js",
+		"quickstart": "npm run prepublish && npm start",
+		"migrate": "knex migrate:latest",
+		"rollback": "knex migrate:rollback",
+		"seed": "knex seed:run"
+	},
+	"config": {
+		"port": 3080
+	}
+}

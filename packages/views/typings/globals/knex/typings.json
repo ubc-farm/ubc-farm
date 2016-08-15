@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d1b270f02adaec2f4d66484dd302cfbca5f1cb68/knex/knex.d.ts",
+    "raw": "registry:dt/knex#0.0.0+20160621184816",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d1b270f02adaec2f4d66484dd302cfbca5f1cb68/knex/knex.d.ts"
+  }
+}

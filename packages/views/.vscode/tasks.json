@@ -1,0 +1,45 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "0.1.0",
+	"command": "npm",
+	"isShellCommand": true,
+	"showOutput": "always",
+	"suppressTaskName": true,
+	"tasks": [
+		{
+			"taskName": "Install",
+			"args": ["install"]
+		},
+		{
+			"taskName": "Update",
+			"args": ["update"]
+		},
+		{
+			"taskName": "Test",
+			"args": ["test"],
+			"isTestCommand": true
+		},
+		{
+			"taskName": "Build",
+			"args": ["run", "prepublish"],
+			"isBuildCommand": true
+		},
+		{
+			"taskName": "Start Server",
+			"args": ["start"]
+		},
+		{
+			"taskName": "Migrate Database",
+			"args": ["run", "migrate"]
+		},
+		{
+			"taskName": "Rollback Database",
+			"args": ["run", "rollback"]
+		},
+		{
+			"taskName": "Seed Database",
+			"args": ["run", "seed"]
+		}
+	]
+}
