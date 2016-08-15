@@ -1,0 +1,1 @@
+export {Money as default} from 'ubc-farm-utils/class/index.js';
