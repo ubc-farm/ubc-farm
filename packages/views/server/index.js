@@ -1,25 +1,21 @@
 import {Server} from 'hapi';
-import databaseRoutes from './database-routes/index.js';
-import hackyRoutes from './hacky-database-routes/index.js';
+import Inert from 'inert';
+import {resolve} from 'path';
+
+import analytics from './routes/analytics.js';
+import coreCss from './routes/css-core.js';
 
 const connection = {
 	port: process.env.npm_package_config_port
 };
 
-const server = new Server({
-	connections: {
-		routes: {
-			cors: true
-		}
-	},
-	debug: {
-		request: ['error']
-	}
-});
-
+const server = new Server();
 server.connection(connection);
 
-server.route(databaseRoutes);
-server.route(hackyRoutes);
+server.path(resolve(__dirname, '../'));
+server.register(Inert, err => {if (err) throw err});
+
+server.route(coreCss);
+server.route(analytics);
 
 export default server;
