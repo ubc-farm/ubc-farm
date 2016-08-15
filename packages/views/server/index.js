@@ -2,13 +2,11 @@ import {resolve} from 'path';
 import {Server} from 'hapi';
 import Inert from 'inert';
 
+import {config as connection} from '../package.json';
+
 import analytics from './routes/analytics.js';
 import coreCss from './routes/css-core.js';
 import partialCss from './routes/css-partials.js';
-
-const connection = {
-	port: process.env.npm_package_config_port
-};
 
 const server = new Server();
 server.connection(connection);
