@@ -1,0 +1,35 @@
+{
+	"name": "ubc-farm-monoserver",
+	"version": "1.2.0",
+	"description": "Reverse proxy parent server that directs requests to the correct subservers. Allows for easier code splitting, as well as the potential for certain functions to be moved to seperate systems in the future",
+	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+	"license": "MIT",
+	"repository": "https://github.com/ubc-farm/monoserver",
+	"main": "index.node.js",
+	"jsnext:main": "index.es.js",
+	"private": true,
+	"dependencies": {
+		"hapi": "14.1.0",
+		"h2o2": "5.1.0",
+		"ubc-farm-api": "ubc-farm/api",
+		"ubc-farm-static-server": "ubc-farm/static-server",
+		"ubc-farm-views-server": "ubc-farm/views-server",
+		"ubc-farm-utils": "ubc-farm/utils"
+	},
+	"devDependencies": { 
+		"rollup": "0.34.2",
+		"rollup-plugin-json": "^2.0.1" 
+	},
+	"scripts": {
+		"prepublish": "rollup -c",
+		"start:api": "cd node_modules/ubc-farm-api && npm start",
+		"start:static": "cd node_modules/ubc-farm-staic-server npm start",
+		"start:views": "cd node_modules/ubc-farm-views-server && npm run watch",
+		"start": "start npm run start:api && start npm run start:static && start npm run start:views",
+		"poststart": "node index.node.js",
+		"quickstart": "npm run prepublish && npm start"
+	},
+	"config": {
+		"port": 3000
+	}
+}
