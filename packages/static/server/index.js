@@ -1,10 +1,10 @@
+import {resolve} from 'path';
 import {Server} from 'hapi';
 import Inert from 'inert';
-import {resolve} from 'path';
 
 import analytics from './routes/analytics.js';
 import coreCss from './routes/css-core.js';
-import partialCss from './routes/css-core.js';
+import partialCss from './routes/css-partials.js';
 
 const connection = {
 	port: process.env.npm_package_config_port
