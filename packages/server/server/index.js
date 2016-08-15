@@ -1,7 +1,8 @@
 import {Server} from 'hapi';
 import h2o2 from 'h2o2';
 
-import proxyHandler from './proxy.js';
+import staticProxy from './static-proxy.js';
+import viewProxy from './view-proxy.js';
 import apiProxy from './api-proxy.js';
 
 const server = new Server();
@@ -11,12 +12,8 @@ server.connection({
 
 server.register(h2o2, err => {if (err) throw err});
 
-server.route({
-	method: 'GET',
-	path: '/{path*}',
-	handler: proxyHandler
-});
-
+server.route(staticProxy);
+server.route(viewProxy);
 server.route(apiProxy);
 
 export default server;
