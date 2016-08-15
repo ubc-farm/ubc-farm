@@ -13,12 +13,12 @@
 		"h2o2": "5.1.0",
 		"ubc-farm-api": "ubc-farm/api",
 		"ubc-farm-static-server": "ubc-farm/static-server",
-		"ubc-farm-views-server": "ubc-farm/views-server",
-		"ubc-farm-utils": "ubc-farm/utils"
+		"ubc-farm-views-server": "ubc-farm/views-server"
 	},
 	"devDependencies": { 
 		"rollup": "0.34.2",
-		"rollup-plugin-json": "^2.0.1" 
+		"rollup-plugin-json": "^2.0.1",
+		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
 		"prepublish": "rollup -c",
