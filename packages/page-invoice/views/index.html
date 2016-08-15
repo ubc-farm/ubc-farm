@@ -4,13 +4,92 @@
 	{{> head}}
 	{{> test}}
 
-	<link href='/css/page/*****/main.css' rel='stylesheet'>
-	<script async src='/js/page/******/index.js'></script>
+	<link href='/css/core/form.css' rel='stylesheet'>
+	<link href='/css/core/table.css' rel='stylesheet'>
+	<link href='/css/core/table-sort.css' rel='stylesheet'>
+
+	<link href='/css/module/table-base/table.css' rel='stylesheet'>
+
+	<link href='/css/page/invoice/invoice.css' rel='stylesheet'>
+	<script async src='/js/page/invoice/index.js'></script>
 </head>
 <body>
 	{{> app-banner}}
 	{{> section-banner breadcrumbs}}
 
-	<div id='app-mount'></div>
+	<form class='invoice'>
+		<div class='row'>
+			<p class='farm-address left'>
+				UBC Farm<br/>
+				2357 Main Maill<br/>
+				Vancouver BC  V6T 1Z4<br/>
+				Canada<br/>
+				Phone: 604-822-5092
+			</p>
+
+			<fieldset class='internal-data right'>
+				<!-- React Node -->
+				<label id='delivery-date-input'>
+					Delivery Date
+					<!-- TODO -->
+					<input type='text'/>	
+				</label>
+
+				<div class='row'>
+
+					<div class='left channel'>
+						<label htmlFor='channel'>Channel</label>
+						<select id='channel' name='channel'>
+							<option value='csa'>CSA</option>
+							<option value='restaurants'>Restaurants</option>
+						</select>
+					</div>
+
+					<div class='right notes'>
+						<label htmlFor='notes'>Notes</label>
+						<textarea id='notes' name='notes'></textarea>
+					</div>
+
+				</div>
+			</fieldset>
+		</div>
+		<div class='row'>
+			<!-- React Node -->
+			<div class='customer left' id='customer-input'>
+				<!-- TODO -->
+			</div>
+
+			<div class='invoice-details right'>
+				<label class='details-row'>
+					<span class='detail-cell detail-header'>Invoice #:</span>
+					<input type='number' 
+						name='invoiceNumber' 
+						class='detail-cell' 
+						placeholder='9584107'
+						min='0'
+					/>
+				</label>
+
+				<label class='details-row'>
+					<span class='detail-cell detail-header'>Date:</span>
+					<!-- React Node -->
+					<!-- TODO -->
+					<input type='text'/>	
+				</label>
+
+				<label class='details-row'>
+					<span class='detail-cell detail-header'>
+						Balance Due (CAD):
+					</span>
+					<!-- React Node -->
+					<!-- TODO -->
+					<span class='detail-cell'/>
+				</label>
+			</div>
+		</div>
+
+		<!-- React Node -->
+		<div id='invoice-table-node'></div>
+	</form>
 </body>
 </html>

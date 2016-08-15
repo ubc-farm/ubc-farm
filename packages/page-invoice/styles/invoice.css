@@ -1,0 +1,85 @@
+.invoice {
+	width: 960px;
+	max-width: 85%;
+	margin: 0 auto;
+}
+
+.internal-data {
+	margin: 1em;
+}
+
+.customer {
+	min-height: 10em
+}
+
+.row::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+.left {float: left} .right {float: right; margin-left: 1em}
+
+.invoice-details {
+	display: table;
+	border: 1px solid #212121;
+	text-align: right;
+}
+label.details-row {
+	display: table-row;
+}
+.detail-cell {
+	display: table-cell;
+	border: 1px solid #212121;
+	padding: 0.25em 0.5em;
+	text-align: inherit;
+	border-radius: 0;
+}
+.detail-header {
+	text-align: left;
+	font-weight: bold;
+	background: lightgray;
+}
+
+.invoice-table-input {
+	border-radius: 0;
+	border-bottom: 1px dotted;
+}
+.invoice-table-input:focus {
+	border-bottom-style: solid;
+}
+
+.invoice-table {
+	width: 100%;
+}
+
+.table-actions-container {
+	position: relative;
+	height: 2.25em;
+	margin-top: 2em;
+}
+.table-actions {
+	position: absolute;
+	display: flex;
+	padding: 0 1em;
+	width: calc(100% - 2em);
+	justify-content: flex-end;
+	transition: opacity 0.1s ease, visibility 0.1s ease;
+	will-change: opacity;
+}
+
+.table-actions-selected {
+	background: rgba(59, 166, 72, 0.15);
+}
+
+.selected-count {
+	margin-right: auto;
+	line-height: 2.25em;
+}
+
+.visible {opacity: 1} .hidden {opacity: 0}
+
+.total-row-dark {
+	background: lightgray;
+}
+.total-row:hover {background: transparent}
+.total-row-dark:hover {background: lightgray}
