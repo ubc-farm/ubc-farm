@@ -1,0 +1,7 @@
+{
+	"files.exclude": {
+		"**/typings/**": true,
+		"LICENSE": true
+	},
+	"eslint.enable": true
+}
