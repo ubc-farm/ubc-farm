@@ -15,7 +15,8 @@
   "devDependencies": {
     "rollup": "0.34.2",
     "ubc-farm-css": "github:ubc-farm/css-core",
-    "ubc-farm-utils": "ubc-farm/utils"
+    "ubc-farm-utils": "ubc-farm/utils",
+    "ubc-farm-views-utils": "ubc-farm/views-utils"
   },
   "scripts": {
     "test": "tape \"**/*.spec.js\"",
