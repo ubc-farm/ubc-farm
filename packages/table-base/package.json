@@ -1,0 +1,25 @@
+{
+	"name": "ubc-farm-table-base",
+	"version": "1.1.1",
+	"description": "Code for a react powered table",
+	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+	"license": "MIT",
+	"repository": "https://github.com/ubc-farm/table-base",
+	"jsnext:main": "index.es.js",
+	"private": true,
+	"dependencies": {
+		"react": "15.3.0"
+	},
+	"devDependencies": { 
+		"rollup": "0.34.2",
+		"rollup-plugin-buble": "^0.12.1",
+		"ubc-farm-utils": "ubc-farm/utils"
+	},
+	"scripts": {
+		"prepublish": "rollup -c"
+	},
+	"files": [
+		"index.es.js",
+		"index.es.js.map"
+	]
+}
