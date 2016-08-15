@@ -1,9 +1,7 @@
 // Place your settings in this file to overwrite default and user settings.
 {
 	"files.exclude": {
-		"typings/**": true,
-		"dev.sqlite3": true,
-		"LICENSE": true
+		"typings/**": true
 	},
 	"eslint.enable": true
 }

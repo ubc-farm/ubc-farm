@@ -29,11 +29,7 @@ node_modules
 ehthumbs.db
 Thumbs.db
 
-# Marko compiled templates
-*.marko.js
-
 # Project-specific ignores
 index.node.js
 index.es.js
 *.map
-*.sqlite3

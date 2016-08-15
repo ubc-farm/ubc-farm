@@ -28,18 +28,6 @@
 		{
 			"taskName": "Start Server",
 			"args": ["start"]
-		},
-		{
-			"taskName": "Migrate Database",
-			"args": ["run", "migrate"]
-		},
-		{
-			"taskName": "Rollback Database",
-			"args": ["run", "rollback"]
-		},
-		{
-			"taskName": "Seed Database",
-			"args": ["run", "seed"]
 		}
 	]
 }
