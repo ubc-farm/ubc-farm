@@ -1,12 +1,7 @@
 import {config as connection} from 'ubc-farm-api/package.json';
-import {options} from './proxy.js';
+import setOptions from './options.js';
 
-const {host = 'localhost', protocol = 'http', port} = connection;
-if (port === undefined) throw Error('Missing port');
-
-export const handler = Object.assign({}, options, {
-	host, protocol, port
-});
+export const handler = setOptions(connection);
 
 export default {
 	method: [
