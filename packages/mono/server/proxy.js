@@ -1,6 +1,6 @@
 import {parse} from 'url';
-import {config as staticObj} from 'ubc-farm-static-server/package.json';
-import {config as viewObj} from 'ubc-farm-views-server/package.json';
+import {config as staticObj} from 'ubc-farm-server-static/package.json';
+import {config as viewObj} from 'ubc-farm-server-views/package.json';
 
 export const host = 'localhost';
 export const protocol = 'http';
@@ -22,8 +22,7 @@ export default function(request, reply) {
 
 	const [, subfolder] = pathname.split('/');
 	switch (subfolder) {
-		case 'analytics.js':
-		case 'css': 
+		case 'css': case 'js':
 			return useConnection(staticObj);
 
 		default: return useConnection(viewObj);
