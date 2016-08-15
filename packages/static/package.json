@@ -1,29 +1,33 @@
 {
-	"name": "ubc-farm-api",
-	"version": "2.0.0",
-	"description": "API server and database",
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"private": true,
-	"license": "MIT",
-	"repository": "https://github.com/ubc-farm/api",
-	"main": "dist/index.node.js",
-	"jsnext:main": "dist/index.es.js",
-	"dependencies": {
-		"hapi": "14.2.0",
-		"inert": "^4.0.1",
-		"ubc-farm-utils": "ubc-farm/utils"
-	},
-	"devDependencies": { 
-		"rollup": "0.34.2"
-	},
-	"scripts": {
-		"test": "tape \"**/*.spec.js\"",
-		"prepublish": "rollup -c",
-		"start": "node dist/index.node.js",
-		"quickstart": "npm run prepublish && npm start"
-	},
-	"config": {
-		"port": 3080
-	}
+  "name": "ubc-farm-static-server",
+  "version": "2.0.0",
+  "description": "Server for static files",
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "private": true,
+  "license": "MIT",
+  "repository": "https://github.com/ubc-farm/static-server",
+  "main": "index.node.js",
+  "jsnext:main": "index.es.js",
+  "dependencies": {
+    "hapi": "14.2.0",
+    "inert": "^4.0.1"
+  },
+  "devDependencies": {
+    "rollup": "0.34.2",
     "ubc-farm-css": "github:ubc-farm/css-core",
+    "ubc-farm-utils": "ubc-farm/utils"
+  },
+  "scripts": {
+    "test": "tape \"**/*.spec.js\"",
+    "prepublish": "rollup -c",
+    "start": "node index.node.js",
+    "quickstart": "npm run prepublish && npm start"
+  },
+  "config": {
+    "port": 3001
+  },
+  "files": [
+    "index.node.js",
+    "index.es.js"
+  ]
 }
