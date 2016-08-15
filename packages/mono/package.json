@@ -1,19 +1,18 @@
 {
-	"name": "ubc-farm-monoserver",
+	"name": "ubc-farm-server-mono",
 	"version": "1.2.0",
 	"description": "Reverse proxy parent server that directs requests to the correct subservers. Allows for easier code splitting, as well as the potential for certain functions to be moved to seperate systems in the future",
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
-	"repository": "https://github.com/ubc-farm/monoserver",
+	"repository": "https://github.com/ubc-farm/server-mono",
 	"main": "index.node.js",
-	"jsnext:main": "index.es.js",
 	"private": true,
 	"dependencies": {
 		"hapi": "14.1.0",
 		"h2o2": "5.1.0",
-		"ubc-farm-api": "ubc-farm/api",
-		"ubc-farm-static-server": "ubc-farm/static-server",
-		"ubc-farm-views-server": "ubc-farm/views-server"
+		"ubc-farm-api": "ubc-farm/server-api",
+		"ubc-farm-static-server": "ubc-farm/server-static",
+		"ubc-farm-views-server": "ubc-farm/server-views"
 	},
 	"devDependencies": { 
 		"rollup": "0.34.2",
