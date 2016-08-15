@@ -1,6 +1,6 @@
 export default {
 	method: 'GET',
-	path: '/analytics.js',
+	path: '/js/analytics.js',
 	handler: {
 		file: 'assets/analytics.js'
 	}
