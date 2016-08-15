@@ -14,5 +14,12 @@
   "scripts": {
 		"prepublish": "rollup -c",
 		"test": "tape \"**/*.spec.js\""
-	}
+	},
+	"files": [
+		"calendar",
+		"class",
+		"function",
+		"dist",
+		"index.js"
+	]
 }
