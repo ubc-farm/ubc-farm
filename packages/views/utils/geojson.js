@@ -1,1 +1,0 @@
-export * from 'ubc-farm-utils/class/geojson/index.js';
