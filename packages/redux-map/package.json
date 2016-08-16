@@ -1,10 +1,10 @@
 {
-	"name": "ubc-farm-page-*******",
-	"version": "**.**.**",
-	"description": "***********",
+	"name": "ubc-farm-page-planner",
+	"version": "0.2.0",
+	"description": "Planner page for designing upcoming tasks",
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-*********",
+	"repository": "https://github.com/NotWoods/ubc-farm/page-planner",
 	"browser": "dist/index.iife.js",
 	"private": true,
 	"dependencies": {
