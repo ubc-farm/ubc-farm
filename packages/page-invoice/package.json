@@ -5,7 +5,7 @@
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
 	"repository": "https://github.com/NotWoods/ubc-farm/page-invoice",
-	"browser": "index.iife.js",
+	"browser": "dist/index.iife.js",
 	"private": true,
 	"dependencies": {
 		"react": "15.3.0",
@@ -28,8 +28,7 @@
 		"prepublish": "rollup -c"
 	},
 	"files": [
-		"index.iife.js",
-		"index.iife.js.map",
+		"dist",
 		"styles",
 		"views"
 	]
