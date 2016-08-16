@@ -1,10 +1,10 @@
 {
-	"name": "ubc-farm-page-*******",
-	"version": "**.**.**",
-	"description": "***********",
+	"name": "ubc-farm-page-fields",
+	"version": "1.1.1",
+	"description": "Field overview page",
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-*********",
+	"repository": "https://github.com/NotWoods/ubc-farm/page-fields",
 	"browser": "dist/index.iife.js",
 	"private": true,
 	"dependencies": {

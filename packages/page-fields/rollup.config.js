@@ -9,6 +9,7 @@ export default {
 	targets: [
 		{ dest: 'dist/index.iife.js', format: 'iife' }
 	],
+	modulename: 'Fields',
 	plugins: [
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers-2']
