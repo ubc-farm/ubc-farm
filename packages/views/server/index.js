@@ -9,7 +9,7 @@ import {
 import packagePages from './routes/page.js';
 import homepage from './routes/home.js';
 
-import {server as connection} from './package.json';
+import {config as connection} from '../package.json';
 
 const server = new Server();
 server.connection(connection);

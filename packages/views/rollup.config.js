@@ -1,3 +1,5 @@
+import json from 'rollup-plugin-json';
+
 export default {
 	entry: 'index.js',
 	sourceMap: true,
@@ -7,5 +9,6 @@ export default {
 	],
 	external: [
 		'hapi', 'vision', 'handlebars'
-	]
+	],
+	plugins: [json()]
 };
