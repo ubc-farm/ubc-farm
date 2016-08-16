@@ -1,6 +1,6 @@
 {
   "name": "ubc-farm-server-views",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Contains routes for the main views of the program that users see",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "private": true,
@@ -18,6 +18,9 @@
     "rollup-plugin-json": "^2.0.1",
     "ubc-farm-utils": "ubc-farm/utils",
     "ubc-farm-views-utils": "ubc-farm/views-utils"
+  },
+  "peerDependencies": {
+    "ubc-farm-page-invoice": "ubc-farm/page-invoice"
   },
   "scripts": {
     "test": "tape \"**/*.spec.js\"",

@@ -22,6 +22,7 @@ server.views({
 		html: Handlebars,
 		hbs: Handlebars
 	},
+	defaultExtension: 'html',
 	relativeTo: __dirname,
 	path: '.',
 	partialsPath,
