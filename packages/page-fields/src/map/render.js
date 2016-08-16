@@ -4,15 +4,15 @@ import './get-api.js';
 import connect from './connector.js';
 import {field} from './style.js';
 
-export function defaultStyler(map) {
+export function defaultStyler(mapData) {
 	const selectedStyle = Object.assign({}, field.normal, field.selected);
-	map.data.setStyle(feature => {
+	mapData.setStyle(feature => {
 		if (feature.getProperty('activeField')) return selectedStyle;
 		else return field.normal;
 	});
 }
 
-export default function defaultConnector(map) {
-	connect(map.data, store);
-	defaultStyler(map)	
+export default function defaultConnector(mapData) {
+	connect(mapData, store);
+	defaultStyler(mapData);
 }
