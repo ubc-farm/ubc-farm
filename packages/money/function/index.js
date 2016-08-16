@@ -9,3 +9,4 @@ export {default as omit} from './omit.js'
 export {default as format} from './format.js'
 export {default as mapAssign} from './map-assign.js';
 export {default as observeStore} from './observe-store.js';
+export {default as coroutine} from './coroutine.js';
