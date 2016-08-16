@@ -4,11 +4,7 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 export default {
-	entry: 'src/index.js',
 	sourceMap: true,
-	targets: [
-		{ dest: 'dist/index.iife.js', format: 'iife' }
-	],
 	plugins: [
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers-2']

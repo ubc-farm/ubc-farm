@@ -1,11 +1,19 @@
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk'
 
-import reducer from './reducer.js';
+import {active, resizing, mapMeta} from './reducer-simple.js';
+import grids from './reducer-gridform.js';
+import cells from './reducer-cells.js';
+import loading from './reducer-loading.js';
 
 export default createStore(
 	combineReducers({
-		fixme: reducer //TODO
+		active, 
+		resizing, 
+		mapMeta, 
+		loading, 
+		grids, 
+		cells 
 	}),
 	undefined,
 	compose(

@@ -1,15 +1,14 @@
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import {createElement as h} from 'react'; /** @jsx h */
-import {Provider} from 'react-redux';
 import {domready} from 'ubc-farm-utils';
-import store from './redux/index.js';
 
-import App from './***********'; //TODO: Fill in
+import Toolbar from './toolbar/toolbar.js';
+import Sidebar from './sidebar/sidebar.js';
+
+export {default} from './map/index.js';
+export {default as store} from './redux/index.js';
 
 domready.then(() => {
-	ReactDOM.render(
-		<Provider store={store}>
-			<App />
-		</Provider>
-	, document.getElementById('app-mount'));
+	render(<Toolbar />, document.getElementById('toolbar-mount'));
+	render(<Sidebar />, document.getElementById('aside-mount'));
 });
