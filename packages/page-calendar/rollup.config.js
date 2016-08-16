@@ -7,7 +7,7 @@ export default {
 	entry: 'src/index.js',
 	sourceMap: true,
 	targets: [
-		{ dest: 'index.iife.js', format: 'iife' }
+		{ dest: 'dist/index.iife.js', format: 'iife' }
 	],
 	plugins: [
 		babel({
