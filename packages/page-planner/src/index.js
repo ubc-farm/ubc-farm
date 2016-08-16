@@ -1,15 +1,16 @@
-import ReactDOM from 'react-dom';
+import {render} from 'react-dom';
 import {createElement as h} from 'react'; /** @jsx h */
-import {Provider} from 'react-redux';
-import {domready} from 'ubc-farm-utils';
-import store from './redux/index.js';
 
-import App from './***********'; //TODO: Fill in
+import TimelineReady from './timeline/index.js';
+import TaskPanel from './drag-drop/panel.js';
+import bindListeners from './drag-drop/handler.js';
 
-domready.then(() => {
-	ReactDOM.render(
-		<Provider store={store}>
-			<App />
-		</Provider>
-	, document.getElementById('app-mount'));
+TimelineReady.then(TimelineComponent => {
+	bindListeners(TimelineComponent);
+	window.TimelineComponent = TimelineComponent;
+
+	render(
+		<TaskPanel />,
+		document.getElementById('tasklist-mount')
+	);
 });
