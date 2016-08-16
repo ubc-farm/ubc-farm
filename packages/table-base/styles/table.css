@@ -1,0 +1,42 @@
+.align-left {text-align: left}
+.align-center {text-align: center}
+.align-right {text-align: right}
+
+.th-hoverable {
+	position: relative;
+	cursor: pointer;
+}
+
+.table-th-row {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.table-cell-hover.align-right {left: auto; right: 1em;}
+.table-cell-hover {
+	display: inline;
+	position: absolute;
+	left: 1em; top: 0.75em;
+	visibility: hidden;
+	white-space: nowrap;
+}
+
+.table-sort-icon {
+	vertical-align: middle;
+	padding: 0 0.2em 0.2em;
+	opacity: 0.5;
+}
+
+.sort-active {
+	opacity: 1;
+}
+
+.visible,
+.th-hoverable:hover .table-cell-hover {visibility: visible}
+
+.hidden,
+.th-hoverable:hover .table-cell-normal {visibility: hidden}
+
+.table-header-selected {
+	color: var(--brand-primary);
+}
