@@ -1,21 +1,21 @@
 {
-  "name": "ubc-farm-server-static",
-  "version": "2.0.0",
-  "description": "Server for static files",
+  "name": "ubc-farm-server-views",
+  "version": "1.1.0",
+  "description": "Contains routes for the main views of the program that users see",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "private": true,
   "license": "MIT",
-  "repository": "https://github.com/ubc-farm/server-static",
+  "repository": "https://github.com/ubc-farm/server-views",
   "main": "index.node.js",
   "jsnext:main": "index.es.js",
   "dependencies": {
     "hapi": "14.2.0",
-    "inert": "^4.0.1"
+    "handlebars": "^4.0.5",
+		"vision": "4.1.0"
   },
   "devDependencies": {
     "rollup": "0.34.2",
     "rollup-plugin-json": "^2.0.1",
-    "ubc-farm-css": "github:ubc-farm/css-core",
     "ubc-farm-utils": "ubc-farm/utils",
     "ubc-farm-views-utils": "ubc-farm/views-utils"
   },
@@ -26,7 +26,7 @@
     "quickstart": "npm run prepublish && npm start"
   },
   "config": {
-    "port": 3001
+    "port": 3040
   },
   "files": [
     "index.node.js",

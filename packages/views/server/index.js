@@ -1,25 +1,35 @@
-import {resolve} from 'path';
 import {Server} from 'hapi';
-import Inert from 'inert';
+import Vision from 'vision';
+import Handlebars from 'handlebars';
 
-import {config as connection} from '../package.json';
+import {
+	partials as partialsPath, 
+	helpers as helpersPath
+} from 'ubc-farm-views-utils';
+import packagePages from './routes/page.js';
+import homepage from './routes/home.js';
 
-import analytics from './routes/analytics.js';
-import pages from './routes/pages.js';
-
-import coreCss from './routes/css-core.js';
-import partialCss from './routes/css-partials.js';
-import pageCss from './routes/css-pages.js';
+import {server as connection} from './package.json';
 
 const server = new Server();
 server.connection(connection);
+server.path(__dirname);
 
-server.path(resolve(__dirname, '../'));
-server.register(Inert, err => {if (err) throw err});
+server.register(Vision, err => {if (err) throw err});
 
-server.route(analytics);
-server.route(coreCss);
-server.route(partialCss);
-server.route(pages);
+server.views({
+	engines: {
+		html: Handlebars,
+		hbs: Handlebars
+	},
+	relativeTo: __dirname,
+	path: '.',
+	partialsPath,
+	helpersPath,
+	isCached: process.env.NODE_ENV !== 'development'
+})
+
+server.route(packagePages);
+server.route(homepage);
 
 export default server;

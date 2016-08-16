@@ -6,7 +6,6 @@ export default {
 		{ dest: 'index.es.js', format: 'es' }
 	],
 	external: [
-		'hapi', 'inert',
-		'path'
+		'hapi', 'vision', 'handlebars'
 	]
 };

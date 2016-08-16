@@ -33,3 +33,4 @@ Thumbs.db
 index.node.js
 index.es.js
 *.map
+nodemon.json

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+	{{> head}}
+	{{> test}}
+	<style>
+		.nav-list {
+			margin: auto;
+			width: 20em;
+		}
+
+		.nav-list-heading {
+			margin: 1em 0 0.25em;
+			display: block;
+			font-size: 1.2em
+		}
+	</style>
+</head>
+<body>
+	{{> app-banner}}
+	{{> section-banner title='UBC Farm'}}
+
+	<dl class='nav-list'>
+		<dt>
+			<a href='/fields' class='nav-list-heading'>
+				<i class='material-icons nav-list-icon'>map</i>
+				Fields
+			</a>
+		</dt>
+		<dd><a href='/fields/editor'>Editor</a>
+
+		<dt>
+			<a href='/finances' class='nav-list-heading'>
+				<i class='material-icons nav-list-icon'>attach_money</i>
+				Finances
+			</a>
+		</dt>
+		<dd><a href='/finances/sales'>Sales</a>
+
+		<dt>
+			<a href='/calendar' class='nav-list-heading'>
+				<i class='material-icons nav-list-icon'>event</i>
+				Calendar
+			</a>
+		</dt>
+		<dd><a href='/calendar/planner'>Planner</a>
+
+		<dt>
+			<a href='/directory' class='nav-list-heading'>
+				<i class='material-icons nav-list-icon'>people</i>
+				Directory
+			</a>
+		</dt>
+	</dl>
+</body>
+</html>
