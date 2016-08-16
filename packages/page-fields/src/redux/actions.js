@@ -1,5 +1,4 @@
-export const SOME_ACTION = 'SOME_ACTION';
+export const SET_SELECTED = 'SET_SELECTED';
 
-export function doSomeAction(param) {
-	return { type: SOME_ACTION, payload: param };
-}
+/** Change the selected field */
+export const setSelected = id => ({ type: SET_SELECTED, payload: id })

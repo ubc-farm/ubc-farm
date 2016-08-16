@@ -1,0 +1,14 @@
+.fill-body {
+	display: table;
+	min-height: 100vh;
+	width: 100%;
+}
+
+.fill-content {
+	display: table-row;
+	height: 100%;
+}
+
+.fill {
+	display: table-cell;
+}

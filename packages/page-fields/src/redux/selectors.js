@@ -1,3 +1,3 @@
 import {createSelector} from 'reselect';
 
-//export const baseSelector = state => state.reducer
+export const activeSelector = state => state.active;

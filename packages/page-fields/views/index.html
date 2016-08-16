@@ -4,13 +4,20 @@
 	{{> head}}
 	{{> test}}
 
-	<link href='/css/page/*****/main.css' rel='stylesheet'>
-	<script async src='/js/page/******/index.js'></script>
+	<link href='/css/page/fields/fill.css' rel='stylesheet'>
+	<script async src='/js/page/fields/index.js'></script>
 </head>
 <body>
-	{{> app-banner}}
-	{{> section-banner breadcrumbs}}
+	{{> app-banner active='Fields'}}
+	{{> section-banner title='Fields' href='/fields'}}
 
-	<div id='app-mount'></div>
+	<div id='aside-mount'></div>
+	<section class='map-container fill-content'>
+		<div id='map-mount' class='fill'></div>
+
+		<link href='/css/page/fields/weather.css' rel='stylesheet'>
+		<div id='weather-mount' class='weather-icon'></div>
+		
+	</section>
 </body>
 </html>

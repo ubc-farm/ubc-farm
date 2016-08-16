@@ -1,15 +1,15 @@
-import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
-import thunk from 'redux-thunk'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
 
-import reducer from './reducer.js';
+import active from './reducer-active.js';
 
 export default createStore(
 	combineReducers({
-		fixme: reducer //TODO
+		active
 	}),
 	undefined,
 	compose(
 		applyMiddleware(thunk),
 		window.devToolsExtension ? window.devToolsExtension() : f => f
 	)
-);
+)

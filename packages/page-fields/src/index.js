@@ -1,15 +1,8 @@
-import ReactDOM from 'react-dom';
-import {createElement as h} from 'react'; /** @jsx h */
-import {Provider} from 'react-redux';
-import {domready} from 'ubc-farm-utils';
-import store from './redux/index.js';
+import map from './map/index.js';
+import connector from './map/render.js';
+import attachWeatherTo from './weather/w-map.js';
 
-import App from './***********'; //TODO: Fill in
+connector(map);
+attachWeatherTo(map);
 
-domready.then(() => {
-	ReactDOM.render(
-		<Provider store={store}>
-			<App />
-		</Provider>
-	, document.getElementById('app-mount'));
-});
+export default map;

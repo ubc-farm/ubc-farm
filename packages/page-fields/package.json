@@ -20,7 +20,8 @@
 		"redux": "^3.5.2",
 		"react-redux": "^4.4.5",
 		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3"
+		"reselect": "^2.5.3",
+		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
 		"prepublish": "rollup -c"
