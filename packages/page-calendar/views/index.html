@@ -2,15 +2,50 @@
 <html>
 <head>
 	{{> head}}
+	<title>Calendar</title>
 	{{> test}}
 
-	<link href='/css/page/*****/main.css' rel='stylesheet'>
-	<script async src='/js/page/******/index.js'></script>
+	<link href='/css/module/datetime-picker/main.css' rel='stylesheet'>
+	<link href='/css/page/calendar/list.css' rel='stylesheet'>
+	<link href='/css/page/calendar/loader.css' rel='stylesheet'>
+	<script async src='/js/page/calendar/index.js'></script>
 </head>
 <body>
-	{{> app-banner}}
-	{{> section-banner breadcrumbs}}
+	{{> app-banner active='Calendar'}}
+	{{> section-banner title='Calendar' href='/calendar'}}
 
+	<link href='/css/core/table.css' rel='stylesheet'>
+	<link href='/css/core/form.css' rel='stylesheet'>
 	<div id='app-mount'></div>
+
+	<li class='event-item-container'>
+		<div class='event-buttons'>
+			<button type='button' class="event-button">Edit</button>
+			<button type='button' class="event-button">Fill</button>
+			<button type='button' class="event-button">Add </button>
+			<button type='button' class="event-button">Join</button>
+		</div>
+		
+		<article class='event-card'>
+			<input type='checkbox' checked />
+			<h4 class='event-title'>BCCH Farm Tour</h4>
+			<p class='event-description'>
+				Market Stall<br/>
+				<hr>
+				Assigned as tour guide
+				<ul>
+					<li>Arrive before 11</li>
+					<li>Prepare equipment</li>
+				</ul>
+			</p>
+			
+			<hr />
+			
+			<span class='time'>
+				8:00 AM–12:30 PM<br/>
+				6 Jan – 2 Feb
+			</span>
+		</article>
+	</li>
 </body>
 </html>

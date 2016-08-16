@@ -1,0 +1,21 @@
+@keyframes blink {
+	0%   {opacity: .2;}
+	20%  {opacity:  1;}
+	100% {opacity: .2;}
+}
+
+.loader-dot {
+	animation: blink 1.4s infinite both;
+	will-change: opacity;
+	background: currentColor;
+	display: inline-block;
+	width: 0.2em; height: 0.2em;
+	border-radius: 50%;
+	margin-left: 0.25em;
+}
+.ld-2 {
+	animation-delay: .2s;
+}
+.ld-3 {
+	animation-delay: .4s;
+}

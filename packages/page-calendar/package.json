@@ -1,10 +1,10 @@
 {
-	"name": "ubc-farm-page-*******",
-	"version": "**.**.**",
-	"description": "***********",
+	"name": "ubc-farm-page-calendar",
+	"version": "1.0.1",
+	"description": "Calendar page listing upcoming tasks",
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-*********",
+	"repository": "https://github.com/NotWoods/ubc-farm/page-calendar",
 	"browser": "dist/index.iife.js",
 	"private": true,
 	"dependencies": {
@@ -20,7 +20,10 @@
 		"redux": "^3.5.2",
 		"react-redux": "^4.4.5",
 		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3"
+		"reselect": "^2.5.3",
+		"ubc-farm-utils": "ubc-farm/utils",
+		"ubc-farm-datetime-picker": "ubc-farm/datetime-picker",
+		"ubc-farm-page-planner": "ubc-farm/page-planner"
 	},
 	"scripts": {
 		"prepublish": "rollup -c"

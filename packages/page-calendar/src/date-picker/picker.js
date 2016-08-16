@@ -1,0 +1,1 @@
+export {default} from 'datetime-picker/date/index.js';
