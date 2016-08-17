@@ -134,16 +134,16 @@ export default class Money {
 	}
 
 	/**
-	 * Returns a formatted currency string
+	 * Returns a formatted currency string.
+	 * @param {string} [locale]
+	 * @param {Object} [options]
+	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 	 */
-	toString(locale, {currency = 'USD', currencyDisplay, useGrouping} = {}) {
+	toString(locale, options) {
 		const float = this.valueOf();
 		if (Number.isNaN(float)) return '';
 
-		const options = {
-			currency, currencyDisplay, useGrouping,
-			style: 'currency'
-		}
+		options = Object.assign({style: 'currency', currency: 'USD'}, options);
 
 		return float.toLocaleString(locale, options);
 	}
