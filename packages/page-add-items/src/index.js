@@ -4,12 +4,12 @@ import {Provider} from 'react-redux';
 import {domready} from 'ubc-farm-utils';
 import store from './redux/index.js';
 
-import TestInput from './money-input/demo.js'; 
+import Form from './form.js'; 
 
 domready.then(() => {
 	ReactDOM.render(
 		<Provider store={store}>
-			<TestInput />
+			<Form />
 		</Provider>
 	, document.getElementById('app-mount'));
 });
