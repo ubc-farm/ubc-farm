@@ -138,7 +138,7 @@ export default class Money {
 	 */
 	toString(locale, {currency = 'USD', currencyDisplay, useGrouping} = {}) {
 		const float = this.valueOf();
-		if (float === null) return '';
+		if (Number.isNaN(float)) return '';
 
 		const options = {
 			currency, currencyDisplay, useGrouping,
