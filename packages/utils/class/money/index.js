@@ -1,11 +1,10 @@
 /**
+ * @deprecated, use the improved Money class instead
  * Class used to represent money. 
  * Internally represents its value as an integer, to avoid float math issues
  * @extends Number
- * @alias module:lib/money.default
- * @typicalname money
  */
-export default class Money extends Number {
+export default class OldMoney extends Number {
 	/**
 	 * @param {number|number[]} money - if an array, 
 	 * uses money[0] as dollars and money[1] as cents. If a float, try to convert
@@ -19,7 +18,7 @@ export default class Money extends Number {
 		if (Array.isArray(dollars)) {
 			dollars = money[0]; cents = money[1];
 		}	else if ((convert && Number.isInteger(money)) 
-		|| money instanceof Money) {
+		|| money instanceof OldMoney) {
 			super(money); 
 			return;
 		} else {
