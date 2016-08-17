@@ -151,4 +151,11 @@ export default class Money {
 
 		return float.toLocaleString(locale, options);
 	}
+
+	/**
+	 * @returns {string} the string value of the Money.
+	 */
+	toJSON() {
+		return this.value;
+	}
 }
