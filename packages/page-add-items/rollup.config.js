@@ -17,7 +17,9 @@ export default {
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
-		commonjs()
+		commonjs({
+			exclude: 'node_modules/lodash-es/**'
+		})
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {

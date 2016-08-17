@@ -1,10 +1,10 @@
 {
-	"name": "ubc-farm-page-*******",
-	"version": "**.**.**",
-	"description": "***********",
+	"name": "ubc-farm-page-add-items",
+	"version": "0.0.0",
+	"description": "Form for adding items to inventory catalog",
 	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
 	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-*********",
+	"repository": "https://github.com/NotWoods/ubc-farm/page-add-items",
 	"browser": "dist/index.iife.js",
 	"private": true,
 	"dependencies": {
@@ -20,7 +20,9 @@
 		"redux": "^3.5.2",
 		"react-redux": "^4.4.5",
 		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3"
+		"reselect": "^2.5.3",
+		"redux-form": "6.0.0-rc.4",
+		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
 		"prepublish": "rollup -c"
