@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {domready} from 'ubc-farm-utils';
 import store from './redux/index.js';
 
-import Form from './form.js'; 
+import Form from './new-item.js'; 
 
 domready.then(() => {
 	ReactDOM.render(

@@ -2,6 +2,7 @@ import {createElement} from 'react' /** @jsx createElement */
 import { Field, reduxForm, propTypes } from 'redux-form';
 
 import MoneyInput from './money-input/input.js';
+import validateMoney from './money-input/validate.js';
 import DurationInput from './duration-input/input.js';
 import submitForm from './submit-item.js';
 
