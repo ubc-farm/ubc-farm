@@ -24,7 +24,7 @@ function decimalToMoneyString(num) {
  * A class used to represent money. Internally the money value
  * is stored as a string, and can be converted back to either
  * an integer for math, a float for display, or a localeString for 
- * formatted display. Money instances are immutable.
+ * formatted display.
  * @property {string} value - the internal value, will be null if the Money
  * is not a valid number.
  */
@@ -38,28 +38,31 @@ export default class Money {
 	 * stripped and the result is stored.
 	 */
 	constructor(thing) {
+		let value;
+
 		if (thing instanceof this.constructor) {
-			this.value = thing.value;
-		} else {
+			value = thing.value;
+		} 
+		else {
 			switch (typeof thing) {
 				case 'number': 
-					this.value = decimalToMoneyString(thing); break;
+					value = decimalToMoneyString(thing); break;
 				case 'string': 
-					this.value = formatMoneyString(thing); break;
+					value = formatMoneyString(thing); break;
 				case 'object': 
-					if (thing === null) this.value = null;
+					if (thing === null) value = null;
 					else {
 						const str = String(thing);
 						const possibleValue = formatMoneyString(str);
 
-						if (possibleValue !== null) this.value = possibleValue;
+						if (possibleValue !== null) value = possibleValue;
 						else {
 							try {
 								const val = thing.valueOf();
 								if (typeof val !== 'object') {
-									this.value = new this.constructor(val).value;
+									value = new this.constructor(val).value;
 								} else {
-									this.value = null;
+									value = null;
 								}
 							} catch (err) {
 								if (!(err instanceof TypeError)) throw err;
@@ -68,11 +71,11 @@ export default class Money {
 					}
 					break;
 				default:
-					this.value = null; break;
+					value = null; break;
 			}
 		}
 
-		Object.freeze(this);
+		Object.defineProperty(this, 'value', {value});
 	}
 
 	/** @type {number} The dollar amount of this Money */
