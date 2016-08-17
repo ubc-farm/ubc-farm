@@ -140,6 +140,10 @@ export default class Money {
 	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 	 */
 	toString(locale, options) {
+		if (typeof locale === 'object' && /undefined|string/.test(typeof options)) {
+			[locale, options] = [options, locale];
+		}
+
 		const float = this.valueOf();
 		if (Number.isNaN(float)) return '';
 
