@@ -10,9 +10,13 @@
 	"dependencies": {
 		"hapi": "14.1.0",
 		"h2o2": "5.1.0",
-		"ubc-farm-api": "ubc-farm/server-api",
-		"ubc-farm-static-server": "ubc-farm/server-static",
-		"ubc-farm-views-server": "ubc-farm/server-views"
+		"ubc-farm-server-static": "ubc-farm/server-static#dist",
+		"ubc-farm-server-views": "ubc-farm/server-views#dist"
+	},
+	"peerDependencies": {
+		"ubc-farm-server-api": "ubc-farm/server-api",
+		"ubc-farm-server-static": "ubc-farm/server-static",
+		"ubc-farm-server-views": "ubc-farm/server-views"
 	},
 	"devDependencies": { 
 		"rollup": "0.34.2",
@@ -21,9 +25,9 @@
 	},
 	"scripts": {
 		"prepublish": "rollup -c",
-		"start:api": "cd node_modules/ubc-farm-api && npm start",
-		"start:static": "cd node_modules/ubc-farm-staic-server npm start",
-		"start:views": "cd node_modules/ubc-farm-views-server && npm run watch",
+		"start:api": "cd ../server-api && npm start",
+		"start:static": "cd ../server-static && npm start",
+		"start:views": "cd ../server-views && npm start",
 		"start": "start npm run start:api && start npm run start:static && start npm run start:views",
 		"poststart": "node index.node.js",
 		"quickstart": "npm run prepublish && npm start"

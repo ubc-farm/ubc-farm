@@ -1,4 +1,4 @@
-import {config as connection} from 'ubc-farm-api/package.json';
+import {config as connection} from 'ubc-farm-server-api/package.json';
 import setOptions from './options.js';
 
 export const handler = setOptions(connection);

@@ -2,8 +2,13 @@ import json from 'rollup-plugin-json';
 
 export default {
 	external(name) {
-		return !name.startsWith('ubc-farm') 
-		|| name.endsWith('server') || name.endsWith('api');
+		if (name.endsWith('.js')) {
+			return false;
+		}
+		else if (name.startsWith('ubc-farm') && !name.includes('server')) 
+			return false;
+		else 
+			return true;
 	},
 	plugins: [json()],
 	entry: 'index.js',
