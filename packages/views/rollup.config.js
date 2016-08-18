@@ -5,12 +5,11 @@ export default {
 	entry: 'index.js',
 	sourceMap: true,
 	targets: [
-		{ dest: 'index.node.js', format: 'cjs' },
-		{ dest: 'index.es.js', format: 'es' }
+		{ dest: 'index.node.js', format: 'cjs' }
 	],
 	external: [
 		'hapi', 'vision', 'handlebars',
-		'ubc-farm-views-utils'
+		'ubc-farm-views-utils', 'path'
 	],
 	plugins: [
 		json(),

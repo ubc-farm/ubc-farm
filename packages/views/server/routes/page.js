@@ -32,10 +32,10 @@ function pageViews(pagename, path = pagename, context) {
 }
 
 export default [
-	//pageViews('calendar'),
-	//pageViews('directory'),
-	//pageViews('fields'),
-	pageViews('invoice',    'finance/sales'),
-	//pageViews('map-editor', 'fields/editor'),
-	//pageViews('planner'),
+	pageViews('calendar'  ),
+	pageViews('directory' ),
+	pageViews('fields'    ),
+	pageViews('invoice'   , 'finance/sales'),
+	pageViews('map-editor', 'fields/editor'),
+	pageViews('planner')  ,
 ];

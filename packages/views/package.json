@@ -11,13 +11,14 @@
   "dependencies": {
     "hapi": "14.2.0",
     "handlebars": "^4.0.5",
-		"vision": "4.1.0"
+		"vision": "4.1.0",
+    "ubc-farm-views-utils": "ubc-farm/views-utils"
   },
   "devDependencies": {
     "rollup": "0.34.2",
     "rollup-plugin-json": "^2.0.1",
-    "ubc-farm-utils": "ubc-farm/utils",
-    "ubc-farm-views-utils": "ubc-farm/views-utils"
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "ubc-farm-utils": "ubc-farm/utils"
   },
   "peerDependencies": {
     "ubc-farm-page-invoice": "ubc-farm/page-invoice"
@@ -33,8 +34,7 @@
   },
   "files": [
     "index.node.js",
-    "index.es.js",
     "index.node.js.map",
-    "index.es.js.map"
+    "pages"
   ]
 }
