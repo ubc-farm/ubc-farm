@@ -38,7 +38,10 @@ const ports = searchModule('ports').then(folder => {
 	const tape = {
 		method, path: '/js/module/tape/{file?}',
 		handler: {
-			file: join(folder, 'tape/index.js')
+			file: {
+				path: join(folder, 'tape/index.js'),
+				confine: false
+			}
 		}
 	};
 

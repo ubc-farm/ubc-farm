@@ -39,7 +39,10 @@ function javascriptRoute(pagename, folder) {
 			method: 'GET',
 			path: `/js/page/${pagename}/index.js`,
 			handler: {
-				file: join(folder, main)
+				file: {
+					path: join(folder, main),
+					confine: false
+				}
 			}
 		}
 	]
