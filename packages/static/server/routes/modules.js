@@ -4,7 +4,10 @@ import search from '../find-folder.js';
 
 const folder = join(__dirname, 'node_modules');
 function searchModule(name) {
-	return search(folder, `ubc-farm-${name}`, name);
+	return search(folder, `ubc-farm-${name}`, name).then(path => {
+		if (path === undefined) throw new Error(`Could not find ${name}`);
+		else return path;
+	})
 }
 
 const method = 'GET', listing = true, index = false;
@@ -64,6 +67,6 @@ const ports = searchModule('ports').then(folder => {
 })
 
 const all = Promise.all([tableBase, datetime, ports])
-	.then( routes => routes.reduce((a = [], b) => [...a, ...b]) );
+.then(([table, date, port]) => [table, date, ...port]);
 
 export default all;
