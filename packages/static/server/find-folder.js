@@ -13,10 +13,6 @@ function doesPathExist(path) {
 	});
 }
 
-function splitPath(path) {
-	return path.split(sep);
-}
-
 /**
  * Tries to recursively find the given folder(s) by searching using fs.stat
  * @returns {Promise<string>} undefined if no path is ever found

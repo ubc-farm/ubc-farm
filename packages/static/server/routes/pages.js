@@ -1,10 +1,14 @@
-function cssRoute(pagename) {
+import {join} from 'path';
+import __dirname from '../../dirname.js'
+import search from '../find-folder.js';
+
+function cssRoute(pagename, folder) {
 	return {
 		method: 'GET',
 		path: `/css/page/${pagename}/{param*}`,
 		handler: {
 			directory: {
-				path: `node_modules/ubc-farm-page-${pagename}/styles`,
+				path: join(folder, 'styles'),
 				listing: true,
 				defaultExtension: 'css',
 				index: false
@@ -13,11 +17,9 @@ function cssRoute(pagename) {
 	}
 }
 
-/**
- * @todo better resolution algorithm
- */
-function javascriptRoute(pagename) {
-	const pkg = require(`node_modules/ubc-farm-page-${pagename}/package.json`);
+function javascriptRoute(pagename, folder) {
+	//eslint-disable-next-line global-require
+	const pkg = require(join(folder, 'package.json')); 
 	const {browser: main = 'dist/index.iife.js'} = pkg;
 
 	return [
@@ -26,7 +28,7 @@ function javascriptRoute(pagename) {
 			path: `/js/page/${pagename}/{param*}`,
 			handler: {
 				directory: {
-					path: `node_modules/ubc-farm-page-${pagename}/dist`,
+					path: join(folder, 'dist'),
 					listing: true,
 					defaultExtension: 'js',
 					index: false
@@ -37,10 +39,19 @@ function javascriptRoute(pagename) {
 			method: 'GET',
 			path: `/js/page/${pagename}/index.js`,
 			handler: {
-				file: `node_modules/ubc-farm-page-${pagename}/${main}`
+				file: join(folder, main)
 			}
 		}
 	]
+}
+
+const folder = join(__dirname, 'node_modules');
+function searchForRouteFolders(pagename) {
+	return search(folder, `ubc-farm-page-${pagename}`, `page-${pagename}`)
+		.then(path => {
+			if (path === undefined) throw new Error(`${pagename} not found`);
+			else return [...javascriptRoute(pagename, path), cssRoute(pagename, path)]
+		});
 }
 
 const pageList = [
@@ -51,6 +62,8 @@ const pageList = [
 	'map-editor'
 ]
 
-export default pageList.reduce(
-	(routes = [], name) => [...routes, cssRoute(name), javascriptRoute(name)]
-);
+const routes = Promise.all(pageList.map(searchForRouteFolders))
+
+export default routes.then(routes => routes.reduce(
+	(allRoutes = [], additional) => [...allRoutes, ...additional]
+));
