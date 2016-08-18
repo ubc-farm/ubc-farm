@@ -1,4 +1,4 @@
-import {sep, resolve as resolvePath, join} from 'path';
+import {resolve as resolvePath, join} from 'path';
 import {stat as statNode} from 'fs';
 import {promisify} from '../node_modules/ubc-farm-utils/index.js';
 

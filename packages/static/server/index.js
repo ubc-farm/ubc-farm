@@ -1,7 +1,7 @@
-import {resolve} from 'path';
 import {Server} from 'hapi';
 import Inert from 'inert';
 
+import __dirname from '../dirname.js';
 import {config as connection} from '../package.json';
 
 import analytics from './routes/analytics.js';
@@ -15,7 +15,7 @@ import moduleRoutes from './routes/modules.js';
 const server = new Server();
 server.connection(connection);
 
-server.path(resolve(__dirname, '../'));
+server.path(__dirname);
 server.register(Inert, err => {if (err) throw err});
 
 server.route(analytics);
