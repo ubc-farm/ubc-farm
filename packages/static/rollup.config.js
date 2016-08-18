@@ -7,6 +7,6 @@ export default {
 	],
 	external: [
 		'hapi', 'inert',
-		'path'
+		'path', 'tape'
 	]
 };

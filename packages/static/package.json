@@ -15,12 +15,13 @@
   "devDependencies": {
     "rollup": "0.34.2",
     "rollup-plugin-json": "^2.0.1",
+    "tape": "^4.6.0",
     "ubc-farm-css": "github:ubc-farm/css-core",
     "ubc-farm-utils": "ubc-farm/utils",
     "ubc-farm-views-utils": "ubc-farm/views-utils"
   },
   "scripts": {
-    "test": "tape \"**/*.spec.js\"",
+    "test": "rollup -i _tests/find-folder.spec.js -f cjs -e path,fs,tape | node",
     "prepublish": "rollup -c",
     "start": "node index.node.js",
     "quickstart": "npm run prepublish && npm start"
