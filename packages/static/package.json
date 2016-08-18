@@ -16,7 +16,7 @@
     "rollup": "0.34.2",
     "rollup-plugin-json": "^2.0.1",
     "tape": "^4.6.0",
-    "ubc-farm-css": "github:ubc-farm/css-core",
+    "ubc-farm-css": "ubc-farm/css-core",
     "ubc-farm-utils": "ubc-farm/utils",
     "ubc-farm-views-utils": "ubc-farm/views-utils"
   },
@@ -31,8 +31,7 @@
   },
   "files": [
     "index.node.js",
-    "index.es.js",
     "index.node.js.map",
-    "index.es.js.map"
+    "assets"
   ]
 }
