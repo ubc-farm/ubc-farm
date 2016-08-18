@@ -22,7 +22,10 @@ server.route(analytics);
 server.route(coreCss);
 server.route(partialCss);
 
-pageRoutes.then(pages => server.route(pages));
-moduleRoutes.then(mods => server.route(mods));
+const pagesReady = pageRoutes.then(pages => server.route(pages));
+const modReady = moduleRoutes.then(mods => server.route(mods));
 
 export default server;
+export const ready = 
+	Promise.all([pagesReady, modReady]).then(() => server)
+	.catch(err => console.error(err));

@@ -1,4 +1,4 @@
-import server from './server/index.js';
-import startServer from 'ubc-farm-utils/function/start-server.js';
+import startServer from './node_modules/ubc-farm-utils/function/start-server.js';
+import {ready} from './server/index.js';
 
-startServer(server, 'Static');
+ready.then(server => startServer(server, 'Static'));
