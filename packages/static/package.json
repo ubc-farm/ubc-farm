@@ -1,6 +1,6 @@
 {
   "name": "ubc-farm-server-static",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Server for static files",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "private": true,
