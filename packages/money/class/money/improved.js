@@ -4,15 +4,15 @@ function formatMoneyString(str) {
 	const [dollarString, ...centStrings] = onlyNumbersAndDecimals.split('.');
 
 	if (!dollarString && centStrings.length === 0) return null;
-	
+
 	let centString = centStrings.join('');
 	if (centString.length === 1) {
-		centString = centString + '0';
+		centString = `${centString}0`;
 	} else if (centString.length === 0) {
 		centString = '00';
 	}
 
-	return dollarString + '.' + centString;
+	return `${dollarString}.${centString}`;
 }
 
 function decimalToMoneyString(num) {
@@ -23,14 +23,14 @@ function decimalToMoneyString(num) {
 /**
  * A class used to represent money. Internally the money value
  * is stored as a string, and can be converted back to either
- * an integer for math, a float for display, or a localeString for 
+ * an integer for math, a float for display, or a localeString for
  * formatted display.
  * @property {string} value - the internal value, will be null if the Money
  * is not a valid number.
  */
 export default class Money {
 	/**
-	 * @param {Money|number|string} thing - value converted 
+	 * @param {Money|number|string} thing - value converted
 	 * into the Money value. If a Money instance, returns a new Money
 	 * with the same value. If a number, assumes that the number is a decimal
 	 * representing dollars and cents and converts it to a string.
@@ -82,7 +82,7 @@ export default class Money {
 
 		const pointIndex = this.value.indexOf('.');
 		const dollarString = this.value.substring(0, pointIndex);
-		return parseInt(dollarString);
+		return parseInt(dollarString, 10);
 	}
 
 	/**
@@ -115,11 +115,11 @@ export default class Money {
 	 * @returns {number} the money value as cents, stripping any fractional cents.
 	 * Useful for doing money related math, as integers won't suffer from floating
 	 * point problems.
-	 * @example 
+	 * @example
 	 * new Money('$10.99').toInteger === 1099
 	 */
 	toInteger() {
-		const {dollars, cents} = this;
+		const { dollars, cents } = this;
 		const dollarsAsCents = dollars * 100;
 		return dollarsAsCents + cents;
 	}
@@ -158,9 +158,9 @@ export default class Money {
 		const float = this.valueOf();
 		if (Number.isNaN(float)) return '';
 
-		options = Object.assign({style: 'currency', currency: 'USD'}, options);
+		const opts = Object.assign({ style: 'currency', currency: 'USD' }, options);
 
-		return float.toLocaleString(locale, options);
+		return float.toLocaleString(locale, opts);
 	}
 
 	/**
