@@ -22,10 +22,6 @@ const dateGets = [
 	'getMilliseconds',
 ];
 
-const labels = dateGets
-	.map(f => f.substr(3).toLowerCase())
-	.map(f => (f.endsWith('s') ? f.slice(-1) : f));
-
 /**
  * Compares two dates at higher and higher fidelities.
  * @param {Date} date1
@@ -34,6 +30,12 @@ const labels = dateGets
  * @returns {Generator<boolean|Object>} returns an object when .return is called
  */
 export function* comparinator(date1, date2, max = 7) {
+	const labels = dateGets.map(f => {
+		const noGet = f.substr(3).toLowerCase();
+		const noPlural = noGet.endsWith('s') ? noGet.slice(-1) : noGet;
+		return noPlural;
+	});
+
 	const call = (i, thisArg) => Date.prototype[dateGets[i]].call(thisArg);
 	const c = {};
 	try {

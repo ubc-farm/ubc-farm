@@ -3,6 +3,6 @@ export default {
 	sourceMap: true,
 	targets: [
 		{ dest: 'dist/index.js', format: 'cjs' },
-		{ dest: 'dist/index.es.js', format: 'es' }
-	]
+		{ dest: 'dist/index.es.js', format: 'es' },
+	],
 };
