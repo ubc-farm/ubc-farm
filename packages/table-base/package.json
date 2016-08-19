@@ -12,12 +12,14 @@
 	},
 	"devDependencies": {
 		"rollup": "0.34.2",
-		"rollup-plugin-buble": "^0.12.1",
+		"rollup-plugin-node-resolve": "^2.0.0",
+		"rollup-plugin-babel": "^2.6.1",
+		"babel-plugin-transform-react-jsx": "^6.8.0",
+		"babel-plugin-external-helpers": "^6.8.0",
 		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
-		"prepublish": "rollup -c",
-		"preinstall": "rollup -c"
+		"prepublish": "rollup -c"
 	},
 	"files": [
 		"index.es.js",
