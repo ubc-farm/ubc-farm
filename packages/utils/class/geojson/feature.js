@@ -4,7 +4,7 @@
  * @see http://geojson.org/geojson-spec.html#feature-objects
  */
 export default class Feature {
-	get type() {return 'Feature'}
+	get type() { return 'Feature'; }
 
 	/**
 	 * @param {Geometry} geometry
@@ -12,14 +12,14 @@ export default class Feature {
 	 * @param {any} [id]
 	 */
 	constructor(geometry, properties = null, id) {
-		Object.assign(this, {geometry, properties});
+		Object.assign(this, { geometry, properties });
 		if (id) this.id = id;
 	}
 
 	/** @returns {Object} */
 	toJSON() {
-		const {type, geometry, properties, id} = this;
-		let json = {type, geometry, properties};
+		const { type, geometry, properties, id } = this;
+		const json = { type, geometry, properties };
 		if (id) json.id = id;
 		return json;
 	}

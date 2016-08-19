@@ -11,7 +11,7 @@ import Position from './position.js';
  * @see http://geojson.org/geojson-spec.html#polygon
  */
 export default class Polygon extends Geometry {
-	get type() {return 'Polygon';}
+	get type() { return 'Polygon'; }
 
 	/** @param {...LineString} lines */
 	constructor(...lines) {
@@ -26,7 +26,7 @@ export default class Polygon extends Geometry {
 	 */
 	static from(value) {
 		if (Array.isArray(value)) return new Polygon(value);
-		else return super.from(value);
+		return super.from(value);
 	}
 
 	/**
@@ -37,19 +37,10 @@ export default class Polygon extends Geometry {
 	static fromGoogle(polygon) {
 		return new Polygon(
 			...polygon.getPaths().getArray().map(path => {
-				let p = path.getArray().map(Position.fromGoogle);
+				const p = path.getArray().map(Position.fromGoogle);
 				p.push(p[0]);
 				return p;
 			})
 		);
-	}
-
-	/**
-	 * Converts Google Maps API Data.Polygon to GeoJSON Polygon
-	 */
-	static fromGoogleData(polygon) {
-		return new Polygon(
-			...polygon.getArray().map(path => {})
-		)
 	}
 }

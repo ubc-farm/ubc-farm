@@ -9,19 +9,19 @@
  */
 export default class Position {
 	/**
-	 * @param {number[]|Object} values of the position. 
+	 * @param {number[]|Object} values of the position.
 	 * @param {number} value.x - set as value[0]
 	 * @param {number} value.y - set as value[1]
 	 * @throws {TypeError} If value is not an array or an object with x and y
 	 */
 	constructor(value) {
-		if (Array.isArray(value))
-			for (let key in value) this[key] = value[key];
-		else if ('x' in value && 'y' in value) {
-			const {x, y} = value;
-			Object.assign(this, {0: x, 1: y});
+		if (Array.isArray(value)) {
+			for (const [key, val] of value.entries()) this[key] = val;
+		} else if ('x' in value && 'y' in value) {
+			const { x, y } = value;
+			Object.assign(this, { 0: x, 1: y });
 		} else {
-			throw TypeError('Position must be called with ' + 
+			throw new TypeError('Position must be called with ' +
 				'either an array or an object with properties x and y');
 		}
 	}
@@ -29,7 +29,7 @@ export default class Position {
 	/** Similar to Promise.resolve(), converts value into a Position */
 	static from(value) {
 		if (value instanceof Position) return value;
-		else return new Position(value);
+		return new Position(value);
 	}
 
 	/**
@@ -41,7 +41,7 @@ export default class Position {
 		return new Position([latlng.lng(), latlng.lat()]);
 	}
 
-	/** 
+	/**
 	 * For JSON.stringify serialization
 	 * @returns {Array}
 	 */
@@ -49,8 +49,8 @@ export default class Position {
 		return Array.from(this);
 	}
 
-	/** 
-	 * Generator function to get values from this Position. Aligns with 
+	/**
+	 * Generator function to get values from this Position. Aligns with
 	 * interator protocol, and allows a position to be easily conveted into an
 	 * array.
 	 * @example
@@ -74,18 +74,16 @@ export default class Position {
 	 * @example
 	 * let position = new Position([12, 34]);
 	 * [].push.call(position, 56);
-	 * 
+	 *
 	 * position.toJSON(); //[12, 34, 56]
 	 */
 	get length() {
-		let i = 0; 
-		for (const _ of this) i++;
-		return i;
+		return [...this].length;
 	}
 
-	//aliases
-	get lat() {return this[1]}
-	get lng() {return this[0]}
-	get x() {return this[0]}
-	get y() {return this[1]}
+	// aliases
+	get lat() { return this[1]; }
+	get lng() { return this[0]; }
+	get x() { return this[0]; }
+	get y() { return this[1]; }
 }

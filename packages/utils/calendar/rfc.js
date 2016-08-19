@@ -7,7 +7,8 @@
  * toIsoDate(date) // returns 1969-07-16
  */
 export function toRfcDate(date) {
-	if (!(date instanceof Date)) 
+	if (!(date instanceof Date)) {
 		throw new TypeError(`date parameter ${date} is not a Date object`);
+	}
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }

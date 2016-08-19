@@ -8,7 +8,7 @@ import Geometry from './geometry.js';
  * @see http://geojson.org/geojson-spec.html#linestring
  */
 export default class LineString extends Geometry {
-	get type() {return 'LineString';}
+	get type() { return 'LineString'; }
 
 	/** @param {Position[]} positions */
 	constructor(positions) {
