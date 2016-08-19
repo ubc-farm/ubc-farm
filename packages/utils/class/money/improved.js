@@ -170,4 +170,12 @@ export default class Money {
 	toJSON() {
 		return this.value;
 	}
+
+	[Symbol.toPrimitive](hint) {
+		switch (hint) {
+			case 'string': return this.toString();
+			case 'number': return this.valueOf();
+			case 'default': default: return this.toJSON();
+		}
+	}
 }
