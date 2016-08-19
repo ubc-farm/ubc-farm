@@ -126,6 +126,18 @@ export default class Money {
 	}
 
 	/**
+	 * @param {number} cents - an integer like that returned by Money#toInteger
+	 * @returns {Money} with a value based off the provided cent amount
+	 * @example
+	 * Money.fromInteger(1099) == new Money('$10.99')
+	 */
+	static fromInteger(cents) {
+		const intString = cents.toFixed(0);
+		const value = `${intString.slice(0, -2)}.${intString.slice(-2)}`;
+		return new this(value);
+	}
+
+	/**
 	 * @returns {number} float representation of the money
 	 * Will be NaN if the internal value is null.
 	 */
