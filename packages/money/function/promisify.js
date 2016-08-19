@@ -4,15 +4,13 @@ function isPromise(thing) {
 }
 
 export default function promisify(func) {
-	return function(...args) {
-		return new Promise((resolve, reject) => {
-			const handleCallback = (err, result) => {
-				if (err) reject(err);
-				else resolve(result);
-			};
+	return (...args) => new Promise((resolve, reject) => {
+		const handleCallback = (err, result) => {
+			if (err) reject(err);
+			else resolve(result);
+		};
 
-			const result = func.call(this, ...args, handleCallback);
-			if (isPromise(result)) resolve(result);
-		})
-	}
+		const result = func.call(this, ...args, handleCallback);
+		if (isPromise(result)) resolve(result);
+	});
 }

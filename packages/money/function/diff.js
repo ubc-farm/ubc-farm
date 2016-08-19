@@ -15,21 +15,21 @@ export default function diff(oldStore, newStore) {
 	if (oldStore === newStore) return undefined;
 	if (typeof newStore !== typeof oldStore) return newStore;
 	else if (Array.isArray(newStore)) {
-		let clone = [...newStore];
+		const clone = [...newStore];
 		return oldStore.reduce((difference, oldValue) => {
 			const newIndex = clone.indexOf(oldValue);
 			if (newIndex === -1) difference.push(REMOVED);
 			else {
 				const subdiff = diff(oldValue, clone[newIndex]);
 				difference.push(subdiff);
-				clone.splice(newIndex, 1); 
+				clone.splice(newIndex, 1);
 			}
 			return difference;
 		}, []).concat(clone);
-	} else if (typeof newStore == 'object' && newStore !== null) {
-		let oldKeys = Object.keys(oldStore);
-		let difference = {};
-		for (let newKey in newStore) {
+	} else if (typeof newStore === 'object' && newStore !== null) {
+		const oldKeys = Object.keys(oldStore);
+		const difference = {};
+		for (const newKey in newStore) {
 			if (!has(oldStore, newKey)) difference[newKey] = newStore[newKey];
 			else {
 				const subdiff = diff(oldStore[newKey], newStore[newKey]);
@@ -37,7 +37,8 @@ export default function diff(oldStore, newStore) {
 				oldKeys.splice(oldKeys.indexOf(newKey), 1);
 			}
 		}
-		for (let removedKey of oldKeys) difference[removedKey] = REMOVED;
+		for (const removedKey of oldKeys) difference[removedKey] = REMOVED;
 		return difference;
-	} else return newStore;
+	}
+	return newStore;
 }

@@ -8,7 +8,7 @@
  * @see http://geojson.org/geojson-spec.html#feature-collection-objects
  */
 export default class FeatureCollection extends Array {
-	get type() {return 'FeatureCollection'}
+	get type() { return 'FeatureCollection'; }
 
 	/** @param {Feature[]} features - an array or iterable of Features */
 	constructor(features) {
@@ -17,11 +17,11 @@ export default class FeatureCollection extends Array {
 	}
 
 	/**
-	 * @type {Feature[]|Iterable<Feature>} returns the array. 
-	 * Setting a value here will clear the array then push the values with 
+	 * @type {Feature[]|Iterable<Feature>} returns the array.
+	 * Setting a value here will clear the array then push the values with
 	 * a spread operator, meaning an iterator can be used instead of an array.
 	 */
-	get features() {return this;}
+	get features() { return this; }
 	set features(values) {
 		this.length = 0;
 		this.push(...values);
@@ -39,7 +39,7 @@ export default class FeatureCollection extends Array {
 	 * @returns {Object}
 	 */
 	toJSON() {
-		const {type} = this;
-		return {type, features: Array.from(this)}
+		const { type } = this;
+		return { type, features: Array.from(this) };
 	}
-} 
+}

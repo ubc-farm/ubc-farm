@@ -1,31 +1,35 @@
-import {long, short} from './labels.js';
-const {months} = long; const shortMonths = short.months;
+import { long, short } from './labels.js';
+
+const { months } = long; const shortMonths = short.months;
 
 /**
  * Used to render a time. You can either pass in a date object or pass in
  * a time string in format HHMM (such as 1300 for 13 o'clock / 1 pm).
  * @param {Date|string} date object or a string
  * @param {boolean} [amPm=true] - set to false to prevent AM/PM from showing
- * @param {boolean} [trailing=false] - set to false to truncate hours, 
- * i.e.: 12:00 becomes 12 instead. 
+ * @param {boolean} [trailing=false] - set to false to truncate hours,
+ * i.e.: 12:00 becomes 12 instead.
  * @param {boolean} [twelve=true] - true to use 12 hours clock, false to use 24
  * @returns {string}
  */
 export function toTimeString(date, options = {}) {
-	const {amPm = true, trailing = false, twelve = true} = options;
+	const { amPm = true, trailing = false, twelve = true } = options;
 
+	let dateObj;
 	if (typeof date === 'string') {
 		const time = date.toString();
-		let hr = 0, min = parseInt(time.slice(-2));
-		if (time.length > 2) hr = parseInt(time.slice(0, -2));
+		const min = parseInt(time.slice(-2), 10);
+		const hr = time.length > 2 ? parseInt(time.slice(0, -2), 10) : 0;
 
-		date = new Date(0);
-		date.setHours(hr, min);
+		dateObj = new Date(0);
+		dateObj.setHours(hr, min);
 	} else if (date == null) {
 		return '';
 	}
 
-	let hour = date.getHours(), minute = date.getMinutes(), amPmStr = '';
+	const minute = dateObj.getMinutes();
+	let hour = dateObj.getHours();
+	let amPmStr = '';
 	if (twelve) {
 		if (hour === 0) {
 			hour = 12;
@@ -33,19 +37,18 @@ export function toTimeString(date, options = {}) {
 		} else if (amPm && hour === 12) {
 			amPmStr = ' PM';
 		} else if (hour > 12) {
-			hour = hour % 12;
+			hour %= 12;
 			if (amPm) amPmStr = ' PM';
 		} else if (amPm) { amPmStr = ' AM'; }
 	}
-	
-	let minString = ':' + minute.toString();
-	if (trailing && minute === 0) { minString = '';	}
+
+	const minString = !trailing || minute !== 0 ? `:${minute.toString()}` : '';
 
 	return hour.toString() + minString + amPmStr;
 }
 
 /**
- * Used to render a date. You can pass a Date object or an object with the 
+ * Used to render a date. You can pass a Date object or an object with the
  * correct properties.
  * @param {Date|Object} date object or json object
  * @param {number} date.date
@@ -56,17 +59,16 @@ export function toTimeString(date, options = {}) {
  * @returns {string}
  */
 export function toDateString(date, options = {}) {
-	const {showYear = false, shortMonth = true} = options;
+	const { showYear = false, shortMonth = true } = options;
 
-	if (!date instanceof Date) {
+	if (!(date instanceof Date)) {
 		date = new Date(date.year, date.month, date.date);
 	}
 
-	let yearString = '';
-	if (showYear) yearString = ' ' + date.getFullYear().toString(); 
-
-	const month = shortMonth 
-		? shortMonths[date.getMonth()] 
+	const yearString = showYear ? ` ${date.getFullYear()}` : '';
+	const month = shortMonth
+		? shortMonths[date.getMonth()]
 		: months[date.getMonth()];
-	return date.getDate().toString() + ' ' + month + yearString;
+
+	return `${date.getDate()} ${month}${yearString}`;
 }

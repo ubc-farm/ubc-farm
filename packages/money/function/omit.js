@@ -8,7 +8,7 @@
 export default function omit(source = {}, ...props) {
 	if (props.length === 0 && Array.isArray(props[0])) props = props[0];
 
-	let target = {};
+	const target = {};
 	for (const key in source) {
 		if (!props.includes(key)) target[key] = source[key];
 	}

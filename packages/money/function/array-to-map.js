@@ -1,4 +1,4 @@
-import id from './id.js'
+import id from './id.js';
 
 /**
  * Transforms an array of objects into a keyed map, using the specified
@@ -9,7 +9,9 @@ import id from './id.js'
  * @alias module:lib/utils.arrayToMap
  */
 export function arrayToMap(array, idKey) {
-	return array.reduce((map, obj) => map.set(obj[idKey]||id(), obj), new Map());
+	return array.reduce((map, obj) => (
+		map.set(obj[idKey] || id(), obj)
+	), new Map());
 }
 
 /**
@@ -21,8 +23,9 @@ export function arrayToMap(array, idKey) {
  * @alias module:lib/utils.arrayToObjectMap
  */
 export function arrayToObjectMap(array, idKey) {
-	if (!Array.isArray(array))
-		throw TypeError('arrayToObjectMap was not given an array');
+	if (!Array.isArray(array)) {
+		throw new TypeError('arrayToObjectMap was not given an array');
+	}
 
 	return array.reduce((newObj, obj) => {
 		newObj[obj[idKey] || id()] = obj;
@@ -37,8 +40,11 @@ export function arrayToObjectMap(array, idKey) {
  * @alias module:lib/utils.mapToObject
  */
 export function mapToObject(map) {
-	let obj = {};
-	for (const [key, value] of map) 
+	const obj = {};
+
+	for (const [key, value] of map) {
 		if (typeof key === 'string') obj[key] = value;
+	}
+
 	return obj;
 }

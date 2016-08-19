@@ -6,8 +6,8 @@ export default function flatten(date, fidelity = 3) {
 		date.getHours(),
 		date.getMinutes(),
 		date.getSeconds(),
-		date.getMilliseconds()
+		date.getMilliseconds(),
 	].slice(0, fidelity);
 
 	return new Date(...dateComponents);
-} 
+}

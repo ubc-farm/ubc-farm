@@ -7,13 +7,15 @@
  */
 export const isReady = document => new Promise(resolve => {
 	function checkState() {
-		if (document.readyState != 'loading') {
-			resolve(); return true;
+		if (document.readyState !== 'loading') {
+			resolve();
+			return true;
 		}
+		return false;
 	}
 	if (checkState()) return;
 	document.addEventListener('readystatechange', checkState);
-})
+});
 
 /**
  * Resolves when the DOM is ready to interact with
@@ -23,7 +25,7 @@ export const isReady = document => new Promise(resolve => {
  * @requires document
  * @alias module:lib/utils.domReady
  */
-const domReady = typeof document === 'undefined' 
+const domReady = typeof document === 'undefined'
 	? null
 	: isReady(document);
 export default domReady;
