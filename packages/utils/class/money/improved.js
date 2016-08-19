@@ -40,42 +40,40 @@ export default class Money {
 	constructor(thing) {
 		let value;
 
-		if (thing instanceof this.constructor) {
-			value = thing.value;
-		} 
-		else {
+		if (!(thing instanceof this.constructor)) {
 			switch (typeof thing) {
-				case 'number': 
+				case 'number':
 					value = decimalToMoneyString(thing); break;
-				case 'string': 
+				case 'string':
 					value = formatMoneyString(thing); break;
-				case 'object': 
-					if (thing === null) value = null;
-					else {
-						const str = String(thing);
-						const possibleValue = formatMoneyString(str);
-
-						if (possibleValue !== null) value = possibleValue;
-						else {
+				case 'object': {
+					let val = null;
+					if (thing !== null) {
+						val = formatMoneyString(String(thing));
+						if (val === null) {
 							try {
-								const val = thing.valueOf();
-								if (typeof val !== 'object') {
-									value = new this.constructor(val).value;
-								} else {
-									value = null;
-								}
+								val = thing.valueOf();
 							} catch (err) {
 								if (!(err instanceof TypeError)) throw err;
+							} finally {
+								if (typeof val !== 'object') {
+									val = new this.constructor(val).value;
+								}
 							}
 						}
 					}
+
+					value = val;
 					break;
+				}
 				default:
 					value = null; break;
 			}
+		} else {
+			value = thing.value;
 		}
 
-		Object.defineProperty(this, 'value', {value});
+		Object.defineProperty(this, 'value', { value });
 	}
 
 	/** @type {number} The dollar amount of this Money */
@@ -97,14 +95,15 @@ export default class Money {
 		const pointIndex = this.value.indexOf('.');
 		const centString = this.value.substring(pointIndex);
 
-		let multiplier = this.value.startsWith('-') ? -1 : 1;
+		const multiplier = this.value.startsWith('-') ? -1 : 1;
 
-		if (centString.length <= 2) return parseInt(centString) * multiplier;
-		else if (digits > 0) {
+		if (digits > 0 && centString.length > 2) {
 			const centValue = parseFloat(centString);
 			const shortened = centValue.toFixed(digits);
 			return parseFloat(shortened) * multiplier;
 		}
+
+		return parseInt(centString, 10) * multiplier;
 	}
 
 	/** @type {number} sameas getCents(0) */
