@@ -36,8 +36,8 @@ export const subtotalSelector = createSelector(
 	(data, totalColumn) => {
 		let total = 0;
 		for (const row of data.values()) {
-			const value = totalColumn.getValue(row);
-			if (value !== undefined && !Money.isNaN(value)) total += value;
+			const value = Number(totalColumn.getValue(row));
+			if (!Number.isNaN(value)) total += value;
 		}
 		return new Money(total);
 	}
@@ -47,14 +47,22 @@ export const subtotalSelector = createSelector(
 export const totalSelector = createSelector(
 	subtotalSelector,
 	vatSelector,
-	(subtotal, VAT) => new Money(subtotal * (VAT + 1))
+	(subtotal, VAT) => {
+		const subtotalInt = subtotal.toInteger();
+		const total = subtotalInt * (VAT + 1);
+		return Money.fromInteger(total);
+	}
 );
 
 /** @returns {Money} */
 export const balanceDueSelector = createSelector(
 	totalSelector,
 	amountPaidSelector,
-	(total, amountPaid) => new Money(total - amountPaid)
+	(total, amountPaid) => {
+		const totalInt = total.toInteger();
+		const paidInt = amountPaid.toInteger();
+		return Money.fromInteger(totalInt - paidInt);
+	}
 );
 
 export const calculatePositionOffset = createSelector(

@@ -41,18 +41,20 @@ export const unitCost = new Column({
 	description: 'Cost per unit of this item',
 	getValue(rowData) {
 		const cents = this.super_getValue(rowData);
-		if (cents !== undefined) return new Money(cents);
-		return undefined;
+		return new Money(cents);
 	},
 	compareFunc(a = 0, b = 0) {
 		return b - a;
 	},
 	align: 'right',
 	toElement(value, rowKey) {
-		const randomMoney = new Money(Math.trunc(Math.random() * 50000)).toString();
+		const randomMoney = new Money(Math.trunc(Math.random() * 50000));
 
 		return this.super_toElement(
-			<UnitCostInput placeholder={randomMoney} rowKey={rowKey} column={this} />
+			<UnitCostInput
+				placeholder={String(randomMoney)}
+				rowKey={rowKey} column={this}
+			/>
 		);
 	},
 });
@@ -80,10 +82,13 @@ export const price = new Column({
 	getValue(rowData) {
 		if (priceValueCache.has(rowData)) return priceValueCache.get(rowData);
 
-		const total = rowData.get(unitCost) * rowData.get(quantity);
-		if (Money.isNaN(total)) return undefined;
+		const unitCostValue = rowData.get(unitCost);
+		const unitCostInt = unitCostValue ? unitCostValue.toInteger() : NaN;
 
-		const result = new Money(total);
+		const total = unitCostInt * rowData.get(quantity);
+		if (Number.isNaN(total)) return undefined;
+
+		const result = Money.fromInteger(total);
 		priceValueCache.set(rowData, result);
 		return result;
 	},

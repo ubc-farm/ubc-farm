@@ -29,10 +29,7 @@ const UnitCostInputConnected = connect(
 	},
 	(dispatch, { rowKey, column }) => ({
 		onBlur(value) {
-			const strippedNonNumbers = value.replace(/[^0-9\.]/g, '');
-			const money = new Money(strippedNonNumbers, { convert: false });
-
-			dispatch(changeData(money, rowKey, column));
+			dispatch(changeData(new Money(value), rowKey, column));
 		},
 	}),
 	(stateProps, dispatchProps, ownProps) => {

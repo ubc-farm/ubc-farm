@@ -65,13 +65,5 @@ export function changeData(newValue, atRowKey, atColumn) {
 }
 
 export function setAmountPaid(amount) {
-	let amountPaid;
-	if (typeof amount === 'string') {
-		const strippedNonNumbers = amount.replace(/[^0-9\.]/g, '');
-		amountPaid = new Money(strippedNonNumbers, { convert: false });
-	} else if (!(amount instanceof Money)) {
-		amountPaid = new Money(amount);
-	}
-
-	return { type: SET_AMOUNT_PAID, amountPaid };
+	return { type: SET_AMOUNT_PAID, amountPaid: new Money(amount) };
 }
