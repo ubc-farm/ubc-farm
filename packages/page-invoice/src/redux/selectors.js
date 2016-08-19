@@ -1,6 +1,6 @@
-import {createSelector} from 'reselect';
-import {Money} from 'ubc-farm-utils';
-import columnList, {price} from '../columnlist.js';
+import { createSelector } from 'reselect';
+import { Money } from 'ubc-farm-utils';
+import columnList, { price } from '../columnlist.js';
 
 /** @returns {Map<K, WeakMap>} */
 export const dataSelector = state => state.data;
@@ -41,14 +41,14 @@ export const subtotalSelector = createSelector(
 		}
 		return new Money(total);
 	}
-)
+);
 
 /** @returns {Money} */
 export const totalSelector = createSelector(
 	subtotalSelector,
 	vatSelector,
 	(subtotal, VAT) => new Money(subtotal * (VAT + 1))
-)
+);
 
 /** @returns {Money} */
 export const balanceDueSelector = createSelector(
@@ -62,10 +62,10 @@ export const calculatePositionOffset = createSelector(
 	columnSelector,
 	(totalColumn, allColumns) => {
 		const index = allColumns.findIndex(c => totalColumn === c);
-		
+
 		return {
 			leftPad: index + 1,
-			rightPad: allColumns.length - index - 1
+			rightPad: allColumns.length - index - 1,
 		};
 	}
-)
+);

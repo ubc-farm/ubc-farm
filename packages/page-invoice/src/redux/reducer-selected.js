@@ -1,40 +1,35 @@
 import {
-	TOGGLE_SELECTION, 
+	TOGGLE_SELECTION,
 	SET_SELECTION,
-	CLEAR_SELECTION, 
-	EVERYTHING_SELECTION
+	CLEAR_SELECTION,
+	EVERYTHING_SELECTION,
 } from './actions.js';
 
 export default function selected(state = new Set(), action, dataState) {
 	switch (action.type) {
 		case TOGGLE_SELECTION: {
 			const id = action.payload;
-			let selected = new Set(state);
-			
-			if (selected.has(id)) 
-				selected.delete(id);
-			else 
-				selected.add(id);
+			const newSelected = new Set(state);
 
-			return selected;
+			if (newSelected.has(id)) newSelected.delete(id);
+			else newSelected.add(id);
+
+			return newSelected;
 		}
 		case SET_SELECTION: {
-			const id = action.meta, status = action.payload;
-			let selected = new Set(state);
+			const id = action.meta;
+			const status = action.payload;
+			const newSelected = new Set(state);
 
-			if (status) 
-				selected.add(id);
-			else 
-				selected.delete(id);
-			
-			return selected;
+			if (status) newSelected.add(id);
+			else newSelected.delete(id);
+
+			return newSelected;
 		}
-		case CLEAR_SELECTION: {
+		case CLEAR_SELECTION:
 			return new Set();
-		}
-		case EVERYTHING_SELECTION: {
+		case EVERYTHING_SELECTION:
 			return new Set(dataState.keys());
-		}
 
 		default: return state;
 	}
