@@ -5,9 +5,12 @@
 	{{> test}}
 
 	<link href='/css/page/fields/fill.css' rel='stylesheet'>
-	<script async src='/js/page/fields/index.js'></script>
+	<script defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"
+	></script>
+	<script defer src='/js/page/fields/index.js'></script>
 </head>
-<body>
+<body class='fill-body'>
 	{{> app-banner active='Fields'}}
 	{{> section-banner title='Fields' href='/fields'}}
 
@@ -17,7 +20,7 @@
 
 		<link href='/css/page/fields/weather.css' rel='stylesheet'>
 		<div id='weather-mount' class='weather-icon'></div>
-		
+
 	</section>
 </body>
 </html>
