@@ -21,7 +21,12 @@
     "ubc-farm-utils": "ubc-farm/utils"
   },
   "peerDependencies": {
-    "ubc-farm-page-invoice": "ubc-farm/page-invoice"
+    "ubc-farm-page-calendar": "ubc-farm/page-calendar",
+    "ubc-farm-page-directory": "ubc-farm/page-directory",
+    "ubc-farm-page-fields": "ubc-farm/page-fields",
+    "ubc-farm-page-invoice": "ubc-farm/page-invoice",
+    "ubc-farm-page-map-editor": "ubc-farm/page-map-editor",
+    "ubc-farm-page-planner": "ubc-farm/page-planner"
   },
   "scripts": {
     "test": "tape \"**/*.spec.js\"",

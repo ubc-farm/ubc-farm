@@ -3,7 +3,7 @@ export default {
 	path: '/',
 	handler: {
 		view: {
-			template: 'pages/homepage.html'
-		}
-	}
-}
+			template: 'pages/homepage.html',
+		},
+	},
+};
