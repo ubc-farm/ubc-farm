@@ -1,21 +1,44 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, PureComponent } from 'react';
+/** @jsx createElement */
 
-const ItemInput = ({ input, meta, items }) => {
-
-	const options = [];
-	for (const [value, text] of items) {
-		options.push(<option value={value}>{text}</option>);
+export default class ItemSelect extends PureComponent {
+	static get propTypes() {
+		return {
+			input: PropTypes.object,
+			meta: PropTypes.object,
+			items: PropTypes.shape({
+				id: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+				name: PropTypes.string,
+			}),
+		};
 	}
 
-	return (
-		<select {...input}>{options}</select>
-	);
-};
+	constructor(props) {
+		super(props);
+		this.state = { items: [] };
+		this.updateItems();
+	}
 
-ItemInput.propTypes = {
-	input: PropTypes.object,
-	meta: PropTypes.object,
-	items: PropTypes.instanceOf(Map),
-};
+	updateItems() {
+		return fetch('http://localhost:3000/api/items?array')
+			.then(response => {
+				if (response.ok) return response.json();
+				throw new Error(`Response status ${response.statusText}`);
+			})
+			.then(items => this.setState({ items }));
+	}
 
-export default ItemInput;
+	render() {
+		const { input } = this.props;
+		const { items } = this.state;
+
+		const options = [];
+		for (const { id, name } of items) {
+			options.push(<option value={id}>{name}</option>);
+		}
+
+		return (
+			<select {...input}>{options}</select>
+		);
+	}
+}
