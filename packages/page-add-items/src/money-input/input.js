@@ -10,7 +10,7 @@ const moneyPattern = /^\-?\(?\$?\s*\-?\s*\(?(((\d{1,3}((,\d{3})*|\d*))?(\.\d{1,4
  * will be displayed rather than the actual value.
  */
 const MoneyInput = ({ input, meta }) => {
-	const { active, valid } = meta;
+	const { active, valid, invalid } = meta;
 	let { value } = input;
 
 	if (!active && valid) {
@@ -21,6 +21,7 @@ const MoneyInput = ({ input, meta }) => {
 	return (
 		<input
 			{...input}
+			className={invalid ? 'invalid' : undefined}
 			type="text" inputMode="number"
 			pattern={moneyPattern.source}
 			value={value}

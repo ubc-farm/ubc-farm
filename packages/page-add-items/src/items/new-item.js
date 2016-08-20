@@ -1,6 +1,7 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { Field, reduxForm, propTypes } from 'redux-form';
 
+import validMoney from '../money-input/validate.js';
 import MoneyInput from '../money-input/input.js';
 import DurationInput from '../duration-input/input.js';
 import submitForm from './submit-item.js';
@@ -56,5 +57,11 @@ export default reduxForm({
 	onSubmit: submitForm,
 	onSubmitSuccess(result) {
 		console.log(result);
+	},
+	validate({ value, salvageValue }) {
+		const errs = {};
+		if (!validMoney(value)) errs.value = 'Invalid number';
+		if (!validMoney(salvageValue)) errs.salvageValue = 'Invalid number';
+		return errs;
 	},
 })(ItemForm);
