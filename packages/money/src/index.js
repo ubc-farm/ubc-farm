@@ -116,6 +116,8 @@ export default class Money {
 	 * Money.fromInteger(1099) == new Money('$10.99')
 	 */
 	static fromInteger(cents) {
+		if (typeof cents !== 'number') return new this(cents);
+
 		const intString = cents.toFixed(0);
 		const value = `${intString.slice(0, -2)}.${intString.slice(-2)}`;
 		return new this(value);
