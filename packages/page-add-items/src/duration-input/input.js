@@ -1,6 +1,7 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 
 const firstEntry = object => {
+	// eslint-disable-next-line guard-for-in
 	for (const key in object) return [key, object[key]];
 	throw new Error(`Object ${object} has no keys`);
 };

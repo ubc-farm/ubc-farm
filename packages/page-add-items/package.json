@@ -1,35 +1,38 @@
 {
-	"name": "ubc-farm-page-add-items",
-	"version": "0.0.0",
-	"description": "Form for adding items to inventory catalog",
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-add-items",
-	"browser": "dist/index.iife.js",
-	"private": true,
-	"dependencies": {
-		"react": "15.3.0",
-		"react-dom": "15.3.0"
-	},
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"rollup-plugin-babel": "^2.6.1",
-		"rollup-plugin-node-resolve": "^2.0.0",
-		"rollup-plugin-commonjs": "^3.3.1",
-		"rollup-plugin-replace": "^1.1.1",
-		"redux": "^3.5.2",
-		"react-redux": "^4.4.5",
-		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3",
-		"redux-form": "6.0.0-rc.4",
-		"ubc-farm-utils": "ubc-farm/utils"
-	},
-	"scripts": {
-		"prepublish": "rollup -c"
-	},
-	"files": [
-		"dist",
-		"styles",
-		"views"
-	]
+  "name": "ubc-farm-page-add-items",
+  "version": "0.0.0",
+  "description": "Form for adding items to inventory catalog",
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "license": "MIT",
+  "repository": "https://github.com/NotWoods/ubc-farm/page-add-items",
+  "browser": "dist/index.iife.js",
+  "private": true,
+  "dependencies": {
+    "react": "15.3.0",
+    "react-dom": "15.3.0"
+  },
+  "devDependencies": {
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-form": "6.0.0-rc.5",
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.3",
+    "rollup": "0.34.2",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.3.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "ubc-farm-money": "ubc-farm/money",
+    "ubc-farm-utils": "ubc-farm/utils"
+  },
+  "scripts": {
+    "prepublish:items": "rollup -c -o dist/item.js src/items/index.js",
+    "prepublish:equip": "rollup -c -o dist/equipment.js src/equipment/index.js",
+    "prepublish": "npm run prepublish:items && npm run prepublish:equip"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "views"
+  ]
 }

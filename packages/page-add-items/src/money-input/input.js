@@ -1,5 +1,5 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import Money from 'ubc-farm-utils/class/money/improved.js';
+import Money from 'ubc-farm-money';
 
 const moneyPattern = /^\-?\(?\$?\s*\-?\s*\(?(((\d{1,3}((,\d{3})*|\d*))?(\.\d{1,4})?)|((\d{1,3}((,\d{3})*|\d*))(\.\d{0,4})?))\)?$/;
 

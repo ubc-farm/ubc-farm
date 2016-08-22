@@ -2,9 +2,9 @@ import ReactDOM from 'react-dom';
 import { createElement as h } from 'react'; /** @jsx h */
 import { Provider } from 'react-redux';
 import { domready } from 'ubc-farm-utils';
-import store from './redux/index.js';
+import store from '../redux/index.js';
 
-import Form from './items/new-item.js';
+import Form from './new-equipment.js';
 
 domready.then(() => {
 	ReactDOM.render(

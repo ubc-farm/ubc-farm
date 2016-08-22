@@ -1,5 +1,5 @@
 import { SubmissionError } from 'redux-form';
-import { Money } from 'ubc-farm-utils';
+import Money from 'ubc-farm-money';
 
 export default function submit(data) {
 	let { value, salvageValue } = data;
