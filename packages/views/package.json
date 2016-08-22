@@ -9,10 +9,11 @@
   "main": "index.node.js",
   "jsnext:main": "index.es.js",
   "dependencies": {
-    "hapi": "14.2.0",
+    "boom": "^3.2.2",
     "handlebars": "^4.0.5",
-		"vision": "4.1.0",
-    "ubc-farm-views-utils": "ubc-farm/views-utils"
+    "hapi": "14.2.0",
+    "ubc-farm-views-utils": "ubc-farm/views-utils",
+    "vision": "4.1.0"
   },
   "devDependencies": {
     "rollup": "0.34.2",

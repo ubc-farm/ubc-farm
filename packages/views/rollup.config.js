@@ -8,8 +8,8 @@ export default {
 		{ dest: 'index.node.js', format: 'cjs' }
 	],
 	external: [
-		'hapi', 'vision', 'handlebars',
-		'ubc-farm-views-utils', 'path'
+		'hapi', 'vision', 'handlebars', 'boom',
+		'ubc-farm-views-utils', 'path', 'fs',
 	],
 	plugins: [
 		json(),

@@ -1,4 +1,6 @@
-import { resolve, join, relative } from 'path';
+import { resolve, join, relative, extname } from 'path';
+import { stat } from 'fs';
+import { notFound } from 'boom';
 
 function pageViews(pagename, path = pagename, context) {
 	let moduleFolder;
@@ -10,7 +12,7 @@ function pageViews(pagename, path = pagename, context) {
 		moduleFolder = resolve(__dirname, `../page-${pagename}`);
 	}
 
-	console.log(moduleFolder);
+	// console.log(moduleFolder);
 	return {
 		method: 'GET',
 		path: `/${path}/{param*}`,
@@ -24,9 +26,18 @@ function pageViews(pagename, path = pagename, context) {
 				// get index
 				filePath = join(moduleFolder, 'views', 'index');
 			}
-			filePath = relative(__dirname, filePath);
 
-			reply.view(filePath, context);
+			const testPath = extname(filePath) ? filePath : `${filePath}.html`;
+
+			stat(testPath, err => {
+				if (err) {
+					if (err.code !== 'ENOENT') throw err;
+					return reply(notFound());
+				}
+
+				const rel = relative(__dirname, filePath);
+				return reply.view(rel, context);
+			});
 		},
 	};
 }
