@@ -6,14 +6,14 @@
   "repository": "https://github.com/ubc-farm/money",
 	"main": "dist/index.js",
 	"jsnext:main": "src/index.js",
-	"private": true,
 	"devDependencies": {
 		"rollup": "0.34.2",
 		"tape": "^4.6.0"
 	},
   "scripts": {
 		"prepublish": "rollup -c",
-		"test": "tape \"**/*.spec.js\""
+		"test": "tape \"**/*.spec.js\"",
+		"docs": "rollup -f cjs src/index.js | jsdoc2md > README.md"
 	},
 	"files": [
 		"src",
