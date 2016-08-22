@@ -12,3 +12,8 @@ export function toRfcDate(date) {
 	}
 	return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
+
+export function fromRfcDate(str) {
+	const [year, month, date] = str.split('-');
+	return new Date(year, month - 1, date);
+}
