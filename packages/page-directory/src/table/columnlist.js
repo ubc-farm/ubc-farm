@@ -1,11 +1,11 @@
 import {createElement} from 'react'; /** @jsx createElement */
-import {Column} from 'table-base';
+import {Column} from 'ubc-farm-table-base';
 import {Money} from 'ubc-farm-utils';
 
 export const name = new Column({columnKey: 'name', compareFunc: true});
 
 export const icon = new Column({
-	columnKey: 'icon', 
+	columnKey: 'icon',
 	title: '',
 	compareFunc: true,
 	toElement(value) {
@@ -19,7 +19,7 @@ export const icon = new Column({
 export const role = new Column({columnKey: 'role', compareFunc: true});
 
 export const hourlyPay = new Column({
-	columnKey: 'hourlyPay', 
+	columnKey: 'hourlyPay',
 	toElement(cents) {
 		let value;
 		if (cents !== undefined) value = new Money(cents).toString();
