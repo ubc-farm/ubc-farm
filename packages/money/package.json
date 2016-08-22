@@ -1,11 +1,11 @@
 {
-  "name": "ubc-farm-utils",
-  "version": "3.0.0",
-  "description": "Utilities used by various ubc-farm sibling packages",
+  "name": "ubc-farm-money",
+  "version": "2.0.0",
+  "description": "Utility class used to represent money",
   "license": "MIT",
-  "repository": "https://github.com/ubc-farm/utils",
+  "repository": "https://github.com/ubc-farm/money",
 	"main": "dist/index.js",
-	"jsnext:main": "index.es.js",
+	"jsnext:main": "src/index.js",
 	"private": true,
 	"devDependencies": {
 		"rollup": "0.34.2",
@@ -16,10 +16,7 @@
 		"test": "tape \"**/*.spec.js\""
 	},
 	"files": [
-		"calendar",
-		"class",
-		"function",
-		"dist",
-		"index.js"
+		"src",
+		"dist"
 	]
 }

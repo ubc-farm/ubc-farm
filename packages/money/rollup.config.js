@@ -1,5 +1,5 @@
 export default {
-	entry: 'index.js',
+	entry: 'src/index.js',
 	sourceMap: true,
 	targets: [
 		{ dest: 'dist/index.js', format: 'cjs' },
