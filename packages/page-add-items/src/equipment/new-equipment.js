@@ -1,7 +1,7 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { Field, reduxForm, propTypes } from 'redux-form';
 
-import RelationSelect from './links.js';
+import RelationSelect from 'ubc-farm-inputs/relation.js';
 import submitForm from './submit.js';
 
 const parseID = value => parseInt(value, 10);

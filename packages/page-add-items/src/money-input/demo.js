@@ -1,7 +1,7 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { Field, reduxForm, propTypes } from 'redux-form';
 
-import MoneyInput from './input.js';
+import MoneyInput from 'ubc-farm-inputs/money.js';
 
 const NormalizingMoneyTest = ({ handleSubmit }) => (
 	<form onSubmit={handleSubmit}>

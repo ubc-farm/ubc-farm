@@ -1,9 +1,9 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { Field, reduxForm, propTypes } from 'redux-form';
 
-import validMoney from '../money-input/validate.js';
-import MoneyInput from '../money-input/input.js';
-import DurationInput from '../duration-input/input.js';
+import DurationInput from 'ubc-farm-inputs/duration.js';
+import MoneyInput, { validate as validMoney } from 'ubc-farm-inputs/money.js';
+
 import submitForm from './submit-item.js';
 
 const ItemForm = ({ handleSubmit, pristine, submitting }) => (
