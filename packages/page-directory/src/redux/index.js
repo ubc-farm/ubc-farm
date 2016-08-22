@@ -1,12 +1,12 @@
-import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
-import thunk from 'redux-thunk'
-import {reducer as form} from 'redux-form';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import { reducer as form } from 'redux-form';
 
-//import reducer from './reducer.js';
+// import reducer from './reducer.js';
 
 export default createStore(
 	combineReducers({
-		form
+		form,
 	}),
 	undefined,
 	compose(

@@ -1,11 +1,12 @@
-import { createElement as h } from 'react'; /** @jsx h */
-import { Field, propTypes } from 'redux-form';
+import { createElement as h, PropTypes } from 'react'; /** @jsx h */
+import { Field } from 'redux-form';
 
 const WorkingDayItem = ({ input }) => (
-	<div>
+	<div className="working-day-container">
 		<input
 			type="checkbox"
 			hidden
+			className="working-days-checkbox"
 			{...input}
 			id={input.name}
 		/>
@@ -15,12 +16,14 @@ const WorkingDayItem = ({ input }) => (
 			aria-checked={input.checked}
 			htmlFor={input.name}
 		>
-			{input.name.charAt('working_'.length + 1).toUpperCase()}
+			{input.name.charAt('working_'.length).toUpperCase()}
 		</label>
 	</div>
 );
 
-WorkingDayItem.propTypes = propTypes;
+WorkingDayItem.propTypes = {
+	input: PropTypes.object,
+};
 
 const WorkingDays = () => (
 	<fieldset name="working_days" className="working_days">

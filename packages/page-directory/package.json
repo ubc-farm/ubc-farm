@@ -28,7 +28,9 @@
 		"ubc-farm-table-base": "ubc-farm/table-base#dist"
 	},
 	"scripts": {
-		"prepublish": "rollup -c"
+		"prepublish:list": "rollup -c -o dist/index.iife.js src/table/index.js",
+		"prepublish:add": "rollup -c -o dist/editor.js src/editor/index.js",
+		"prepublish": "npm run prepublish:list && npm run prepublish:add"
 	},
 	"files": [
 		"dist",

@@ -4,11 +4,8 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 export default {
-	entry: 'src/index.js',
 	sourceMap: true,
-	targets: [
-		{ dest: 'dist/index.iife.js', format: 'iife' },
-	],
+	format: 'iife',
 	plugins: [
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers-2'],
@@ -17,7 +14,9 @@ export default {
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs(),
+		commonjs({
+			exclude: 'node_modules/lodash-es/**',
+		}),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {

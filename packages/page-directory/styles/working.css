@@ -1,0 +1,20 @@
+.working-day-container {
+	display: inline-block;
+	margin: 0.25em;
+}
+
+.working-days-button {
+	border-radius: 50%;
+	line-height: 1.5em;
+	width: 1.5em;
+	text-align: center;
+	border: 1px solid black;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.working-days-checkbox:checked + .working-days-button {
+	background: var(--brand-primary);
+	color: white;
+	border-color: var(--brand-primary);
+}

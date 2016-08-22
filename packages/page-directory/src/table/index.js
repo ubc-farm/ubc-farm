@@ -14,5 +14,4 @@ Promise.all([apiData, domready]).then(([data]) => {
 		/>,
 		document.getElementById('app-mount')
 	);
-})
-;
+});

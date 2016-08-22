@@ -1,20 +1,18 @@
-import { createElement as h } from 'react'; /** @jsx h */
+import { createElement as h, PropTypes } from 'react'; /** @jsx h */
 import { connect } from 'react-redux';
 import { reduxForm, Field, propTypes, formValueSelector } from 'redux-form';
 
-import EmployeeSection from './employee/index.js';
-import ResearcherSection from './researcher/index.js';
-
 import Address from './address.js';
+import submit from '../submit.js';
 
-const Form = ({ handleSubmit, addressValue, roleValue }) => (
-	<form onSubmit={handleSubmit}>
+const Form = ({ handleSubmit, addressValue, id }) => (
+	<form onSubmit={handleSubmit} id={id}>
 		<label>
 			<span className="label-body">Name</span>
 			<Field component="input" type="text" name="name" />
 		</label>
 		<label>
-			<span className="label-body">Name</span>
+			<span className="label-body">Role</span>
 			<Field component="input" type="text" name="role" list="role-list" />
 			<datalist id="role-list">
 				<option value="Employee" />
@@ -41,28 +39,25 @@ const Form = ({ handleSubmit, addressValue, roleValue }) => (
 			addressValue={addressValue}
 			label="Mailing Address"
 		/>
-
-		{roleValue === 'Employee' ? EmployeeSection : null}
-		{roleValue === 'Researcher' ? ResearcherSection : null}
 	</form>
 );
 
-Form.propTypes = propTypes;
+Form.propTypes = Object.assign({}, propTypes, {
+	addressValue: PropTypes.string,
+});
 
 const ReduxForm = reduxForm({
-	form: 'contact',
+	form: 'new-person',
+	onSubmit: submit,
 })(Form);
 
-const selector = formValueSelector('contact');
+export const selector = formValueSelector('new-person');
+
 export default connect(
 	state => {
 		const addressValue =
 			selector(state, 'addressPhysical') || selector(state, 'addressMailing');
-		const roleValue = selector(state, 'role');
 
-		return {
-			addressValue,
-			roleValue,
-		};
+		return { addressValue	};
 	}
 )(ReduxForm);
