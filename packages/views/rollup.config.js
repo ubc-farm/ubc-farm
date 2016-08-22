@@ -5,7 +5,7 @@ export default {
 	entry: 'index.js',
 	sourceMap: true,
 	targets: [
-		{ dest: 'index.node.js', format: 'cjs' }
+		{ dest: 'index.node.js', format: 'cjs' },
 	],
 	external: [
 		'hapi', 'vision', 'handlebars', 'boom',
@@ -13,6 +13,6 @@ export default {
 	],
 	plugins: [
 		json(),
-		nodeResolve({jsnext: true})
-	]
+		nodeResolve({ jsnext: true }),
+	],
 };
