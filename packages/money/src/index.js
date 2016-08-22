@@ -1,128 +1,113 @@
-function formatMoneyString(str) {
-	const onlyNumbersAndDecimals = str.replace(/[^0-9.]/g, '');
-
-	const [dollarString, ...centStrings] = onlyNumbersAndDecimals.split('.');
-
-	if (!dollarString && centStrings.length === 0) return null;
-
-	let centString = centStrings.join('');
-	if (centString.length === 1) {
-		centString = `${centString}0`;
-	} else if (centString.length === 0) {
-		centString = '00';
-	}
-
-	return `${dollarString}.${centString}`;
-}
-
-function decimalToMoneyString(num) {
-	const str = num.toString(10);
-	return formatMoneyString(str);
-}
-
 /**
- * A class used to represent money. Internally the money value
- * is stored as a string, and can be converted back to either
- * an integer for math, a float for display, or a localeString for
- * formatted display.
- * @property {string} value - the internal value, will be null if the Money
- * is not a valid number.
+ * A class used to represent money. Internally the money value is stored
+ * as cents, so most of the time it will be an integer which can be used
+ * for math without floating point troubles.
+ * It can also be formatted with the toString() function, utilizing
+ * Number.toLocaleString().
  */
 export default class Money {
 	/**
-	 * @param {Money|number|string} thing - value converted
-	 * into the Money value. If a Money instance, returns a new Money
-	 * with the same value. If a number, assumes that the number is a decimal
-	 * representing dollars and cents and converts it to a string.
-	 * If a string, any non-digit values, except for the first . character, are
-	 * stripped and the result is stored.
+	 * @param {any} thing - value converted into the Money value.
+	 * If a Money instead, returns a new Money with the same value.
+	 * If a number, assumes that the number is a decimal representing dollars
+	 * and cents and converts it to a string.
+	 * If a string, any non-digit values, except for the first . character,
+	 * are stripped and the result is stored.
 	 */
 	constructor(thing) {
-		let value;
+		let value = null;
 
 		if (!(thing instanceof this.constructor)) {
 			switch (typeof thing) {
 				case 'number':
-					value = decimalToMoneyString(thing); break;
-				case 'string':
-					value = formatMoneyString(thing); break;
-				case 'object': {
-					let val = null;
-					if (thing !== null) {
-						val = formatMoneyString(String(thing));
-						if (val === null) {
-							try {
-								val = thing.valueOf();
-							} catch (err) {
-								if (!(err instanceof TypeError)) throw err;
-							} finally {
-								if (typeof val !== 'object') {
-									val = new this.constructor(val).value;
-								}
-							}
-						}
+					thing = thing.toString(10);
+					// fall through
+				case 'string': {
+					const onlyNumbersAndDecimals = thing.replace(/[^-0-9.]/g, '');
+					const [dollars, ...centsStrings] = onlyNumbersAndDecimals.split('.');
+					const centString = centsStrings.join('');
+
+					if (!dollars && !centString) break;
+
+					value = parseInt(dollars || 0, 10);
+					value *= 100;
+
+					let centValue = 0;
+					if (centString.length > 0) {
+						centValue = parseInt(centString.substr(0, 2), 10);
+					}
+					if (centString.length > 2) {
+						const fraction = `.${centString.substr(2)}`;
+						centValue += parseFloat(fraction);
 					}
 
-					value = val;
+					if (value < 0) value -= centValue;
+					else value += centValue;
 					break;
 				}
-				default:
-					value = null; break;
+				case 'object': {
+					if (thing === null) break;
+
+					let val;
+					try {
+						val = thing.valueOf();
+					} catch (err) {
+						if (!(err instanceof TypeError)) throw err;
+					} finally {
+						if (typeof val !== 'object') break;
+						value = new this.constructor(val).value;
+					}
+					break;
+				}
+				default: break;
 			}
 		} else {
 			value = thing.value;
 		}
 
+		if (value == null) value = NaN;
+
 		Object.defineProperty(this, 'value', { value });
 	}
 
-	/** @type {number} The dollar amount of this Money */
-	get dollars() {
-		if (this.value === null) return NaN;
-
-		const pointIndex = this.value.indexOf('.');
-		const dollarString = this.value.substring(0, pointIndex);
-		return parseInt(dollarString, 10);
+	/**
+	 * @returns {number} the dollar value of this money
+	 */
+	getDollars() {
+		const cents = Math.floor(this.value);
+		return Math.trunc(cents / 100);
 	}
 
 	/**
-	 * @param {number} digits after decimal point, for fractional cents.
-	 * @returns {number}
+	 * Returns the cents of this money.
+	 * @param {number} digits - if specified, toFixed will be called on the value
+	 * before determining the cents value.
+	 * @returns {number} will always be between -100 and 100
 	 */
-	getCents(digits = 0) {
-		if (this.value === null) return NaN;
+	getCents(digits) {
+		let value = this.value;
 
-		const pointIndex = this.value.indexOf('.');
-		const centString = this.value.substring(pointIndex + 1);
-
-		const multiplier = this.value.startsWith('-') ? -1 : 1;
-
-		if (digits > 0 && centString.length > 2) {
-			const centValue = parseFloat(centString);
-			const shortened = centValue.toFixed(digits);
-			return parseFloat(shortened) * multiplier;
+		if (digits !== undefined) {
+			const fixed = value.toFixed(digits);
+			value = parseFloat(fixed);
 		}
 
-		return parseInt(centString, 10) * multiplier;
+		return value % 100;
 	}
 
-	/** @type {number} sameas getCents(0) */
-	get cents() {
-		return this.getCents(0);
-	}
+	/** Same as getDollars() */
+	get dollars() { return this.getDollars(); }
+	/** Same as getCents(0) */
+	get cents() { return this.getCents(0); }
 
 	/**
-	 * @returns {number} the money value as cents, stripping any fractional cents.
-	 * Useful for doing money related math, as integers won't suffer from floating
-	 * point problems.
+	 * @returns {number} the integer value of this money, stripping
+	 * any fractional cents. Useful for doing money related math,
+	 * as integers won't suffer from floating point problems.
 	 * @example
-	 * new Money('$10.99').toInteger === 1099
+	 * new Money('$10.99').toInteger() === 1099
 	 */
-	toInteger() {
-		const { dollars, cents } = this;
-		const dollarsAsCents = dollars * 100;
-		return dollarsAsCents + cents;
-	}
+	toInteger() { return Math.trunc(this.value); }
 
 	/**
 	 * @param {number} cents - an integer like that returned by Money#toInteger
@@ -141,15 +126,17 @@ export default class Money {
 	 * Will be NaN if the internal value is null.
 	 */
 	valueOf() {
-		return parseFloat(this.value);
+		return this.value / 100;
 	}
 
 	/**
 	 * Returns a formatted currency string.
+	 * If value is NaN, an empty string is returned.
 	 * @param {string} [locale]
 	 * @param {Object} [options]
 	 * @param {boolean} [options.parentheses] - wrap negative numbers
 	 * in parentheses
+	 * @param {string} [options.currency=USD] - currency locale to return
 	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 	 */
 	toString(locale, options) {
@@ -172,10 +159,10 @@ export default class Money {
 	}
 
 	/**
-	 * @returns {string} the string value of the Money.
+	 * @returns {string} The money as a simple string
 	 */
 	toJSON() {
-		return this.value;
+		return this.valueOf().toString();
 	}
 
 	[Symbol.toPrimitive](hint) {
