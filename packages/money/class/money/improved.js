@@ -93,7 +93,7 @@ export default class Money {
 		if (this.value === null) return NaN;
 
 		const pointIndex = this.value.indexOf('.');
-		const centString = this.value.substring(pointIndex);
+		const centString = this.value.substring(pointIndex + 1);
 
 		const multiplier = this.value.startsWith('-') ? -1 : 1;
 
