@@ -148,6 +148,8 @@ export default class Money {
 	 * Returns a formatted currency string.
 	 * @param {string} [locale]
 	 * @param {Object} [options]
+	 * @param {boolean} [options.parentheses] - wrap negative numbers
+	 * in parentheses
 	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 	 */
 	toString(locale, options) {
@@ -159,6 +161,12 @@ export default class Money {
 		if (Number.isNaN(float)) return '';
 
 		const opts = Object.assign({ style: 'currency', currency: 'USD' }, options);
+
+		if (opts.parentheses && float < 0) {
+			const positive = Math.abs(float);
+			const str = positive.toLocaleString(locale, opts);
+			return `(${str})`;
+		}
 
 		return float.toLocaleString(locale, opts);
 	}
