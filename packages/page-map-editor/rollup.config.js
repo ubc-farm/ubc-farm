@@ -8,6 +8,7 @@ export default {
 	plugins: [
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers'],
+			exclude: 'node_modules/**',
 		}),
 		nodeResolve({ jsnext: true }),
 		replace({

@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
+    "jsts": "ubc-farm/ports#jsts",
     "promise-worker": "github:notwoods/promise-worker",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
@@ -25,12 +26,12 @@
     "rollup-plugin-commonjs": "^3.3.1",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
+    "spherical-geometry-js": "github:notwoods/spherical-geometry-js",
     "ubc-farm-page-fields": "ubc-farm/page-fields",
-    "ubc-farm-utils": "ubc-farm/utils",
-    "jsts": "ubc-farm/ports#jsts"
+    "ubc-farm-utils": "ubc-farm/utils"
   },
   "scripts": {
-    "prepublish:index": "rollup -c -i src/index.js -o dist/index.iife.js",
+    "prepublish:index": "rollup -c -i src/index.js -o dist/index.iife.js -f iife -n MapEditor",
     "prepublish:worker": "rollup -c -i src/worker.js -o dist/worker.js",
     "prepublish": "npm run prepublish:index && npm run prepublish:worker"
   },
