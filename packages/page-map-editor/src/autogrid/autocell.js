@@ -20,7 +20,9 @@ export function getPerpendicularAngle(angle) {
  * of the rectangle.
  * @returns {Polygon} the new rectangle
  */
-export function createRectangle({position, width = 2, height = 2, angle}) {
+export function createRectangle({
+	position, width = 2, height = 2, angle = 0,
+}) {
 	const perpendicularAngle = getPerpendicularAngle(angle);
 
 	const bottomLeft = {x: position.x, y: position.y};
@@ -39,7 +41,7 @@ export function createRectangle({position, width = 2, height = 2, angle}) {
  * Returns an object containing north, south, east, and west coordinates
  * offset from the rectangle. Expects a clockwise simple rectangle.
  */
-export function getNextPoints({polygon, x = 2, y = 2, angle}) {
+export function getNextPoints({ polygon, x = 2, y = 2, angle = 0 }) {
 	const perpendicular = getPerpendicularAngle(angle);
 	const [start, northPoint, , westPoint] = polygon.getCoordinates();
 	const startPosition = {x: start.x, y: start.y};

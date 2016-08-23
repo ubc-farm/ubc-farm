@@ -57,7 +57,7 @@ const valueSelector = formValueSelector('grid');
 export default connect(
 	state => ({
 		initialValues: activeGridSelector(state),
-		angleValue: valueSelector(state, 'angle'),
+		angleValue: valueSelector(state, 'angle') || 0,
 	}),
 	dispatch => ({
 		onSubmit: formData => dispatch(buildGrid(undefined, formData)),
