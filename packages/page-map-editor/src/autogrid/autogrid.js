@@ -35,12 +35,17 @@ export default function* AutoGrid(container, gridOptions) {
 		const cell = createRectangle({ position: pos, width, height, angle });
 
 		if (!cells.some(existing => equivalentPolygons(cell, existing))) {
-			if (container.contains(cell)) 
+			if (container.contains(cell)) {
 				yield cell;
-			else if (container.intersects(cell)) 
-				yield cell.intersection(container);
-			else 
+			} else if (container.intersects(cell)) {
+				try {
+					yield cell.intersection(container);
+				} catch (err) {
+					if (!err.message.includes('found non-noded intersection')) throw err;
+				}
+			} else {
 				continue;
+			}
 
 			cells.push(cell);
 
