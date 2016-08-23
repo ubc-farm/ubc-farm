@@ -1,5 +1,5 @@
-import {geom} from 'ubc-farm-ports/jsts';
+import { geom } from 'ubc-farm-ports/jsts';
 
-const {GeometryFactory} = geom;
+const { GeometryFactory } = geom;
 
 export default new GeometryFactory();

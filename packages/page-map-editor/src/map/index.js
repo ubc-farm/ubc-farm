@@ -1,6 +1,6 @@
-import 'ubc-farm-page-fields/map/get-api.js';
+import 'ubc-farm-page-fields/src/map/get-api.js';
 import store from '../redux/index.js';
-import map, {data as mapData} from './map.js';
+import map, { data as mapData } from './map.js';
 
 import connectStoreToMapData from './connect-store.js';
 import createPolygonListeners from './polygon-listeners.js';

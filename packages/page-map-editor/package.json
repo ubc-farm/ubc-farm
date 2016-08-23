@@ -1,37 +1,41 @@
 {
-	"name": "ubc-farm-page-map-editor",
-	"version": "2.1.0",
-	"description": "Page for editing fields",
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-map-editor",
-	"browser": "dist/index.iife.js",
-	"private": true,
-	"dependencies": {
-		"react": "15.3.0",
-		"react-dom": "15.3.0"
-	},
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"rollup-plugin-babel": "^2.6.1",
-		"rollup-plugin-node-resolve": "^2.0.0",
-		"rollup-plugin-commonjs": "^3.3.1",
-		"rollup-plugin-replace": "^1.1.1",
-		"redux": "^3.5.2",
-		"react-redux": "^4.4.5",
-		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3",
-		"ubc-farm-utils": "ubc-farm/utils",
-		"ubc-farm-page-fields": "ubc-farm/page-fields"
-	},
-	"scripts": {
-		"prepublish:index": "rollup -c -i src/index.js -o dist/index.iife.js",
-		"prepublish:worker": "rollup -c -i src/worker.js -o dist/worker.js",
-		"prepublish": "npm run prepublish:index && npm run prepublish:worker"
-	},
-	"files": [
-		"dist",
-		"styles",
-		"views"
-	]
+  "name": "ubc-farm-page-map-editor",
+  "version": "2.1.0",
+  "description": "Page for editing fields",
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "license": "MIT",
+  "repository": "https://github.com/NotWoods/ubc-farm/page-map-editor",
+  "browser": "dist/index.iife.js",
+  "private": true,
+  "dependencies": {
+    "react": "15.3.0",
+    "react-dom": "15.3.0"
+  },
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.8.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "promise-worker": "github:notwoods/promise-worker",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-form": "^6.0.0-rc.5",
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.3",
+    "rollup": "0.34.2",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.3.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "ubc-farm-page-fields": "ubc-farm/page-fields",
+    "ubc-farm-utils": "ubc-farm/utils"
+  },
+  "scripts": {
+    "prepublish:index": "rollup -c -i src/index.js -o dist/index.iife.js",
+    "prepublish:worker": "rollup -c -i src/worker.js -o dist/worker.js",
+    "prepublish": "npm run prepublish:index && npm run prepublish:worker"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "views"
+  ]
 }

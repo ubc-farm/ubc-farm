@@ -1,16 +1,16 @@
-import {createSelector} from 'reselect';
-import {observeStore} from 'ubc-farm-utils';
-import watchActive from 'ubc-farm-page-fields/map/connector.js';
+import { createSelector } from 'reselect';
+import { observeStore } from 'ubc-farm-utils';
+import watchActive from 'ubc-farm-page-fields/src/map/connector.js';
 
 import {
-	activeSelector, 
+	activeSelector,
 	resizableSelector,
 	addModeSelector,
 	loadingSelector,
 	cellSelector,
-	activeGridSelector
+	activeGridSelector,
 } from '../redux/selectors.js';
-import {isGridCell} from './filter.js';
+import { isGridCell } from './filter.js';
 
 export function activeListener(store) {
 	return watchActive(store);
@@ -18,7 +18,7 @@ export function activeListener(store) {
 
 const drawingModeSelector = createSelector(
 	addModeSelector,
-	isAddingMode => isAddingMode ? 'Polygon' : null
+	isAddingMode => (isAddingMode ? 'Polygon' : null)
 );
 
 /** Updates drawing mode */
@@ -45,17 +45,17 @@ export function newCellSetListener(store, mapData) {
 const gridDataActiveCombined = createSelector(
 	activeSelector,
 	activeGridSelector,
-	(active, grid) => {active, grid}
+	(active, grid) => ({ active, grid })
 );
 
 export function gridFormListener(store, mapData) {
 	return observeStore(
 		store, gridDataActiveCombined,
-		({active, grid}) => {
+		({ active, grid }) => {
 			const feature = mapData.getFeatureById(active);
 			if (feature) feature.setProperty('grid', grid);
 		}
-	)
+	);
 }
 
 export function resizableListener(store, mapData) {
@@ -96,7 +96,7 @@ export default function startAllListeners(store, mapData) {
 		newCellSetListener,
 		gridFormListener,
 		resizableListener,
-		loadingListener
+		loadingListener,
 	]
 	.map(listener => listener(store, mapData));
 }

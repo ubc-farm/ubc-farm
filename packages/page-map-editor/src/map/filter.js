@@ -24,6 +24,6 @@ export function isNewlyDrawn(feature) {
 	if (feature.getGeometry().getType() !== 'Polygon') return false;
 
 	let result = true;
-	feature.forEachProperty(() => { result = false });
+	feature.forEachProperty(() => { result = false; });
 	return result;
 }

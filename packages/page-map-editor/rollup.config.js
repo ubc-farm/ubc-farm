@@ -7,18 +7,20 @@ export default {
 	sourceMap: true,
 	plugins: [
 		babel({
-			plugins: ['transform-react-jsx', 'external-helpers-2']
+			plugins: ['transform-react-jsx', 'external-helpers'],
 		}),
-		nodeResolve({jsnext: true}),
+		nodeResolve({ jsnext: true }),
 		replace({
-			'process.env.NODE_ENV': JSON.stringify('production')
+			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs()
+		commonjs({
+			exclude: 'node_modules/lodash-es/**',
+		}),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {
-		'react': 'React',
+		react: 'React',
 		'react-dom': 'ReactDOM',
-		'tape': 'test'
-	}
-}
+		tape: 'test',
+	},
+};

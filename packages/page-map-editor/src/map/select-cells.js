@@ -1,19 +1,20 @@
 /* global google */
-import {isGridCell} from './filter.js';
+import { isGridCell } from './filter.js';
 
 /**
  * Adds functionality to 'select' polygons when mousing over them
- * while the mouse button is down. 
+ * while the mouse button is down.
  */
 
-var rightMouseDown = false, modifierKeyDown = false;
+let rightMouseDown = false;
+let modifierKeyDown = false;
 
 /**
  * Handle mouseover event
  * @param {Data.MouseEvent} e
  * @param {Data.Feature} e.feature
  */
-function handleMouseOver({feature}) {
+function handleMouseOver({ feature }) {
 	if (rightMouseDown && isGridCell(feature)) {
 		const featureSelected = feature.getProperty('selected');
 		if (modifierKeyDown && featureSelected) {
@@ -25,7 +26,7 @@ function handleMouseOver({feature}) {
 }
 
 /** @type {google.maps.MapsEventListener|undefined} */
-var mouseOverListener, createMouseOverListener;
+let mouseOverListener;
 /** Destroys the mouse over listener if it exists */
 function destroyMouseOverListener() {
 	if (mouseOverListener) {
@@ -34,6 +35,8 @@ function destroyMouseOverListener() {
 	}
 }
 
+let createMouseOverListener;
+
 /**
  * Responds to a mousedown event by tracking the right button
  * and activating the mouseOverListener.
@@ -41,12 +44,16 @@ function destroyMouseOverListener() {
  * @param {number} e.button
  * @param {boolean} e.ctrlKey
  */
-function handleRightMouseDown({button, ctrlKey}) {
+function handleRightMouseDown({ button, ctrlKey }) {
 	if (button === 2) {
 		rightMouseDown = true;
 		modifierKeyDown = ctrlKey;
 
-		createMouseOverListener();
+		try {
+			createMouseOverListener();
+		} catch (err) {
+			if (!(err instanceof TypeError)) throw err;
+		}
 	}
 }
 
@@ -56,7 +63,7 @@ function handleRightMouseDown({button, ctrlKey}) {
  * @param {MouseEvent} e
  * @param {number} e.button
  */
-function handleRightMouseUp({button}) {
+function handleRightMouseUp({ button }) {
 	if (button === 2) {
 		rightMouseDown = false;
 		destroyMouseOverListener();
@@ -71,25 +78,28 @@ function flush() {
 	rightMouseDown = false;
 }
 
-/** 
+/**
  * Creates event listeners.
  * Two params are used to match the other listener initializers,
  * but the redux store isn't used here so both parameters can be
  * used for mapData.
- * @param {google.maps.Data} mapData 
+ * @param {google.maps.Data} mapData
  * @returns {function} invoke to destory listeners
  */
 export default function init(alsoMapData, mapData = alsoMapData) {
 	rightMouseDown = false; modifierKeyDown = false;
 
 	/** Creates a mouse over listener if needed. */
-	createMouseOverListener = function() {
+	createMouseOverListener = function buildMouseOverListener() {
 		if (mouseOverListener !== undefined) return mouseOverListener;
-		else return mouseOverListener = google.maps.event.addListener(
+
+		mouseOverListener = google.maps.event.addListener(
 			mapData, 'mouseover',
 			handleMouseOver
 		);
-	}
+
+		return mouseOverListener;
+	};
 
 	window.addEventListener('mousedown', handleRightMouseDown);
 	window.addEventListener('mouseup', handleRightMouseUp);
