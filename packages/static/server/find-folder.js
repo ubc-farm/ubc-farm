@@ -1,6 +1,6 @@
-import {resolve as resolvePath, join} from 'path';
-import {stat as statNode} from 'fs';
-import {promisify} from '../node_modules/ubc-farm-utils/index.js';
+import { resolve as resolvePath, join } from 'path';
+import { stat as statNode } from 'fs';
+import { promisify } from '../node_modules/ubc-farm-utils/index.js';
 
 const stat = promisify(statNode);
 
@@ -9,7 +9,7 @@ function doesPathExist(path) {
 	.then(() => true)
 	.catch(err => {
 		if (err.code === 'ENOENT') return false;
-		else throw err;
+		throw err;
 	});
 }
 
@@ -21,9 +21,9 @@ export default function search(folder, ...potentialNames) {
 	if (folder === resolvePath('/')) return Promise.resolve(undefined);
 
 	const potentialPaths = potentialNames.map(name => join(folder, name));
-	
+
 	const checkExists = Promise.all(potentialPaths.map(p => doesPathExist(p)));
-	
+
 	return checkExists.then(results => {
 		if (results.every(v => v === false)) {
 			const upOnePath = resolvePath(folder, '../');

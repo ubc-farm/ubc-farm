@@ -6,7 +6,7 @@ export default {
 			path: 'node_modules/ubc-farm-views-utils/partials/css',
 			listing: true,
 			defaultExtension: 'css',
-			index: false
-		}
-	}
-}
+			index: false,
+		},
+	},
+};

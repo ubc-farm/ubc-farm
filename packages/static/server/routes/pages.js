@@ -1,5 +1,5 @@
-import {join} from 'path';
-import __dirname from '../../dirname.js'
+import { join } from 'path';
+import __dirname from '../../dirname.js';
 import search from '../find-folder.js';
 
 function cssRoute(pagename, folder) {
@@ -11,16 +11,16 @@ function cssRoute(pagename, folder) {
 				path: join(folder, 'styles'),
 				listing: true,
 				defaultExtension: 'css',
-				index: false
-			}
-		}
-	}
+				index: false,
+			},
+		},
+	};
 }
 
 function javascriptRoute(pagename, folder) {
-	//eslint-disable-next-line global-require
-	const pkg = require(join(folder, 'package.json')); 
-	const {browser: main = 'dist/index.iife.js'} = pkg;
+	// eslint-disable-next-line global-require
+	const pkg = require(join(folder, 'package.json'));
+	const { browser: main = 'dist/index.iife.js' } = pkg;
 
 	return [
 		{
@@ -31,9 +31,9 @@ function javascriptRoute(pagename, folder) {
 					path: join(folder, 'dist'),
 					listing: true,
 					defaultExtension: 'js',
-					index: false
-				}
-			}
+					index: false,
+				},
+			},
 		},
 		{
 			method: 'GET',
@@ -41,11 +41,11 @@ function javascriptRoute(pagename, folder) {
 			handler: {
 				file: {
 					path: join(folder, main),
-					confine: false
-				}
-			}
-		}
-	]
+					confine: false,
+				},
+			},
+		},
+	];
 }
 
 const folder = join(__dirname, 'node_modules');
@@ -53,7 +53,7 @@ function searchForRouteFolders(pagename) {
 	return search(folder, `ubc-farm-page-${pagename}`, `page-${pagename}`)
 		.then(path => {
 			if (path === undefined) throw new Error(`${pagename} not found`);
-			else return [...javascriptRoute(pagename, path), cssRoute(pagename, path)]
+			return [...javascriptRoute(pagename, path), cssRoute(pagename, path)];
 		});
 }
 
@@ -62,11 +62,12 @@ const pageList = [
 	'directory',
 	'fields',
 	'invoice',
-	'map-editor'
-]
+	'map-editor',
+	'add-items',
+];
 
-const routes = Promise.all(pageList.map(searchForRouteFolders))
+const routes = Promise.all(pageList.map(searchForRouteFolders));
 
-export default routes.then(routes => routes.reduce(
+export default routes.then(r => r.reduce(
 	(allRoutes = [], additional) => [...allRoutes, ...additional]
 ));
