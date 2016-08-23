@@ -12,8 +12,8 @@ import {
 } from '../redux/selectors.js';
 import { isGridCell } from './filter.js';
 
-export function activeListener(store) {
-	return watchActive(store);
+export function activeListener(store, mapData) {
+	return watchActive(mapData, store);
 }
 
 const drawingModeSelector = createSelector(
