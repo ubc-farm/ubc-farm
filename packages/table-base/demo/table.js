@@ -92,8 +92,8 @@ export default class Table extends PureComponent {
 
 		return (
 			<table className={className}>
-				<caption style={{ visibility: selected.length > 0 ? 'visible':'hidden' }}>
-					{`${selected.length} item${selected.length > 1 ? 's' : ''} selected`}
+				<caption style={{ visibility: selected.size > 0 ? 'visible':'hidden' }}>
+					{`${selected.size} item${selected.size > 1 ? 's' : ''} selected`}
 				</caption>
 				<Head
 					columns={columns}
