@@ -9,8 +9,7 @@
   "private": true,
   "dependencies": {
     "react": "15.3.0",
-    "react-dom": "15.3.0",
-    "ubc-farm-table-base": "github:ubc-farm/table-base"
+    "react-dom": "15.3.0"
   },
   "devDependencies": {
     "react-redux": "^4.4.5",
@@ -23,14 +22,16 @@
     "rollup-plugin-commonjs": "^3.3.1",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
-    "ubc-farm-inputs": "github:ubc-farm/inputs",
+    "ubc-farm-inputs": "ubc-farm/inputs",
     "ubc-farm-money": "ubc-farm/money",
-    "ubc-farm-utils": "ubc-farm/utils"
+    "ubc-farm-utils": "ubc-farm/utils",
+    "ubc-farm-table-base": "ubc-farm/table-base#dist"
   },
   "scripts": {
     "prepublish:items": "rollup -c -o dist/item.js src/items/index.js",
     "prepublish:equip": "rollup -c -o dist/equipment.js src/equipment/index.js",
-    "prepublish": "npm run prepublish:items && npm run prepublish:equip"
+    "prepublish:items-list": "rollup -c -o dist/item-list.js src/list/items.js",
+    "prepublish": "npm run prepublish:items && npm run prepublish:equip && npm run prepublish:items-list"
   },
   "files": [
     "dist",
