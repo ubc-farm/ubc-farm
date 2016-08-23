@@ -1,5 +1,4 @@
 import map from './map.js';
 
-export default new Promise(resolve => {
-	map.data.loadGeoJson('/api/fields/geojson', undefined, resolve);
-})
+export default fetch('/api/fields/geojson').then(response => response.json())
+	.then(geojson => map.data.addGeoJson(geojson));
