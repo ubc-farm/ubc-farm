@@ -49,6 +49,10 @@ export const lifespan = new Column({
 		return b - a;
 	},
 	toElement(value) {
+		if (typeof value !== 'object') {
+			return this.super_toElement(null);
+		}
+
 		const val = keys.reduce((str = '', key) => {
 			if (Object.prototype.hasOwnProperty.call(value, key)) {
 				const num = value[key];
@@ -79,7 +83,7 @@ export const value = new Column({
 });
 
 export const salvageValue = new Column({
-	columnKey: 'value',
+	columnKey: 'salvageValue',
 	toElement: moneyToElement,
 	compareFunc(a = 0, b = 0) {
 		return parseFloat(b) - parseFloat(a);
