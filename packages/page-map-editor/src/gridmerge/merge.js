@@ -1,11 +1,11 @@
-import {operation} from 'ubc-farm-ports/jsts';
-import {Feature} from 'ubc-farm-utils/class/geojson/index.js'
-import {read, write} from '../jsts/geojson-parser.js';
+import { operation } from 'jsts';
+import { Feature } from 'ubc-farm-utils/class/geojson/index.js';
+import { read, write } from '../jsts/geojson-parser.js';
 import getCommonParent from './common-parent.js';
 
-const {union: {CascadedPolygonUnion}} = operation;
+const { union: { CascadedPolygonUnion } } = operation;
 
-/** 
+/**
  * Unites all the given polygons into a large polygon
  * @param {GeoJSON.Polygon[]} cells - array of cells
  * @returns {GeoJSON.Feature} the resulting polygon

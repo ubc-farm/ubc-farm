@@ -1,4 +1,4 @@
-import { geom } from 'ubc-farm-ports/jsts';
+import { geom } from 'jsts';
 
 const { GeometryFactory } = geom;
 

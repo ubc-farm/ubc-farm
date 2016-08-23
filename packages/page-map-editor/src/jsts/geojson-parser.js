@@ -1,7 +1,7 @@
-import {io} from 'ubc-farm-ports/jsts';
+import { io } from 'jsts';
 import factory from './factory.js';
 
-const {GeoJSONReader} = io;
+const { GeoJSONReader } = io;
 
 /**
  * GeoJSONWriter seems to be broken; just extract the parser and run that

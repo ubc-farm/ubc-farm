@@ -1,6 +1,6 @@
-import {computeOffset as offset} from 'spherical-geometry-js';
-import {geom, algorithm} from 'ubc-farm-ports/jsts';
-import factory from './factory.js';
+import { computeOffset as offset } from 'spherical-geometry-js';
+import { geom, algorithm } from 'jsts';
+import factory from '../jsts/factory.js';
 
 const {Coordinate} = geom;
 const {Angle: {toDegrees, toRadians, normalize, PI_OVER_2}} = algorithm;
