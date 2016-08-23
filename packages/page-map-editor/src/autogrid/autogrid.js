@@ -22,18 +22,17 @@ export default function* AutoGrid(container, gridOptions) {
 	if (!('getGeometryType' in container))
 		throw TypeError('AutoGrid container must be a JSTS geometry');
 
-	const {baseWidth = 2.0, baseHeight = 2.0, angle} = gridOptions;
-	const widths = gridOptions.specificWidths;
-	const heights = gridOptions.specificHeights;
+	const { baseWidth = 2.0, baseHeight = 2.0, angle } = gridOptions;
+	const { specificWidths = {}, specificHeights = {} } = gridOptions;
 
 	const cells = [], queue = [];
 	queue.push({pos: container.getCoordinate(), row: 0, col: 0});
 
 	while (queue.length > 0) {
-		const {pos, row, col} = queue.shift();
-		const width = widths[row] || baseWidth; 
-		const height = heights[col] || baseHeight; 
-		const cell = createRectangle({position: pos, width, height, angle});
+		const { pos, row, col } = queue.shift();
+		const width = specificWidths[row] || baseWidth;
+		const height = specificHeights[col] || baseHeight;
+		const cell = createRectangle({ position: pos, width, height, angle });
 
 		if (!cells.some(existing => equivalentPolygons(cell, existing))) {
 			if (container.contains(cell)) 
