@@ -9,12 +9,12 @@ const { GeoJSONReader } = io;
  * @type {jsts.io.GeoJSONParser}
  */
 const reader = new GeoJSONReader(factory);
-const {parser: writer} = reader;
+const { parser: writer } = reader;
 
 
 /** Converts GeoJSON to JSTS Geometry */
-const read = reader.read; 
+const read = reader.read.bind(reader);
 /** Converts JSTS Geometry to GeoJSON Geometry */
-const write = writer.write;
+const write = writer.write.bind(writer);
 
-export {read, write};
+export { read, write };
