@@ -5,7 +5,9 @@ import { Table } from 'ubc-farm-table-base';
 
 import * as columns from './item-columns.js';
 
-const apiData = fetch('/api/items').then(data => {
+const apiData = fetch('/api/items')
+.then(response => response.json())
+.then(data => {
 	function buildRow(obj) {
 		const row = new WeakMap();
 		for (const key in obj) {
@@ -14,13 +16,13 @@ const apiData = fetch('/api/items').then(data => {
 		return row;
 	}
 
-	const entries = Object.keys(data).then(key => {
+	const entries = Object.keys(data).map(key => {
 		const value = buildRow(data[key]);
 		return [key, value];
 	});
 
 	return new Map(entries);
-})
+});
 
 Promise.all([apiData, domready]).then(([data]) => {
 	ReactDOM.render(
