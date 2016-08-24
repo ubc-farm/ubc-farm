@@ -2,8 +2,9 @@ import { id as randomID } from 'ubc-farm-utils';
 import Tasks from './tasklist.js';
 
 export function addTask(data, time, location, tasktype, set = this) {
-	const clone = Object.assign({}, data);
-	if (!('id' in data)) clone.id = randomID();
+	console.log(data, time, location, tasktype, set);
+
+	const clone = Object.assign({ id: randomID() }, data);
 	if (time !== undefined) clone.start = time;
 	if (location !== undefined) clone.group = location;
 
