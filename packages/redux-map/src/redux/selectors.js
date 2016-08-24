@@ -1,3 +1,5 @@
 import { createSelector } from 'reselect';
 
-// export const baseSelector = state => state.reducer
+export const locationsList = state => state.locations;
+
+export const taskListSelector = state => state.tasks;
