@@ -2,13 +2,14 @@ import {
 	SET_TASK_EQUIPMENT,
 	SET_TASK_LOCATION,
 	SET_TASK_TIMES,
+	SET_TASK_TYPE,
 } from '../actions/index.js';
 
 /* eslint-disable camelcase */
 
 const defaultTask = {
 	type: '',
-	start_time: undefined,
+	start_time: Date.now(),
 	end_time: undefined,
 	hoursTaken: undefined,
 	locationId: undefined,
@@ -27,10 +28,6 @@ export default function task(state = defaultTask, action) {
 
 			return setState({ equipmentUsage: equipClone });
 		}
-		case SET_TASK_LOCATION: {
-			if (payload === state.locationId) return state;
-			return setState({ locationId: payload });
-		}
 		case SET_TASK_TIMES: {
 			const { start, end } = payload;
 			const changes = {};
@@ -45,6 +42,13 @@ export default function task(state = defaultTask, action) {
 			if (Object.keys(changes) === 0) return state;
 			return setState(changes);
 		}
+
+		case SET_TASK_LOCATION:
+			if (payload === state.locationId) return state;
+			return setState({ locationId: payload });
+		case SET_TASK_TYPE:
+			if (payload === state.type) return state;
+			return setState({ type: payload });
 
 		default: return state;
 	}
