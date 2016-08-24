@@ -27,12 +27,23 @@ export default function task(state = defaultTask, action) {
 
 			return setState({ equipmentUsage: equipClone });
 		}
-		case SET_TASK_LOCATION:
+		case SET_TASK_LOCATION: {
+			if (payload === state.locationId) return state;
 			return setState({ locationId: payload });
+		}
 		case SET_TASK_TIMES: {
-			const { start_time = state.start_time } = payload;
-			const { end_time = state.end_time } = payload;
-			return setState({ start_time, end_time });
+			const { start, end } = payload;
+			const changes = {};
+
+			if (start != null && start !== state.start_time) {
+				Object.assign(changes, { start_time: start });
+			}
+			if (end != null && end !== state.end_time) {
+				Object.assign(changes, { end_time: end });
+			}
+
+			if (Object.keys(changes) === 0) return state;
+			return setState(changes);
 		}
 
 		default: return state;
