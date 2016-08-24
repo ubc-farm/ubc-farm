@@ -1,4 +1,4 @@
-export const GET_LOCATIONS = 'ADD_TASK';
+export const GET_LOCATIONS = 'GET_LOCATIONS';
 
 export function setLocations(list) {
 	return { type: GET_LOCATIONS, payload: list, error: false };
