@@ -1,12 +1,6 @@
-import { render } from 'react-dom';
-import { createElement as h } from 'react'; /** @jsx h */
+import initDragListeners from './ondrag.js';
 
-import TaskPanel from './drag-drop/panel.js';
-import initDragListeners from './drag-drop/ondrag.js';
-
+export { default } from './panel.js';
 initDragListeners();
 
-render(
-	<TaskPanel />,
-	document.getElementById('tasklist-mount')
-);
+// render(<TaskPanel />, document.getElementById('tasklist-mount'));
