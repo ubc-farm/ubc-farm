@@ -3,4 +3,4 @@ import attach from './w-map.js';
 
 attach(map);
 
-export {default} from './display.js';
+export { default } from './display.js';

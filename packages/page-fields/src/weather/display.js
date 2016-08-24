@@ -1,24 +1,27 @@
-import {createElement as h, PureComponent, PropTypes} from 'react';
+import { createElement as h, PureComponent, PropTypes } from 'react';
 /** @jsx h */
-import {Position} from 'ubc-farm-utils/class/geojson/index.js';
 
 /** @todo use rollup to replace with env variable */
-const WEATHER_API = '84c885cba4b86046e2e6f506d2f86a09'; //process.env.WEATHER_API
+const WEATHER_API = '84c885cba4b86046e2e6f506d2f86a09'; // process.env.WEATHER_API
 
 /**
  * Displays weather data pulled from OpenWeatherMap.
  * The provided position is used to find weather data.
  */
 export default class WeatherDisplay extends PureComponent {
-	static get propTypes() {return {
-		lat: PropTypes.number.isRequired,
-		lng: PropTypes.number.isRequired,
-		delay: PropTypes.number
-	}}
+	static get propTypes() {
+		return {
+			lat: PropTypes.number.isRequired,
+			lng: PropTypes.number.isRequired,
+			delay: PropTypes.number,
+		};
+	}
 
-	static get defaultProps() {return {
-		delay: 1000
-	}}
+	static get defaultProps() {
+		return {
+			delay: 1000,
+		};
+	}
 
 	constructor(props) {
 		super(props);
@@ -37,29 +40,30 @@ export default class WeatherDisplay extends PureComponent {
 		}
 	}
 
-	updateWeatherState({lat, lng} = this.props) {
+	updateWeatherState({ lat, lng } = this.props) {
 		return fetch('http://api.openweathermap.org/data/2.5/weather?units=metric'
 		+ `&lat=${lat}&lon=${lng}`
 		+ `&APPID=${WEATHER_API}`)
 		.then(response => response.json())
 		.then(json => {
-			if (json.cod === 200) this.setState({weather: json, failed: false});
+			if (json.cod === 200) this.setState({ weather: json, failed: false });
 			else {
 				console.warn(json.message ? json.message : json, lat, lng);
-				this.setState({failed: true})
+				this.setState({ failed: true });
 			}
 		});
 	}
 
 	render() {
-		const {failed, weather: weatherData} = this.state;
+		const { failed, weather: weatherData } = this.state;
 
 		if (!weatherData) return null;
-		const {weather: [weather], main: {temp}} = weatherData;
+		const { weather: [weather], main: { temp } } = weatherData;
 
 		return (
-			<div className='weather-data' style={{opacity: failed ? 0.2 : 1}}>
-				<img alt={weather.description} className='weather-data-icon'
+			<div className="weather-data" style={{ opacity: failed ? 0.2 : 1 }}>
+				<img
+					alt={weather.description} className="weather-data-icon"
 					src={`http://openweathermap.org/img/w/${weather.icon}.png`}
 					width={50} height={50}
 				/>

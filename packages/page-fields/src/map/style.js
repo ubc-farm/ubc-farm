@@ -1,11 +1,11 @@
-/*global google*/
+/* global google*/
 
 export const color = {
 	primary: 'rgb(59, 166, 72)',
 	accent: 'rgb(47, 123, 130)',
 	gray: '#999',
-	light: '#ddd'
-}
+	light: '#ddd',
+};
 
 export const field = {
 	normal: {
@@ -13,25 +13,25 @@ export const field = {
 		strokeOpacity: 1,
 		fillColor: color.primary,
 		strokeColor: color.primary,
-		zIndex: 1
+		zIndex: 1,
 	},
 	selected: {
-		fillOpacity: 0.1
+		fillOpacity: 0.1,
 	},
 	resizable: {
-		editable: true
-	}
-}
+		editable: true,
+	},
+};
 
 export const map = {
-	center: {lat: 49.249568, lng: -123.237155},
+	center: { lat: 49.249568, lng: -123.237155 },
 	zoom: 17,
 	mapTypeId: google.maps.MapTypeId.SATELLITE,
 	fullscreenControl: true,
 	scaleControl: true,
-	mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-	tilt: 0
-}
+	mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+	tilt: 0,
+};
 
 export const grid = {
 	normal: {
@@ -39,16 +39,16 @@ export const grid = {
 		fillOpacity: 0.0,
 		strokeOpacity: 0.5,
 		fillColor: color.gray,
-		strokeColor: color.light
+		strokeColor: color.light,
 	},
 	hover: {
-		fillOpacity: 0.4
+		fillOpacity: 0.4,
 	},
 	selected: {
 		zIndex: 3,
 		fillOpacity: 0.5,
 		strokeOpacity: 0.9,
 		fillColor: color.accent,
-		strokeColor: color.accent
-	}
-}
+		strokeColor: color.accent,
+	},
+};

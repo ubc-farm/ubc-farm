@@ -1,6 +1,6 @@
 /* global google */
-import {createElement} from 'react'; /** @jsx createElement */
-import {render} from 'react-dom';
+import { createElement } from 'react'; /** @jsx createElement */
+import { render } from 'react-dom';
 
 import WeatherDisplay from './display.js';
 
@@ -29,7 +29,7 @@ function renderWeather(position) {
  */
 export default function attachWeatherToMap(map) {
 	renderWeather(centerPos(map));
-	return google.maps.event.addListener(map, 'center_changed', 
+	return google.maps.event.addListener(map, 'center_changed',
 		() => renderWeather(centerPos(map))
 	);
 }
