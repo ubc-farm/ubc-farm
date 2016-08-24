@@ -21,7 +21,7 @@ export default class TaskTile extends Component {
 	}
 
 	componentDidMount() {
-		this._ref.style.setProperty('--brand-primary', this.props.color);
+		this.ref.style.setProperty('--brand-primary', this.props.color);
 	}
 
 	handleDragStart(e) {
@@ -36,12 +36,13 @@ export default class TaskTile extends Component {
 	}
 
 	render() {
+		const { name } = this.props;
+		const { dragging } = this.state;
+
 		return (
 			<span
-				className={cx('task-tile', {
-					'dragging': this.state.dragging,
-				})}
-				ref={s => { this._ref = s; }}
+				className={cx('task-tile', name, { dragging })}
+				ref={s => { this.ref = s; }}
 				draggable="true"
 				onDragStart={this.handleDragStart}
 				onDragEnd={this.handleDragEnd}

@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
-import locations from './reducer-locations.js';
-import tasks from './reducer-tasks.js';
+import locations from './reducers/locations.js';
+import tasks from './reducers/tasks.js';
 
 export default createStore(
 	combineReducers({
