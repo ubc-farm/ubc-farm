@@ -23,6 +23,12 @@ export const field = {
 	},
 };
 
+export const newField = {
+	normal: {
+		fillColor: color.gray,
+	},
+};
+
 export const map = {
 	center: { lat: 49.249568, lng: -123.237155 },
 	zoom: 17,
