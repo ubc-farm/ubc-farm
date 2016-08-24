@@ -1,4 +1,4 @@
-import {createElement as h} from 'react'; /** @jsx h */
+import { createElement as h } from 'react'; /** @jsx h */
 import TaskTile from './tile.js';
 import Tasks from './tasklist.js';
 
@@ -9,7 +9,7 @@ const TaskPanel = () => {
 		tiles.push(<TaskTile name={name} color={color} />);
 	}
 
-	return <div>{tiles}</div>
-}
+	return <div>{tiles}</div>;
+};
 
 export default TaskPanel;
