@@ -3,6 +3,7 @@ export const DELETE_TASK = 'DELETE_TASK';
 
 export const SET_TASK_EQUIPMENT = 'SET_TASK_EQUIPMENT';
 export const SET_TASK_LOCATION = 'SET_TASK_LOCATION';
+export const SET_TASK_TYPE = 'SET_TASK_TYPE';
 export const SET_TASK_TIMES = 'SET_TASK_TIMES';
 
 export function addTask(id, defaults) {
@@ -23,4 +24,8 @@ export function setTimes(id, start, end) {
 		id,
 		payload: { start, end },
 	};
+}
+
+export function setTaskType(id, newType) {
+	return { type: SET_TASK_TYPE, payload: newType };
 }
