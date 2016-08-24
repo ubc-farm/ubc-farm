@@ -21,6 +21,6 @@ export function setTimes(id, start, end) {
 	return {
 		type: SET_TASK_LOCATION,
 		id,
-		payload: { start_time: start, end_time: end },
+		payload: { start, end },
 	};
 }
