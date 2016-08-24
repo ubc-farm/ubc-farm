@@ -1,4 +1,4 @@
-import {addTask, updateTaskType} from './timeline-actions.js';
+import { addTask, updateTaskType } from './timeline-actions.js';
 
 function handleDragOver(e) {
 	e.preventDefault();
@@ -6,7 +6,7 @@ function handleDragOver(e) {
 }
 
 /**
- * Handler for drop event. 
+ * Handler for drop event.
  * Bind the handler to the Timeline.
  * @param {DragEvent} e
  * @this Timeline
@@ -18,14 +18,14 @@ function handleDrop(e) {
 
 	switch (eventProps.what) {
 		case 'background': {
-			const {group, snappedTime: time} = eventProps;
+			const { group, snappedTime: time } = eventProps;
 			addTask({
-				content: 'new item'
+				content: 'new item',
 			}, time, group, text, this.itemsData);
 			break;
 		}
 		case 'item': {
-			const {item} = eventProps;
+			const { item } = eventProps;
 			updateTaskType(text, item, this.itemsData);
 			break;
 		}

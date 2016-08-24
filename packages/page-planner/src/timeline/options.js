@@ -3,5 +3,6 @@ const nextYear = new Date(new Date().getFullYear() + 2, 0, 0);
 
 export default {
 	editable: true,
-	min: lastYear, max: nextYear
-}
+	min: lastYear,
+	max: nextYear,
+};
