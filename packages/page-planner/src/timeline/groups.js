@@ -9,14 +9,20 @@ const groups = new DataSet(undefined, { queue: true });
  * state slice changes.
  */
 function updateDataSet(sourceState) {
-	groups.forEach(
-		({ id }) => groups.remove(id),
-		{ filter: ({ id }) => !sourceState.has(id) }
-	);
+	groups.forEach(({ id }) => groups.remove(id, 'redux-update'), {
+		filter: ({ id }) => !sourceState.has(id),
+	});
 
 	for (const [id, value] of sourceState) {
-		const data = Object.assign({ id }, value);
-		groups.add(data);
+		const data = {
+			id,
+			className: undefined,
+			content: value.name || '',
+			style: undefined,
+			title: undefined,
+		};
+
+		groups.add(data, 'redux-update');
 	}
 }
 
