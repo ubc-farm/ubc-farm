@@ -5,16 +5,19 @@ import {
 	SET_TASK_TYPE,
 } from '../actions/index.js';
 
-/* eslint-disable camelcase */
-
-const defaultTask = {
+/**
+ * Default state for a task. Setting to frozen
+ * since there were some bugs due to mutating the defaultState object and
+ * having the changes apply to every task.
+ */
+const defaultTask = Object.freeze({
 	type: '',
 	start_time: Date.now(),
 	end_time: undefined,
 	hoursTaken: undefined,
 	locationId: undefined,
 	equipmentUsage: new Map(),
-};
+});
 
 export default function task(state = defaultTask, action) {
 	const setState = newState => Object.assign({}, state, newState);

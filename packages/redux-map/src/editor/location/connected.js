@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
 import { setSelectedLocation } from '../../redux/actions/index.js';
-import getOptions from './options.js';
-import getInput from './task.js';
+import { selectedTaskObject, locationsList } from '../../redux/selectors.js';
 import LocationSelect from './select.js';
 
 export default connect(
-	state => Object.assign({ options: getOptions(state) }, getInput(state)),
+	state => {
+		const selected = selectedTaskObject(state);
+		return {
+			value: selected ? selected.locationId : '',
+			disabled: !selected,
+			options: locationsList(state),
+		};
+	},
 	dispatch => ({
 		onChange({ target }) {
 			dispatch(setSelectedLocation(target.value));
