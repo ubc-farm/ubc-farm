@@ -1,6 +1,2 @@
-import initDragListeners from './ondrag.js';
-
 export { default } from './panel.js';
-initDragListeners();
-
-// render(<TaskPanel />, document.getElementById('tasklist-mount'));
+export { default as init } from './ondrag.js';
