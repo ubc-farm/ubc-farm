@@ -1,4 +1,3 @@
-import Timeline from '../timeline/index.js';
 import store from '../redux/index.js';
 import { addTask, setTaskType } from '../redux/actions/index.js';
 
@@ -7,10 +6,10 @@ export function handleDragOver(e) {
 	e.dataTransfer.effectAllowed = 'all';
 }
 
-export function handleDrop(e) {
+export function handleDrop(timeline, e) {
 	e.preventDefault();
 	const text = e.dataTransfer.getData('text/plain');
-	const eventProps = Timeline.getEventProperties(e);
+	const eventProps = timeline.getEventProperties(e);
 
 	switch (eventProps.what) {
 		case 'background': {
@@ -29,8 +28,20 @@ export function handleDrop(e) {
 	}
 }
 
-export default function init() {
-	const element = Timeline.dom.center;
+/**
+ * Initialize drag listeners
+ * @param {vis.Timeline} Timeline
+ * @returns {function} call to remove listeners
+ */
+export default function init(timeline) {
+	const element = timeline.dom.center;
+	const ondrop = handleDrop.bind(undefined, timeline);
+
 	element.addEventListener('dragover', handleDragOver);
-	element.addEventListener('drop', handleDrop);
+	element.addEventListener('drop', ondrop);
+
+	return function removeDragListeners() {
+		element.removeEventListener('dragover', handleDragOver);
+		element.removeEventListener('drop', ondrop);
+	};
 }
