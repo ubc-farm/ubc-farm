@@ -5,6 +5,7 @@ import {
 	SET_TASK_LOCATION,
 	SET_TASK_TIMES,
 	SET_TASK_TYPE,
+	SET_TASK_NAME,
 } from '../actions/index.js';
 
 /**
@@ -78,6 +79,9 @@ export default function task(state = defaultTask, action) {
 		case SET_TASK_TYPE:
 			if (payload === state.type) return state;
 			return setState({ type: payload });
+		case SET_TASK_NAME:
+			if (payload === state.name) return state;
+			return setState({ name: payload });
 
 		default: return state;
 	}

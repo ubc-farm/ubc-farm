@@ -14,7 +14,7 @@ const EquipmentSelector = ({ value = '', onChange, options }) => (
 
 EquipmentSelector.propTypes = {
 	options: PropTypes.instanceOf(Map),
-	value: PropTypes.string.isRequired,
+	value: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 };
 
