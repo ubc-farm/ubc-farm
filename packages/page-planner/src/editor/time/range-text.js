@@ -24,14 +24,12 @@ const RangeText = props => {
 
 	let { start, end } = props;
 
-	if (start == null) return null;
+	if (start == null) return <span className="disabled">----</span>;
 
 	if (end == null) {
 		return (
 			<time dateTime={start.toUTCString()}>
-				{toDateString(start, { shortMonth: true })}
-				<br />
-				{toTimeString(start, { amPm: true, twelve: twelveHour })}
+				{toDateString(start, { shortMonth: false })}
 			</time>
 		);
 	}

@@ -4,7 +4,7 @@ import LocationSelect from './location/connected.js';
 import TimeDisplay from './time/connected.js';
 
 const EditorPanel = () => (
-	<form>
+	<form className="panel">
 		<h3>Time</h3>
 		<TimeDisplay />
 

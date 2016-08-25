@@ -8,3 +8,8 @@
 .main-area {
 	margin-right: 20rem;
 }
+
+.panel {
+	margin: 0 0.5em;
+	border-top: 0.1em solid gray;
+}
