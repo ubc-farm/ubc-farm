@@ -1,4 +1,4 @@
-import jsx from 'rollup-plugin-jsx';
+import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
@@ -11,18 +11,16 @@ export default {
 		{ dest: 'dist/index.iife.js', format: 'iife' },
 	],
 	plugins: [
-		jsx({
-			include: ['src/index.js', 'src/drag-drop/**'],
-			factory: 'React.createElement',
-			arrayChildren: false,
-			passUnknownTagsToFactory: true,
+		babel({
+			plugins: ['transform-react-jsx', 'external-helpers'],
+			exclude: 'node_modules/**',
 		}),
 		nodeResolve({ jsnext: true }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
 		commonjs({
-			exclude: 'node_modules/moment/**',
+			exclude: ['node_modules/moment/**', 'src/**'],
 		}),
 	],
 	external: ['react', 'react-dom', 'tape'],
