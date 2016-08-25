@@ -64,6 +64,7 @@ const pageList = [
 	'invoice',
 	'map-editor',
 	'add-items',
+	'planner',
 ];
 
 const routes = Promise.all(pageList.map(searchForRouteFolders));
