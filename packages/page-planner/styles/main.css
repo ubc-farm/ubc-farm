@@ -1,0 +1,10 @@
+.planner-sidebar {
+	float: right;
+	display: flex;
+	flex-direction: column;
+	width: 20rem;
+}
+
+.main-area {
+	margin-right: 20rem;
+}
