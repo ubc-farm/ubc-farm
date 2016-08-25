@@ -27,5 +27,5 @@ export function setTimes(id, start, end) {
 }
 
 export function setTaskType(id, newType) {
-	return { type: SET_TASK_TYPE, payload: newType };
+	return { type: SET_TASK_TYPE, id, payload: newType };
 }

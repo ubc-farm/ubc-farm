@@ -14,7 +14,12 @@ export function handleDrop(timeline, e) {
 	switch (eventProps.what) {
 		case 'background': {
 			const { group, snappedTime } = eventProps;
-			const props = { locationId: group, start_time: snappedTime };
+			const props = {
+				locationId: group,
+				start_time: snappedTime.valueOf(),
+				type: text,
+			};
+
 			store.dispatch(addTask(undefined, props));
 			break;
 		}
