@@ -29,4 +29,4 @@ export default connect(
 			dispatch(setSelectedEquipment(position, undefined, target.value));
 		},
 	})
-);
+)(EquipmentCount);

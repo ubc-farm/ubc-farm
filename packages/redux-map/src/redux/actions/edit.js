@@ -36,6 +36,6 @@ export function deleteSelectedEquipment(position) {
 export function addSelectedEquipment() {
 	return (dispatch, getState) => {
 		const selected = selectedTask(getState());
-		return dispatch(deleteTaskEquipment(selected));
+		return dispatch(addTaskEquipment(selected));
 	};
 }
