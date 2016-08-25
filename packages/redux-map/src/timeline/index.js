@@ -6,11 +6,12 @@ import items, { listen as listenItems } from './items.js';
 import onAdd from './onadd.js';
 import onMove from './onmove.js';
 import onRemove from './onremove.js';
+import onSelect, { init as initSelector } from './onselect.js';
 
 const lastYear = new Date(new Date().getFullYear() - 1, 0);
 const nextYear = new Date(new Date().getFullYear() + 2, 0, 0);
 
-export default new Timeline(
+const timeline = new Timeline(
 	document.getElementById('timeline-mount'),
 	items,
 	groups,
@@ -25,6 +26,12 @@ export default new Timeline(
 		multiselect: false,
 	}
 );
+
+timeline.on('select', onSelect);
+initSelector(timeline);
+
+export default timeline;
+
 export function listen(store) {
 	const groupUnsub = listenGroups(store);
 	const itemUnsub = listenItems(store);
