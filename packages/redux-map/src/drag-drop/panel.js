@@ -6,7 +6,7 @@ const TaskPanel = () => {
 	let tiles = [];
 
 	for (const [name, color] of taskDictionary()) {
-		tiles.push(<TaskTile name={name} color={color} />);
+		tiles.push(<TaskTile name={name} color={color} key={name} />);
 	}
 
 	return <div>{tiles}</div>;

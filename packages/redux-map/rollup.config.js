@@ -5,6 +5,7 @@ import replace from 'rollup-plugin-replace';
 
 export default {
 	entry: 'src/index.js',
+	moduleName: 'Planner',
 	sourceMap: true,
 	targets: [
 		{ dest: 'dist/index.iife.js', format: 'iife' },

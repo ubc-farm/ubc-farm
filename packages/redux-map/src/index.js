@@ -18,3 +18,7 @@ render(
 	<Provider store={store}><Editor /></Provider>,
 	document.getElementById('editor-mount')
 );
+
+store.dispatch(fetchLocations());
+
+export default store;
