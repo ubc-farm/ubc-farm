@@ -1,6 +1,6 @@
 import { createElement } from 'react'; /** @jsx createElement */
 
-import LocationSelect from './location/select.js';
+import LocationSelect from './location/connected.js';
 
 const EditorPanel = () => (
 	<form>
