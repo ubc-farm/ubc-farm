@@ -24,6 +24,8 @@ function updateDataSet(sourceState) {
 
 		groups.add(data, 'redux-update');
 	}
+
+	groups.flush();
 }
 
 const listen = store => observeStore(store, locationsList, updateDataSet);

@@ -41,6 +41,8 @@ function deepUpdate(sourceState, lastSource = new Map()) {
 
 		items.update(data, 'redux-update');
 	}
+
+	items.flush();
 }
 
 const listen = store => observeStore(store, taskListSelector, deepUpdate);
