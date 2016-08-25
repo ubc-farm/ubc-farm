@@ -29,7 +29,7 @@ export default function taskList(state = new Map(), action) {
 			const clone = new Map(state);
 			const key = action.payload || id();
 
-			const blank = taskReducer(undefined, action);
+			const blank = Object.assign({}, taskReducer(undefined, action));
 			if (action.meta) Object.assign(blank, action.meta);
 
 			return clone.set(key, blank);

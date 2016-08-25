@@ -24,3 +24,4 @@ render(
 store.dispatch(fetchLocations());
 
 export default store;
+export { default as items } from './timeline/items.js';
