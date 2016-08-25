@@ -1,6 +1,8 @@
 import { selectedTask } from '../selectors.js';
 import {
 	setTaskLocation,
+	addTaskEquipment,
+	setTaskEquipment,
 	deleteTaskEquipment,
 } from './task.js';
 
@@ -17,9 +19,23 @@ export function setSelectedLocation(location) {
 	};
 }
 
-export function deleteSelectedEquipment(equipment) {
+export function setSelectedEquipment(position, equipment, count) {
 	return (dispatch, getState) => {
 		const selected = selectedTask(getState());
-		return dispatch(deleteTaskEquipment(selected, equipment));
+		return dispatch(setTaskEquipment(selected, position, equipment, count));
+	};
+}
+
+export function deleteSelectedEquipment(position) {
+	return (dispatch, getState) => {
+		const selected = selectedTask(getState());
+		return dispatch(deleteTaskEquipment(selected, position));
+	};
+}
+
+export function addSelectedEquipment() {
+	return (dispatch, getState) => {
+		const selected = selectedTask(getState());
+		return dispatch(deleteTaskEquipment(selected));
 	};
 }

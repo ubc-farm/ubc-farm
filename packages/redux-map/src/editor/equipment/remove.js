@@ -10,9 +10,9 @@ const RemoveButton = props => (
 
 export default connect(
 	undefined,
-	(dispatch, { equipment }) => ({
+	(dispatch, { position }) => ({
 		onClick() {
-			dispatch(deleteSelectedEquipment(equipment));
+			dispatch(deleteSelectedEquipment(position));
 		},
 	})
 )(RemoveButton);

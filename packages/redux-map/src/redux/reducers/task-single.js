@@ -1,4 +1,5 @@
 import {
+	ADD_TASK_EQUIPMENT,
 	SET_TASK_EQUIPMENT,
 	DELETE_TASK_EQUIPMENT,
 	SET_TASK_LOCATION,
@@ -17,7 +18,7 @@ const defaultTask = Object.freeze({
 	end_time: undefined,
 	hoursTaken: undefined,
 	locationId: undefined,
-	equipmentUsage: new Map(),
+	equipmentUsage: [],
 });
 
 export default function task(state = defaultTask, action) {
@@ -26,16 +27,33 @@ export default function task(state = defaultTask, action) {
 
 	switch (action.type) {
 		case SET_TASK_EQUIPMENT: {
-			const { equipment, count } = payload;
-			const equipClone = new Map(state.equipmentUsage);
-			equipClone.set(equipment, count);
+			const { position } = payload;
+			const equipClone = [...state.equipmentUsage];
+
+			const { equipment = equipClone[position].equipment } = payload;
+			const { count = equipClone[position].count } = payload;
+
+			equipClone[position] = [equipment, count];
 
 			return setState({ equipmentUsage: equipClone });
 		}
 		case DELETE_TASK_EQUIPMENT: {
-			const { equipment } = payload;
-			const equipClone = new Map(state.equipmentUsage);
-			equipClone.delete(equipment);
+			let { position } = payload;
+			const equipClone = [...state.equipmentUsage];
+
+			if (position === undefined) {
+				const { equipment } = payload;
+				position = equipClone.findIndex(([key]) => key === equipment);
+			}
+
+			equipClone.splice(position, 1);
+
+			return setState({ equipmentUsage: equipClone });
+		}
+		case ADD_TASK_EQUIPMENT: {
+			const equipClone = [...state.equipmentUsage];
+
+			equipClone.push([undefined, undefined]);
 
 			return setState({ equipmentUsage: equipClone });
 		}
