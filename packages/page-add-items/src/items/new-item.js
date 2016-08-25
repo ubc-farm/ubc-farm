@@ -60,8 +60,12 @@ export default reduxForm({
 	},
 	validate({ value, salvageValue }) {
 		const errs = {};
-		if (!validMoney(value)) errs.value = 'Invalid number';
-		if (!validMoney(salvageValue)) errs.salvageValue = 'Invalid number';
+		if (value !== undefined && !validMoney(value)) {
+			errs.value = 'Invalid number';
+		}
+		if (salvageValue !== undefined && !validMoney(value)) {
+			errs.salvageValue = 'Invalid number';
+		}
 		return errs;
 	},
 })(ItemForm);
