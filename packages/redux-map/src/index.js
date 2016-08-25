@@ -6,7 +6,7 @@ import store from './redux/index.js';
 import timeline, { listen } from './timeline/index.js';
 import TaskPanel, { init } from './drag-drop/index.js';
 import Editor from './editor/index.js';
-import { fetchLocations } from './redux/actions/index.js';
+import { fetchLocations, fetchEquipment } from './redux/actions/index.js';
 
 render(
 	<Provider store={store}><TaskPanel /></Provider>,
@@ -22,6 +22,7 @@ render(
 );
 
 store.dispatch(fetchLocations());
+store.dispatch(fetchEquipment());
 
 export default store;
 export { default as items } from './timeline/items.js';
