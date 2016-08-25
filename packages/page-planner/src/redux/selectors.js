@@ -8,7 +8,7 @@ export const taskColors = () => map.values();
 export const taskListSelector = state => state.tasks;
 
 export const locationsList = state => state.locations;
-export const equipmentList = () => new Map(); // TODO get from server
+export const equipmentList = state => state.equipment;
 
 export const selectedTask = state => state.selected.value;
 export const selectedTaskObject = createSelector(
