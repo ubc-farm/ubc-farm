@@ -1,7 +1,7 @@
 import { createElement as h, PropTypes } from 'react'; /** @jsx h */
 
-const EquipmentSelector = ({ value, onChange, options }) => (
-	<select value={value} onChange={onChange}>
+const EquipmentSelector = ({ value = '', onChange, options }) => (
+	<select value={value} onChange={onChange} className="equip-choose">
 		<option value="" disabled />
 		{Array.from(options, ([id, { name }]) => (
 			<option value={id} key={id}>{name}</option>
