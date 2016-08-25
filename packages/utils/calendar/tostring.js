@@ -25,6 +25,8 @@ export function toTimeString(date, options = {}) {
 		dateObj.setHours(hr, min);
 	} else if (date == null) {
 		return '';
+	} else {
+		dateObj = date;
 	}
 
 	const minute = dateObj.getMinutes();
@@ -61,14 +63,13 @@ export function toTimeString(date, options = {}) {
 export function toDateString(date, options = {}) {
 	const { showYear = false, shortMonth = true } = options;
 
-	if (!(date instanceof Date)) {
-		date = new Date(date.year, date.month, date.date);
-	}
+	const dateObj = date instanceof Date
+		? date : new Date(date.year, date.month, date.date);
 
-	const yearString = showYear ? ` ${date.getFullYear()}` : '';
+	const yearString = showYear ? ` ${dateObj.getFullYear()}` : '';
 	const month = shortMonth
-		? shortMonths[date.getMonth()]
-		: months[date.getMonth()];
+		? shortMonths[dateObj.getMonth()]
+		: months[dateObj.getMonth()];
 
-	return `${date.getDate()} ${month}${yearString}`;
+	return `${dateObj.getDate()} ${month}${yearString}`;
 }
