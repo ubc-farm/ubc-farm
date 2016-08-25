@@ -10,3 +10,8 @@ export const taskListSelector = state => state.tasks;
 export const locationsList = state => state.locations;
 
 export const selectedTask = state => state.selected.value;
+export const selectedTaskObject = createSelector(
+	selectedTask,
+	taskListSelector,
+	(selectedId, list) => list.get(selectedId)
+);
