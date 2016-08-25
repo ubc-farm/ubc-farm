@@ -6,6 +6,7 @@ export const SET_TASK_EQUIPMENT = 'SET_TASK_EQUIPMENT';
 export const DELETE_TASK_EQUIPMENT = 'DELETE_TASK_EQUIPMENT';
 
 export const SET_TASK_LOCATION = 'SET_TASK_LOCATION';
+export const SET_TASK_NAME = 'SET_TASK_NAME';
 export const SET_TASK_TYPE = 'SET_TASK_TYPE';
 export const SET_TASK_TIMES = 'SET_TASK_TIMES';
 
@@ -31,6 +32,10 @@ export function setTimes(id, start, end) {
 
 export function setTaskType(id, newType) {
 	return { type: SET_TASK_TYPE, id, payload: newType };
+}
+
+export function setTaskName(id, name) {
+	return { type: SET_TASK_NAME, id, payload: name };
 }
 
 export function setTaskEquipment(id, position, equipment, count) {
