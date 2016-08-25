@@ -1,7 +1,7 @@
 import Timeline from 'vis-timeline'; //eslint-disable-line
 
-import groups from './groups.js';
-import items from './items.js';
+import groups, { listen as listenGroups } from './groups.js';
+import items, { listen as listenItems } from './items.js';
 
 import onAdd from './onadd.js';
 import onMove from './onmove.js';
@@ -25,3 +25,12 @@ export default new Timeline(
 		multiselect: false,
 	}
 );
+export function listen(store) {
+	const groupUnsub = listenGroups(store);
+	const itemUnsub = listenItems(store);
+
+	return function unsubscribeTimeline() {
+		groupUnsub();
+		itemUnsub();
+	};
+}
