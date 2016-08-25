@@ -20,7 +20,7 @@ export function setTaskLocation(id, newLocation) {
 
 export function setTimes(id, start, end) {
 	return {
-		type: SET_TASK_LOCATION,
+		type: SET_TASK_TIMES,
 		id,
 		payload: { start, end },
 	};
