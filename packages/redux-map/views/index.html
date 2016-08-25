@@ -8,11 +8,17 @@
 	<link href='/css/module/vis-timeline/vis.css' rel='stylesheet'>
 
 	<link href='/css/page/planner/tasks.css' rel='stylesheet'>
+	<link href='/css/page/planner/main.css' rel='stylesheet'>
 	<script defer async src='/js/page/planner/index.js'></script>
 </head>
 <body>
 	{{> app-banner active='Calendar'}}
 	{{> section-banner breadcrumbs}}
+
+	<aside class="planner-sidebar">
+		<div id='tasklist-mount'></div>
+		<div id='editor-mount'></div>
+	</aside>
 
 	<style>
 		.vis-item {
@@ -24,11 +30,9 @@
 			box-shadow: 0 0 4px #4195fc;
 		}
 	</style>
-	<div id='timeline-mount'></div>
+	<section class="main-area">
+		<div id='timeline-mount'></div>
+	</section>
 
-	<aside class="planner-sidebar">
-		<div id='tasklist-mount'></div>
-		<div id='editor-mount'></div>
-	</aside>
 </body>
 </html>
