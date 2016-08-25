@@ -5,7 +5,7 @@ import AddButton from './add.js';
 import { selectedTask } from '../../redux/selectors.js';
 
 const EquipmentSection = props => (
-	<fieldset disabled={props.disabled}>
+	<fieldset disabled={props.disabled} className="equip-container">
 		<EquipmentList {...props} />
 		<AddButton />
 	</fieldset>
