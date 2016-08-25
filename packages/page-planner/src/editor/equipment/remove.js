@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { deleteSelectedEquipment } from '../../redux/actions/index.js';
 
 const RemoveButton = props => (
-	<button className="equip-remove" {...props}>
+	<button className="equip-remove" type="button" {...props}>
 		<i className="material-icons md-18">remove_circle</i>
 	</button>
 );

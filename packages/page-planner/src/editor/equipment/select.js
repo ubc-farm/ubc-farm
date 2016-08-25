@@ -31,4 +31,4 @@ export default connect(
 			setSelectedEquipment(position, target.value, undefined);
 		},
 	})
-);
+)(EquipmentSelector);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import EquipmentItem from './item.js';
 import { selectedEquipment } from '../../redux/selectors.js';
 
-const EquipmentList = ({ list, invalidMessages }) => (
+const EquipmentList = ({ list, invalidMessages = new Map() }) => (
 	<ul className="equip-list">
 		{list.map(([equipmentID], index) => (
 			<EquipmentItem
