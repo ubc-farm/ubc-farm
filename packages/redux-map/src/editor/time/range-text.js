@@ -1,6 +1,19 @@
 import { createElement as h, PropTypes } from 'react'; /** @jsx h */
 import { omit } from 'ubc-farm-utils';
-import { toRangeString } from 'ubc-farm-utils/calendar/index.js';
+import {
+	toRangeString,
+	toDateString,
+	toTimeString,
+} from 'ubc-farm-utils/calendar/index.js';
+
+function insertLineBreaks(children) {
+	const result = [];
+	for (const [i, value] of children.entries()) {
+		if (i !== 0) result.push(<br />);
+		result.push(value);
+	}
+	return result;
+}
 
 /**
  * Returns a react element using the RangeString function to build
@@ -10,13 +23,20 @@ const RangeText = props => {
 	const { forceDate, twelveHour } = props;
 
 	let { start, end } = props;
-	[start, end] = toRangeString(start, end, { forceDate, twelveHour });
 
-	const insertLineBreaks = children => children.reduce((text, val, i) => {
-		if (i !== 0) text.push(<br />);
-		text.push(val);
-		return text;
-	}, []);
+	if (start == null) return null;
+
+	if (end == null) {
+		return (
+			<time dateTime={start.toUTCString()}>
+				{toDateString(start, { shortMonth: true })}
+				<br />
+				{toTimeString(start, { amPm: true, twelve: twelveHour })}
+			</time>
+		);
+	}
+
+	[start, end] = toRangeString(start, end, { forceDate, twelveHour });
 
 	return (
 		<span
@@ -30,10 +50,10 @@ const RangeText = props => {
 };
 
 RangeText.propTypes = {
-	start: PropTypes.instanceOf(Date).isRequired,
-	end: PropTypes.instanceOf(Date).isRequired,
-	forceDate: PropTypes.boolean,
-	twelveHour: PropTypes.boolean,
+	start: PropTypes.instanceOf(Date),
+	end: PropTypes.instanceOf(Date),
+	forceDate: PropTypes.bool,
+	twelveHour: PropTypes.bool,
 };
 
 export default RangeText;
