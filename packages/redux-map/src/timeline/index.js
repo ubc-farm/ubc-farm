@@ -21,5 +21,7 @@ export default new Timeline(
 		min: lastYear,
 		max: nextYear,
 		editable: true,
+		selectable: true,
+		multiselect: false,
 	}
 );
