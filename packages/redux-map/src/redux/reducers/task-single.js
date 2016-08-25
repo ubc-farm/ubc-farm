@@ -1,5 +1,6 @@
 import {
 	SET_TASK_EQUIPMENT,
+	DELETE_TASK_EQUIPMENT,
 	SET_TASK_LOCATION,
 	SET_TASK_TIMES,
 	SET_TASK_TYPE,
@@ -28,6 +29,13 @@ export default function task(state = defaultTask, action) {
 			const { equipment, count } = payload;
 			const equipClone = new Map(state.equipmentUsage);
 			equipClone.set(equipment, count);
+
+			return setState({ equipmentUsage: equipClone });
+		}
+		case DELETE_TASK_EQUIPMENT: {
+			const { equipment } = payload;
+			const equipClone = new Map(state.equipmentUsage);
+			equipClone.delete(equipment);
 
 			return setState({ equipmentUsage: equipClone });
 		}
