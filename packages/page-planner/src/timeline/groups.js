@@ -8,12 +8,14 @@ const groups = new DataSet(undefined, { queue: true });
  * Updates the dataset with the new items whenever the
  * state slice changes.
  */
-function updateDataSet(sourceState) {
+function updateDataSet(sourceState, lastState = new Map()) {
 	groups.forEach(({ id }) => groups.remove(id, 'redux-update'), {
 		filter: ({ id }) => !sourceState.has(id),
 	});
 
 	for (const [id, value] of sourceState) {
+		if (value === lastState.get(id)) continue;
+
 		const data = {
 			id,
 			className: undefined,
@@ -22,7 +24,7 @@ function updateDataSet(sourceState) {
 			title: undefined,
 		};
 
-		groups.add(data, 'redux-update');
+		groups.update(data, 'redux-update');
 	}
 
 	groups.flush();
