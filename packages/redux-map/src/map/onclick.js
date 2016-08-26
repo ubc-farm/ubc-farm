@@ -35,7 +35,7 @@ function updateSelectedItem(newSelected, oldSelected) {
 
 		if (style != null) mapData.overrideStyle(next, style);
 	}
-	if (last) mapData.revertStyle(next);
+	if (last && last !== next) mapData.revertStyle(next);
 }
 
 export default function observeClickAndStore() {
