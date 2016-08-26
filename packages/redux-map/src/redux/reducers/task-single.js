@@ -31,8 +31,9 @@ export default function task(state = defaultTask, action) {
 			const { position } = payload;
 			const equipClone = [...state.equipmentUsage];
 
-			const { equipment = equipClone[position].equipment } = payload;
-			const { count = equipClone[position].count } = payload;
+			let { equipment, count } = payload;
+			if (equipment === undefined) [equipment] = equipClone[position];
+			if (count === undefined) [, count] = equipClone[position];
 
 			equipClone[position] = [equipment, count];
 

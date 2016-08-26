@@ -21,6 +21,7 @@ EquipmentSelector.propTypes = {
 export default connect(
 	(state, { position }) => {
 		const [equipmentID] = selectedEquipment(state)[position];
+
 		return {
 			options: equipmentList(state),
 			value: equipmentID,
@@ -28,7 +29,7 @@ export default connect(
 	},
 	(dispatch, { position }) => ({
 		onChange({ target }) {
-			setSelectedEquipment(position, target.value, undefined);
+			dispatch(setSelectedEquipment(position, target.value, undefined));
 		},
 	})
 )(EquipmentSelector);
