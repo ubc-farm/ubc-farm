@@ -24,6 +24,7 @@ const timeline = new Timeline(
 		editable: true,
 		selectable: true,
 		multiselect: false,
+		height: 'calc(50vh - 2rem)',
 	}
 );
 
