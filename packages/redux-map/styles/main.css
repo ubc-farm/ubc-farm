@@ -2,11 +2,11 @@
 	float: right;
 	display: flex;
 	flex-direction: column;
-	width: 20rem;
+	width: 30rem;
 }
 
 .main-area {
-	margin-right: 20rem;
+	margin-right: 30rem;
 }
 
 .panel {

@@ -6,8 +6,8 @@ import { equipmentList, selectedEquipment } from '../../redux/selectors.js';
 const EquipmentSelector = ({ value = '', onChange, options }) => (
 	<select value={value} onChange={onChange} className="equip-choose">
 		<option value="" disabled />
-		{Array.from(options, ([id, { name }]) => (
-			<option value={id} key={id}>{name}</option>
+		{Array.from(options, ([id, { name = '', description = '' }]) => (
+			<option value={id} key={id}>{`${name} - ${description}`}</option>
 		))}
 	</select>
 );
