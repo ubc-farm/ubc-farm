@@ -23,8 +23,15 @@ export default class Money {
 					thing = thing.toString(10);
 					// fall through
 				case 'string': {
-					const onlyNumbersAndDecimals = thing.replace(/[^-0-9.]/g, '');
-					const [dollars, ...centsStrings] = onlyNumbersAndDecimals.split('.');
+					let stripped = thing.replace(/[^-0-9().]/g, '');
+					if (stripped.includes('(') || stripped.includes(')')) {
+						if (stripped.startsWith('(') && stripped.endsWith(')')) {
+							stripped = `-${stripped}`;
+						}
+						stripped = stripped.replace(/\(|\)/g, '');
+					}
+
+					const [dollars, ...centsStrings] = stripped.split('.');
 					const centString = centsStrings.join('');
 
 					if (!dollars && !centString) break;
