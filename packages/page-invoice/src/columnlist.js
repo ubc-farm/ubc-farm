@@ -1,6 +1,6 @@
 import { createElement as h } from 'react'; /** @jsx h */
 import { Money } from 'ubc-farm-utils/index.js';
-import { Column } from 'ubc-farm-table-base/index.js';
+import { Column } from 'ubc-farm-table-base';
 
 import InvoiceInput from './inputs/base.js';
 import UnitCostInput from './inputs/unit-cost.js';

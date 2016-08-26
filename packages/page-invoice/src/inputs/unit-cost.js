@@ -1,8 +1,8 @@
 import { createElement as h, PropTypes } from 'react'; /** @jsx h */
 import { connect } from 'react-redux';
-import { Money } from '../../ubc-farm-utils/index.js';
+import Money from 'ubc-farm-money';
 
-import { Column } from '../../react-table/index.js';
+import { Column } from 'ubc-farm-table-base';
 import UpdateOnBlur from '../small-components/input-with-state.js';
 
 import { changeData } from '../redux/actions.js';

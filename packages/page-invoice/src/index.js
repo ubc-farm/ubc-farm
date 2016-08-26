@@ -11,5 +11,5 @@ domready.then(() => {
 		<Provider store={store}>
 			<InvoiceTable />
 		</Provider>
-	, document.getElementById('app-mount'));
+	, document.getElementById('invoice-table-node'));
 });

@@ -1,4 +1,4 @@
-import { Money } from '../../ubc-farm-utils/index.js';
+import Money from 'ubc-farm-money';
 
 import {
 	selectedSelector, selectedLengthSelector,

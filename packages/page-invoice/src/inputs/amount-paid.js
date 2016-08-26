@@ -1,6 +1,6 @@
 import { createElement as h, PropTypes } from 'react'; /** @jsx h */
 import { connect } from 'react-redux';
-import { Cell } from '../../react-table/index.js';
+import { Cell } from 'ubc-farm-table-base';
 
 import {
 	amountPaidSelector,

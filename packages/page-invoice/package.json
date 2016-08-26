@@ -1,35 +1,38 @@
 {
-	"name": "ubc-farm-page-invoice",
-	"version": "1.1.0",
-	"description": "The invoice page for the farm, providing and interactive data table to write and generate invoices",
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-invoice",
-	"browser": "dist/index.iife.js",
-	"private": true,
-	"dependencies": {
-		"react": "15.3.0",
-		"react-dom": "15.3.0"
-	},
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"rollup-plugin-babel": "^2.6.1",
-		"rollup-plugin-node-resolve": "^2.0.0",
-		"rollup-plugin-commonjs": "^3.3.1",
-		"rollup-plugin-replace": "^1.1.1",
-		"redux": "^3.5.2",
-		"react-redux": "^4.4.5",
-		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3",
-		"ubc-farm-utils": "ubc-farm/utils",
-		"ubc-farm-table-base": "ubc-farm/table-base"
-	},
-	"scripts": {
-		"prepublish": "rollup -c"
-	},
-	"files": [
-		"dist",
-		"styles",
-		"views"
-	]
+  "name": "ubc-farm-page-invoice",
+  "version": "1.1.0",
+  "description": "The invoice page for the farm, providing and interactive data table to write and generate invoices",
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "license": "MIT",
+  "repository": "https://github.com/NotWoods/ubc-farm/page-invoice",
+  "browser": "dist/index.iife.js",
+  "private": true,
+  "dependencies": {
+    "react": "15.3.0",
+    "react-dom": "15.3.0"
+  },
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.8.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.3",
+    "rollup": "0.34.2",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.3.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "ubc-farm-money": "github:ubc-farm/money",
+    "ubc-farm-table-base": "ubc-farm/table-base#dist",
+    "ubc-farm-utils": "ubc-farm/utils"
+  },
+  "scripts": {
+    "prepublish": "rollup -c"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "views"
+  ]
 }
