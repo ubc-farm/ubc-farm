@@ -27,3 +27,4 @@ store.dispatch(fetchEquipment());
 
 export default store;
 export { default as items } from './timeline/items.js';
+export { default as map } from './map/index.js';
