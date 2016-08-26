@@ -1,15 +1,30 @@
-import { GET_LOCATIONS } from '../actions/index.js';
-
-const entries = obj => Object.keys(obj).map(k => [k, obj[k]]);
+import { GET_LOCATIONS, GET_FIELDS } from '../actions/index.js';
 
 export default function locations(state = new Map(), action) {
-	if (action.type !== GET_LOCATIONS) return state;
-	const { payload, error } = action;
+	switch (action.type) {
+		case GET_LOCATIONS: case GET_FIELDS: {
+			const { payload, error } = action;
 
-	if (error) {
-		console.error(payload);
-		return state;
+			if (error) {
+				console.error(payload);
+				return state;
+			}
+
+			const copy = new Map(state);
+			let data = payload;
+			if (action.type === GET_FIELDS) {
+				data = {};
+				Object.keys(payload).forEach(id => {
+					data[`field-${id}`] = {
+						id: `field-${id}`,
+						name: `Field ${id}`,
+					};
+				});
+			}
+
+			Object.keys(data).forEach(key => copy.set(key, data[key]));
+			return copy;
+		}
+		default: return state;
 	}
-
-	return new Map(entries(payload));
 }
