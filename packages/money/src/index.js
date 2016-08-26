@@ -40,9 +40,13 @@ export default class Money {
 					value *= 100;
 
 					let centValue = 0;
-					if (centString.length > 0) {
-						centValue = parseInt(centString.substr(0, 2), 10);
+					if (centString.length === 1) {
+						centValue = parseInt(`${centString.charAt(0)}0`, 10);
+					} else if (centString.length >= 2) {
+						const firstTwoCents = centString.substr(0, 2);
+						centValue = parseInt(firstTwoCents, 10);
 					}
+
 					if (centString.length > 2) {
 						const fraction = `.${centString.substr(2)}`;
 						centValue += parseFloat(fraction);
@@ -52,7 +56,8 @@ export default class Money {
 					else value += centValue;
 					break;
 				}
-				case 'object': {
+				case 'object':
+				case 'function': {
 					if (thing === null) break;
 
 					let val;
@@ -61,7 +66,7 @@ export default class Money {
 					} catch (err) {
 						if (!(err instanceof TypeError)) throw err;
 					} finally {
-						if (typeof val !== 'object') break;
+						if (typeof val !== 'number' && typeof val !== 'string') break;
 						value = new this.constructor(val).value;
 					}
 					break;
@@ -74,7 +79,7 @@ export default class Money {
 
 		if (value == null) value = NaN;
 
-		Object.defineProperty(this, 'value', { value });
+		Reflect.defineProperty(this, 'value', { value });
 	}
 
 	/**
