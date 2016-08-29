@@ -20,7 +20,7 @@ function pageViews(pagename, path = pagename, context) {
 				for (const [index, file] of pathsToVerify.entries()) {
 					if (exists[index]) {
 						const rel = relative(__dirname, file);
-						return reply.view(rel, file);
+						return reply.view(rel, context);
 					}
 				}
 
