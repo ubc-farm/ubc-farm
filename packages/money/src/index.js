@@ -36,8 +36,9 @@ export default class Money {
 
 					if (!dollars && !centString) break;
 
-					value = parseInt(dollars || 0, 10);
-					value *= 100;
+					if (dollars === '') value = 0;
+					else if (dollars === '-') value = -0;
+					else value = parseInt(dollars, 10) * 100;
 
 					let centValue = 0;
 					if (centString.length === 1) {
@@ -52,7 +53,7 @@ export default class Money {
 						centValue += parseFloat(fraction);
 					}
 
-					if (value < 0) value -= centValue;
+					if (value < 0 || Object.is(value, -0)) value -= centValue;
 					else value += centValue;
 					break;
 				}
