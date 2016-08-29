@@ -5,8 +5,11 @@ import search from '../find-folder.js';
 const startFolder = join(__dirname, 'node_modules');
 function searchModule(name) {
 	return search(startFolder, `ubc-farm-${name}`, name).then(path => {
-		if (path === undefined) throw new Error(`Could not find ${name}`);
-		else return path;
+		if (path === undefined) {
+			throw new Error(`Could not find ${name} module`);
+		}
+
+		return path;
 	});
 }
 

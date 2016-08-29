@@ -22,16 +22,17 @@ export default function search(folder, ...potentialNames) {
 
 	const potentialPaths = potentialNames.map(name => join(folder, name));
 
-	const checkExists = Promise.all(potentialPaths.map(p => doesPathExist(p)));
+	const checkPaths = Promise.all(potentialPaths.map(p => doesPathExist(p)));
 
-	return checkExists.then(results => {
-		if (results.every(v => v === false)) {
+	return checkPaths.then(results => {
+		const noneExist = results.every(v => !v);
+		if (noneExist) {
 			const upOnePath = resolvePath(folder, '../');
 			return search(upOnePath, ...potentialNames);
-		} else {
-			const index = results.findIndex(v => v === true);
-			const foundPath = potentialPaths[index];
-			return foundPath;
 		}
+
+		const index = results.findIndex(v => v === true);
+		const foundPath = potentialPaths[index];
+		return foundPath;
 	});
 }

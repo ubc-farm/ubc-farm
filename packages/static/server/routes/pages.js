@@ -52,7 +52,10 @@ const folder = join(__dirname, 'node_modules');
 function searchForRouteFolders(pagename) {
 	return search(folder, `ubc-farm-page-${pagename}`, `page-${pagename}`)
 		.then(path => {
-			if (path === undefined) throw new Error(`${pagename} not found`);
+			if (path === undefined) {
+				throw new Error(`${pagename} page package not found`);
+			}
+
 			return [...javascriptRoute(pagename, path), cssRoute(pagename, path)];
 		});
 }
@@ -67,7 +70,12 @@ const pageList = [
 	'planner',
 ];
 
-const routes = Promise.all(pageList.map(searchForRouteFolders));
+const routes = Promise.all(pageList.map(
+	page => searchForRouteFolders(page).catch(err => {
+		console.warn(err);
+		return [];
+	})
+));
 
 export default routes.then(r => r.reduce(
 	(allRoutes = [], additional) => [...allRoutes, ...additional]
