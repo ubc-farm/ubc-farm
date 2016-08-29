@@ -1,48 +1,29 @@
-import { resolve, join, relative, extname } from 'path';
-import { stat } from 'fs';
+import { join, relative, extname } from 'path';
 import { notFound } from 'boom';
+import search, { doesPathExist } from '../find-folder.js';
 
+const start = join(__dirname, 'node_modules');
 function pageViews(pagename, path = pagename, context) {
-	let moduleFolder;
-	try {
-		moduleFolder = require.resolve(`ubc-farm-page-${pagename}`);
-	} catch (err) {
-		// TODO: Make a better resolution algorithm
-		// If no module found, check for a sibling package folder.
-		moduleFolder = resolve(__dirname, `../page-${pagename}`);
-	}
-
-	// console.log(moduleFolder);
-	return {
+	return search(start, `ubc-farm-page-${pagename}`, `page-${pagename}`)
+	.then(moduleFolder => ({
 		method: 'GET',
 		path: `/${path}/{param*}`,
-		handler(request, reply) {
-			const reqPath = request.params.param;
-
-			let filePath;
-			if (reqPath) {
-				filePath = join(moduleFolder, 'views', reqPath);
-			} else {
-				// get index
-				filePath = join(moduleFolder, 'views', 'index');
-			}
+		handler: function viewHandler(request, reply) {
+			const reqPath = request.params.param || 'index';
+			const filePath = join(moduleFolder, 'views', reqPath);
 
 			const testPath = extname(filePath) ? filePath : `${filePath}.html`;
-
-			stat(testPath, err => {
-				if (err) {
-					if (err.code !== 'ENOENT') throw err;
-					return reply(notFound());
-				}
+			return doesPathExist(testPath).then(exists => {
+				if (!exists) return reply(notFound());
 
 				const rel = relative(__dirname, filePath);
 				return reply.view(rel, context);
 			});
 		},
-	};
+	}));
 }
 
-export default [
+export default Promise.all([
 	pageViews('calendar'),
 	pageViews('directory'),
 	pageViews('fields'),
@@ -50,4 +31,4 @@ export default [
 	pageViews('map-editor', 'fields/editor'),
 	pageViews('add-items', 'finances/add-item'),
 	pageViews('planner', 'calendar/planner'),
-];
+]);
