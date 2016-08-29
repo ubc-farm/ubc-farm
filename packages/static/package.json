@@ -9,8 +9,8 @@
   "main": "index.node.js",
   "jsnext:main": "index.es.js",
   "dependencies": {
-    "hapi": "14.2.0",
-    "inert": "^4.0.1"
+    "hapi": "15.0.2",
+    "inert": "4.0.2"
   },
   "devDependencies": {
     "rollup": "0.34.2",
