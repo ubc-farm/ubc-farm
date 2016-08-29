@@ -15,7 +15,7 @@
 </head>
 <body>
 	{{> app-banner}}
-	{{> section-banner breadcrumbs}}
+	{{> section-banner text="[Finances](/finances) > [Sales](#)"}}
 
 	<form class='invoice'>
 		<div class='row'>
@@ -32,7 +32,7 @@
 				<label id='delivery-date-input'>
 					Delivery Date
 					<!-- TODO -->
-					<input type='text'/>	
+					<input type='text'/>
 				</label>
 
 				<div class='row'>
@@ -62,9 +62,9 @@
 			<div class='invoice-details right'>
 				<label class='details-row'>
 					<span class='detail-cell detail-header'>Invoice #:</span>
-					<input type='number' 
-						name='invoiceNumber' 
-						class='detail-cell' 
+					<input type='number'
+						name='invoiceNumber'
+						class='detail-cell'
 						placeholder='9584107'
 						min='0'
 					/>
@@ -74,7 +74,7 @@
 					<span class='detail-cell detail-header'>Date:</span>
 					<!-- React Node -->
 					<!-- TODO -->
-					<input type='text'/>	
+					<input type='text'/>
 				</label>
 
 				<label class='details-row'>

@@ -7,22 +7,23 @@ export default {
 	entry: 'src/index.js',
 	sourceMap: true,
 	targets: [
-		{ dest: 'dist/index.iife.js', format: 'iife' }
+		{ dest: 'dist/index.iife.js', format: 'iife' },
 	],
 	plugins: [
 		babel({
-			plugins: ['transform-react-jsx', 'external-helpers']
+			plugins: ['transform-react-jsx', 'external-helpers'],
+			exclude: ['node_modules/**', '../node_modules/**'],
 		}),
-		nodeResolve({jsnext: true}),
+		nodeResolve({ jsnext: true }),
 		replace({
-			'process.env.NODE_ENV': JSON.stringify('production')
+			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs()
+		commonjs(),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {
-		'react': 'React',
+		react: 'React',
 		'react-dom': 'ReactDOM',
-		'tape': 'test'
-	}
-}
+		tape: 'test',
+	},
+};
