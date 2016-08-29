@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { join } from 'path';
 import __dirname from '../../dirname.js';
 import search from '../find-folder.js';
 
@@ -13,7 +13,7 @@ export default cssCoreSearch.then(cssCore => {
 		path: '/css/core/{param*}',
 		handler: {
 			directory: {
-				path: resolve(cssCore, '../src'),
+				path: join(cssCore, 'src'),
 				listing: true,
 				defaultExtension: 'css',
 				index: false,
@@ -25,7 +25,7 @@ export default cssCoreSearch.then(cssCore => {
 		method: 'GET',
 		path: '/css/core/min.css',
 		handler: {
-			file: resolve(cssCore, '../min.css'),
+			file: join(cssCore, 'min.css'),
 		},
 	};
 
