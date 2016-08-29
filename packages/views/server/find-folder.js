@@ -22,8 +22,10 @@ export function doesPathExist(path) {
  */
 export default function search(folder, ...potentialNames) {
 	if (folder === resolvePath('/')) {
-		throw new Error('Search failed, could not find ' +
-			`any of ${potentialNames.join()}`);
+		//throw new Error('Search failed, could not find ' +
+		//	`any of ${potentialNames.join()}`);
+		console.warn(`Could not find ${potentialNames.join(', ')}`);
+		return undefined;
 	}
 
 	const potentialPaths = potentialNames.map(name => join(folder, name));

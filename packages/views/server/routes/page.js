@@ -9,15 +9,22 @@ function pageViews(pagename, path = pagename, context) {
 		method: 'GET',
 		path: `/${path}/{param*}`,
 		handler: function viewHandler(request, reply) {
-			const reqPath = request.params.param || 'index';
-			const filePath = join(moduleFolder, 'views', reqPath);
+			const requestedPath = request.params.param || 'index';
+			const fileLocation = join(moduleFolder, 'views', requestedPath);
 
-			const testPath = extname(filePath) ? filePath : `${filePath}.html`;
-			return doesPathExist(testPath).then(exists => {
-				if (!exists) return reply(notFound());
+			const pathsToVerify = extname(fileLocation)
+				? [fileLocation]
+				: [`${fileLocation}.hbs`, `${fileLocation}.html`];
 
-				const rel = relative(__dirname, filePath);
-				return reply.view(rel, context);
+			return Promise.all(pathsToVerify.map(doesPathExist)).then(exists => {
+				for (const [index, file] of pathsToVerify.entries()) {
+					if (exists[index]) {
+						const rel = relative(__dirname, file);
+						return reply.view(rel, file);
+					}
+				}
+
+				return reply(notFound());
 			});
 		},
 	}));
@@ -30,5 +37,10 @@ export default Promise.all([
 	pageViews('invoice', 'finances/sales'),
 	pageViews('map-editor', 'fields/editor'),
 	pageViews('add-items', 'finances/add-item'),
-	pageViews('planner', 'calendar/planner'),
+	pageViews('planner', 'calendar/planner', {
+		breadcrumbs: [
+			{ title: 'Calendar', href: '/calendar' },
+			{ title: 'Planner', href: '#' },
+		],
+	}),
 ]);
