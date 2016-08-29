@@ -1,4 +1,5 @@
 import json from 'rollup-plugin-json';
+import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
 	external(name) {
@@ -10,7 +11,10 @@ export default {
 
 		return true;
 	},
-	plugins: [json()],
+	plugins: [
+		json(),
+		nodeResolve({ jsnext: true }),
+	],
 	entry: 'index.js',
 	sourceMap: true,
 	targets: [
