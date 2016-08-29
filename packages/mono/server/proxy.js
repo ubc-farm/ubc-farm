@@ -2,9 +2,6 @@ import { parse } from 'url';
 import { config as staticObj } from 'ubc-farm-server-static/package.json';
 import { config as viewObj } from 'ubc-farm-server-views/package.json';
 
-export const host = 'localhost';
-export const protocol = 'http';
-
 export const options = {
 	passThrough: true,
 	xforward: true,

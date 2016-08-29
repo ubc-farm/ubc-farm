@@ -10,17 +10,14 @@
 	"dependencies": {
 		"hapi": "15.0.2",
 		"h2o2": "5.1.1",
-		"ubc-farm-server-static": "ubc-farm/server-static#dist",
-		"ubc-farm-server-views": "ubc-farm/server-views#dist"
-	},
-	"peerDependencies": {
-		"ubc-farm-server-api": "ubc-farm/server-api",
-		"ubc-farm-server-static": "ubc-farm/server-static",
-		"ubc-farm-server-views": "ubc-farm/server-views"
+		"ubc-farm-server-api": "../api",
+		"ubc-farm-server-static": "../static",
+		"ubc-farm-server-views": "../views"
 	},
 	"devDependencies": {
 		"rollup": "0.34.2",
 		"rollup-plugin-json": "^2.0.1",
+		"rollup-plugin-node-resolve": "2.0.0",
 		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
