@@ -8,8 +8,8 @@
 	"main": "index.node.js",
 	"private": true,
 	"dependencies": {
-		"hapi": "14.1.0",
-		"h2o2": "5.1.0",
+		"hapi": "15.0.2",
+		"h2o2": "5.1.1",
 		"ubc-farm-server-static": "ubc-farm/server-static#dist",
 		"ubc-farm-server-views": "ubc-farm/server-views#dist"
 	},
@@ -18,16 +18,16 @@
 		"ubc-farm-server-static": "ubc-farm/server-static",
 		"ubc-farm-server-views": "ubc-farm/server-views"
 	},
-	"devDependencies": { 
+	"devDependencies": {
 		"rollup": "0.34.2",
 		"rollup-plugin-json": "^2.0.1",
 		"ubc-farm-utils": "ubc-farm/utils"
 	},
 	"scripts": {
 		"prepublish": "rollup -c",
-		"start:api": "cd ../server-api && npm start",
-		"start:static": "cd ../server-static && npm start",
-		"start:views": "cd ../server-views && npm start",
+		"start:api": "cd ../api && npm start",
+		"start:static": "cd ../static && npm start",
+		"start:views": "cd ../views && npm start",
 		"start": "start npm run start:api && start npm run start:static && start npm run start:views",
 		"poststart": "node index.node.js",
 		"quickstart": "npm run prepublish && npm start"
