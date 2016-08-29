@@ -4,16 +4,16 @@ export default {
 	external(name) {
 		if (name.endsWith('.js')) {
 			return false;
-		}
-		else if (name.startsWith('ubc-farm') && !name.includes('server')) 
+		}	else if (name.startsWith('ubc-farm') && !name.includes('server')) {
 			return false;
-		else 
-			return true;
+		}
+
+		return true;
 	},
 	plugins: [json()],
 	entry: 'index.js',
 	sourceMap: true,
 	targets: [
-		{ dest: 'index.node.js', format: 'cjs' }
-	]
-}
+		{ dest: 'index.node.js', format: 'cjs' },
+	],
+};

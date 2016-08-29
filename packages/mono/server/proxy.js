@@ -1,20 +1,20 @@
-import {parse} from 'url';
-import {config as staticObj} from 'ubc-farm-server-static/package.json';
-import {config as viewObj} from 'ubc-farm-server-views/package.json';
+import { parse } from 'url';
+import { config as staticObj } from 'ubc-farm-server-static/package.json';
+import { config as viewObj } from 'ubc-farm-server-views/package.json';
 
 export const host = 'localhost';
 export const protocol = 'http';
 
 export const options = {
 	passThrough: true,
-	xforward: true
-}
+	xforward: true,
+};
 
-export default function(request, reply) {
-	const {pathname} = parse(request.path);
-	
+export default function (request, reply) {
+	const { pathname } = parse(request.path);
+
 	function useConnection(connection) {
-		const {host = 'localhost', port, protocol = 'http'} = connection;
+		const { host = 'localhost', port, protocol = 'http' } = connection;
 		if (port === undefined) throw Error('Missing port');
 		const opts = Object.assign({}, options, { host, port, protocol });
 		return reply.proxy(opts);
