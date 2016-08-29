@@ -30,7 +30,11 @@ server.views({
 	isCached: process.env.NODE_ENV !== 'development',
 });
 
-server.route(packagePages);
 server.route(homepage);
 
 export default server;
+
+export const ready = packagePages
+	.then(routes => server.route(routes))
+	.then(() => server)
+	.catch(err => console.log(err));
