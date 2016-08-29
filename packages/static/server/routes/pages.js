@@ -77,6 +77,4 @@ const routes = Promise.all(pageList.map(
 	})
 ));
 
-export default routes.then(r => r.reduce(
-	(allRoutes = [], additional) => [...allRoutes, ...additional]
-));
+export default routes.then(r => [].concat(...r));
