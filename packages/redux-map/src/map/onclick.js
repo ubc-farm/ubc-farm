@@ -5,7 +5,7 @@ import { data as mapData } from './map.js';
 
 import store from '../redux/index.js';
 import { setSelectedLocation } from '../redux/actions/index.js';
-import { selectedTaskObject } from '../redux/selectors.js';
+import { selectedLocation } from '../redux/selectors.js';
 
 function onClick({ feature }) {
 	const id = feature.getId();
@@ -13,33 +13,36 @@ function onClick({ feature }) {
 	store.dispatch(setSelectedLocation(id));
 }
 
-function updateSelectedItem(newSelected, oldSelected) {
-	let next;
-	let last;
+const selectedIcon = {
+	icon: 'http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png',
+};
 
-	if (newSelected && newSelected.locationId) {
-		next = mapData.getFeatureById(newSelected.locationId);
-	}
+/**
+ * @param {string} nextLocation
+ * @param {string} lastLocation
+ */
+function updateSelectedItem(nextLocation, lastLocation) {
+	const next = mapData.getFeatureById(nextLocation);
 
-	if (oldSelected && oldSelected.locationId) {
-		last = mapData.getFeatureById(oldSelected.locationId);
+	if (lastLocation) {
+		const last = mapData.getFeatureById(lastLocation);
+		if (last && last !== next) mapData.revertStyle(last);
 	}
 
 	if (next) {
 		let style;
 		switch (next.getGeometry().getType()) {
 			case 'Polygon': style = fieldStyle.selected; break;
-			case 'Point': style = null; break; // TODO: Add marker style
+			case 'Point': style = selectedIcon; break;
 			default: style = null; break;
 		}
 
-		if (style != null) mapData.overrideStyle(next, style);
+		mapData.overrideStyle(next, style);
 	}
-	if (last && last !== next) mapData.revertStyle(next);
 }
 
 export default function observeClickAndStore() {
-	const unsub = observeStore(store, selectedTaskObject,	updateSelectedItem);
+	const unsub = observeStore(store, selectedLocation,	updateSelectedItem);
 	const onclick = google.maps.event.addListener(mapData, 'click', onClick);
 
 	return function unsubscribe() {
