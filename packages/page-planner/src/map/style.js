@@ -3,6 +3,8 @@ import { data } from './map.js';
 
 const { normal } = fieldStyle;
 
-data.setStyle(normal);
+data.setStyle(feature => Object.assign({}, normal, {
+	title: feature.getProperty('name'),
+}));
 
 export default normal;

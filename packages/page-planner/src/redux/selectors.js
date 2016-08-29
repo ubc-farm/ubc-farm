@@ -22,3 +22,7 @@ export const selectedEquipment = createSelector(
 	task => (task ? task.equipmentUsage : [])
 );
 
+export const selectedLocation = createSelector(
+	selectedTaskObject,
+	task => (task ? task.locationId : undefined)
+);
