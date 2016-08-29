@@ -9,7 +9,9 @@
 	"private": true,
 	"dependencies": {
 		"hapi": "15.0.2",
-		"h2o2": "5.1.1",
+		"h2o2": "5.1.1"
+	},
+	"peerDependencies": {
 		"ubc-farm-server-api": "../api",
 		"ubc-farm-server-static": "../static",
 		"ubc-farm-server-views": "../views"

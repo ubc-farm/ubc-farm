@@ -1,4 +1,4 @@
-import { config } from 'ubc-farm-server-static/package.json';
+import { config } from '../../static/package.json';
 import setOptions from './options.js';
 
 const proxy = setOptions(config);
