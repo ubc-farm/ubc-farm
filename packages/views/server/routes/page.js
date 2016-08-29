@@ -34,9 +34,25 @@ export default Promise.all([
 	pageViews('calendar'),
 	pageViews('directory'),
 	pageViews('fields'),
-	pageViews('invoice', 'finances/sales'),
-	pageViews('map-editor', 'fields/editor'),
-	pageViews('add-items', 'finances/add-item'),
+	pageViews('invoice', 'finances/sales', {
+		breadcrumbs: [
+			{ title: 'Finances', href: '/finances' },
+			{ title: 'Sales', href: '#' },
+		],
+	}),
+	pageViews('map-editor', 'fields/editor', {
+		breadcrumbs: [
+			{ title: 'Fields', href: '/fields' },
+			{ title: 'Editor', href: '#' },
+		],
+	}),
+	pageViews('add-items', 'finances/items/add', {
+		breadcrumbs: [
+			{ title: 'Finances', href: '/finances' },
+			{ title: 'Items', href: '/items' },
+			{ title: 'Add', href: '#' },
+		],
+	}),
 	pageViews('planner', 'calendar/planner', {
 		breadcrumbs: [
 			{ title: 'Calendar', href: '/calendar' },
