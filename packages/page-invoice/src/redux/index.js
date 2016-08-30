@@ -1,9 +1,14 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import invoiceApp from './reducer.js';
+
+import { reducer as form } from 'redux-form';
+import selected from './reducer-selected.js';
 
 export default createStore(
-	invoiceApp,
+	combineReducers({
+		selected,
+		form,
+	}),
 	undefined,
 	compose(
 		applyMiddleware(thunk),

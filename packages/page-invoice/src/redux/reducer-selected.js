@@ -1,35 +1,18 @@
-import {
-	TOGGLE_SELECTION,
-	SET_SELECTION,
-	CLEAR_SELECTION,
-	EVERYTHING_SELECTION,
-} from './actions.js';
+import { ADD_SELECTION, REMOVE_SELECTION } from './actions/index.js';
 
-export default function selected(state = new Set(), action, dataState) {
+/**
+ * Tracks selected rows as a set of indexes
+ */
+export default function selected(state = new Set(), action) {
 	switch (action.type) {
-		case TOGGLE_SELECTION: {
-			const id = action.payload;
-			const newSelected = new Set(state);
+		case ADD_SELECTION:
+			return new Set([...state, ...action.payload]);
 
-			if (newSelected.has(id)) newSelected.delete(id);
-			else newSelected.add(id);
-
-			return newSelected;
+		case REMOVE_SELECTION: {
+			const nextState = new Set(state);
+			for (const id of action.payload) nextState.delete(id);
+			return nextState;
 		}
-		case SET_SELECTION: {
-			const id = action.meta;
-			const status = action.payload;
-			const newSelected = new Set(state);
-
-			if (status) newSelected.add(id);
-			else newSelected.delete(id);
-
-			return newSelected;
-		}
-		case CLEAR_SELECTION:
-			return new Set();
-		case EVERYTHING_SELECTION:
-			return new Set(dataState.keys());
 
 		default: return state;
 	}
