@@ -8,14 +8,14 @@ export default {
 	format: 'iife',
 	plugins: [
 		babel({
-			plugins: ['transform-react-jsx', 'external-helpers-2'],
+			plugins: ['transform-react-jsx', 'external-helpers'],
 		}),
 		nodeResolve({ jsnext: true }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
 		commonjs({
-			exclude: 'node_modules/lodash-es/**',
+			exclude: ['../node_modules/lodash-es/**', 'node_modules/lodash-es/**'],
 		}),
 	],
 	external: ['react', 'react-dom', 'tape'],
