@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { formValueSelector } from 'redux-form';
-import { Money } from 'ubc-farm-utils';
+import Money from 'ubc-farm-money';
 import { priceIntSelector } from './selectors-row.js';
 
 export * from './selectors-row.js';
@@ -39,9 +39,11 @@ export const subtotalIntSelector = createSelector(
 	}
 );
 
+export const vatSelector = () => 0.04; // invoice('vat');
+
 export const totalIntSelector = createSelector(
 	subtotalIntSelector,
-	() => 0.04,
+	vatSelector,
 	(subtotalInt, VAT) => subtotalInt * (VAT + 1)
 );
 
@@ -49,6 +51,7 @@ export const amountPaidIntSelector = createSelector(
 	invoice('amountPaid'),
 	amount => new Money(amount).toInteger()
 );
+
 
 export const balanceDueIntSelector = createSelector(
 	totalIntSelector,
