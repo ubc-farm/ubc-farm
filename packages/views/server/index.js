@@ -5,7 +5,7 @@ import Handlebars from 'handlebars';
 import {
 	partials as partialsPath,
 	helpers as helpersPath,
-} from 'ubc-farm-views-utils';
+} from 'ubc-farm-views-partials';
 import packagePages from './routes/page.js';
 import homepage from './routes/home.js';
 

@@ -9,7 +9,7 @@ export default {
 	],
 	external: [
 		'hapi', 'vision', 'handlebars', 'boom',
-		'ubc-farm-views-utils', 'path', 'fs',
+		'ubc-farm-views-partials', 'path', 'fs',
 	],
 	plugins: [
 		json(),
