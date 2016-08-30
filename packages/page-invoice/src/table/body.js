@@ -1,22 +1,39 @@
+import { createElement, cloneElement, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Body } from 'ubc-farm-table-base';
 
 import {
-	columnSelector,
-	selectedSelector,
-	dataSelector,
+	selected as selectedSelector,
+	sortMapSelector,
 } from '../redux/selectors.js';
-import { toggleRowSelection } from '../redux/actions.js';
+/** @jsx createElement */
+
+const renderRows = ({ fields, sortMap, children }) => {
+	const fieldNames = new Map(fields.map((name, index) => [index, name]));
+
+	const rows = [];
+	for (const rowIndex of sortMap.values()) {
+		const fieldName = fieldNames.get(rowIndex);
+
+		const row = cloneElement(children, {
+			member: fieldName,
+			index: rowIndex,
+			key: rowIndex,
+		});
+		rows.push(row);
+	}
+
+	return <tbody>{rows}</tbody>;
+};
+
+renderRows.propTypes = {
+	fields: PropTypes.any.isRequired,
+	sortMap: PropTypes.instanceOf(Map),
+	children: PropTypes.element.isRequired,
+};
 
 export default connect(
 	state => ({
-		columns: columnSelector(state),
+		sortMap: sortMapSelector(state),
 		selected: selectedSelector(state),
-		data: dataSelector(state),
-	}),
-	dispatch => ({
-		onSelect(rowKey) {
-			dispatch(toggleRowSelection(rowKey));
-		},
 	})
-)(Body);
+)(renderRows);

@@ -2,7 +2,7 @@ import {
 	selected,
 	selectedLength,
 	rowsLength,
-} from './selectors.js';
+} from '../selectors.js';
 
 export const ADD_SELECTION = 'ADD_SELECTION';
 export const REMOVE_SELECTION = 'REMOVE_SELECTION';
