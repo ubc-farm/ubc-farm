@@ -8,7 +8,7 @@ export default {
 	format: 'iife',
 	plugins: [
 		babel({
-			plugins: ['transform-react-jsx', 'external-helpers-2'],
+			plugins: ['transform-react-jsx', 'external-helpers'],
 		}),
 		nodeResolve({ jsnext: true }),
 		replace({
