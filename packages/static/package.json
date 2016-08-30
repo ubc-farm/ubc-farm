@@ -19,7 +19,7 @@
     "tape": "^4.6.0",
     "ubc-farm-css": "ubc-farm/css-core",
     "ubc-farm-utils": "ubc-farm/utils",
-    "ubc-farm-views-utils": "ubc-farm/views-utils"
+    "ubc-farm-views-partials": "ubc-farm/views-partials"
   },
   "scripts": {
     "test": "rollup -i _tests/find-folder.spec.js -f cjs -e path,fs,tape | node",
