@@ -5,6 +5,8 @@ export default function startServer(server, name) {
 
 	return server.start().then(() => {
 		console.log(`[+] ${name} server running at: ${server.info.uri}`);
+
+		process.stdin.on('data', () => server.stop());
 	}).catch(err => {
 		console.error(`[X] ${name} server issue: ${err}`);
 	});
