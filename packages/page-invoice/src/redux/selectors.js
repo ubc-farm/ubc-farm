@@ -1,6 +1,9 @@
 import { createSelector } from 'reselect';
 import { formValueSelector } from 'redux-form';
 import { Money } from 'ubc-farm-utils';
+import { priceIntSelector } from './selectors-row.js';
+
+export * from './selectors-row.js';
 
 const invoice = formValueSelector('invoice');
 
@@ -10,32 +13,45 @@ export const selectedLength = createSelector(
 	set => set.size
 );
 
+export const sortInfo = state => state.sortInfo;
+export const sortMapSelector = createSelector(
+	sortInfo,
+	sort => sort.map
+);
+
 export const rowsSelector = invoice('rows');
 export const rowsLength = createSelector(
 	rowsSelector,
 	rows => rows.length
 );
 
-export const subtotalSelector = createSelector(
+export const subtotalIntSelector = createSelector(
 	rowsSelector,
-	rows => Money.fromInteger(
-		rows.reduce((totalInt = 0, { unitCost, quantity }) => {
-			const unitCostInt = new Money(unitCost).toInteger();
-			const rowPrice = quantity * unitCostInt;
+	(rows) => {
+		let subtotalInt = 0;
+		for (let i = 0; i < rows.length; i++) {
+			const rowSelector = invoice(`rows[${i}]`);
+			const priceInt = priceIntSelector(rowSelector(rows[i]));
 
-			if (Number.isNaN(rowPrice)) return totalInt;
-			return totalInt + rowPrice;
-		})
-	)
+			if (!Number.isNaN(priceInt)) subtotalInt += priceInt;
+		}
+		return subtotalInt;
+	}
 );
 
-const VAT = 0.04;
-export const totalSelector = createSelector(
-	subtotalSelector,
-	subtotal => {
-		const subtotalInt = subtotal.toInteger();
-		const totalInt = subtotalInt * (VAT + 1);
+export const totalIntSelector = createSelector(
+	subtotalIntSelector,
+	() => 0.04,
+	(subtotalInt, VAT) => subtotalInt * (VAT + 1)
+);
 
-		return Money.fromInteger(totalInt);
-	}
+export const amountPaidIntSelector = createSelector(
+	invoice('amountPaid'),
+	amount => new Money(amount).toInteger()
+);
+
+export const balanceDueIntSelector = createSelector(
+	totalIntSelector,
+	amountPaidIntSelector,
+	(totalInt, amountPaidInt) => totalInt - amountPaidInt
 );
