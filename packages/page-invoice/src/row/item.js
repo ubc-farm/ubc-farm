@@ -1,6 +1,7 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Field, autofill } from 'redux-form';
 import { connect } from 'react-redux';
+import { reSortOnChange } from '../redux/actions/index.js';
 
 let ItemInput = ({ input, list }) => (
 	<input {...input} spellCheck list={list} />
@@ -13,7 +14,7 @@ ItemInput.propTypes = {
 
 ItemInput = connect(
 	state => ({
-		list: undefined, // TODO: Get ID from store
+		list: '', // TODO: Get ID from store
 	}),
 	(dispatch, { input, parent }) => ({
 		onBlur(e) {
@@ -35,7 +36,16 @@ ItemInput = connect(
 
 			input.onBlur(value);
 		},
-	})
+		onChange(e) {
+			input.onChange(e);
+			dispatch(reSortOnChange(input.name));
+		},
+	}),
+	(stateProps, dispatchProps, ownProps) => {
+		const result = Object.assign({}, stateProps, ownProps);
+		result.input = Object.assign({}, result.input, dispatchProps);
+		return result;
+	}
 )(ItemInput);
 
 

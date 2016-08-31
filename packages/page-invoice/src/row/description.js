@@ -1,14 +1,15 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Field } from 'redux-form';
+import input from './input.js';
 
 const DescriptionField = ({ parent }) => (
-	<th scope="row">
+	<td>
 		<Field
 			name={`${parent}.description`}
-			component="input"
+			component={input}
 			spellCheck
 		/>
-	</th>
+	</td>
 );
 
 DescriptionField.propTypes = { parent: PropTypes.string.isRequired };

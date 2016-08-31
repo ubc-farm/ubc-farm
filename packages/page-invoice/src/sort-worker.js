@@ -20,12 +20,24 @@ function compare([, a], [, b]) {
  * the data map.
  */
 function buildSortMap(data, sortKey, reverse) {
-	let columnData = data.map((rowData, index) => [index, rowData[sortKey]]);
-
-	if (sortKey === 'unitCost') {
-		columnData = columnData.map(
-			([index, value]) => [index, new Money(value).toInteger()]
-		);
+	let columnData;
+	switch (sortKey) {
+		case 'unitCost':
+			columnData = data.map(
+				({ unitCost }, index) => [index, new Money(unitCost).toInteger()]
+			);
+			break;
+		case 'price':
+			columnData = data.map(({ unitCost, quantity }, index) => {
+				const unitCostInt = new Money(unitCost).toInteger();
+				return [index, unitCostInt * quantity];
+			});
+			break;
+		case undefined:	case null:
+			return Array.from(data.keys());
+		default:
+			columnData = data.map((rowData, index) => [index, rowData[sortKey]]);
+			break;
 	}
 
 	const sortMap = columnData.sort(compare).map(([rowIndex]) => rowIndex);

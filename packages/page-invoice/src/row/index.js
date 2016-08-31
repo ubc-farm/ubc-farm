@@ -23,4 +23,4 @@ RowContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 };
 
-export default () => <RenderRows><RowContainer /></RenderRows>;
+export default props => <RenderRows {...props} component={RowContainer} />;

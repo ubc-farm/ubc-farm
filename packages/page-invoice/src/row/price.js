@@ -14,7 +14,7 @@ PriceField.propTypes = { centsValue: PropTypes.number };
 const invoiceSelector = formValueSelector('invoice');
 const ConnectedPrice = connect(
 	(state, { parent }) => {
-		const rowData = invoiceSelector(parent);
+		const rowData = invoiceSelector(state, parent);
 
 		const priceInt = priceIntSelector(rowData);
 		return { centsValue: priceInt };
