@@ -5,7 +5,11 @@ import { priceIntSelector } from './selectors-row.js';
 
 export * from './selectors-row.js';
 
-const invoice = formValueSelector('invoice');
+export const sortInfo = state => state.sortInfo;
+export const sortMapSelector = createSelector(
+	sortInfo,
+	sort => sort.map
+);
 
 export const selected = state => state.selected;
 export const selectedLength = createSelector(
@@ -13,16 +17,18 @@ export const selectedLength = createSelector(
 	set => set.size
 );
 
-export const sortInfo = state => state.sortInfo;
-export const sortMapSelector = createSelector(
-	sortInfo,
-	sort => sort.map
-);
+const invoice = formValueSelector('invoice');
 
 export const rowsSelector = invoice('rows');
 export const rowsLength = createSelector(
 	rowsSelector,
 	rows => rows.length
+);
+
+export const allSelected = createSelector(
+	selectedLength,
+	rowsLength,
+	(selectedCount, rowCount) => selectedCount === rowCount
 );
 
 export const subtotalIntSelector = createSelector(

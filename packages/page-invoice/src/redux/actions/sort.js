@@ -46,7 +46,18 @@ export function calculateSortMap() {
 }
 
 export function changeSortTarget(targetKey) {
-	return dispatch => {
+	return (dispatch, getState) => {
+		const { key } = sortInfo(getState());
+
+		if (key === targetKey) {
+			const { dir, map } = sortInfo(getState());
+
+			if (dir === 'down') dispatch(setSortDir('up'));
+			else dispatch(setSortDir('down'));
+
+			return Promise.resolve(map);
+		}
+
 		dispatch(setSortDir('down'));
 		dispatch(setSortKey(targetKey));
 		return dispatch(calculateSortMap());
