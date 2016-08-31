@@ -7,23 +7,15 @@ import {
 } from '../redux/selectors.js';
 /** @jsx createElement */
 
-const renderRows = ({ fields, sortMap, component }) => {
-	const fieldNames = new Map(fields.map((name, index) => [index, name]));
-
-	const rows = [];
-	for (const rowIndex of sortMap) {
-		const fieldName = fieldNames.get(rowIndex);
-
-		const row = createElement(component, {
-			member: fieldName,
-			index: rowIndex,
-			key: rowIndex,
-		});
-		rows.push(row);
-	}
-
-	return <tbody>{rows}</tbody>;
-};
+const renderRows = ({ fields, component }) => (
+	<tbody>
+		{fields.map((name, index) => createElement(component, {
+			member: name,
+			index,
+			key: index,
+		}))}
+	</tbody>
+)
 
 renderRows.propTypes = {
 	fields: PropTypes.any.isRequired,
