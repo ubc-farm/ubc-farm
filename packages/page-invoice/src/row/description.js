@@ -8,6 +8,7 @@ const DescriptionField = ({ parent }) => (
 			name={`${parent}.description`}
 			component={input}
 			spellCheck
+			className="invoice-table-input"
 		/>
 	</td>
 );

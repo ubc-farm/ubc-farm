@@ -3,15 +3,14 @@ import { connect } from 'react-redux';
 import { selectedLength } from '../redux/selectors.js';
 
 const Switch = ({ unselectedElement, selectedElement, showSelected }) => {
-	const className = 'table-actions table-actions-standard';
-	let unselected;
-	let selected;
+	let unselected = 'table-actions table-actions-standard';
+	let selected = 'table-actions table-actions-selected';
 	if (showSelected) {
-		selected = `${className} visible`;
-		unselected = `${className} hidden`;
+		selected = `${selected} visible`;
+		unselected = `${unselected} hidden`;
 	} else {
-		unselected = `${className} visible`;
-		selected = `${className} hidden`;
+		unselected = `${unselected} visible`;
+		selected = `${selected} hidden`;
 	}
 
 	return (

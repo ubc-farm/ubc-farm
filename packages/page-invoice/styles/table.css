@@ -1,3 +1,16 @@
+.invoice-table {
+	min-width: 58em;
+	width: 100%;
+}
+
 .input-money, .input-quantity {
 	width: 5em;
+}
+.invoice-table-input, .input-money {
+	border: 0;
+	border-radius: 0;
+	border-bottom: 1px dashed black;
+}
+.invoice-table-input:focus, .input-money:focus {
+	border-bottom-style: solid;
 }

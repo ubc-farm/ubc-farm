@@ -40,19 +40,6 @@ label.details-row {
 	background: lightgray;
 }
 
-.invoice-table-input {
-	border-radius: 0;
-	border-bottom: 1px dotted;
-}
-.invoice-table-input:focus {
-	border-bottom-style: solid;
-}
-
-.invoice-table {
-	min-width: 58em;
-	width: 100%;
-}
-
 .table-actions-container {
 	position: relative;
 	height: 2.25em;
@@ -67,7 +54,6 @@ label.details-row {
 	transition: opacity 0.1s ease, visibility 0.1s ease;
 	will-change: opacity;
 }
-
 .table-actions-selected {
 	background: rgba(59, 166, 72, 0.15);
 }
@@ -84,3 +70,7 @@ label.details-row {
 }
 .total-row:hover {background: transparent}
 .total-row-dark:hover {background: lightgray}
+
+.detail-date {
+	width: calc(100% - 1em - 2px);
+}

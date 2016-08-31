@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { reSortOnChange } from '../redux/actions/index.js';
 
 let ItemInput = ({ input, list }) => (
-	<input {...input} spellCheck list={list} />
+	<input {...input} spellCheck list={list} className="invoice-table-input" />
 );
 ItemInput.propTypes = {
 	input: PropTypes.object.isRequired,

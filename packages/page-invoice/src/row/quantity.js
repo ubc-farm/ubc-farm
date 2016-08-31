@@ -8,7 +8,7 @@ const QuantityField = ({ parent }) => (
 			name={`${parent}.quantity`}
 			component={input}
 			type="number" step="any"
-			className="input-quantity"
+			className="invoice-table-input input-quantity"
 		/>
 	</td>
 );
