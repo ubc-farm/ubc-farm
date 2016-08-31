@@ -29,11 +29,9 @@
 			</p>
 
 			<fieldset class='internal-data right'>
-				<!-- React Node -->
 				<label id='delivery-date-input'>
 					Delivery Date
-					<!-- TODO -->
-					<input type='text'/>
+					<input type="date" />
 				</label>
 
 				<div class='row'>
@@ -68,14 +66,13 @@
 						class='detail-cell'
 						placeholder='9584107'
 						min='0'
+						form="invoice"
 					/>
 				</label>
 
 				<label class='details-row'>
 					<span class='detail-cell detail-header'>Date:</span>
-					<!-- React Node -->
-					<!-- TODO -->
-					<input type='text'/>
+					<input type='date' form="invoice" name="date"/>
 				</label>
 
 				<label class='details-row'>
@@ -83,8 +80,7 @@
 						Balance Due (CAD):
 					</span>
 					<!-- React Node -->
-					<!-- TODO -->
-					<span class='detail-cell'/>
+					<span class='detail-cell' id="balance-due-indicator"/>
 				</label>
 			</div>
 		</div>
