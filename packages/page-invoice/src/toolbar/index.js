@@ -8,8 +8,8 @@ export default () => (
 	<Switch
 		unselectedElement={<AddButton />}
 		selectedElement={[
-			<Counter />,
-			<DeleteButton />,
+			<Counter key="counter" />,
+			<DeleteButton key="delete" />,
 		]}
 	/>
 );
