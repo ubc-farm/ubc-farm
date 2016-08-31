@@ -23,19 +23,10 @@ export function updateSortMap(payload, isError = false) {
 
 const sorter = new PromiseWorker('/js/page/invoice/sort-worker.js');
 export function calculateSortMap() {
-	let lastDir = null;
-	let lastKey = null;
-
 	return (dispatch, getState) => {
 		const { dir, key } = sortInfo(getState());
-		if (dir === lastDir && key === lastKey) {
-			return Promise.resolve(sortInfo(getState()).map);
-		}
-
-		lastDir = dir;
-		lastKey = key;
-
 		const data = rowsSelector(getState());
+
 		return sorter.postMessage({ dir, key, data })
 			.then(map => {
 				dispatch(updateSortMap(map, false));
@@ -50,16 +41,26 @@ export function changeSortTarget(targetKey) {
 		const { key } = sortInfo(getState());
 
 		if (key === targetKey) {
-			const { dir, map } = sortInfo(getState());
+			const { dir } = sortInfo(getState());
 
 			if (dir === 'down') dispatch(setSortDir('up'));
 			else dispatch(setSortDir('down'));
-
-			return Promise.resolve(map);
+		} else {
+			dispatch(setSortDir('down'));
+			dispatch(setSortKey(targetKey));
 		}
 
-		dispatch(setSortDir('down'));
-		dispatch(setSortKey(targetKey));
 		return dispatch(calculateSortMap());
+	};
+}
+
+export function reSortOnChange(name) {
+	return (dispatch, getState) => {
+		const { key } = sortInfo(getState());
+		const column = name.substring(name.lastIndexOf('.') + 1);
+
+		if (column !== key) return;
+
+		dispatch(calculateSortMap());
 	};
 }

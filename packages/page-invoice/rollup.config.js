@@ -9,13 +9,18 @@ export default {
 	plugins: [
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers'],
-			exclude: ['node_modules/**', '../node_modules/**'],
+			include: ['node_modules/ubc-farm-inputs/**', 'src/**'],
 		}),
 		nodeResolve({ jsnext: true }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs(),
+		commonjs({
+			exclude: [
+				'node_modules/lodash-es/**', '../node_modules/lodash-es/**',
+				'../node_modules/redux-form/**',
+			],
+		}),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {
