@@ -5,7 +5,7 @@ import { subtotalIntSelector } from '../redux/selectors.js';
 
 const SubtotalRow = ({ children }) => (
 	<tr className="total-row">
-		<th scope="row" className="align-right" colSpan={4}>
+		<th scope="row" className="align-right" colSpan={5}>
 			Subtotal
 		</th>
 

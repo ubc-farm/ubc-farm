@@ -5,7 +5,7 @@ import { totalIntSelector } from '../redux/selectors.js';
 
 const TotalRow = ({ children }) => (
 	<tr className="total-row">
-		<th scope="row" className="align-right" colSpan={4}>
+		<th scope="row" className="align-right" colSpan={5}>
 			Total
 		</th>
 

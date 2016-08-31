@@ -14,7 +14,7 @@ const HeaderCheckbox = props => (
 export default connect(
 	state => ({
 		checked: allSelected(state),
-		indeterminate: selectedLength(state) > 0,
+		indeterminate: !allSelected(state) && selectedLength(state) > 0,
 	}),
 	dispatch => ({
 		onChange() { dispatch(toggleSelectAll());	},

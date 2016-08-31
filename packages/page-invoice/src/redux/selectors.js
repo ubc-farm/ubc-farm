@@ -19,10 +19,10 @@ export const selectedLength = createSelector(
 
 const invoice = formValueSelector('invoice');
 
-export const rowsSelector = invoice('rows');
+export const rowsSelector = state => invoice(state, 'rows');
 export const rowsLength = createSelector(
 	rowsSelector,
-	rows => rows.length
+	rows => (rows ? rows.length : 0)
 );
 
 export const allSelected = createSelector(
@@ -35,9 +35,11 @@ export const subtotalIntSelector = createSelector(
 	rowsSelector,
 	(rows) => {
 		let subtotalInt = 0;
+		if (!rows) return subtotalInt;
+
 		for (let i = 0; i < rows.length; i++) {
-			const rowSelector = invoice(`rows[${i}]`);
-			const priceInt = priceIntSelector(rowSelector(rows[i]));
+			// const rowSelector = invoice(state, `rows[${i}]`);
+			const priceInt = priceIntSelector(rows[i]);
 
 			if (!Number.isNaN(priceInt)) subtotalInt += priceInt;
 		}
@@ -54,7 +56,7 @@ export const totalIntSelector = createSelector(
 );
 
 export const amountPaidIntSelector = createSelector(
-	invoice('amountPaid'),
+	state => invoice(state, 'amountPaid'),
 	amount => new Money(amount).toInteger()
 );
 

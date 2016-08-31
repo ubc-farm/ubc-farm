@@ -1,4 +1,4 @@
-import { createElement, cloneElement, PropTypes } from 'react';
+import { createElement, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -7,14 +7,14 @@ import {
 } from '../redux/selectors.js';
 /** @jsx createElement */
 
-const renderRows = ({ fields, sortMap, children }) => {
+const renderRows = ({ fields, sortMap, component }) => {
 	const fieldNames = new Map(fields.map((name, index) => [index, name]));
 
 	const rows = [];
-	for (const rowIndex of sortMap.values()) {
+	for (const rowIndex of sortMap) {
 		const fieldName = fieldNames.get(rowIndex);
 
-		const row = cloneElement(children, {
+		const row = createElement(component, {
 			member: fieldName,
 			index: rowIndex,
 			key: rowIndex,
@@ -27,8 +27,8 @@ const renderRows = ({ fields, sortMap, children }) => {
 
 renderRows.propTypes = {
 	fields: PropTypes.any.isRequired,
-	sortMap: PropTypes.instanceOf(Map),
-	children: PropTypes.element.isRequired,
+	sortMap: PropTypes.arrayOf(PropTypes.number),
+	component: PropTypes.func.isRequired,
 };
 
 export default connect(
