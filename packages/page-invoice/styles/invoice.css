@@ -49,6 +49,7 @@ label.details-row {
 }
 
 .invoice-table {
+	min-width: 58em;
 	width: 100%;
 }
 
