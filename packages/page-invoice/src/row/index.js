@@ -6,8 +6,9 @@ import DescriptionField from './description.js';
 import UnitCostField from './unitcost.js';
 import QuantityField from './quantity.js';
 import PriceDisplay from './price.js';
+import RenderRows from './body.js';
 
-const RowContainer = ({ member, index }) => (
+export const RowContainer = ({ member, index }) => (
 	<Row parentIndex={index}>
 		<ItemField parent={member} />
 		<DescriptionField parent={member} />
@@ -22,4 +23,4 @@ RowContainer.propTypes = {
 	index: PropTypes.number.isRequired,
 };
 
-export default RowContainer;
+export default () => <RenderRows><RowContainer /></RenderRows>;
