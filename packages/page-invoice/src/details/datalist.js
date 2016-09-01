@@ -16,6 +16,6 @@ DataList.propTypes = {
 export default connect(
 	state => ({
 		id: datalistID(state),
-		data: datalistValues(state),
+		options: datalistValues(state),
 	})
 )(DataList);
