@@ -18,7 +18,7 @@
 	{{> app-banner}}
 	{{> section-banner text="[Finances](/finances) > [Sales](#)"}}
 
-	<form class='invoice'>
+	<main class='invoice'>
 		<div class='row'>
 			<p class='farm-address left'>
 				UBC Farm<br/>
@@ -31,14 +31,14 @@
 			<fieldset class='internal-data right'>
 				<label id='delivery-date-input'>
 					Delivery Date
-					<input type="date" />
+					<input type="date" name="deliveryDate" form="invoice" />
 				</label>
 
 				<div class='row'>
 
 					<div class='left channel'>
 						<label htmlFor='channel'>Channel</label>
-						<select id='channel' name='channel'>
+						<select id='channel' name='channel' form="invoice">
 							<option value='csa'>CSA</option>
 							<option value='restaurants'>Restaurants</option>
 						</select>
@@ -46,7 +46,7 @@
 
 					<div class='right notes'>
 						<label htmlFor='notes'>Notes</label>
-						<textarea id='notes' name='notes'></textarea>
+						<textarea id='notes' name='notes' form="invoice"></textarea>
 					</div>
 
 				</div>
@@ -91,6 +91,6 @@
 
 		<!-- React Node -->
 		<div id='invoice-table-node'></div>
-	</form>
+	</main>
 </body>
 </html>
