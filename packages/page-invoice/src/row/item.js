@@ -36,10 +36,6 @@ ItemInput = connect(
 
 			input.onBlur(value);
 		},
-		onChange(e) {
-			input.onChange(e);
-			dispatch(reSortOnChange(input.name));
-		},
 	}),
 	(stateProps, dispatchProps, ownProps) => {
 		const result = Object.assign({}, stateProps, ownProps);

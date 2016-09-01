@@ -1,7 +1,7 @@
 import { defaultMemoize } from 'reselect';
-import { arraySwap } from 'redux-form';
+import { formValueSelector, arraySwap, blur, focus } from 'redux-form';
 import Money from 'ubc-farm-money';
-import { sortInfo, rowsSelector, rowsLength } from '../selectors.js';
+import { sortInfo, rowsLength } from '../selectors.js';
 
 function compareString(a, b) {
 	return String(a).localeCompare(b);
@@ -24,7 +24,9 @@ const compare = defaultMemoize(column => {
 	}
 });
 
-export function sortRows() {
+const invoice = formValueSelector('invoice');
+
+export function shellSortRows(swapAction) {
 	return (dispatch, getState) => {
 		const column = sortInfo(getState()).key;
 		const reverse = sortInfo(getState()).dir === 'up';
@@ -35,12 +37,12 @@ export function sortRows() {
 		while (h > 0) {
 			for (let i = h; i < length; i++) {
 				for (let j = i; j > 0; j -= h) {
-					const a = rowsSelector(getState())[j][column];
-					const b = rowsSelector(getState())[j - h][column];
+					const a = invoice(getState(), `rows[${j}].${column}`);
+					const b = invoice(getState(), `rows[${j - h}].${column}`);
 
 					let comparison = compare(column)(a, b);
 					if (reverse) comparison *= -1;
-					if (comparison < 0) dispatch(arraySwap('invoice', 'rows', j, j - h));
+					if (comparison < 0) dispatch(swapAction(j, j - h));
 				}
 			}
 
@@ -49,15 +51,6 @@ export function sortRows() {
 	};
 }
 
-const getColumnName = defaultMemoize(text => {
-	const index = text.lastIndexOf('.');
-	return index === -1 ? text : text.substr(index + 1);
-});
-
-export function reSortOnChange(inputName) {
-	return (dispatch, getState) => {
-		if (sortInfo(getState()) === getColumnName(inputName)) {
-			dispatch(sortRows());
-		}
-	};
+export function sortRows() {
+	return shellSortRows((a, b) => arraySwap('invoice', 'rows', a, b));
 }
