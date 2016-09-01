@@ -19,6 +19,8 @@ SubtotalRow.propTypes = { children: PropTypes.node };
 
 export default connect(
 	state => ({
-		children: Money.fromInteger(subtotalIntSelector(state)).toString(),
+		children: Money
+			.fromInteger(subtotalIntSelector(state))
+			.toString({ parentheses: true }),
 	})
 )(SubtotalRow);

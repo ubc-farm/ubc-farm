@@ -19,6 +19,8 @@ TotalRow.propTypes = { children: PropTypes.node };
 
 export default connect(
 	state => ({
-		children: Money.fromInteger(totalIntSelector(state)).toString(),
+		children: Money
+			.fromInteger(totalIntSelector(state))
+			.toString({ parentheses: true }),
 	})
 )(TotalRow);

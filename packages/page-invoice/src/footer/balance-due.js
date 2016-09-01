@@ -19,6 +19,8 @@ BalanceDueRow.propTypes = { children: PropTypes.node };
 
 export default connect(
 	state => ({
-		children: Money.fromInteger(balanceDueIntSelector(state)).toString(),
+		children: Money
+			.fromInteger(balanceDueIntSelector(state))
+			.toString({ parentheses: true }),
 	})
 )(BalanceDueRow);

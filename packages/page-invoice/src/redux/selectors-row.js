@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { Money } from 'ubc-farm-utils';
+import Money from 'ubc-farm-money';
 
 export const unitCostIntSelector = createSelector(
 	rowState => rowState.unitCost,

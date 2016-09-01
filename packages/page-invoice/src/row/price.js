@@ -6,7 +6,7 @@ import { priceIntSelector } from '../redux/selectors.js';
 
 const PriceField = ({ centsValue }) => (
 	<td className="align-right">
-		{Money.fromInteger(centsValue).toString()}
+		{Money.fromInteger(centsValue).toString({ parentheses: true })}
 	</td>
 );
 PriceField.propTypes = { centsValue: PropTypes.number };

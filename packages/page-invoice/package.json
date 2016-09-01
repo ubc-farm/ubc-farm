@@ -14,7 +14,6 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
-    "promise-worker": "github:notwoods/promise-worker",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-form": "6.0.1",
@@ -31,8 +30,7 @@
     "ubc-farm-utils": "ubc-farm/utils"
   },
   "scripts": {
-    "prepublish:index": "rollup -c -o dist/index.iife.js src/index.js",
-    "prepublish": "npm run prepublish:index"
+    "prepublish": "rollup -c -o dist/index.iife.js src/index.js"
   },
   "files": [
     "dist",
