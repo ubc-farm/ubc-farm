@@ -6,7 +6,7 @@ import { changeSortTarget } from '../redux/actions/index.js';
 
 const iconClass = 'material-icons md-18 table-sort-icon';
 
-const HeaderCell = props => {
+function HeaderCell(props) {
 	const { children, title, active, dir, align = 'left' } = props;
 
 	const iconType = dir === 'up' ? 'arrow_upward' : 'arrow_downward';
@@ -32,7 +32,7 @@ const HeaderCell = props => {
 			</span>
 		</th>
 	);
-};
+}
 HeaderCell.propTypes = {
 	children: PropTypes.node,
 	title: PropTypes.string,

@@ -1,7 +1,6 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Field, autofill } from 'redux-form';
 import { connect } from 'react-redux';
-import { reSortOnChange } from '../redux/actions/index.js';
 
 let ItemInput = ({ input, list }) => (
 	<input {...input} spellCheck list={list} className="invoice-table-input" />

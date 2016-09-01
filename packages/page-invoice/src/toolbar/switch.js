@@ -2,7 +2,7 @@ import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { connect } from 'react-redux';
 import { selectedLength } from '../redux/selectors.js';
 
-const Switch = ({ unselectedElement, selectedElement, showSelected }) => {
+function Switch({ unselectedElement, selectedElement, showSelected }) {
 	let unselected = 'table-actions table-actions-standard';
 	let selected = 'table-actions table-actions-selected';
 	if (showSelected) {
@@ -19,7 +19,7 @@ const Switch = ({ unselectedElement, selectedElement, showSelected }) => {
 			<section className={selected}>{selectedElement}</section>
 		</caption>
 	);
-};
+}
 
 Switch.propTypes = {
 	unselectedElement: PropTypes.node,

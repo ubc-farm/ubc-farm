@@ -15,7 +15,7 @@ const renderRows = ({ fields, component }) => (
 			key: index,
 		}))}
 	</tbody>
-)
+);
 
 renderRows.propTypes = {
 	fields: PropTypes.any.isRequired,
