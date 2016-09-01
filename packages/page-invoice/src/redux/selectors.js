@@ -66,3 +66,6 @@ export const balanceDueIntSelector = createSelector(
 	amountPaidIntSelector,
 	(totalInt, amountPaidInt) => totalInt - amountPaidInt
 );
+
+export const datalistID = state => state.itemlist.list;
+export const datalistValues = state => state.itemlist.data;
