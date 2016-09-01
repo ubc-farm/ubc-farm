@@ -1,19 +1,30 @@
-import { arrayRemove, arrayPush } from 'redux-form';
-import { selected } from '../selectors.js';
-import { calculateSortMap } from './index.js';
+import { arrayRemove, arrayPush, arrayRemoveAll } from 'redux-form';
+import { selected, allSelected } from '../selectors.js';
+import { sortRows, selectNone } from './index.js';
 
 export function addBlankRow() {
 	return dispatch => {
 		dispatch(arrayPush('invoice', 'rows', {}));
-		dispatch(calculateSortMap());
+		dispatch(sortRows());
 	};
 }
 
 export function deleteSelectedRows() {
 	return (dispatch, getState) => {
-		for (const index of selected(getState())) {
-			dispatch(arrayRemove('invoice', 'rows', index));
+		if (allSelected(getState())) {
+			dispatch(arrayRemoveAll());
+			dispatch(selectNone());
+			return;
 		}
-		dispatch(calculateSortMap());
+
+		let deletedCount = 0;
+		const selectedList = Array.from(selected(getState())).sort((a, b) => b - a);
+		for (const index of selectedList) {
+			dispatch(arrayRemove('invoice', 'rows', index - deletedCount));
+			deletedCount++;
+		}
+
+		dispatch(selectNone());
+		dispatch(sortRows());
 	};
 }

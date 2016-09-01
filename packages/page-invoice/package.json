@@ -32,8 +32,7 @@
   },
   "scripts": {
     "prepublish:index": "rollup -c -o dist/index.iife.js src/index.js",
-    "prepublish:worker": "rollup -c -o dist/sort-worker.js src/sort-worker.js",
-    "prepublish": "npm run prepublish:index && npm run prepublish:worker"
+    "prepublish": "npm run prepublish:index"
   },
   "files": [
     "dist",
