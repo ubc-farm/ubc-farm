@@ -1,3 +1,5 @@
+import { centsToString, floatToCents, stringToCents } from './index.js';
+
 /**
  * A class used to represent money. Internally the money value is stored
  * as cents, so most of the time it will be an integer which can be used
@@ -20,41 +22,10 @@ export default class Money {
 		if (!(thing instanceof this.constructor)) {
 			switch (typeof thing) {
 				case 'number':
-					thing = thing.toString(10);
-					// fall through
+					value = floatToCents(thing);
+					break;
 				case 'string': {
-					let stripped = thing.replace(/[^-0-9().]/g, '');
-					if (stripped.includes('(') || stripped.includes(')')) {
-						if (stripped.startsWith('(') && stripped.endsWith(')')) {
-							stripped = `-${stripped}`;
-						}
-						stripped = stripped.replace(/\(|\)/g, '');
-					}
-
-					const [dollars, ...centsStrings] = stripped.split('.');
-					const centString = centsStrings.join('');
-
-					if (!dollars && !centString) break;
-
-					if (dollars === '') value = 0;
-					else if (dollars === '-') value = -0;
-					else value = parseInt(dollars, 10) * 100;
-
-					let centValue = 0;
-					if (centString.length === 1) {
-						centValue = parseInt(`${centString.charAt(0)}0`, 10);
-					} else if (centString.length >= 2) {
-						const firstTwoCents = centString.slice(0, 2);
-						centValue = parseInt(firstTwoCents, 10);
-					}
-
-					if (centString.length > 2) {
-						const fraction = `.${centString.slice(2)}`;
-						centValue += parseFloat(fraction);
-					}
-
-					if (value < 0 || Object.is(value, -0)) value -= centValue;
-					else value += centValue;
+					value = stringToCents(thing);
 					break;
 				}
 				case 'object':
@@ -155,22 +126,7 @@ export default class Money {
 	 * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 	 */
 	toString(locale, options) {
-		if (typeof locale === 'object' && /undefined|string/.test(typeof options)) {
-			[locale, options] = [options, locale];
-		}
-
-		const float = this.valueOf();
-		if (Number.isNaN(float)) return '';
-
-		const opts = Object.assign({ style: 'currency', currency: 'USD' }, options);
-
-		if (opts.parentheses && float < 0) {
-			const positive = Math.abs(float);
-			const str = positive.toLocaleString(locale, opts);
-			return `(${str})`;
-		}
-
-		return float.toLocaleString(locale, opts);
+		return centsToString(this.value, locale, options);
 	}
 
 	/**
