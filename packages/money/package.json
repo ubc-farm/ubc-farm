@@ -12,7 +12,7 @@
 	},
   "scripts": {
 		"prepublish": "rollup -c",
-		"test": "tape \"**/*.spec.js\"",
+		"test": "rollup -f cjs test/class-parse.js | node && rollup -f cjs test/parse.js | node ",
 		"docs": "rollup -f cjs src/index.js | jsdoc2md > README.md"
 	},
 	"files": [

@@ -9,7 +9,7 @@
  * @param {string} [options.currency=USD] - currency locale to return
  * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
  */
-export default function toString(cents, locale, options) {
+export default function centsToString(cents, locale, options) {
 	if (typeof locale === 'object' && /undefined|string/.test(typeof options)) {
 		[locale, options] = [options, locale];
 	}

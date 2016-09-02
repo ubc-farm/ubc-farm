@@ -7,7 +7,7 @@
  * If true, an integer will be returned.
  * @returns {number}
  */
-export default function convertString(str, { trunc = false } = {}) {
+export default function stringToCents(str, { trunc = false } = {}) {
 	if (typeof str !== 'string') throw new TypeError(`${str} must be a string`);
 
 	let stripped = str.replace(/[^-0-9().]/g, '');
