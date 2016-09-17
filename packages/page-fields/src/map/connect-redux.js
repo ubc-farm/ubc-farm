@@ -1,7 +1,7 @@
-/* global google */
 import { observeStore } from 'ubc-farm-utils';
-import { setSelected } from '../redux/actions.js';
-import { activeSelector } from '../redux/selectors.js';
+
+/** @type {string} used to identify the active field in the map */
+export let activeProp = 'activeField'; // eslint-disable-line
 
 /**
  * Updates the polygons on the map by setting the 'activeField'
@@ -15,8 +15,8 @@ function updateActive(newActive, lastActive) {
 	const last = this.getFeatureById(lastActive);
 	const next = this.getFeatureById(newActive);
 
-	if (last) last.removeProperty('activeField');
-	if (next) next.setProperty('activeField', true);
+	if (last) last.removeProperty(activeProp);
+	if (next) next.setProperty(activeProp, true);
 }
 
 /**
@@ -27,14 +27,14 @@ function updateActive(newActive, lastActive) {
  * @param {Store} store
  * @returns {Function[]} invoke both functions to remove listeners
  */
-export default function connectToStore(mapData, store) {
+export default function connectToStore(mapData, store, selector, clickAction) {
 	const { dispatch } = store;
-	const listener = google.maps.event.addListener(mapData, 'click',
-		({ feature }) => dispatch(setSelected(feature.getId()))
+	const listener = mapData.addListener('click',
+		({ feature }) => dispatch(clickAction(feature.getId()))
 	);
 
 	const unsubscribe =
-		observeStore(store, activeSelector, updateActive.bind(mapData));
+		observeStore(store, selector, updateActive.bind(mapData));
 
 	return [
 		unsubscribe,

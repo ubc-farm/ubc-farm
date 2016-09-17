@@ -1,5 +1,6 @@
 /* global google*/
 
+/** @type {Object} color defaults used in other styles */
 export const color = {
 	primary: 'rgb(59, 166, 72)',
 	accent: 'rgb(47, 123, 130)',
@@ -7,6 +8,7 @@ export const color = {
 	light: '#ddd',
 };
 
+/** @type {Object} field polygon options */
 export const field = {
 	normal: {
 		fillOpacity: 0.5,
@@ -23,22 +25,27 @@ export const field = {
 	},
 };
 
+/** @type {Object} styles for an unsaved field */
 export const newField = {
 	normal: {
 		fillColor: color.gray,
 	},
 };
 
+/** @type {Object} map styles, can be passed as options to `new google.maps.Map()` */
 export const map = {
 	center: { lat: 49.249568, lng: -123.237155 },
 	zoom: 17,
 	mapTypeId: google.maps.MapTypeId.SATELLITE,
 	fullscreenControl: true,
 	scaleControl: true,
-	mapTypeControlOptions: { style: google.maps.MapTypeControlStyle.DROPDOWN_MENU },
+	mapTypeControlOptions: {
+		style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+	},
 	tilt: 0,
 };
 
+/** @type {Object} options for the grid polygons */
 export const grid = {
 	normal: {
 		zIndex: 2,
