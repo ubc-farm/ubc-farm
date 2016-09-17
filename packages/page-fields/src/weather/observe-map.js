@@ -19,7 +19,7 @@ function renderWeather(pos, target) {
  * @param {Element} element on document to place map
  * @returns {function} call to remove listener
  */
-export default function updateWeatherOnMapPan(map, element) {
+export default function observeMap(map, element) {
 	renderWeather(map.getCenter(), element);
 
 	const listener = google.maps.event.addListener(map, 'center_changed',
