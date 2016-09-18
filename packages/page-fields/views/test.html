@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href='https://fonts.googleapis.com/icon?family=Material+Icons'
+      rel='stylesheet'>
+	<link href='../../css-core/src/normalize.css' rel='stylesheet'>
+	<link href='../../css-core/src/root.css' rel='stylesheet'>
+	<link href='../../css-core/src/button.css' rel='stylesheet'>
+	<link href='../../css-core/src/form.css' rel='stylesheet'>
+	<link href='../../ribbon/dist/ribbon.css' rel='stylesheet'>
+	<script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+	<script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+
+	<script defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"
+	></script>
+	<script defer src="../dist/index.iife.js"></script>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+		}
+		#map-mount {
+			flex: 5 100vh;
+		}
+	</style>
+</head>
+<body>
+	<div id="toolbar-mount"></div>
+
+	<div id='map-mount'></div>
+
+	<link href='../src/weather/weather.css' rel='stylesheet'>
+	<div id='weather-mount' class='weather-icon'></div>
+</body>
+</html>

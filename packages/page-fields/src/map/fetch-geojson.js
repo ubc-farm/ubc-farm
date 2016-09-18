@@ -6,7 +6,7 @@
  * @returns {Promise<google.maps.Data.Feature[]>} newly added features
  */
 export default function fetchGeoJson(url, mapData) {
-	return fetch(url) // '/api/fields/geojson'
+	return fetch(url)
 	.then(response => response.json())
 	.then(geojson => mapData.addGeoJson(geojson));
 }
