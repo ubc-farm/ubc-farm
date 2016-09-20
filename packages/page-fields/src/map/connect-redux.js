@@ -28,9 +28,8 @@ function updateActive(newActive, lastActive) {
  * @returns {Function[]} invoke both functions to remove listeners
  */
 export default function connectToStore(mapData, store, selector, clickAction) {
-	const { dispatch } = store;
 	const listener = mapData.addListener('click',
-		({ feature }) => dispatch(clickAction(feature.getId()))
+		({ feature }) => store.dispatch(clickAction(feature.getId()))
 	);
 
 	const unsubscribe =
