@@ -17,7 +17,7 @@ export default function centsToString(cents, locale, options) {
 	const float = cents / 100;
 	if (Number.isNaN(float)) return '';
 
-	const opts = Object.assign({ style: 'currency', currency: 'USD' }, options);
+	const opts = Object.assign({ style: 'currency', currency: 'CAD' }, options);
 
 	if (opts.parentheses && float < 0) {
 		const positive = Math.abs(float);
