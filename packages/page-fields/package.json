@@ -24,7 +24,7 @@
 		"redux-thunk": "^2.1.0",
 		"reselect": "^2.5.3",
 		"ubc-farm-utils": "ubc-farm/utils",
-		"ribbon-toolbar": "ubc-farm/ribbon-toolbar#1.0.0"
+		"ribbon-toolbar": "ubc-farm/ribbon-toolbar#2.0.0"
 	},
 	"scripts": {
 		"prepublish": "rollup -c"
