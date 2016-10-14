@@ -21,7 +21,9 @@ function restOfArray(array, removedItem) {
 
 /**
  * Same effects as glob, but takes an array of patterns
- * rather than a single pattern.
+ * rather than a single pattern. Globs are executed in parallel.
+ * Globs share a cache and are set to ignore the paths searched by
+ * other globs.
  * @param {string[]} patterns
  * @param {Object} [options] passed to glob
  * @returns {Promise<string[]>} array of file paths found by glob
