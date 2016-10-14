@@ -1,19 +1,55 @@
+import { join } from 'path';
 import { Server } from 'hapi';
-import h2o2 from 'h2o2';
+import Inert from 'inert';
+import Vision from 'vision';
+import Handlebars from 'handlebars';
 
-import { config as connection } from '../package.json';
+const showDebug = process.env.NODE_ENV === 'development' && ['error'];
 
-import staticProxy from './static-proxy.js';
-import viewProxy from './view-proxy.js';
-import apiProxy from './api-proxy.js';
+/** @type {Hapi.Server} */
+const server = new Server({
+	connections: {
+		port: process.env.npm_package_config_port,
+		routes: {
+			cors: true,
+			response: {
+				emptyStatusCode: 204,
+				failAction: 'log',
+			},
+		},
+	},
+	debug: { log: showDebug, request: showDebug },
+});
 
-const server = new Server();
-server.connection(connection);
+const plugins = [Inert, Vision];
+/** @type {Promise<Hapi.Server>} resolves with the server instance */
+const registration = Promise
+	.all(plugins.map(plugin => server.register(plugin)))
+	.then(() => server)
+	.catch(console.error);
 
-server.register(h2o2, err => { if (err) throw err; });
+const manager = server.views({
+	engines: {
+		hbs: Handlebars,
+	},
+	defaultExtension: 'hbs',
+	partialsPath: join(__dirname, 'template-partials'),
+	helpersPath: join(__dirname, 'template-helpers'),
+	isCached: process.env.NODE_ENV !== 'development',
+	allowAbsolutePaths: true,
+	context(request) {
+		if (request === null) return {};
+		const { path, params, query } = request;
 
-server.route(staticProxy);
-server.route(viewProxy);
-server.route(apiProxy);
+		const depth = path.split('/').length - 1;
+		const base = depth <= 1 ? '.' : `${'../'.repeat(depth - 2)}..`;
 
-export default server;
+		return { base, params, query, reactRoot: '<div id="reactRoot"></div>' };
+	},
+});
+
+export {
+	server as default,
+	registration as serverReady,
+	manager as viewManager,
+};
