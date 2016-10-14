@@ -1,3 +1,5 @@
 node_modules
 dist
 typings
+test/_out.js
+test/_out.js.map

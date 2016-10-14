@@ -14,19 +14,6 @@
 			"isBuildCommand": true,
 			"args": ["--quiet"],
 			"showOutput": "never"
-		},
-		{
-			"taskName": "lint",
-			"problemMatcher": ["$eslint-compact", "$eslint-stylish"]
-		},
-		{
-			"taskName": "typings"
-		},
-		{
-			"taskName": "version patch"
-		},
-		{
-			"taskName": "version minor"
 		}
 	]
 }
