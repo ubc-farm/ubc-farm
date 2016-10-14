@@ -1,4 +1,4 @@
-import { relative } from 'path';
+import { join } from 'path';
 
 /* eslint-disable global-require */
 
@@ -21,10 +21,10 @@ export class ConfigError extends Error {
  * @returns {Promise} resolves once plugin has registered.
  */
 export default function importPlugin(server, folder = process.cwd(), options) {
-	const json = require(relative(folder, './package.json'));
+	const json = require(join(folder, './package.json'));
 	const pluginPath = json['ubc-farm'] && json['ubc-farm']['server-plugin'];
 	if (!pluginPath) throw new ConfigError(folder);
 
-	const plugin = require(relative(folder, pluginPath));
+	const plugin = require(join(folder, pluginPath));
 	return server.register(plugin, Object.assign({ once: true }, options));
 }
