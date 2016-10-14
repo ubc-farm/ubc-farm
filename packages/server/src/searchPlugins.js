@@ -1,5 +1,5 @@
-import globAll from './globAll.js';
 import importPlugin from './importPlugin.js';
+import globAll from './globAll.js';
 
 /**
  * Forces a glob pattern to look for directories rather than files.
@@ -12,7 +12,8 @@ function forceDirectory(pattern) {
 }
 
 /**
- * @param {Hapi.Server|Promise<Hapi.Server>} server
+ * @param {Hapi.Server|Promise<Hapi.Server>} server - can be
+ * either a Hapi server or a promise that resolves with one
  * @param {string[]} patterns to search in glob format
  * @returns {Promise}
  */
