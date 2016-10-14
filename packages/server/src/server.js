@@ -9,7 +9,6 @@ const showDebug = process.env.NODE_ENV === 'development' && ['error'];
 /** @type {Hapi.Server} */
 const server = new Server({
 	connections: {
-		port: process.env.npm_package_config_port,
 		routes: {
 			cors: true,
 			response: {
@@ -19,6 +18,10 @@ const server = new Server({
 		},
 	},
 	debug: { log: showDebug, request: showDebug },
+});
+
+server.connection({
+	port: parseInt(process.env.npm_package_config_port, 10),
 });
 
 const plugins = [Inert, Vision];

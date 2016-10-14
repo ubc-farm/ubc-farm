@@ -36,7 +36,7 @@ export default function globAll(patterns, options = {}) {
 
 	function addToIgnore(items) {
 		return Object.assign({}, options, {
-			ignore: options.ignore ? items.conat(options.ignore) : items,
+			ignore: options.ignore ? items.concat(options.ignore) : items,
 			symlinks,
 			statCache,
 			realpathCache,
