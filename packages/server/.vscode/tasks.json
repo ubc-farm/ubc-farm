@@ -1,0 +1,34 @@
+{
+	"version": "0.1.0",
+	"command": "builder",
+	"isShellCommand": true,
+	"showOutput": "always",
+	"args": ["run"],
+	"tasks": [
+		{
+			"taskName": "test",
+			"args": ["npm:test"],
+			"suppressTaskName": true,
+			"isTestCommand": true
+		},
+		{
+			"taskName": "compile",
+			"isBuildCommand": true,
+			"args": ["--quiet"],
+			"showOutput": "never"
+		},
+		{
+			"taskName": "lint",
+			"problemMatcher": ["$eslint-compact", "$eslint-stylish"]
+		},
+		{
+			"taskName": "typings"
+		},
+		{
+			"taskName": "version patch"
+		},
+		{
+			"taskName": "version minor"
+		}
+	]
+}

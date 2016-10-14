@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"typings": true,
+		"dist": true
+	},
+	"eslint.options": {
+		"configFile": "node_modules/ubc-farm-page-archetype/config/eslint/.eslintrc.yaml"
+	}
+}
