@@ -1,14 +1,12 @@
 {
 	"version": "0.1.0",
-	"command": "builder",
+	"command": "yarn",
 	"isShellCommand": true,
 	"showOutput": "always",
 	"args": ["run"],
 	"tasks": [
 		{
 			"taskName": "test",
-			"args": ["npm:test"],
-			"suppressTaskName": true,
 			"isTestCommand": true
 		},
 		{
