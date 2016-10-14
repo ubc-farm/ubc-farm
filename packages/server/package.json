@@ -1,31 +1,31 @@
 {
-	"name": "ubc-farm-server",
-	"version": "2.0.0",
-	"description": "Server for the ubc-farm program suite",
-	"module": "dist/index.es.js",
+  "name": "ubc-farm-server",
+  "version": "2.0.0",
+  "description": "Server for the ubc-farm program suite",
+  "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",
-	"dependencies": {
-		"hapi": "^15.1.1",
-		"inert": "^4.0.2",
-		"vision": "^4.1.0",
-		"handlebars": "^4.0.5",
-		"minimist": "^1.2.0",
-		"glob": "^7.1.1"
-	},
-	"devDependencies": {
-		"builder": "^3.0.0",
+  "dependencies": {
+    "glob": "^7.1.1",
+    "handlebars": "^4.0.5",
+    "hapi": "^15.1.1",
+    "inert": "^4.0.2",
+    "minimist": "^1.2.0",
+    "vision": "^4.1.0"
+  },
+  "devDependencies": {
+		"builder": "3.1.0",
     "page-archetype": "ubc-farm/page-archetype#0.1.0"
-	},
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"license": "MIT",
-	"repository": "ubc-farm/server",
-	"bugs": "https://github.com/ubc-farm/server/issues",
-	"scripts": {
-		"postinstall": "builder run npm:postinstall",
+  },
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "license": "MIT",
+  "repository": "ubc-farm/server",
+  "bugs": "https://github.com/ubc-farm/server/issues",
+  "scripts": {
+    "postinstall": "builder run npm:postinstall",
     "prepublish": "builder run npm:prepublish",
     "prestart": "builder run npm:prestart",
     "preversion": "builder run npm:preversion",
     "version": "builder run npm:version",
     "postversion": "builder run npm:postversion"
-	}
+  }
 }
