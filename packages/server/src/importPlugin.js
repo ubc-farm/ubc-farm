@@ -18,13 +18,13 @@ export class ConfigError extends Error {
  * @param {Hapi.Server} server to register plugin to
  * @param {string} [folder] containg package.json - defaults to process.cwd()
  * @param {Object} [options] passed to server.register
- * @returns {Promise} resolves once plugin has registered.
+ * @returns {Promise<void>} resolves once plugin has registered.
  */
-export default function importPlugin(server, folder = process.cwd(), options) {
+export default async function importPlugin(server, folder = process.cwd(), options) {
 	const json = require(join(folder, './package.json'));
 	const pluginPath = json['ubc-farm'] && json['ubc-farm']['server-plugin'];
 	if (!pluginPath) throw new ConfigError(folder);
 
 	const plugin = require(join(folder, pluginPath));
-	return server.register(plugin, Object.assign({ once: true }, options));
+	await server.register(plugin, Object.assign({ once: true }, options));
 }

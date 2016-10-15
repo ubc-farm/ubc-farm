@@ -1,7 +1,7 @@
 import globCb from 'glob';
 
 /** Promisified glob function */
-function glob(pattern, options) {
+export function glob(pattern, options) {
 	return new Promise((resolve, reject) => {
 		globCb(pattern, options, (err, result) => {
 			if (err) return reject(err);
@@ -28,15 +28,21 @@ function restOfArray(array, removedItem) {
  * @param {Object} [options] passed to glob
  * @returns {Promise<string[]>} array of file paths found by glob
  */
-export default function globAll(patterns, options = {}) {
+export default async function globAll(patterns, options = {}) {
 	let symlinks;
 	let statCache;
 	let realpathCache;
 	let cache;
 
-	function addToIgnore(items) {
+	if (!Array.isArray(patterns)) {
+		throw new TypeError('pattern must be string[]');
+	}
+
+	const { ignore } = options;
+	function ignoreRest(currentItem) {
+		const list = restOfArray(patterns, currentItem);
 		return Object.assign({}, options, {
-			ignore: options.ignore ? items.concat(options.ignore) : items,
+			ignore: ignore ? list.concat(ignore) : list,
 			symlinks,
 			statCache,
 			realpathCache,
@@ -44,7 +50,11 @@ export default function globAll(patterns, options = {}) {
 		});
 	}
 
-	return Promise.all(patterns.map((pattern, i, array) =>
-		glob(pattern, addToIgnore(restOfArray(array, pattern)))
-	)).then(results => [].concat(...results));
+	const results = await Promise.all(
+		patterns.map(pattern =>	glob(pattern, ignoreRest(pattern)))
+	);
+
+	const noDuplicates = new Set();
+	results.forEach(matches => matches.forEach(match => noDuplicates.add(match)));
+	return Array.from(noDuplicates);
 }

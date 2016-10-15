@@ -15,15 +15,15 @@ function forceDirectory(pattern) {
  * @param {Hapi.Server|Promise<Hapi.Server>} server - can be
  * either a Hapi server or a promise that resolves with one
  * @param {string[]} patterns to search in glob format
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
-export default function searchPlugins(server, patterns) {
+export default async function searchPlugins(server, patterns) {
 	if (!Array.isArray(patterns) || patterns.length === 0) {
-		return importPlugin(server);
+		await importPlugin(server);
+		return;
 	}
 
 	const dirPatterns = patterns.map(forceDirectory);
-
-	return Promise.all([server, globAll(dirPatterns)])
-		.then(([_server, folders]) => folders.map(folder => importPlugin(_server, folder)));
+	const [_server, folders] = await Promise.all([server, globAll(dirPatterns)]);
+	await Promise.all(folders.map(folder => importPlugin(_server, folder)));
 }
