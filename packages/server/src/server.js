@@ -20,8 +20,9 @@ const server = new Server({
 	debug: { log: showDebug, request: showDebug },
 });
 
+const port = parseInt(process.env.npm_package_config_port, 10);
 server.connection({
-	port: parseInt(process.env.npm_package_config_port, 10),
+	port: Number.isNaN(port) ? null : port,
 });
 
 const plugins = [Inert, Vision];
@@ -36,8 +37,8 @@ const manager = server.views({
 		hbs: Handlebars,
 	},
 	defaultExtension: 'hbs',
-	partialsPath: join(__dirname, 'template-partials'),
-	helpersPath: join(__dirname, 'template-helpers'),
+	partialsPath: join(__dirname, '../template-partials'),
+	helpersPath: join(__dirname, '../template-helpers'),
 	isCached: process.env.NODE_ENV !== 'development',
 	allowAbsolutePaths: true,
 	context(request) {

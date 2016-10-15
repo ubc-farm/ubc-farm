@@ -1,9 +1,8 @@
-import multiEntry from 'rollup-plugin-multi-entry';
 import config from './rollup.config.js';
 
 export default {
-	entry: 'test/**',
-	plugins: [...config.plugins, multiEntry({ exports: false })],
+	entry: 'test/importPlugin.spec.js',
+	plugins: [...config.plugins],
 	format: 'cjs',
-	external: [...config.external, 'tape'],
+	external: [...config.external, 'blue-tape'],
 };

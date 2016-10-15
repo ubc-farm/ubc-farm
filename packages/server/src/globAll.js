@@ -55,6 +55,8 @@ export default async function globAll(patterns, options = {}) {
 	);
 
 	const noDuplicates = new Set();
-	results.forEach(matches => matches.forEach(match => noDuplicates.add(match)));
+	results.forEach(matches => {
+		if (matches) matches.forEach(match => noDuplicates.add(match));
+	});
 	return Array.from(noDuplicates);
 }
