@@ -4,4 +4,4 @@ import { serverReady, searchPlugins } from 'ubc-farm-server';
 
 const { _: patterns } = minimist(process.argv.slice(2));
 
-searchPlugins(serverReady, patterns);
+searchPlugins(serverReady, patterns).then(server => server.start());
