@@ -3,6 +3,7 @@ export default {
 	dest: 'bin/ubc-farm-server',
 	format: 'cjs',
 	banner: '#!/user/bin/env node',
+	sourceMap: true,
 	external: ['minimist', 'ubc-farm-server'],
 	paths: { 'ubc-farm-server': '../dist/index.cjs.js' },
 };
