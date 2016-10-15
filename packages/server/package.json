@@ -7,15 +7,19 @@
     "ubc-farm-server": "./bin/ubc-farm-server"
   },
   "dependencies": {
+    "babel-plugin-external-helpers": "^6.8.0",
+    "babel-preset-es2016": "^6.16.0",
+    "babel-preset-es2017": "^6.16.0",
     "glob": "^7.1.1",
     "handlebars": "^4.0.5",
     "hapi": "^15.1.1",
     "inert": "^4.0.2",
     "minimist": "^1.2.0",
+    "rollup-plugin-babel": "^2.6.1",
     "vision": "^4.1.0"
   },
   "devDependencies": {
-		"rollup": "^0.36.3",
+    "rollup": "^0.36.3",
     "rollup-plugin-multi-entry": "^2.0.1",
     "tape": "^4.6.2"
   },
