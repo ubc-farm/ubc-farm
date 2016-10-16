@@ -2,7 +2,7 @@ import test from 'blue-tape';
 import { Server } from 'hapi';
 import importPlugin, { ConfigError } from '../src/importPlugin.js';
 
-const pluginStub = require('./fixture/plugin.js');
+const pluginStub = require('./test/fixture/plugin.js');
 
 test('server.register stub', t => {
 	t.plan(1);
@@ -39,6 +39,7 @@ test('Throws errors', t => {
 
 test('Imported plugin is registered propertly', async t => {
 	const server = new Server();
+	server.connection();
 	await importPlugin(server, 'test/fixture');
 
 	const { payload } = await server.inject('/test');

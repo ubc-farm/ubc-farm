@@ -45,8 +45,8 @@ const manager = server.views({
 		if (request === null) return {};
 		const { path, params, query } = request;
 
-		const depth = path.split('/').length - 1;
-		const base = depth <= 1 ? '.' : `${'../'.repeat(depth - 2)}..`;
+		const depth = path.split('/').filter(s => !!s).length;
+		const base = depth <= 0 ? '.' : `${'../'.repeat(depth - 1)}..`;
 
 		return { base, params, query, reactRoot: '<div id="reactRoot"></div>' };
 	},
