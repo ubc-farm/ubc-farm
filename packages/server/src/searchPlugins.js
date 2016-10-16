@@ -19,27 +19,25 @@ function forceDirectory(pattern) {
  * Map with the folder name as the key, and rejected error as the value.
  */
 export default async function searchPlugins(serverPromise, patterns) {
+	const fails = new Map();
+	let server;
+	let folders;
+
 	if (!Array.isArray(patterns) || patterns.length === 0) {
-		const server = await Promise.resolve(serverPromise);
-		try {
-			await importPlugin(server);
-			return server;
-		} catch (err) {
-			return new Map().set(process.cwd(), err);
-		}
+		server = await Promise.resolve(serverPromise);
+		folders = [process.cwd()];
+	} else {
+		const dirPatterns = patterns.map(forceDirectory);
+		[server, folders] = await Promise.all([serverPromise, globAll(dirPatterns)]);
 	}
 
-	const dirPatterns = patterns.map(forceDirectory);
-	const [server, folders] = await Promise.all([serverPromise, globAll(dirPatterns)]);
-
-	const fails = new Map();
 	await Promise.all(folders.map(async folder => {
 		try {
-			return await importPlugin(server, folder);
+			await importPlugin(server, folder);
 		} catch (err) {
 			fails.set(folder, err);
-			return undefined;
 		}
 	}));
+
 	return fails;
 }
