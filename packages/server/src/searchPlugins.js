@@ -15,17 +15,31 @@ function forceDirectory(pattern) {
  * @param {Hapi.Server|Promise<Hapi.Server>} server - can be
  * either a Hapi server or a promise that resolves with one
  * @param {string[]} patterns to search in glob format
- * @returns {Promise<Hapi.Server>}
+ * @returns {Promise<Map<string, Error>>} all errored plugins are returned as a
+ * Map with the folder name as the key, and rejected error as the value.
  */
 export default async function searchPlugins(serverPromise, patterns) {
 	if (!Array.isArray(patterns) || patterns.length === 0) {
 		const server = await Promise.resolve(serverPromise);
-		await importPlugin(server);
-		return server;
+		try {
+			await importPlugin(server);
+			return server;
+		} catch (err) {
+			return new Map().set(process.cwd(), err);
+		}
 	}
 
 	const dirPatterns = patterns.map(forceDirectory);
 	const [server, folders] = await Promise.all([serverPromise, globAll(dirPatterns)]);
-	await Promise.all(folders.map(folder => importPlugin(server, folder)));
-	return server;
+
+	const fails = new Map();
+	await Promise.all(folders.map(async folder => {
+		try {
+			return await importPlugin(server, folder);
+		} catch (err) {
+			fails.set(folder, err);
+			return undefined;
+		}
+	}));
+	return fails;
 }
