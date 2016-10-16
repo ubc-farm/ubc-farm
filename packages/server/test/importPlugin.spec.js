@@ -1,4 +1,5 @@
 import test from 'blue-tape';
+import { Server } from 'hapi';
 import importPlugin, { ConfigError } from '../src/importPlugin.js';
 
 const pluginStub = require('./fixture/plugin.js');
@@ -34,4 +35,12 @@ test('Throws errors', t => {
 	t.shouldFail(importPlugin(), TypeError, 'Reject TypeError when server is missing');
 	t.shouldFail(importPlugin({}, process.cwd()), ConfigError);
 	t.shouldFail(importPlugin({}, 'test'), 'Reject when package.json doesn\'t exist');
+});
+
+test('Imported plugin is registered propertly', async t => {
+	const server = new Server();
+	await importPlugin(server, 'test/fixture');
+
+	const { payload } = await server.inject('/test');
+	t.equal(payload, 'test passed');
 });
