@@ -13,7 +13,7 @@ export default {
 	],
 	plugins: [babel()],
 	targets: [
-		// { dest: 'dist/index.es.js', format: 'es' },
+		{ dest: 'dist/index.es.js', format: 'es' },
 		{ dest: 'dist/index.cjs.js', format: 'cjs' },
 	],
 };
