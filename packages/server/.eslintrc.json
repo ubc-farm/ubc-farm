@@ -1,0 +1,16 @@
+{
+	"extends": "airbnb-base",
+	"rules": {
+		"indent": ["warn", "tab", {
+			"SwitchCase": 1, "VariableDeclarator": 1,	"outerIIFEBody": 1
+		}],
+		"no-tabs": "off",
+		"linebreak-style": "off",
+		"import/named": "error",
+		"import/default": "error",
+		"import/namespace": ["error", { "allowComputed": true }],
+		"no-implicit-coercion": ["error", {
+			"boolean": false, "number": true, "string": true, "allow": []
+		}]
+	}
+}

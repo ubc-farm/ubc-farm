@@ -1,11 +1,14 @@
 {
   "globalDependencies": {
     "handlebars": "registry:dt/handlebars#4.0.5+20160804082238",
-    "hapi": "registry:dt/hapi#13.0.0+20160928135445",
+    "hapi": "registry:dt/hapi#13.0.0+20161014012508",
     "node": "registry:dt/node#6.0.0+20161014191813"
   },
   "dependencies": {
     "glob": "registry:npm/glob#6.0.0+20160723033700",
     "minimist": "registry:npm/minimist#1.0.0+20160723033700"
+  },
+  "devDependencies": {
+    "blue-tape": "registry:npm/blue-tape#0.2.0+20160723033700"
   }
 }

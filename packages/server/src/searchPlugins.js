@@ -31,7 +31,7 @@ export default async function searchPlugins(serverPromise, patterns) {
 		[server, folders] = await Promise.all([serverPromise, globAll(dirPatterns)]);
 	}
 
-	await Promise.all(folders.map(async folder => {
+	await Promise.all(folders.map(async (folder) => {
 		try {
 			await importPlugin(server, folder);
 		} catch (err) {
