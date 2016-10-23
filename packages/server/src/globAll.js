@@ -1,14 +1,12 @@
 import globCb from 'glob';
 
-/** Promisified glob function */
-export function glob(pattern, options) {
-	return new Promise((resolve, reject) => {
-		globCb(pattern, options, (err, result) => {
-			if (err) return reject(err);
-			return resolve(result);
-		});
+export function promisify(func) {
+	return (...args) => new Promise((resolve, reject) => {
+		func(...args, (err, result) => (err ? reject(err) : resolve(result)));
 	});
 }
+
+const glob = promisify(globCb);
 
 /**
  * @param {Array<V>} array
@@ -29,16 +27,18 @@ function restOfArray(array, removedItem) {
  * @returns {Promise<string[]>} array of file paths found by glob
  */
 export default async function globAll(patterns, options = {}) {
-	let symlinks;
-	let statCache;
-	let realpathCache;
-	let cache;
+	const {
+		ignore,
+		symlinks = {},
+		statCache = {},
+		realpathCache = {},
+		cache = {},
+	} = options;
 
 	if (!Array.isArray(patterns)) {
 		throw new TypeError('pattern must be string[]');
 	}
 
-	const { ignore } = options;
 	function ignoreRest(currentItem) {
 		const list = restOfArray(patterns, currentItem);
 		return Object.assign({}, options, {
@@ -55,7 +55,7 @@ export default async function globAll(patterns, options = {}) {
 	);
 
 	const noDuplicates = new Set();
-	results.forEach(matches => {
+	results.forEach((matches) => {
 		if (matches) matches.forEach(match => noDuplicates.add(match));
 	});
 	return Array.from(noDuplicates);
