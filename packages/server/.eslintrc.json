@@ -1,5 +1,8 @@
 {
 	"extends": "airbnb-base",
+	"parserOptions": {
+		"ecmaVersion": 8
+	},
 	"rules": {
 		"indent": ["warn", "tab", {
 			"SwitchCase": 1, "VariableDeclarator": 1,	"outerIIFEBody": 1
@@ -12,6 +15,8 @@
 		"no-implicit-coercion": ["error", {
 			"boolean": false, "number": true, "string": true, "allow": []
 		}],
-		"import/extensions": "off"
+		"import/extensions": "off",
+		"global-require": "off",
+		"import/no-dynamic-require": "off"
 	}
 }
