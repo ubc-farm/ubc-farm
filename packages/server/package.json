@@ -16,12 +16,15 @@
     "vision": "^4.1.0"
   },
   "devDependencies": {
+    "@types/blue-tape": "^0.1.30",
+    "@types/hapi": "^13.0.36",
+    "@types/proxyquire": "^1.3.27",
+    "@ubc-farm/eslint-config": "ubc-farm/eslint-config",
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-es2017": "^6.16.0",
     "blue-tape": "^1.0.0",
     "eslint": "^3.8.0",
-    "eslint-config-airbnb-base": "^8.0.0",
     "eslint-plugin-import": "^2.0.1",
     "proxyquire": "^1.7.10",
     "rollup": "^0.36.3",
