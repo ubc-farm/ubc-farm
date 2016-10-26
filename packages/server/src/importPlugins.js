@@ -31,9 +31,14 @@ export default async function importPlugins(patterns, server) {
 		});
 
 		const globber = new JsonGlob(pattern, opts).on('result', (str, match) => {
-			const pluginPath = join(dirname(match), str);
-			const plugin = require(pluginPath);
-			plugins.push(server.register(plugin, { once: true }));
+			const isString = typeof match === 'string';
+			const pluginPath = join(dirname(isString ? match : match.register), str);
+			const register = require(pluginPath);
+
+			const plugin = isString
+				? server.register(register, { once: true })
+				: server.register(Object.assign({ once: true }, match, { register }));
+			plugins.push(plugin);
 		});
 
 		return globber.done();

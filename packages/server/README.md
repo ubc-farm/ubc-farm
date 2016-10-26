@@ -8,13 +8,19 @@ Each folder is checked for a package.json file with the following property:
 ```json
 {
 	"ubc-farm": {
-		"server-plugin": "./some/path/to/plugin.js"
+		"server-plugin": {
+			"register": "./some/path/to/plugin.js",
+			"routes": { "prefix": "/webpage-prefix" }
+		}
 	}
 }
 ```
 
-The path should lead to a Hapi plugin script, and it is resolved relative to the
-package.json file.
+The `register` path should lead to a Hapi plugin script, and it is resolved
+relative to the package.json file. The avaliable options for the server-plugin
+object match [Hapi's `server.register()` object schema](http://hapijs.com/api#serverregisterplugins-options-callback), except that
+the plugin will only register once by default. Alternatively, you can specify
+a string instead of an object and it will be used as the `register` value.
 
 Additionally, the plugins [Inert](https://github.com/hapijs/<inert></inert>) and
 [Vision](https://github.com/hapijs/vision)
