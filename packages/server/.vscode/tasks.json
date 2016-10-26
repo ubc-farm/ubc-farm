@@ -10,7 +10,7 @@
 			"isTestCommand": true
 		},
 		{
-			"taskName": "compile",
+			"taskName": "prepare",
 			"isBuildCommand": true,
 			"args": ["--quiet"],
 			"showOutput": "never"

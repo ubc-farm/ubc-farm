@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, dirname } from 'path';
 import JsonGlob from './JsonGlob.js';
 
 /**
@@ -25,12 +25,16 @@ export default async function importPlugins(patterns, server) {
 
 	const plugins = [];
 	const globsDone = Promise.all(patterns.map((pattern) => {
-		const opts = Object.assign({}, globOptions);
-		opts.pattern = patterns.filter(v => v !== pattern);
+		const opts = Object.assign({}, globOptions, {
+			pattern: patterns.filter(v => v !== pattern),
+			keypath: 'ubc-farm.server-plugin',
+		});
 
-		const globber = new JsonGlob(pattern, opts).on('result', (str, match) =>
-			plugins.push(server.register(join(match, str), { once: true }))
-		);
+		const globber = new JsonGlob(pattern, opts).on('result', (str, match) => {
+			const pluginPath = join(dirname(match), str);
+			const plugin = require(pluginPath);
+			plugins.push(server.register(plugin, { once: true }));
+		});
 
 		return globber.done();
 	}));

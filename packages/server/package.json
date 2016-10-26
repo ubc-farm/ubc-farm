@@ -32,10 +32,7 @@
   "repository": "ubc-farm/server",
   "bugs": "https://github.com/ubc-farm/server/issues",
   "scripts": {
-    "test": "npm run test:globAll && npm run test:import",
-    "test:globAll": "rollup -c rollup.config.test.js -i test/globAll.spec.js | node",
-    "test:import": "rollup -c rollup.config.test.js -i test/importPlugin.spec.js | node",
-    "compile": "rollup -c && rollup -c rollup.config.cli.js"
+    "prepare": "rollup -c && rollup -c rollup.config.cli.js"
   },
   "files": [
     "dist",

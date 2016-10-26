@@ -25,7 +25,7 @@ export default (async () => {
 		port: Number.isNaN(port) ? null : port,
 	});
 
-	await Promise.all([Inert, Vision].map(plugin => server.register(plugin)));
+	await server.register([Inert, Vision]);
 
 	await server.views({
 		engines: { hbs: Handlebars },

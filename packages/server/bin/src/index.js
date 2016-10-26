@@ -17,7 +17,11 @@ const { _: patterns } = minimist(process.argv.slice(2));
 		console.log('Server started with connections: ');
 		console.log(connections.map(c => c.info));
 	}
-
+/*
+	// Doesn't seem to properly list plugins...
 	console.log('\nPlugins loaded:');
-	connections.forEach(({ plugins }) => console.log(plugins));
+	[server, ...connections].forEach(
+		({ plugins }) => console.log(Object.keys(plugins).join(' '))
+	);
+*/
 })();

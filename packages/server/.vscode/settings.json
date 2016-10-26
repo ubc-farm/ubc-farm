@@ -1,7 +1,7 @@
 {
 	"files.exclude": {
 		"typings": true,
-		"dist": true,
+		// "dist": true,
 		"node_modules": true
 	}
 }
