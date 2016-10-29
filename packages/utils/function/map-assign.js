@@ -1,24 +1,21 @@
 /**
  * Acts like Object.assign, but for Map objects instead.
  * @param {Map} target
- * @param {...Map} sources
+ * @param {...Iterable<K, V>} sources
  * @returns {Map} target
  */
-export default function assign(target, ...sources) {
+export default function setAll(target, ...sources) {
 	if (!(target instanceof Map)) {
 		throw new TypeError('target must be a Map object');
 	}
 
 	for (const source of sources) {
-		if (source instanceof Map) {
+		if (typeof source[Symbol.iterator] === 'function') {
 			for (const [key, value] of source) target.set(key, value);
-		} else if (source != null) {
-			for (const key in source) {
-				if (Object.prototype.hasOwnProperty.call(source, key)) {
-					target.set(key, source[key]);
-				}
-			}
+		} else if (typeof source === 'object' && source != null) {
+			Object.keys(source).forEach(key => target.set(key, source[key]));
 		}
 	}
+
 	return target;
 }

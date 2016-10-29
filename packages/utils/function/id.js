@@ -9,7 +9,6 @@
  *
  * @returns {string}
  * @see https://gist.github.com/gordonbrander/2230317
- * @alias module:lib/utils.id
  */
 const id = () => `_${Math.random().toString(36).substr(2, 9)}`;
 export default id;

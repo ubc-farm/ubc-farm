@@ -4,7 +4,6 @@ const has = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
  * A simple javascript utility for conditionally joining classNames together.
  * Slight ES6 adjustments from the fork.
  * @see https://github.com/JedWatson/classnames
- * @alias module:lib/utils.classlist
  */
 export default function classList(...classes) {
 	const list = [];

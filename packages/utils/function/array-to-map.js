@@ -6,7 +6,6 @@ import id from './id.js';
  * @param {Array<Object>} array
  * @param {string} [idKey]
  * @returns {Map<string, Object>}
- * @alias module:lib/utils.arrayToMap
  */
 export function arrayToMap(array, idKey) {
 	return array.reduce((map, obj) => (
@@ -20,7 +19,6 @@ export function arrayToMap(array, idKey) {
  * @param {Array<Object>} array
  * @param {string} [idKey]
  * @returns {Object}
- * @alias module:lib/utils.arrayToObjectMap
  */
 export function arrayToObjectMap(array, idKey) {
 	if (!Array.isArray(array)) {
@@ -37,7 +35,6 @@ export function arrayToObjectMap(array, idKey) {
  * Transforms a map into an object. Non-string and non-number keys are ignored.
  * @param {Map} map
  * @returns {Object}
- * @alias module:lib/utils.mapToObject
  */
 export function mapToObject(map) {
 	const obj = {};

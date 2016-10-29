@@ -1,17 +1,4 @@
 /**
- * Creates an object composed of the own string keyed
- * properties of source that are not set to be omitted.
- * @param {Object} source
- * @param {...string|string[]} props
- * @returns {Object}
+ * @deprecated use lodash (_omit())
  */
-export default function omit(source = {}, ...props) {
-	if (props.length === 0 && Array.isArray(props[0])) props = props[0];
-
-	const target = {};
-	for (const key in source) {
-		if (!props.includes(key)) target[key] = source[key];
-	}
-
-	return target;
-}
+export default function omit(source = {}, ...props) {}

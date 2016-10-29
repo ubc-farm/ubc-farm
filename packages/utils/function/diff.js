@@ -9,7 +9,6 @@ export const REMOVED = Symbol();
  * @param {Object} newStore
  * @returns {Object[]} an object with only updated keys. Removed keys are
  * given a value of the REMOVED Symbol.
- * @alias module:lib/utils.diff
  */
 export default function diff(oldStore, newStore) {
 	if (oldStore === newStore) return undefined;

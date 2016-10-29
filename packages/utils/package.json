@@ -1,25 +1,29 @@
 {
-  "name": "ubc-farm-utils",
-  "version": "3.0.0",
+  "name": "@ubc-farm/utils",
+  "version": "4.0.0",
   "description": "Utilities used by various ubc-farm sibling packages",
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/utils",
-	"main": "dist/index.js",
-	"jsnext:main": "index.es.js",
-	"private": true,
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"tape": "^4.6.0"
-	},
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "devDependencies": {
+    "@ubc-farm/eslint-config": "^4.0.0",
+    "eslint": "^3.9.0",
+    "eslint-plugin-import": "^2.0.1",
+    "rollup": "0.34.2",
+    "tape": "^4.6.0"
+  },
   "scripts": {
-		"prepublish": "rollup -c",
-		"test": "tape \"**/*.spec.js\""
-	},
-	"files": [
-		"calendar",
-		"class",
-		"function",
-		"dist",
-		"index.js"
-	]
+    "prepare": "rollup -c",
+    "prepublish": "npm run prepare",
+    "test": "tape \"**/*.spec.js\""
+  },
+  "files": [
+    "calendar",
+    "class",
+    "function",
+    "dist",
+    "index.js"
+  ]
 }

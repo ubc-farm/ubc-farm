@@ -15,8 +15,8 @@ export default class Position {
 	 * @throws {TypeError} If value is not an array or an object with x and y
 	 */
 	constructor(value) {
-		if (Array.isArray(value)) {
-			for (const [key, val] of value.entries()) this[key] = val;
+		if (typeof value[Symbol.iterator] === 'function') {
+			Object.assign(this, Array.from(value));
 		} else if ('x' in value && 'y' in value) {
 			const { x, y } = value;
 			Object.assign(this, { 0: x, 1: y });
