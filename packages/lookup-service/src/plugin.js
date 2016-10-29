@@ -2,13 +2,13 @@ import * as Joi from 'joi';
 import lookupItem from './lookupItem.js';
 import * as pkg from '../package.json';
 
+const url = Joi.string().uri('https');
+
 export function register(server, { prefix = '/plants' }, done) {
 	const cache = {
 		privacy: 'public',
 		expiresIn: 3.6e+6, // 1hr
 	};
-
-	const url = Joi.string().uri('https');
 
 	server.route([
 		{
