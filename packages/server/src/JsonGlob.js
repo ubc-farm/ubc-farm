@@ -24,32 +24,42 @@ export default class JsonGlob extends Glob {
 	constructor(pattern, options = {}) {
 		super(pattern, options);
 
-		let { keypath } = options;
+		const { keypath } = options;
 		if (typeof keypath !== 'string') {
 			throw new TypeError('keypath must be a string');
 		}
-		keypath = keypath.split('.');
+		const keys = keypath.split('.');
 
 		const seen = new Set();
 
 		this.on('match', async (match) => {
-			if (seen.has(match)) return;
-			seen.add(match);
+			try {
+				if (seen.has(match)) return;
+				seen.add(match);
 
-			let json;
-			if (match.endsWith('package.json')) json = require(match);
-			else json = JSON.parse(await readFile(match));
+				let json;
+				if (match.endsWith('package.json')) json = require(match);
+				else json = JSON.parse(await readFile(match));
 
-			const subvalue = keypath
-				? keypath.reduce((parent, key) => parent[key], json)
-				: json;
+				let subvalue = json;
+				if (keypath) {
+					try {
+						subvalue = keys.reduce((parent, key) => parent[key], json);
+					} catch (err) {
+						if (!(err instanceof TypeError)) throw err;
+						throw new TypeError(`Can't find ${keypath} in ${match}`);
+					}
+				}
 
-			/**
-			 * Result event
-			 * @event JsonGlob#result
-			 * @type {any}
-			 */
-			this.emit('result', subvalue, match);
+				/**
+				 * Result event
+				 * @event JsonGlob#result
+				 * @type {any}
+				 */
+				this.emit('result', subvalue, match);
+			} catch (err) {
+				this.emit('error', err);
+			}
 		});
 	}
 

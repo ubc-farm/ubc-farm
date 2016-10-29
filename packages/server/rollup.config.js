@@ -4,6 +4,7 @@ export default {
 	entry: 'src/index.js',
 	sourceMap: true,
 	external: [
+		'fs',
 		'path',
 		'glob',
 		'hapi',

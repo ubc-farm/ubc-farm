@@ -4,10 +4,15 @@ import { server as serverPromise, importPlugins } from 'ubc-farm-server';
 
 /* eslint-disable no-console */
 
-const { _: patterns } = minimist(process.argv.slice(2));
+const argv = minimist(process.argv.slice(2), {
+	boolean: ['stack'],
+});
+
 (async () => {
+	if (argv._.length === 0) throw new TypeError('No plugins specified');
+
 	const server = await serverPromise;
-	const plugins = await importPlugins(patterns, server);
+	const plugins = await importPlugins(argv._, server);
 
 	server.route({
 		method: 'GET',
@@ -27,4 +32,7 @@ const { _: patterns } = minimist(process.argv.slice(2));
 	// Doesn't seem to properly list plugins...
 	console.log('\nPlugins loaded:');
 	Object.keys(plugins).forEach(name => console.log(name));
-})();
+})().catch((err) => {
+	if (argv.stack) console.error(err);
+	else console.error(err.message);
+});

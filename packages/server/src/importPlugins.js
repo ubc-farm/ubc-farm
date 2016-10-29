@@ -30,15 +30,16 @@ export default async function importPlugins(patterns, server) {
 			keypath: 'ubc-farm.server-plugin',
 		});
 
-		const globber = new JsonGlob(pattern, opts).on('result', (str, match) => {
-			const isString = typeof match === 'string';
-			const pluginPath = join(dirname(isString ? match : match.register), str);
+		const globber = new JsonGlob(pattern, opts)
+			.on('result', (str, match) => {
+				const isString = typeof match === 'string';
+				const pluginPath = join(dirname(isString ? match : match.register), str);
 
-			const register = require(pluginPath);
-			const plugin = Object.assign({ once: true }, match, { register });
+				const register = require(pluginPath);
+				const plugin = Object.assign({ once: true }, match, { register });
 
-			plugins.push(server.register(plugin).then(() => plugin));
-		});
+				plugins.push(server.register(plugin).then(() => plugin));
+			});
 
 		return globber.done();
 	}));
@@ -50,6 +51,28 @@ export default async function importPlugins(patterns, server) {
 
 		pluginInfo[name] = route;
 	}
+
+	server.route({
+		method: 'GET',
+		path: '/services',
+		handler: (req, reply) => reply(pluginInfo).type('application/json'),
+		config: {
+			response: {
+				schema(value, opts, next) {
+					if (typeof value === 'object' && value !== null) {
+						if (Object.keys(value).some(key => key[value].endsWith('/'))) {
+							next(new Error('Some values end in a slash (/)'));
+						} else {
+							next();
+						}
+					} else {
+						next(new TypeError('Response is not an object'));
+					}
+				},
+			},
+			cors: true,
+		},
+	});
 
 	return pluginInfo;
 }
