@@ -20,10 +20,9 @@
     "test": "tape \"**/*.spec.js\""
   },
   "files": [
-    "calendar",
-    "class",
-    "function",
     "dist",
+    "lib",
+    "GeoJSON",
     "index.js"
   ]
 }
