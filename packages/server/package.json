@@ -4,9 +4,7 @@
   "description": "Server for the ubc-farm program suite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
-  "bin": {
-    "ubc-farm-server": "./bin/ubc-farm-server"
-  },
+  "bin": "./bin/ubc-farm-server",
   "dependencies": {
     "glob": "^7.1.1",
     "handlebars": "^4.0.5",
@@ -38,7 +36,8 @@
   "repository": "ubc-farm/server",
   "bugs": "https://github.com/ubc-farm/server/issues",
   "scripts": {
-    "prepare": "rollup -c && rollup -c rollup.config.cli.js"
+    "prepare": "rollup -c && rollup -c rollup.config.cli.js",
+    "prepublish": "npm run prepare"
   },
   "files": [
     "dist",
