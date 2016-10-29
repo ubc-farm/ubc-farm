@@ -14,12 +14,6 @@ const argv = minimist(process.argv.slice(2), {
 	const server = await serverPromise;
 	const plugins = await importPlugins(argv._, server);
 
-	server.route({
-		method: 'GET',
-		path: '/services',
-		handler: (req, reply) => reply(plugins).type('application/json'),
-	});
-
 	await server.start();
 	const { connections } = server;
 	if (connections.length === 1) {
