@@ -1,22 +1,26 @@
 {
-  "name": "ubc-farm-money",
-  "version": "2.1.1",
+  "name": "@ubc-farm/money",
+  "version": "3.0.0",
   "description": "Utility class used to represent money",
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/money",
-	"main": "dist/index.js",
-	"jsnext:main": "src/index.js",
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"tape": "^4.6.0"
-	},
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
+  "devDependencies": {
+    "@ubc-farm/eslint-config": "^4.0.0",
+    "eslint": "^3.9.0",
+    "eslint-plugin-import": "^2.0.1",
+    "rollup": "0.34.2",
+    "tape": "^4.6.0"
+  },
   "scripts": {
-		"prepublish": "rollup -c",
-		"test": "rollup -f cjs test/class-parse.js | node && rollup -f cjs test/parse.js | node ",
-		"docs": "rollup -f cjs src/index.js | jsdoc2md > README.md"
-	},
-	"files": [
-		"src",
-		"dist"
-	]
+    "prepare": "rollup -c",
+    "prepublish": "npm run prepare",
+    "test": "rollup -f cjs test/class-parse.js | node && rollup -f cjs test/parse.js | node ",
+    "docs": "rollup -f cjs src/index.js | jsdoc2md > README.md"
+  },
+  "files": [
+    "dist"
+  ]
 }
