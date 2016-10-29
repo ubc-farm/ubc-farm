@@ -7,7 +7,7 @@ import JsonGlob from './JsonGlob.js';
  * `ubc-farm.server-plugin` property and requires the file listed there.
  * @param {string[]} patterns in glob format
  * @param {Hapi.Server} server to register plugin to
- * @returns {Promise<void>} resolves once plugins have registered.
+ * @returns {Promise<Object>} resolves once plugins have registered.
  */
 export default async function importPlugins(patterns, server) {
 	if (!server) throw new TypeError('Missing Hapi server');
@@ -24,7 +24,7 @@ export default async function importPlugins(patterns, server) {
 	};
 
 	const plugins = [];
-	const globsDone = Promise.all(patterns.map((pattern) => {
+	await Promise.all(patterns.map((pattern) => {
 		const opts = Object.assign({}, globOptions, {
 			pattern: patterns.filter(v => v !== pattern),
 			keypath: 'ubc-farm.server-plugin',
@@ -33,16 +33,23 @@ export default async function importPlugins(patterns, server) {
 		const globber = new JsonGlob(pattern, opts).on('result', (str, match) => {
 			const isString = typeof match === 'string';
 			const pluginPath = join(dirname(isString ? match : match.register), str);
-			const register = require(pluginPath);
 
-			const plugin = isString
-				? server.register(register, { once: true })
-				: server.register(Object.assign({ once: true }, match, { register }));
-			plugins.push(plugin);
+			const register = require(pluginPath);
+			const plugin = Object.assign({ once: true }, match, { register });
+
+			plugins.push(server.register(plugin).then(() => plugin));
 		});
 
 		return globber.done();
 	}));
 
-	return globsDone.then(() => Promise.all(plugins));
+	const pluginInfo = {};
+	for (const { register: { attributes }, route = '' } of await Promise.all(plugins)) {
+		const name = attributes.name || (attributes.pkg && attributes.pkg.name);
+		if (!name) throw new Error("Can't find a plugin name");
+
+		pluginInfo[name] = route;
+	}
+
+	return pluginInfo;
 }

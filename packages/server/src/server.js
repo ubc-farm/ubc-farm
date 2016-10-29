@@ -6,25 +6,26 @@ import Handlebars from 'handlebars';
 
 const showDebug = process.env.NODE_ENV === 'development' && ['error'];
 
-export default (async () => {
-	const server = new Server({
-		connections: {
-			routes: {
-				cors: true,
-				response: {
-					emptyStatusCode: 204,
-					failAction: 'log',
-				},
+const server = new Server({
+	connections: {
+		routes: {
+			cors: true,
+			response: {
+				emptyStatusCode: 204,
+				failAction: 'log',
 			},
 		},
-		debug: { log: showDebug, request: showDebug },
-	});
+	},
+	debug: { log: showDebug, request: showDebug },
+});
 
-	const port = parseInt(process.env.npm_package_config_port, 10);
-	server.connection({
-		port: Number.isNaN(port) ? null : port,
-	});
+const port = parseInt(process.env.npm_package_config_port, 10);
+server.connection({
+	port: Number.isNaN(port) ? null : port,
+	labels: 'default',
+});
 
+export default (async () => {
 	await server.register([Inert, Vision]);
 
 	await server.views({

@@ -7,7 +7,13 @@ import { server as serverPromise, importPlugins } from 'ubc-farm-server';
 const { _: patterns } = minimist(process.argv.slice(2));
 (async () => {
 	const server = await serverPromise;
-	await importPlugins(patterns, server);
+	const plugins = await importPlugins(patterns, server);
+
+	server.route({
+		method: 'GET',
+		path: '/services',
+		handler: (req, reply) => reply(plugins).type('application/json'),
+	});
 
 	await server.start();
 	const { connections } = server;
@@ -17,11 +23,8 @@ const { _: patterns } = minimist(process.argv.slice(2));
 		console.log('Server started with connections: ');
 		console.log(connections.map(c => c.info));
 	}
-/*
+
 	// Doesn't seem to properly list plugins...
 	console.log('\nPlugins loaded:');
-	[server, ...connections].forEach(
-		({ plugins }) => console.log(Object.keys(plugins).join(' '))
-	);
-*/
+	Object.keys(plugins).forEach(name => console.log(name));
 })();
