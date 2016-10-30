@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/server",
-  "version": "2.1.2",
+  "version": "2.2.1",
   "description": "Server for the ubc-farm program suite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -12,8 +12,6 @@
     "handlebars": "^4.0.5",
     "hapi": "^15.1.1",
     "inert": "^4.0.2",
-    "minimist": "^1.2.0",
-    "object.values": "^1.0.3",
     "vision": "^4.1.0"
   },
   "devDependencies": {
@@ -30,9 +28,13 @@
     "blue-tape": "^1.0.0",
     "eslint": "^3.8.0",
     "eslint-plugin-import": "^2.0.1",
+    "minimist": "^1.2.0",
+    "object.values": "^1.0.3",
     "proxyquire": "^1.7.10",
     "rollup": "^0.36.3",
-    "rollup-plugin-babel": "^2.6.1"
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-node-resolve": "^2.0.0"
   },
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
@@ -44,7 +46,7 @@
   },
   "files": [
     "dist",
-    "bin/ubc-farm-server",
+    "bin/ubc-farm-server.js",
     "template-helpers",
     "template-partials"
   ]

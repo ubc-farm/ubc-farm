@@ -1,4 +1,6 @@
 import babel from 'rollup-plugin-babel';
+import commonjs from 'rollup-plugin-commonjs';
+import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
 	entry: 'src/index.js',
@@ -11,9 +13,12 @@ export default {
 		'inert',
 		'vision',
 		'handlebars',
-		'object.values/polyfill',
 	],
-	plugins: [babel()],
+	plugins: [
+		babel({ exclude: 'node_modules/**' }),
+		commonjs(),
+		nodeResolve(),
+	],
 	targets: [
 		{ dest: 'dist/index.es.js', format: 'es' },
 		{ dest: 'dist/index.cjs.js', format: 'cjs' },
