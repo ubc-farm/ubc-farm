@@ -43,7 +43,7 @@
   "bugs": "https://github.com/ubc-farm/server/issues",
   "scripts": {
     "prepare:cli": "rollup -c rollup.config.cli.js",
-    "prepare:helper": "rollup -c -o template-helpers/eachEntry.js template-helpers/eachEntry.mjs",
+    "prepare:helper": "rollup -c rollup.config.test.js -o template-helpers/eachEntry.js template-helpers/src/eachEntry.js",
     "prepare": "rollup -c && npm run prepare:cli && npm run prepare:helper",
     "prepublish": "npm run prepare"
   },

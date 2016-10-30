@@ -1,3 +1,5 @@
+'use strict';
+
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
@@ -58,5 +60,4 @@ function eachEntry(map, options) {
 	return result;
 }
 
-export default eachEntry;
-//# sourceMappingURL=eachEntry.js.map
+module.exports = eachEntry;

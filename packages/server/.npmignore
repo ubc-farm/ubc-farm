@@ -1,2 +1,2 @@
-template-helpers/*.mjs
+template-helpers/src/**
 bin/src/**
