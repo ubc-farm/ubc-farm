@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/server",
-  "version": "2.2.1",
+  "version": "2.3.1",
   "description": "Server for the ubc-farm program suite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -20,17 +20,17 @@
     "@types/handlebars": "^4.0.31",
     "@types/hapi": "^13.0.36",
     "@types/minimist": "^1.1.29",
+    "@types/node": "^6.0.46",
     "@types/proxyquire": "^1.3.27",
     "@ubc-farm/eslint-config": "ubc-farm/eslint-config",
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-es2017": "^6.16.0",
     "blue-tape": "^1.0.0",
+    "es7-object-polyfill": "0.0.3",
     "eslint": "^3.8.0",
     "eslint-plugin-import": "^2.0.1",
     "minimist": "^1.2.0",
-    "object.entries": "^1.0.3",
-    "object.values": "^1.0.3",
     "proxyquire": "^1.7.10",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
@@ -42,7 +42,9 @@
   "repository": "ubc-farm/server",
   "bugs": "https://github.com/ubc-farm/server/issues",
   "scripts": {
-    "prepare": "rollup -c && rollup -c rollup.config.cli.js",
+    "prepare:cli": "rollup -c rollup.config.cli.js",
+    "prepare:helper": "rollup -c -o template-helpers/eachEntry.js template-helpers/eachEntry.mjs",
+    "prepare": "rollup -c && npm run prepare:cli && npm run prepare:helper",
     "prepublish": "npm run prepare"
   },
   "files": [
