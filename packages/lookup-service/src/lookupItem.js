@@ -14,15 +14,30 @@ export default function lookupItem(latinName) {
 		titles: latinName,
 	}))
 	.then(res => res.json())
-	.then(({ query: { pages }}) => {
+	.then(({ query: { pages } }) => {
 		const id = parseInt(Object.keys(pages)[0], 10);
-		if (id === -1) throw new NotFoundError();
+		// if (id === -1) throw new NotFoundError();
 
 		const plantData = pages[id];
-		return {
-			// latinName,
-			info: plantData.fullurl,
-			image: plantData.images.length > 0 ? plantData.images[0].title : null
-		};
+
+		if (!plantData.images) return { info: plantData.fullurl, image: null };
+
+		return fetch(ENDPOINT + stringify({
+			action: 'query',
+			format: 'json',
+			prop: 'imageinfo',
+			iiprop: 'url',
+			titles: plantData.images[plantData.images.length - 1].title,
+		}))
+		.then(res => res.json())
+		.then(({ query: { pages: imagePages } }) => {
+			const imageId = parseInt(Object.keys(imagePages)[0], 10);
+			const { imageinfo: [{ url }] } = imagePages[imageId];
+
+			return {
+				info: plantData.fullurl,
+				image: url,
+			};
+		});
 	});
 }

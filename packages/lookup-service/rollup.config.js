@@ -1,3 +1,6 @@
+import json from 'rollup-plugin-json';
+import { resolve } from 'path';
+
 export default {
 	entry: 'src/lookupItem.js',
 	sourceMap: true,
@@ -9,4 +12,8 @@ export default {
 	external(id) {
 		return !id.includes('/');
 	},
-}
+	plugins: [json()],
+	paths: {
+		[resolve(process.cwd(), './src/lookupItem.js')]: './index.cjs.js',
+	},
+};

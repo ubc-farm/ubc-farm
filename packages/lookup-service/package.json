@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/lookup-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API for looking up static information about plants grown at the farm",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -14,22 +14,27 @@
   "devDependencies": {
     "@types/joi": "^9.0.32",
     "@types/node-fetch": "^1.6.5",
+    "@ubc-farm/server": "^2.3.1",
     "@ubc-farm/eslint-config": "ubc-farm/eslint-config",
     "eslint": "^3.8.1",
     "eslint-plugin-import": "^2.0.1",
-    "rollup": "^0.36.3"
+    "rollup": "^0.36.3",
+    "rollup-plugin-json": "^2.0.2"
   },
   "peerDependencies": {
-    "@ubc-farm/server": "ubc-farm/server"
+    "@ubc-farm/server": "^2.3.1"
   },
   "scripts": {
     "prepare": "rollup -c && rollup src/plugin.js -c -o dist/plugin.js -f cjs",
-    "start": "ubc-farm-server ."
+    "prepublish": "npm run prepare",
+    "start": "ubc-farm-server ./package.json --stack"
   },
   "ubc-farm": {
     "server-plugin": {
       "register": "dist/plugin.js",
-      "routes": { "prefix": "/lookup" }
+      "routes": {
+        "prefix": "/lookup"
+      }
     }
   }
 }
