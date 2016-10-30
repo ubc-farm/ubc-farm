@@ -2,6 +2,7 @@
 	"extends": "@ubc-farm/eslint-config",
 	"rules": {
 		"global-require": "off",
-		"import/no-dynamic-require": "off"
+		"import/no-dynamic-require": "off",
+		"import/no-commonjs": "off"
 	}
 }
