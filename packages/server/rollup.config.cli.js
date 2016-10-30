@@ -2,9 +2,9 @@ import babel from 'rollup-plugin-babel';
 
 export default {
 	entry: 'bin/src/index.js',
-	dest: 'bin/ubc-farm-server',
+	dest: 'bin/ubc-farm-server.js',
 	format: 'cjs',
-	banner: '#!/user/bin/env node',
+	banner: '#! /usr/bin/env node',
 	sourceMap: true,
 	external: ['minimist', 'ubc-farm-server'],
 	plugins: [babel()],

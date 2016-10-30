@@ -35,8 +35,8 @@ The package can be installed locally or globally using npm or yarn.
 All glob arguments will only search for folders.
 
 ```
-yarn global add ubc-farm/server
-npm install ubc-farm/server -g
+yarn add @ubc-farm/server
+npm install @ubc-farm/server
 ```
 
 ## Handlebars

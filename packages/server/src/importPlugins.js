@@ -1,4 +1,4 @@
-import 'object.values';
+import values from 'object.values/polyfill';
 import { join, dirname } from 'path';
 import JsonGlob from './JsonGlob.js';
 
@@ -59,10 +59,10 @@ export default async function importPlugins(patterns, server) {
 		handler: (req, reply) => reply(pluginInfo).type('application/json'),
 		config: {
 			response: {
-				schema: (value, opts, next) => Promise.resolve().then(() => {
-					if (typeof value !== 'object' || value === null) {
+				schema: (json, opts, next) => Promise.resolve().then(() => {
+					if (typeof json !== 'object' || json === null) {
 						throw new TypeError('Response is not an object');
-					} else if (Object.values(value).some(url => url.endsWith('/'))) {
+					} else if (values(json).some(url => url.endsWith('/'))) {
 						throw new Error('Some values end in a slash (/)');
 					}
 				}).then(next, next),

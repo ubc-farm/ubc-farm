@@ -11,6 +11,7 @@ export default {
 		'inert',
 		'vision',
 		'handlebars',
+		'object.values/polyfill',
 	],
 	plugins: [babel()],
 	targets: [
