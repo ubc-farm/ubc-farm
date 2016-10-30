@@ -5,7 +5,7 @@ Column.propTypes = {
 	isKey: PropTypes.bool,
 	dataSort: PropTypes.bool,
 	dataFormat: PropTypes.func, // (cell, row, extraFormatData) => ReactNode
-	extraFormatData: PropTypes.any,
+	extraFormatData: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 	filterFormatted: PropTypes.bool,
 	filterValue: PropTypes.func, // (cell, row) => any
 	csvFormat: PropTypes.func, // (cell, row) => string
@@ -16,7 +16,7 @@ Column.propTypes = {
 	searchable: PropTypes.bool,
 	columnTitle: PropTypes.bool,
 	sortFunc: PropTypes.func, // (a, b, order. sortField, extraSortData) => number
-	extraSortData: PropTypes.any,
+	extraSortData: PropTypes.any, // eslint-disable-line react/forbid-prop-types
 	// (cell, row, rowIndex, columnIndex) => string
 	headerClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 	// (cell, row, rowIndex, columnIndex) => string
@@ -45,4 +45,4 @@ Column.propTypes = {
 
 Column.defaultProps = {
 	searchable: true,
-}
+};

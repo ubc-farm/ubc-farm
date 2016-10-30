@@ -105,4 +105,4 @@ Table.defaultProps = {
 	saveText: 'Save',
 	closeText: 'Close',
 	exportCSVText: 'Export CSV',
-}
+};
