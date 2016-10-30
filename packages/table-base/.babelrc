@@ -1,0 +1,11 @@
+{
+	"presets": ["es2017", "es2016"],
+  "plugins": [
+		"external-helpers",
+		["transform-react-jsx", { "pragma": "createElement" }]
+	],
+  "ignore": [
+    "node_modules/**",
+		"dist/**"
+  ]
+}

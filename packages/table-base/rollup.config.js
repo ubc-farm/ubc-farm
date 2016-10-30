@@ -1,14 +1,10 @@
 import babel from 'rollup-plugin-babel';
-import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
 	entry: 'index.js',
 	external: ['react'],
 	plugins: [
-		babel({
-			plugins: ['transform-react-jsx', 'external-helpers'],
-		}),
-		nodeResolve({ jsnext: true }),
+		babel(),
 	],
 	sourceMap: true,
 	targets: [
