@@ -11,6 +11,7 @@
     "hapi": "^15.1.1",
     "inert": "^4.0.2",
     "minimist": "^1.2.0",
+    "object.values": "^1.0.3",
     "vision": "^4.1.0"
   },
   "devDependencies": {
