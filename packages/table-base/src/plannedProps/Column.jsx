@@ -22,7 +22,7 @@ Column.propTypes = {
 	// (cell, row, rowIndex, columnIndex) => string
 	columnClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 	editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
-		type: PropTypes.oneOf(['textarea', 'select', 'checkbox', 'datetime']),
+		type: PropTypes.string,
 		validator: PropTypes.func, // (cellValue) => boolean
 		options: PropTypes.arrayOf(PropTypes.string),
 	})]),

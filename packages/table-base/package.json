@@ -1,15 +1,21 @@
 {
-  "name": "@ubc-farm/table",
+  "name": "@ubc-farm/table-base",
   "version": "2.0.0",
   "description": "Code for a react powered table",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
-  "repository": "https://github.com/ubc-farm/table",
+  "repository": "https://github.com/ubc-farm/table-base",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "dependencies": {
-    "react": "^15.3.2"
+    "@types/react-redux": "^4.4.32",
+    "@types/redux": "^3.6.31",
+    "es7-object-polyfill": "0.0.3",
+    "lodash-es": "^4.16.4",
+    "react": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "@types/react": "^0.14.43",

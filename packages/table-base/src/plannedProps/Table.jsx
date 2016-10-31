@@ -2,6 +2,7 @@ import { PropTypes } from 'react';
 
 Table.propTypes = {
 	data: PropTypes.arrayOf(PropTypes.object).isRequired,
+	children: PropTypes.arrayOf(PropTypes.element).isRequired,
 	keyField: PropTypes.string,
 	remote: PropTypes.bool,
 
@@ -9,6 +10,11 @@ Table.propTypes = {
 	ignoreSinglePage: PropTypes.bool,
 	// (rowData, rowIndex) => string
 	trClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+	headClassName: PropTypes.string,
+	headRowClassName: PropTypes.string,
+	bodyClassName: PropTypes.string,
+	containerClassName: PropTypes.string,
+	tableClassName: PropTypes.string,
 
 	insertRow: PropTypes.bool,
 	deleteRow: PropTypes.bool,
