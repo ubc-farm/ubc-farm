@@ -1,23 +1,17 @@
 import 'es7-object-polyfill';
-import { createElement, PropTypes, PureComponent } from 'react';
+import { createElement, PropTypes, Component } from 'react';
 /** @jsx createElement */
 
 /**
- * A checkbox component. Adds a 'indeterminate' prop, which allows for the
- * indeterminate value of a checkbox to be set.
+ * A presentational checkbox component.
+ * Adds an 'indeterminate' prop to the normal checkbox properties,
+ * which allows for the indeterminate value of a checkbox to be set by React.
  */
-export default class Checkbox extends PureComponent {
-	static get propTypes() {
-		return { indeterminate: PropTypes.bool };
-	}
-
-	componentDidMount() {
-		this.handleIndeterminate();
-	}
-
+export default class Checkbox extends Component {
+	componentDidMount() {	this.setIndeterminate(); }
 	componentDidUpdate(prevProps) {
 		if (this.props.indeterminate !== prevProps.indeterminate) {
-			this.handleIndeterminate();
+			this.setIndeterminate();
 		}
 	}
 
@@ -25,9 +19,7 @@ export default class Checkbox extends PureComponent {
 	 * Indeterminate must be set manually, so get a ref to the checkbox and
 	 * apply the indeterminate value if nessecary.
 	 */
-	handleIndeterminate() {
-		this.ref.indeterminate = this.props.indeterminate;
-	}
+	setIndeterminate() { this.ref.indeterminate = this.props.indeterminate; }
 
 	render() {
 		const props = Object.entries(this.props)
@@ -40,3 +32,7 @@ export default class Checkbox extends PureComponent {
 		return <input {...props} />;
 	}
 }
+
+Checkbox.propTypes = {
+	indeterminate: PropTypes.bool,
+};
