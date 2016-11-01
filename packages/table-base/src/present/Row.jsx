@@ -9,18 +9,20 @@ import Cell from './Cell.jsx';
  * adds an extra class that could be styled with CSS.
  */
 const Row = props => (
-	<td
+	<tr
 		{...props}
-		className={cx(
-			'farmtable-Row',
-			{ 'farmtable-Row--selected': props.selected },
-			props.className,
-		)}
+		className={cx('farmtable-Row', props.className, {
+			'farmtable-Row--unselectable': props.unselectable,
+			'farmtable-Row--selected': props.selected,
+			[props.selectedClassName]: props.selected,
+		})}
 	/>
 );
 Row.propTypes = {
 	className: PropTypes.string,
 	selected: PropTypes.bool,
+	unselectable: PropTypes.bool,
+	selectedClassName: PropTypes.string,
 };
 export default Row;
 

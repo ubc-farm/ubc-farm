@@ -26,6 +26,7 @@ Column.propTypes = {
 		validator: PropTypes.func, // (cellValue) => boolean
 		options: PropTypes.arrayOf(PropTypes.string),
 	})]),
+	customEditor: PropTypes.element,
 	autoKey: PropTypes.bool,
 	filter: PropTypes.shape({
 		type: PropTypes.oneOf([

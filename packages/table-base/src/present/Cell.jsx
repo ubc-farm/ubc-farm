@@ -1,4 +1,5 @@
 import { createElement, PropTypes } from 'react';
+import { omit } from 'lodash-es';
 import { classList as cx } from '@ubc-farm/utils';
 /** @jsx createElement */
 
@@ -7,15 +8,14 @@ import { classList as cx } from '@ubc-farm/utils';
  * the cell will try to use the noDataText prop.
  */
 const Cell = props => (
-	<td	{...props} className={cx('farmtable-Cell', props.className)}>
-		{ props.children || props.noDataText || null }
-	</td>
+	<td
+		{...omit(props, 'cellEdit', 'rowId')}
+		className={cx('farmtable-Cell', props.className)}
+	/>
 );
 
 Cell.propTypes = {
 	className: PropTypes.string,
-	children: PropTypes.node,
-	noDataText: PropTypes.node,
 };
 
 export default Cell;
