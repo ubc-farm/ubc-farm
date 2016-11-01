@@ -15,7 +15,7 @@ export function getColumnInfo(columnElements) {
 			// Use formatted data for search/filtering
 		//	filterFormatted: props.filterFormatted,
 			// Enable editing. If object, more settings avaliable
-		//	editable: props.editable,
+			editable: props.editable,
 		//	customEditor: props.customEditor, // Custom editing component
 			hidden: props.hidden, // Hide the column
 			// Don't show the column as a field in the insert dialog

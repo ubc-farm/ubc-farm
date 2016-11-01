@@ -13,7 +13,7 @@ const Body = (props) => {
 				const id = rowData[keyField];
 				return (
 					<Row
-						{...props.selectRow}
+						{...selectRow}
 						key={id} id={id} index={index}
 						columnInfo={props.columnInfo}
 						selectEnabled={selectRow}

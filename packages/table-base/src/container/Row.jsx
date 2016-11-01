@@ -41,12 +41,11 @@ export default class Row extends Component {
 					: null }
 				{ map(...props.columnInfo, ([key, column]) => (
 					<Cell
-						key={key}
+						key={key} rowId={props.id} className={column.className}
+						columnName={key} column={column} rowData={rowData}
 						hidden={column.hidden}
-						className={column.className}
-						rowData={rowData}
-						cellEdit={props.cellEdit}
-						rowId={props.id}
+						editable={column.editable} cellEdit={props.cellEdit}
+						clickToSelectAndEditCell={selectEnabled && props.clickToSelectAndEditCell}
 					>
 						{
 							column.format(rowData[key], rowData, props.index)
@@ -71,6 +70,7 @@ Row.propTypes = {
 	selectEnabled: PropTypes.bool,
 	mode: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
 	clickToSelect: PropTypes.bool,
+	clickToSelectAndEditCell: PropTypes.bool,
 	selectedClassName: PropTypes.string,
 	selected: PropTypes.bool,
 	unselectable: PropTypes.bool,
