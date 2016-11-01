@@ -1,5 +1,4 @@
 import { createElement, PropTypes } from 'react';
-import { omit } from 'lodash-es';
 import { classList as cx } from '@ubc-farm/utils';
 /** @jsx createElement */
 
@@ -9,7 +8,7 @@ import { classList as cx } from '@ubc-farm/utils';
  */
 const Cell = props => (
 	<td
-		{...omit(props, 'cellEdit', 'rowId')}
+		{...props}
 		className={cx('farmtable-Cell', props.className)}
 	/>
 );

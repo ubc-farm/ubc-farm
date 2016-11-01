@@ -1,14 +1,23 @@
 import { createElement, PropTypes, Component } from 'react';
 import { map } from 'lodash-es';
 import RowBase, { RowSelect } from '../present/Row.jsx';
-import Cell from '../present/Cell.jsx';
+import Cell from './Cell.jsx';
 /** @jsx createElement */
 
+/**
+ * Creates row with cell layout order matching that of the given columns
+ */
 export default class Row extends Component {
 	constructor(props) {
 		super(props);
 
 		this.handleChange = this.handleChange.bind(this);
+		this.onMouseEnter = props.onRowMouseEnter
+			? props.onRowMouseEnter.bind(undefined, props.rowData)
+			: undefined;
+		this.onMouseExit = props.onRowMouseOut
+			? props.onRowMouseOut.bind(undefined, props.rowData)
+			: undefined;
 	}
 
 	handleChange(event) {
@@ -30,6 +39,8 @@ export default class Row extends Component {
 				className={className && (typeof className === 'function'
 					?	className(rowData, props.index)
 					: className)}
+				onMouseEnter={this.onMouseEnter}
+				onMouseExit={this.onMouseExit}
 			>
 				{ (selectEnabled && !props.hideSelectColumn) ?
 					<RowSelect
@@ -39,12 +50,15 @@ export default class Row extends Component {
 						disabled={unselectable}
 					/>
 					: null }
-				{ map(...props.columnInfo, ([key, column]) => (
+				{ map([...props.columnInfo], ([key, column]) => (
 					<Cell
-						key={key} rowId={props.id} className={column.className}
-						columnName={key} column={column} rowData={rowData}
+						key={key} columnName={key}
+						column={column} rowData={rowData}
+						rowId={props.id}
+						className={column.className}
 						hidden={column.hidden}
-						editable={column.editable} cellEdit={props.cellEdit}
+						editable={column.editable}
+						cellEdit={props.cellEdit}
 						clickToSelectAndEditCell={selectEnabled && props.clickToSelectAndEditCell}
 					>
 						{
@@ -65,6 +79,9 @@ Row.propTypes = {
 	index: PropTypes.number.isRequired,
 	noDataText: PropTypes.node,
 	className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+
+	onRowMouseEnter: PropTypes.func,
+	onRowMouseOut: PropTypes.func,
 
 	cellEdit: PropTypes.object,
 	selectEnabled: PropTypes.bool,

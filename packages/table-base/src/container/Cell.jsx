@@ -28,6 +28,11 @@ export default class Cell extends Component {
 		if (this.props.editable) this.setState({ editing: true });
 	}
 
+	renderInput() {
+		if (!this.state.editing) return null;
+		return null; // TODO;
+	}
+
 	render() {
 		const clickListener = {};
 		if (this.props.editable) {
@@ -44,17 +49,13 @@ export default class Cell extends Component {
 		}
 
 		return (
-			<Cell
+			<CellBase
 				{...clickListener}
+				className={this.state.editing && 'farmtable-Cell--editing'}
 			>
 				{ this.state.editing ? this.renderInput() : this.props.children }
-			</Cell>
+			</CellBase>
 		);
-	}
-
-	renderInput() {
-		if (!this.state.editing) return null;
-		return null // TODO;
 	}
 }
 

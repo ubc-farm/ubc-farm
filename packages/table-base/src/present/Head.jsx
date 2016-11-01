@@ -5,17 +5,15 @@ import Checkbox from './Checkbox.jsx';
 
 /** Presentational component for a thead */
 const Head = props => (
-	<thead
-		{...props}
-		className={cx('farmtable-Head', props.className)}
-	>
-		<tr className="farmtable-Head-row">
+	<thead {...props} className={cx('farmtable-Head', props.className)}>
+		<tr className={cx('farmtable-Head-row', props.rowClassName)}>
 			{ props.children }
 		</tr>
 	</thead>
 );
 Head.propTypes = {
 	className: PropTypes.string,
+	rowClassName: PropTypes.string,
 	children: PropTypes.node,
 };
 export default Head;

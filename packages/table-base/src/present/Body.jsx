@@ -9,20 +9,23 @@ const Body = (props) => {
 	const { selectRow, keyField } = props;
 	return (
 		<tbody className={cx('farmtable-Body', props.bodyClassName)}>
-			{ map(...props.tableData, (rowData, index) => {
+			{ map(props.tableData, (rowData, index) => {
 				const id = rowData[keyField];
 				return (
 					<Row
 						{...selectRow}
-						key={id} id={id} index={index}
-						columnInfo={props.columnInfo}
-						selectEnabled={selectRow}
+						selectEnabled={!!selectRow}
 						selectedClassName={selectRow && selectRow.className}
 						selected={selectRow && selectRow.selected.has(id)}
+						rowData={rowData}
+						key={id} id={id} index={index}
+						columnInfo={props.columnInfo}
 						unselectable={selectRow && selectRow.unselectable.has(id)}
 						className={props.trClassName}
 						cellEdit={props.cellEdit}
 						noDataText={props.noDataText}
+						onRowMouseEnter={props.onRowMouseEnter}
+						onRowMouseOut={props.onRowMouseOut}
 					/>
 				);
 			}) }
@@ -52,6 +55,9 @@ Body.propTypes = {
 	}),
 
 	cellEdit: PropTypes.object,
+
+	onRowMouseEnter: PropTypes.func,
+	onRowMouseOut: PropTypes.func,
 };
 
 export default Body;
