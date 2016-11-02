@@ -71,7 +71,7 @@ export const HeadCell = props => (
 	<HeadCellBase
 		hidden={props.hidden}
 		onClick={props.sort ?
-			() => props.onSortChange(props.name, props.sortOrder)
+			() => props.onSortChange(props.name)
 			: undefined}
 		className={cx(props.className,
 			props.sort && props.sortOrder !== 'none' && [

@@ -1,4 +1,4 @@
-import { Children, PropTypes } from 'react';
+import { Children } from 'react';
 
 /**
  * Converts the column ReactElements into objects with data for cells to look at.
@@ -6,7 +6,7 @@ import { Children, PropTypes } from 'react';
  * @returns {Map<string, Object>} columnInfo where the keys are the object key
  * that the column represents, and the object describes data about the column.
  */
-export function getColumnInfo(columnElements) {
+export default function getColumnInfo(columnElements) {
 	return new Map(Children.map(columnElements, ({ props }, index) => [
 		props.dataField,
 		{

@@ -23,7 +23,7 @@ const Table = props => (
 				sortOrder={props.sortOrder}
 				onSortChange={props.onSortChange}
 				isAllSelected={props.isAllSelected}
-				indeterminate={props.indeterminate}
+				indeterminate={props.selectRow && props.selectRow.selected.size > 0}
 				columnInfo={props.columnInfo}
 			/>
 			<Body
@@ -40,7 +40,7 @@ const Table = props => (
 			/>
 		</table>
 		{ props.footer }
-		{ props.paginationControls }
+		{ props.pagination }
 	</form>
 );
 
@@ -50,7 +50,7 @@ Table.propTypes = {
 	keyField: PropTypes.string.isRequired,
 	toolbar: PropTypes.node,
 	footer: PropTypes.node,
-	paginationControls: PropTypes.node,
+	pagination: PropTypes.node,
 
 	className: PropTypes.string,
 	containerClassName: PropTypes.string,
@@ -70,7 +70,6 @@ Table.propTypes = {
 	onSortChange: PropTypes.func,
 
 	isAllSelected: PropTypes.bool,
-	indeterminate: PropTypes.bool,
 	selectRow: PropTypes.shape({
 		mode: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
 		clickToSelect: PropTypes.bool,
