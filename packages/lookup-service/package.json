@@ -27,7 +27,7 @@
   "scripts": {
     "prepare": "rollup -c && rollup src/plugin.js -c -o dist/plugin.js -f cjs",
     "prepublish": "npm run prepare",
-    "start": "ubc-farm-server ./package.json --stack"
+    "start": "ubc-farm-server ./package.json"
   },
   "ubc-farm": {
     "server-plugin": {
