@@ -22,7 +22,12 @@
   ];
 
 	ReactDOM.render(
-		h(Table, { tableData },
+		h(Table, {
+			tableData,
+			 selectRow: {
+				 mode: 'checkbox'
+			 }
+		},
 			h(Column, { dataField: 'id', isKey: true }, 'ID'),
 			h(Column, { dataField: 'name' }, 'Name'),
 			h(Column, { dataField: 'price' }, 'Price ($)')

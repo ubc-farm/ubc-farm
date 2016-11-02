@@ -20,7 +20,8 @@ const Body = (props) => {
 						rowData={rowData}
 						key={id} id={id} index={index}
 						columnInfo={props.columnInfo}
-						unselectable={selectRow && selectRow.unselectable.has(id)}
+						unselectable={selectRow && selectRow.unselectable
+							&& selectRow.unselectable.has(id)}
 						className={props.trClassName}
 						cellEdit={props.cellEdit}
 						noDataText={props.noDataText}

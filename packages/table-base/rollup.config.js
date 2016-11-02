@@ -7,7 +7,7 @@ export default {
 	external: ['react'],
 	globals: { react: 'React' },
 	plugins: [
-		babel({ exclude: 'node_modules/**' }),
+		babel({ include: 'src/**', exclude: 'node_modules/**' }),
 		commonjs(),
 		nodeResolve(),
 	],

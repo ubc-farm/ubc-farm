@@ -25,6 +25,7 @@ const Table = props => (
 				isAllSelected={props.isAllSelected}
 				indeterminate={props.selectRow && props.selectRow.selected.size > 0}
 				columns={props.columnSource}
+				selectRow={props.selectRow}
 			/>
 			<Body
 				keyField={props.keyField}

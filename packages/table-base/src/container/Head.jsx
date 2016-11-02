@@ -8,8 +8,8 @@ import HeadBase, { HeadSelect } from '../present/Head.jsx';
 
 export default class Head extends Component {
 	renderSelect() {
-		const { props, props: { selectRow } } = this;
-		if (!selectRow || !selectRow.hideSelectColumn) return null;
+		const { props, props: { selectRow, isAllSelected } } = this;
+		if (!selectRow || selectRow.hideSelectColumn) return null;
 
 		if (selectRow.mode !== 'checkbox') {
 			return <HeadSelect hidden className="farmtable-Head-select" />;
@@ -18,8 +18,8 @@ export default class Head extends Component {
 		return (
 			<HeadSelect
 				onChange={props.onSelectAll}
-				checked={props.isAllSelected}
-				indeterminate={props.indeterminate}
+				checked={isAllSelected}
+				indeterminate={props.indeterminate && !isAllSelected}
 			/>
 		);
 	}

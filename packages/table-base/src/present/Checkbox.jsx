@@ -27,9 +27,15 @@ export default class Checkbox extends Component {
 				/* eslint-disable no-param-reassign */
 				if (key !== 'indeterminate' && key !== 'type') newProps[key] = value;
 				return newProps;
-			}, { type: 'checkbox' });
+			}, {});
 
-		return <input {...props} />;
+		return (
+			<input
+				{...props}
+				type="checkbox"
+				ref={(input) => { this.ref = input; }}
+			/>
+		);
 	}
 }
 
