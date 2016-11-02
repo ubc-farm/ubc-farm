@@ -1,7 +1,7 @@
 import { createElement, PropTypes, PureComponent } from 'react';
 import { bindAll } from 'lodash-es';
+import { getColumnInfo } from '../present/HeadColumn.jsx';
 import TableBase from '../present/Table.jsx';
-import getColumnInfo from '../read/getColumnInfo.js';
 /** @jsx createElement */
 
 export default class Table extends PureComponent {

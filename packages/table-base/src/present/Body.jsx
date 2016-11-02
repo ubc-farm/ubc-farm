@@ -1,6 +1,6 @@
 import { createElement, PropTypes } from 'react';
 import { map } from 'lodash-es';
-import { classList as cx } from '@ubc-farm/utils';
+import { classlist as cx } from '@ubc-farm/utils';
 import Row from '../container/Row.jsx';
 /** @jsx createElement */
 

@@ -1,5 +1,5 @@
 import { createElement, PropTypes } from 'react';
-import { classList as cx } from '@ubc-farm/utils';
+import { classlist as cx } from '@ubc-farm/utils';
 import Cell from './Cell.jsx';
 /** @jsx createElement */
 

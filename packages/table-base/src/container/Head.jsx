@@ -1,8 +1,9 @@
-import { createElement, cloneElement, PropTypes, Component, Children } from 'react';
-import { map } from 'lodash-es';
-import { classList as cx } from '@ubc-farm/utils';
-import HeadBase, { HeadCell as HeadCellBase, HeadSelect } from '../present/Head.jsx';
-import HeadColumn from '../present/HeadColumn.jsx';
+import {
+	createElement, cloneElement,
+	PropTypes, Component, Children,
+} from 'react';
+import { classlist as cx } from '@ubc-farm/utils';
+import HeadBase, { HeadSelect } from '../present/Head.jsx';
 /** @jsx createElement */
 
 export default class Head extends Component {
