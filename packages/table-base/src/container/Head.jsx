@@ -17,7 +17,7 @@ export default class Head extends Component {
 
 		return (
 			<HeadSelect
-				onChange={props.onSelectAll}
+				onChange={selectRow.onSelectAll}
 				checked={isAllSelected}
 				indeterminate={props.indeterminate && !isAllSelected}
 			/>

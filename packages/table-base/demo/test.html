@@ -21,11 +21,18 @@
     {id: 5, name: "name5", price: 110}
   ];
 
+	let sortList = new Set();
+
+	function update() {
 	ReactDOM.render(
 		h(Table, {
 			tableData,
+			remote: true,
 			 selectRow: {
-				 mode: 'checkbox'
+				 mode: 'checkbox',
+				 selected: sortList,
+				 onSelect: console.log,
+				 onSelectAll: console.log
 			 }
 		},
 			h(Column, { dataField: 'id', isKey: true }, 'ID'),
@@ -33,5 +40,7 @@
 			h(Column, { dataField: 'price' }, 'Price ($)')
 		)
 	, document.getElementById('reactRoot'))
+	}
+	update();
 </script>
 </html>

@@ -49,6 +49,7 @@ export default class Row extends Component {
 						checked={selected}
 						onChange={handleChange}
 						disabled={unselectable}
+						name={props.mode === 'radio' ? 'selected' : null}
 					/>
 					: null }
 				{ map([...props.columnInfo], ([key, column]) => (

@@ -47,8 +47,9 @@ export default class Table extends PureComponent {
 	}
 
 	getSelectSize() {
-		const { unselectable } = this.props.selectRow;
-		return this.state.selected.size - (unselectable ? unselectable.size : 0);
+		const { remote, selectRow: { selected, unselectable } } = this.props;
+		if (remote) return selected.size - (unselectable ? unselectable.size : 0);
+		else return this.state.selected.size - (unselectable ? unselectable.size : 0);
 	}
 
 	/** @returns {Object} equivalent to props.selectRow */
@@ -135,10 +136,11 @@ export default class Table extends PureComponent {
 		if (isAllSelected) {
 			this.setState({ selected: new Set() });
 		} else {
+			const { unselectable } = selectRow;
 			const toSelect = new Set();
 			const keyField = this.getKeyField();
 			for (const { [keyField]: id } of this.getDisplayedData()) {
-				if (!selectRow.unselectable.has(id)) toSelect.add(id);
+				if (!unselectable || !unselectable.has(id)) toSelect.add(id);
 			}
 			this.setState({ selected: toSelect });
 		}

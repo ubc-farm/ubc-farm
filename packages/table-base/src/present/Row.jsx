@@ -15,8 +15,7 @@ const Row = props => (
 		className={cx('farmtable-Row', props.className, {
 			'farmtable-Row--unselectable': props.unselectable,
 			'farmtable-Row--selected': props.selected,
-			[props.selectedClassName]: props.selected,
-		})}
+		}, props.selected && props.selectedClassName)}
 	/>
 );
 Row.propTypes = {
