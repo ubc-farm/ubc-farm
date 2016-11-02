@@ -1,7 +1,8 @@
-import { createElement, PropTypes, Component } from 'react';
+import { createElement, cloneElement, PropTypes, Component, Children } from 'react';
 import { map } from 'lodash-es';
 import { classList as cx } from '@ubc-farm/utils';
 import HeadBase, { HeadCell as HeadCellBase, HeadSelect } from '../present/Head.jsx';
+import HeadColumn from '../present/HeadColumn.jsx';
 /** @jsx createElement */
 
 export default class Head extends Component {
@@ -10,7 +11,7 @@ export default class Head extends Component {
 		if (!selectRow || !selectRow.hideSelectColumn) return null;
 
 		if (selectRow.mode !== 'checkbox') {
-			return <HeadCell className="farmtable-Head-select" />;
+			return <HeadSelect hidden className="farmtable-Head-select" />;
 		}
 
 		return (
@@ -23,33 +24,37 @@ export default class Head extends Component {
 	}
 
 	render() {
-		const { sortName, sortOrder, headClassName, headRowClassName } = this.props;
+		const { sortName, sortOrder, onSortChange } = this.props;
 
 		return (
 			<HeadBase
-				className={headClassName}
-				rowClassName={headRowClassName}
+				className={this.props.headClassName}
+				rowClassName={this.props.headRowClassName}
 			>
 				{ this.renderSelect() }
-				{ map([...this.props.columnInfo], ([key, column]) => (
-					<HeadCell
-						{...column}
-						key={key} name={key}
-						sortOrder={(column.sort && key === sortName)
-							? sortOrder
-							: 'none'}
-						onSortChange={this.props.onSortChange}
-					>
-						{ column.text }
-					</HeadCell>
-				)) }
+				{ Children.map(this.props.columns, (column) => {
+					const { dataField, dataSort } = column.props;
+					const extraProps = { key: dataField };
+					if (dataSort) {
+						const sorting = sortName === dataField && sortOrder !== 'none';
+						extraProps.onHeaderClick = () => onSortChange(dataField);
+						extraProps.headerClassName = cx(
+							column.props.headerClassName, {
+								'farmtable-HeadColumn--sort': sorting,
+								[`farmtable-HeadColumn--sort-${sortOrder}`]: sorting,
+							}
+						);
+					}
+
+					return cloneElement(column, extraProps);
+				}) }
 			</HeadBase>
 		);
 	}
 }
 
 Head.propTypes = {
-	columnInfo: PropTypes.instanceOf(Map).isRequired,
+	columns: PropTypes.arrayOf(PropTypes.element),
 	headClassName: PropTypes.string,
 	headRowClassName: PropTypes.string,
 
@@ -64,28 +69,4 @@ Head.propTypes = {
 		hideSelectColumn: PropTypes.bool,
 		onSelectAll: PropTypes.func, // (isAllSelected, rows) => boolean|string[]
 	}),
-};
-
-
-export const HeadCell = props => (
-	<HeadCellBase
-		hidden={props.hidden}
-		onClick={props.sort ?
-			() => props.onSortChange(props.name)
-			: undefined}
-		className={cx(props.className,
-			props.sort && props.sortOrder !== 'none' && [
-				'farmtable-Head-cell--sort',
-				`farmtable-Head-cell--sort-${props.sortOrder}`,
-			])}
-	/>
-);
-
-HeadCell.propTypes = {
-	hidden: PropTypes.bool,
-	sort: PropTypes.bool,
-	className: PropTypes.string,
-	onSortChange: PropTypes.func,
-	sortOrder: PropTypes.oneOf(['none', 'desc', 'asc']),
-	name: PropTypes.string,
 };
