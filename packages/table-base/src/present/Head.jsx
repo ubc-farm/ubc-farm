@@ -1,4 +1,5 @@
 import { createElement, PropTypes } from 'react';
+import { omit } from 'lodash-es';
 import { classlist as cx } from '@ubc-farm/utils';
 import Checkbox from './Checkbox.jsx';
 import HeadColumn from './HeadColumn.jsx';
@@ -6,7 +7,10 @@ import HeadColumn from './HeadColumn.jsx';
 
 /** Presentational component for a thead */
 const Head = props => (
-	<thead {...props} className={cx('farmtable-Head', props.className)}>
+	<thead
+		{...omit(props, 'rowClassName')}
+		className={cx('farmtable-Head', props.className)}
+	>
 		<tr className={cx('farmtable-Head-row', props.rowClassName)}>
 			{ props.children }
 		</tr>

@@ -13,10 +13,10 @@ export default class Row extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.onMouseEnter = props.onRowMouseEnter
-			? props.onRowMouseEnter.bind(undefined, props.rowData)
+			? () => props.onRowMouseEnter(props.rowData)
 			: undefined;
-		this.onMouseExit = props.onRowMouseOut
-			? props.onRowMouseOut.bind(undefined, props.rowData)
+		this.onMouseLeave = props.onRowMouseOut
+			? () => props.onRowMouseOut(props.rowData)
 			: undefined;
 	}
 
@@ -36,11 +36,12 @@ export default class Row extends Component {
 				onClick={props.clickToSelect ? handleChange : null}
 				selected={selectEnabled && selected}
 				unselectable={selectEnabled && unselectable}
-				className={className && (typeof className === 'function'
-					?	className(rowData, props.index)
-					: className)}
+				className={typeof className === 'function'
+					? className(rowData, props.index)
+					: className}
+				selectedClassName={props.selectedClassName}
 				onMouseEnter={this.onMouseEnter}
-				onMouseExit={this.onMouseExit}
+				onMouseLeave={this.onMouseLeave}
 			>
 				{ (selectEnabled && !props.hideSelectColumn) ?
 					<RowSelect
@@ -73,7 +74,7 @@ export default class Row extends Component {
 }
 
 Row.propTypes = {
-	id: PropTypes.string,
+	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	columnInfo: PropTypes.instanceOf(Map).isRequired,
 	rowData: PropTypes.object.isRequired,
 	index: PropTypes.number.isRequired,
@@ -85,7 +86,7 @@ Row.propTypes = {
 
 	cellEdit: PropTypes.object,
 	selectEnabled: PropTypes.bool,
-	mode: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
+	mode: PropTypes.oneOf(['radio', 'checkbox']),
 	clickToSelect: PropTypes.bool,
 	clickToSelectAndEditCell: PropTypes.bool,
 	selectedClassName: PropTypes.string,

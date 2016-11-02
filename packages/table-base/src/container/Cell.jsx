@@ -51,7 +51,7 @@ export default class Cell extends Component {
 		return (
 			<CellBase
 				{...clickListener}
-				className={this.state.editing && 'farmtable-Cell--editing'}
+				className={this.state.editing ? 'farmtable-Cell--editing' : null}
 			>
 				{ this.state.editing ? this.renderInput() : this.props.children }
 			</CellBase>
@@ -60,11 +60,11 @@ export default class Cell extends Component {
 }
 
 Cell.propTypes = {
-	children: PropTypes.string,
+	children: PropTypes.node,
 	className: PropTypes.string,
 	hidden: PropTypes.bool,
 	rowData: PropTypes.object,
-	rowId: PropTypes.string,
+	rowId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	columnName: PropTypes.string,
 
 	column: PropTypes.shape({

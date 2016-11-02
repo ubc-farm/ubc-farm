@@ -10,8 +10,23 @@
 </body>
 <script src="../dist/index.iife.js"></script>
 <script>
-	ReactDOM.render(React.createElement(Table, {
+	const h = React.createElement;
+	const { Column, default: Table } = UBCFarmTable
 
-	}), document.getElementById('reactRoot'))
+	var tableData = [
+    {id: 1, name: "name1", price: 100},
+    {id: 2, name: "name2", price: 120},
+    {id: 3, name: "name3", price: 130},
+    {id: 4, name: "name4", price: 140},
+    {id: 5, name: "name5", price: 110}
+  ];
+
+	ReactDOM.render(
+		h(Table, { tableData },
+			h(Column, { dataField: 'id', isKey: true }),
+			h(Column, { dataField: 'name' }),
+			h(Column, { dataField: 'price' })
+		)
+	, document.getElementById('reactRoot'))
 </script>
 </html>

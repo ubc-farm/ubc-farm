@@ -1,4 +1,5 @@
 import { createElement, PropTypes } from 'react';
+import { omit } from 'lodash-es';
 import { classlist as cx } from '@ubc-farm/utils';
 import Cell from './Cell.jsx';
 /** @jsx createElement */
@@ -10,7 +11,7 @@ import Cell from './Cell.jsx';
  */
 const Row = props => (
 	<tr
-		{...props}
+		{...omit(props, 'selected', 'unselectable', 'selectedClassName')}
 		className={cx('farmtable-Row', props.className, {
 			'farmtable-Row--unselectable': props.unselectable,
 			'farmtable-Row--selected': props.selected,

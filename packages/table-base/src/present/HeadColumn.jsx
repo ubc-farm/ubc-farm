@@ -23,7 +23,7 @@ export default HeadColumn;
  * that the column represents, and the object describes data about the column.
  */
 export function getColumnInfo(columnElements) {
-	return new Map(Children.map(columnElements, ({ props }, index) => [
+	return new Map(columnElements.map(({ props }, index) => [
 		props.dataField,
 		{
 			sort: props.dataSort, // True to enable sorting
