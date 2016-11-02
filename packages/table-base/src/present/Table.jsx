@@ -17,6 +17,7 @@ const Table = props => (
 			onMouseLeave={props.onMouseLeave}
 		>
 			<Head
+				/* TODO move the head/body to container table */
 				headClassName={props.headClassName}
 				headRowClassName={props.headRowClassName}
 				sortName={props.sortName}

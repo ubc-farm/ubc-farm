@@ -27,17 +27,14 @@
 	ReactDOM.render(
 		h(Table, {
 			tableData,
-			remote: true,
 			 selectRow: {
-				 mode: 'checkbox',
-				 selected: sortList,
-				 onSelect: console.log,
-				 onSelectAll: console.log
-			 }
+				 mode: 'checkbox'
+			 },
+			 onSortChange: console.log
 		},
-			h(Column, { dataField: 'id', isKey: true }, 'ID'),
-			h(Column, { dataField: 'name' }, 'Name'),
-			h(Column, { dataField: 'price' }, 'Price ($)')
+			h(Column, { dataField: 'id', isKey: true, dataSort: true }, 'ID'),
+			h(Column, { dataField: 'name', dataSort: true }, 'Name'),
+			h(Column, { dataField: 'price', dataSort: true }, 'Price ($)')
 		)
 	, document.getElementById('reactRoot'))
 	}

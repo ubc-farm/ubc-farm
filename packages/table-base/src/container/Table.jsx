@@ -2,6 +2,7 @@ import { createElement, PropTypes, PureComponent } from 'react';
 import { bindAll } from 'lodash-es';
 import { getColumnInfo } from '../present/HeadColumn.jsx';
 import TableBase from '../present/Table.jsx';
+import sort from '../manipulate/sort.js';
 /** @jsx createElement */
 
 export default class Table extends PureComponent {
@@ -24,13 +25,24 @@ export default class Table extends PureComponent {
 		const { sortName, sortOrder } = nextProps;
 		const newState = {};
 		if (sortName) newState.sortName = sortName;
-		if (sortOrder) newState.sortOrder = sortOrder;
+		if (sortOrder) newState.sortOrder = sortOrder; // TODO improve...
 		this.setState(newState);
 	}
 
 	/** @returns {Object[]} filtered version of tableData */
 	getDisplayedData() {
-		return this.props.tableData; // TODO stub
+		let data = this.props.tableData;
+
+		if (this.state.sortName) {
+			const { sortName, sortOrder } = this.state;
+			data = sort(
+				data,
+				sortOrder, sortName,
+				getColumnInfo(this.props.children).get(sortName).sortFunc
+			);
+		}
+
+		return data;
 	}
 
 	/** @returns {string} row keyField, calcualted from column info */
@@ -153,7 +165,8 @@ export default class Table extends PureComponent {
 	 * @param {string} columnName
 	 */
 	handleSortChange(columnName) {
-		const { sortName, sortOrder, onSortChange } = this.props;
+		const { sortName, sortOrder } = this.state;
+		const { onSortChange } = this.props;
 
 		if (typeof onSortChange === 'function') {
 			onSortChange(columnName, sortOrder);
@@ -174,10 +187,13 @@ export default class Table extends PureComponent {
 			}
 			this.setState({ sortOrder: newOrder });
 		} else {
-			this.setState({
-				sortName: columnName,
-				sortOrder: this.props.defaultSortOrder || 'desc',
-			});
+			const column = getColumnInfo(this.props.children).get(columnName);
+			if (column && column.sort) {
+				this.setState({
+					sortName: columnName,
+					sortOrder: this.props.defaultSortOrder || 'desc',
+				});
+			}
 		}
 	}
 

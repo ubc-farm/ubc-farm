@@ -2,7 +2,7 @@ function defaultSort(a, b, sortOrder, sortField) {
 	let valueA = a[sortField] == null ? '' : a[sortField];
 	let valueB = b[sortField] == null ? '' : b[sortField];
 
-	if (sortOrder === 'asc') [valueA, valueB] = [valueB, valueA];
+	if (sortOrder === 'desc') [valueA, valueB] = [valueB, valueA];
 
 	if (typeof valueB === 'string') return valueB.localeCompare(valueA);
 	else if (valueA > valueB) return -1;
