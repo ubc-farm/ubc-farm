@@ -206,6 +206,7 @@ export default class Table extends PureComponent {
 				keyField={this.getKeyField()}
 				tableData={this.getDisplayedData()}
 				columnInfo={getColumnInfo(children)}
+				columnSource={children}
 				sortName={this.state.sortName || props.defaultSortName}
 				sortOrder={this.state.sortOrder || props.defaultSortOrder}
 				onSortChange={this.handleSortChange}

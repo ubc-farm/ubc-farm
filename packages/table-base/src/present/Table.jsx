@@ -24,7 +24,7 @@ const Table = props => (
 				onSortChange={props.onSortChange}
 				isAllSelected={props.isAllSelected}
 				indeterminate={props.selectRow && props.selectRow.selected.size > 0}
-				columnInfo={props.columnInfo}
+				columns={props.columnSource}
 			/>
 			<Body
 				keyField={props.keyField}
@@ -47,6 +47,7 @@ const Table = props => (
 Table.propTypes = {
 	tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
 	columnInfo: PropTypes.instanceOf(Map).isRequired,
+	columnSource: PropTypes.node,
 	keyField: PropTypes.string.isRequired,
 	toolbar: PropTypes.node,
 	footer: PropTypes.node,
