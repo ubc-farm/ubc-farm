@@ -9,7 +9,8 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "dependencies": {
-    "react": "^15.3.2"
+    "react": "^15.3.2",
+    "lodash-es": "^4.16.5"
   },
   "devDependencies": {
     "@types/react": "^0.14.43",
@@ -24,7 +25,6 @@
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
-    "lodash-es": "^4.16.5",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",

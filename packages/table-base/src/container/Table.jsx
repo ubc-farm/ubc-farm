@@ -238,10 +238,7 @@ export default class Table extends PureComponent {
 }
 
 Table.propTypes = {
-	children: PropTypes.oneOfType([
-		PropTypes.element,
-		PropTypes.arrayOf(PropTypes.element),
-	]).isRequired,
+	children: PropTypes.arrayOf(PropTypes.element).isRequired,
 	tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
 	keyField: PropTypes.string,
 	remote: PropTypes.bool,
@@ -249,7 +246,17 @@ Table.propTypes = {
 	selectRow: PropTypes.shape({
 		selected: PropTypes.instanceOf(Set),
 		unselectable: PropTypes.instanceOf(Set),
+		onSelect: PropTypes.func,
+		onSelectAll: PropTypes.func,
 	}),
+
+	cellEdit: PropTypes.shape({
+		mode: PropTypes.oneOf(['click', 'dbclick']).isRequired,
+		blurToSave: PropTypes.bool,
+		beforeCellSave: PropTypes.func, // (row, cellName, cellValue) => boolean
+		afterCellSave: PropTypes.func, // (row, cellName, cellValue) => void
+	}),
+
 	sortName: PropTypes.string,
 	sortOrder: PropTypes.oneOf(['desc', 'asc']),
 	defaultSortName: PropTypes.string,
