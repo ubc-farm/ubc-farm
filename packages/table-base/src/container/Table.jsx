@@ -2,6 +2,8 @@ import { createElement, PropTypes, PureComponent } from 'react';
 import { bindAll } from 'lodash-es';
 import { getColumnInfo } from '../present/HeadColumn.jsx';
 import TableBase from '../present/Table.jsx';
+import Head from './Head.jsx';
+import Body from '../present/Body.jsx';
 import sort from '../manipulate/sort.js';
 /** @jsx createElement */
 
@@ -66,9 +68,12 @@ export default class Table extends PureComponent {
 
 	/** @returns {Object} equivalent to props.selectRow */
 	getSelectData() {
-		return Object.assign({}, this.props.selectRow, {
+		const { selectRow } = this.props;
+		if (!selectRow) return null;
+
+		return Object.assign({}, selectRow, {
 			selected: this.props.remote
-				? this.props.selectRow.selected
+				? selectRow.selected
 				: this.state.selected,
 			onSelect: this.handleSelect,
 			onSelectAll: this.handleSelectAll,
@@ -213,7 +218,10 @@ export default class Table extends PureComponent {
 	}
 
 	render() {
-		const { props, props: { children, selectRow } } = this;
+		const { props, props: { children } } = this;
+
+		const tableData = this.getDisplayedData();
+		const selectRow = this.getSelectData();
 
 		return (
 			<TableBase
@@ -221,18 +229,31 @@ export default class Table extends PureComponent {
 				toolbar={this.renderToolbar()}
 				footer={this.renderFilters()}
 				pagination={this.renderPaginationControls()}
-				keyField={this.getKeyField()}
-				tableData={this.getDisplayedData()}
-				columnInfo={getColumnInfo(children)}
-				columnSource={children}
-				sortName={this.state.sortName || props.defaultSortName}
-				sortOrder={this.state.sortOrder || props.defaultSortOrder}
-				onSortChange={this.handleSortChange}
-				isAllSelected={selectRow &&
-					props.tableData.length === this.getSelectSize()}
-				selectRow={selectRow && this.getSelectData()}
-				cellEdit={props.cellEdit}
-			/>
+			>
+				<Head
+					headClassName={props.headClassName}
+					headRowClassName={props.headRowClassName}
+					sortName={this.state.sortName || props.defaultSortName}
+					sortOrder={this.state.sortOrder || props.defaultSortOrder}
+					onSortChange={this.handleSortChange}
+					isAllSelected={selectRow && tableData.length === this.getSelectSize()}
+					indeterminate={selectRow && selectRow.selected.size > 0}
+					columns={children}
+					selectRow={selectRow}
+				/>
+				<Body
+					keyField={this.getKeyField()}
+					noDataText={props.noDataText}
+					trClassName={props.trClassName}
+					bodyClassName={props.bodyClassName}
+					selectRow={selectRow}
+					cellEdit={props.cellEdit}
+					tableData={tableData}
+					columnInfo={getColumnInfo(children)}
+					onRowMouseEnter={props.onRowMouseEnter}
+					onRowMouseOut={props.onRowMouseOut}
+				/>
+			</TableBase>
 		);
 	}
 }
