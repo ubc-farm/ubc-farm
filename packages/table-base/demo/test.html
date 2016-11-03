@@ -4,6 +4,7 @@
 	<title>@ubc-farm/table-base</title>
 	<script src="https://unpkg.com/react@15/dist/react.js"></script>
 	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+	<script src="https://cdn.jsdelivr.net/lodash/4.16.6/lodash.min.js"></script>
 </head>
 <body>
 	<div id="reactRoot"></div>
@@ -30,7 +31,6 @@
 			 selectRow: {
 				 mode: 'checkbox'
 			 },
-			 onSortChange: console.log
 		},
 			h(Column, { dataField: 'id', isKey: true, dataSort: true }, 'ID'),
 			h(Column, { dataField: 'name', dataSort: true }, 'Name'),

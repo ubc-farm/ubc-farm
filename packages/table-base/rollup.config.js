@@ -4,8 +4,8 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
 	entry: 'src/index.js',
-	external: ['react'],
-	globals: { react: 'React' },
+	external: ['react', 'lodash-es'],
+	globals: { react: 'React', 'lodash-es': '_' },
 	plugins: [
 		babel({ include: 'src/**', exclude: 'node_modules/**' }),
 		commonjs(),

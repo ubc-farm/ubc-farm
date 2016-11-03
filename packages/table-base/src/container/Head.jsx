@@ -40,7 +40,7 @@ export default class Head extends Component {
 						const sorting = sortName === dataField && sortOrder !== 'none';
 						extraProps.onHeaderClick = () => onSortChange(dataField);
 						extraProps.headerClassName = cx(
-							column.props.headerClassName, {
+							column.props.headerClassName, 'farmtable-HeadColumn--sortable', {
 								'farmtable-HeadColumn--sort': sorting,
 								[`farmtable-HeadColumn--sort-${sortOrder}`]: sorting,
 							}
