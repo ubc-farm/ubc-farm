@@ -3,4 +3,4 @@ dist
 typings
 test/_out.js*
 bin/ubc-farm-server*
-template-helpers/*.js
+template-helpers/*

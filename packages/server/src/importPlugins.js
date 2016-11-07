@@ -1,10 +1,15 @@
 import 'es7-object-polyfill';
-import { join, dirname, sep, posix } from 'path';
+import { join, dirname } from 'path';
 import resolveCb from 'resolve';
 import JsonGlob, { promisify } from './JsonGlob.js';
 
 const resolve = promisify(resolveCb);
 const keypath = 'ubc-farm.server-plugin';
+
+function isGlob(pattern) {
+	return pattern.includes('*') ||
+		pattern.includes('/') || pattern.includes('\\');
+}
 
 /**
  * Finds and attaches plugins to the provided Hapi server.
@@ -31,7 +36,7 @@ export default async function importPlugins(patterns, server) {
 
 	const plugins = [];
 	await Promise.all(patterns.map(async (pattern) => {
-		if (!pattern.includes(sep) && !pattern.includes(posix.sep)) {
+		if (!isGlob(pattern)) {
 			let pluginOpts;
 
 			const pluginPath = await resolve(pattern, {
