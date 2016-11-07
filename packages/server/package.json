@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/server",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "Server for the ubc-farm program suite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -8,10 +8,12 @@
     "ubc-farm-server": "bin/ubc-farm-server.js"
   },
   "dependencies": {
+    "@types/resolve": "0.0.4",
     "glob": "^7.1.1",
     "handlebars": "^4.0.5",
     "hapi": "^15.1.1",
     "inert": "^4.0.2",
+    "resolve": "^1.1.7",
     "vision": "^4.1.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import { readFile as readFileCb } from 'fs';
 import { Glob } from 'glob';
 
-function promisify(func) {
+export function promisify(func) {
 	return (...args) => new Promise((resolve, reject) => {
 		func(...args, (err, result) => (err ? reject(err) : resolve(result)));
 	});
