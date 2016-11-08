@@ -46,7 +46,8 @@
   "scripts": {
     "prepare:cli": "rollup -c rollup.config.cli.js",
     "prepare:helper": "rollup -c rollup.config.test.js -o template-helpers/eachEntry.js template-helpers/src/eachEntry.js",
-    "prepare": "rollup -c && npm run prepare:cli && npm run prepare:helper",
+    "prepare:main": "rollup -c",
+    "prepare": "npm run prepare:main && npm run prepare:cli && npm run prepare:helper",
     "prepublish": "npm run prepare"
   },
   "files": [

@@ -1,14 +1,10 @@
 import 'es7-object-polyfill';
-import { join, dirname } from 'path';
-import resolveCb from 'resolve';
-import JsonGlob, { promisify } from './JsonGlob.js';
-
-const resolve = promisify(resolveCb);
-const keypath = 'ubc-farm.server-plugin';
+import PluginGlob from './PluginGlob.js';
+import requirePlugin from './requirePlugin.js';
 
 function isGlob(pattern) {
-	return pattern.includes('*') ||
-		pattern.includes('/') || pattern.includes('\\');
+	return pattern.includes('*')
+	|| pattern.includes('/') || pattern.includes('\\');
 }
 
 /**
@@ -31,57 +27,29 @@ export default async function importPlugins(patterns, server) {
 		nodir: true,
 		nosort: true,
 		absolute: true,
-		keypath,
 	};
 
 	const plugins = [];
 	await Promise.all(patterns.map(async (pattern) => {
 		if (!isGlob(pattern)) {
-			let pluginOpts;
-
-			const pluginPath = await resolve(pattern, {
-				basedir: process.cwd(),
-				packageFilter(pkg, pkgfile) {
-					let subvalue = pkg;
-					try {
-						subvalue = keypath.split('.')
-							.reduce((parent, key) => parent[key], pkg);
-					} catch (err) {
-						if (!(err instanceof TypeError)) throw err;
-						throw new TypeError(`Can't find ${keypath} in ${pkgfile}`);
-					}
-
-					pluginOpts = Object.assign({ once: true }, subvalue);
-					return typeof subvalue === 'string' ? subvalue : subvalue.register;
-				},
-			});
-
-			const register = require(pluginPath);
-			pluginOpts.register = register;
-
-			plugins.push(server.register(pluginOpts).then(() => pluginOpts));
+			const plugin = await requirePlugin(pattern);
+			plugins.push(server.register(plugin).then(() => plugin));
 		} else {
 			const opts = Object.assign({}, globOptions, {
 				pattern: patterns.filter(v => v !== pattern),
 			});
 
-			const globber = new JsonGlob(pattern, opts)
-				.on('result', (obj, match) => {
-					const isString = typeof obj === 'string';
-					const pluginPath = join(dirname(match), isString ? obj : obj.register);
-
-					const register = require(pluginPath);
-					const plugin = Object.assign({ once: true }, obj, { register });
-
-					plugins.push(server.register(plugin).then(() => plugin));
-				});
-
-			await globber.done();
+			await new PluginGlob(pattern, opts)
+				.on('result', plugin => plugins.push(
+					server.register(plugin).then(() => plugin)
+				))
+				.done();
 		}
 	}));
 
 	const pluginInfo = {};
-	for (const { register: { attributes }, route = '' } of await Promise.all(plugins)) {
+	const pluginList = await Promise.all(plugins);
+	for (const { register: { attributes }, route = '' } of pluginList) {
 		const name = attributes.name || (attributes.pkg && attributes.pkg.name);
 		if (!name) throw new Error("Can't find a plugin name");
 

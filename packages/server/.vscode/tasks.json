@@ -1,6 +1,6 @@
 {
 	"version": "0.1.0",
-	"command": "yarn",
+	"command": "npm",
 	"isShellCommand": true,
 	"showOutput": "always",
 	"args": ["run"],
@@ -12,6 +12,11 @@
 		{
 			"taskName": "prepare",
 			"isBuildCommand": true,
+			"args": ["--quiet"],
+			"showOutput": "never"
+		},
+		{
+			"taskName": "prepare:main",
 			"args": ["--quiet"],
 			"showOutput": "never"
 		}
