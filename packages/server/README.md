@@ -28,11 +28,14 @@ Additionally, the plugins [Inert](https://github.com/hapijs/<inert></inert>) and
 
 ## Usage
 ```
-> ubc-farm-server path1 path2 glob/*/
+> ubc-farm-server ./path1 ./path2 glob/*/ some-module
 ```
 Multiple folders or glob patterns can be listed and are seperated by a space.
 The package can be installed locally or globally using npm or yarn.
 All glob arguments will only search for folders.
+
+If a pattern doesn't contain a slash or star character, it will be interpreted
+as a module name and loaded from node-modules.
 
 ```
 yarn add @ubc-farm/server
