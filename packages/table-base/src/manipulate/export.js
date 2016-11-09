@@ -44,3 +44,7 @@ export function download(filename, text) {
 	element.click();
 	document.body.removeChild(element);
 }
+
+export default function exportToCSV(tableData, columns, filename) {
+	download(filename, toCSV(tableData, columns));
+}

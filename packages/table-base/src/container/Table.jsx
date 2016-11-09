@@ -1,10 +1,12 @@
 import { createElement, PropTypes, PureComponent } from 'react';
 import { bindAll } from 'lodash-es';
+import { sort } from '../manipulate/index.js';
 import { getColumnInfo } from '../present/HeadColumn.jsx';
 import TableBase from '../present/Table.jsx';
 import Head from './Head.jsx';
 import Body from '../present/Body.jsx';
-import sort from '../manipulate/sort.js';
+import Insert from './Insert.jsx';
+import Toolbar from '../present/Toolbar.jsx';
 /** @jsx createElement */
 
 export default class Table extends PureComponent {
@@ -16,6 +18,7 @@ export default class Table extends PureComponent {
 			sortName: props.sortName || null,
 			sortOrder: props.sortOrder || null,
 			selected: new Set(),
+			inserting: false,
 		};
 	}
 
@@ -106,7 +109,9 @@ export default class Table extends PureComponent {
 		if (this.props.remote) return;
 
 		if (selectRow.mode === 'radio') {
-			this.setState({ selected: new Set().add(id) });
+			const selected = new Set();
+			if (!this.state.selected.has(id)) selected.add(id);
+			this.setState({ selected });
 			return;
 		}
 
@@ -204,7 +209,21 @@ export default class Table extends PureComponent {
 
 	/** @returns {ReactElement} toolbar above table w/ buttons and search */
 	renderToolbar() {
-		return null; // TODO stub
+		return (
+			<Toolbar
+				insert={this.props.handleAdd ? {
+					onClick: () => this.setState({ inserting: !this.state.inserting }),
+				} : null}
+			>
+				{ this.props.handleAdd ?
+					<Insert
+						columnInfo={getColumnInfo(this.props.children)}
+						open={this.state.inserting}
+						onSubmit={this.props.handleAdd} // TODO autoKey
+					/>
+				: null}
+			</Toolbar>
+		);
 	}
 
 	/** @returns {ReactElement} filtering controls */
@@ -283,4 +302,6 @@ Table.propTypes = {
 	defaultSortName: PropTypes.string,
 	defaultSortOrder: PropTypes.oneOf(['desc', 'asc']),
 	onSortChange: PropTypes.func,
+
+	handleAdd: PropTypes.func,
 };

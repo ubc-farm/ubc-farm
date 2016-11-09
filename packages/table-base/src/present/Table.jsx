@@ -9,7 +9,7 @@ import Body from './Body.jsx';
  * among the child thead and tbody components
  */
 const Table = props => (
-	<form className={cx('farmtable-Table-container', props.containerClassName)}>
+	<div className={cx('farmtable-Table-container', props.containerClassName)}>
 		{ props.toolbar }
 		<table
 			className={cx('farmtable-Table', props.className)}
@@ -20,7 +20,7 @@ const Table = props => (
 		</table>
 		{ props.footer }
 		{ props.pagination }
-	</form>
+	</div>
 );
 
 Table.propTypes = {

@@ -14,7 +14,7 @@
 	const h = React.createElement;
 	const { Column, default: Table } = UBCFarmTable
 
-	var tableData = [
+	const tableData = [
     {id: 1, name: "name1", price: 100},
     {id: 2, name: "name2", price: 120},
     {id: 3, name: "name3", price: 130},
@@ -22,15 +22,17 @@
     {id: 5, name: "name5", price: 110}
   ];
 
-	let sortList = new Set();
-
 	function update() {
 	ReactDOM.render(
 		h(Table, {
 			tableData,
-			 selectRow: {
-				 mode: 'checkbox'
-			 },
+			handleAdd(data) {
+				tableData.push(data);
+				update();
+			},
+			selectRow: {
+				mode: 'checkbox'
+			},
 		},
 			h(Column, { dataField: 'id', isKey: true, dataSort: true }, 'ID'),
 			h(Column, { dataField: 'name', dataSort: true }, 'Name'),
