@@ -20,7 +20,7 @@ export function toCSV(tableData, columns) {
 		if (props.hidden && props.export !== true) return text;
 		else if (props.export === false) return text;
 
-		const cell = row[props.dataField];
+		const cell = row[props.field];
 
 		let cellText = props.csvFormat ? props.csvFormat(cell, row) : String(cell);
 		if (cellText.includes(',')) cellText = `"${cellText}"`;

@@ -5,6 +5,7 @@ import { classlist as cx } from '@ubc-farm/utils';
 /** Presentational component for a tbody */
 const Body = props => (
 	<tbody
+		{...props}
 		className={cx('farmtable-Body', props.className)}
 	/>
 );

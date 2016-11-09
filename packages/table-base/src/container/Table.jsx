@@ -6,8 +6,8 @@ import Body from './Body.jsx';
 
 function getKeyField(columns, keyFieldProp) {
 	if (keyFieldProp) return keyFieldProp;
-	for (const { isKey, dataField } of columns) {
-		if (isKey) return dataField;
+	for (const { isKey, field } of columns) {
+		if (isKey) return field;
 	}
 
 	throw new TypeError('No keyField detected');

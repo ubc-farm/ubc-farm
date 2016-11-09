@@ -12,7 +12,6 @@ function simpleBind(func, ...args) {
  * Creates row with cell layout order matching that of the given columns
  */
 const Row = (props) => {
-	console.log(props);
 	const { rowData: row, rowIndex: index } = props;
 
 	return (
@@ -20,16 +19,16 @@ const Row = (props) => {
 			className={typeof props.rowClassName === 'function'
 				?	props.rowClassName(row, props.rowIndex)
 				: props.rowClassName}
-			onClick={simpleBind(row, props.onRowClick)}
-			onMouseEnter={simpleBind(row, props.onRowMouseEnter)}
-			onMouseLeave={simpleBind(row, props.onRowMouseLeave)}
+			onClick={simpleBind(props.onRowClick, row)}
+			onMouseEnter={simpleBind(props.onRowMouseEnter, row)}
+			onMouseLeave={simpleBind(props.onRowMouseLeave, row)}
 		>
 			{props.columns.map((column, colIndex) => {
-				const cell = row[column.dataField];
+				const cell = row[column.field];
 
 				return (
 					<Cell
-						key={column.dataField}
+						key={column.field}
 						hidden={column.hidden}
 						className={typeof column.className === 'function'
 							?	column.className(cell, row, index, colIndex)
@@ -47,7 +46,7 @@ const Row = (props) => {
 Row.propTypes = {
 	rowData: PropTypes.object.isRequired,
 	columns: PropTypes.arrayOf(PropTypes.shape({
-		dataField: PropTypes.string.isRequired,
+		field: PropTypes.string.isRequired,
 		format: PropTypes.func, // (cell, row) => ReactNode
 		hidden: PropTypes.bool,
 		// (cell, row, rowIndex) => string

@@ -25,9 +25,9 @@
 	function update() {
 	ReactDOM.render(
 		h(Table, { tableData },
-			h(Column, { dataField: 'id', isKey: true, dataSort: true }, 'ID'),
-			h(Column, { dataField: 'name', dataSort: true }, 'Name'),
-			h(Column, { dataField: 'price', dataSort: true }, 'Price ($)')
+			h(Column, { field: 'id', isKey: true }, 'ID'),
+			h(Column, { field: 'name' }, 'Name'),
+			h(Column, { field: 'price' }, 'Price ($)')
 		)
 	, document.getElementById('reactRoot'))
 	}

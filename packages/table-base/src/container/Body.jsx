@@ -6,10 +6,9 @@ import Row from './Row.jsx';
 /** Presentational component for a tbody */
 const Body = props => (
 	<BodyBase className={props.bodyClassName}>
-		{props.tableData.map((rowData, rowIndex) => (
+		{ props.tableData.map((rowData, rowIndex) => (
 			<Row
 				key={rowData[props.keyField]}
-				help={console.log(rowData, props)}
 				rowData={rowData}
 				columns={props.columns}
 				rowIndex={rowIndex}
@@ -18,7 +17,7 @@ const Body = props => (
 				onRowMouseEnter={props.onRowMouseEnter}
 				onRowMouseLeave={props.onRowMouseLeave}
 			/>
-		))}
+		)) }
 	</BodyBase>
 );
 

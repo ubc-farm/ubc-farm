@@ -13,7 +13,7 @@ export const HeadColumn = props => (
 );
 
 HeadColumn.propTypes = {
-	dataField: PropTypes.string.isRequired,
+	field: PropTypes.string.isRequired,
 	children: PropTypes.node,
 	isKey: PropTypes.bool,
 
