@@ -12,7 +12,7 @@
 		{
 			"taskName": "prepare",
 			"isBuildCommand": true,
-			"showOutput": "silent"
+			"showOutput": "always"
 		},
 		{
 			"taskName": "watch",

@@ -24,16 +24,7 @@
 
 	function update() {
 	ReactDOM.render(
-		h(Table, {
-			tableData,
-			handleAdd(data) {
-				tableData.push(data);
-				update();
-			},
-			selectRow: {
-				mode: 'checkbox'
-			},
-		},
+		h(Table, { tableData },
 			h(Column, { dataField: 'id', isKey: true, dataSort: true }, 'ID'),
 			h(Column, { dataField: 'name', dataSort: true }, 'Name'),
 			h(Column, { dataField: 'price', dataSort: true }, 'Price ($)')

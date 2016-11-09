@@ -1,99 +1,67 @@
-import { createElement, PropTypes, Component } from 'react';
-import { map } from 'lodash-es';
-import RowBase, { RowSelect } from '../present/Row.jsx';
-import Cell from './Cell.jsx';
+import { createElement, PropTypes } from 'react';
+import RowBase from '../present/Row.jsx';
+import Cell from '../present/Cell.jsx';
 /** @jsx createElement */
+
+function simpleBind(func, ...args) {
+	if (!func) return null;
+	return (...eventArgs) => func(...args, ...eventArgs);
+}
 
 /**
  * Creates row with cell layout order matching that of the given columns
  */
-export default class Row extends Component {
-	constructor(props) {
-		super(props);
+const Row = (props) => {
+	console.log(props);
+	const { rowData: row, rowIndex: index } = props;
 
-		this.handleChange = this.handleChange.bind(this);
-		this.onMouseEnter = props.onRowMouseEnter
-			? () => props.onRowMouseEnter(props.rowData)
-			: undefined;
-		this.onMouseLeave = props.onRowMouseOut
-			? () => props.onRowMouseOut(props.rowData)
-			: undefined;
-	}
+	return (
+		<RowBase
+			className={typeof props.rowClassName === 'function'
+				?	props.rowClassName(row, props.rowIndex)
+				: props.rowClassName}
+			onClick={simpleBind(row, props.onRowClick)}
+			onMouseEnter={simpleBind(row, props.onRowMouseEnter)}
+			onMouseLeave={simpleBind(row, props.onRowMouseLeave)}
+		>
+			{props.columns.map((column, colIndex) => {
+				const cell = row[column.dataField];
 
-	handleChange(event) {
-		const { onSelect, rowData, selected } = this.props;
-		return onSelect(rowData, selected, event);
-	}
-
-	render() {
-		const { props, handleChange } = this;
-		const { rowData, selectEnabled, selected, unselectable, className } = props;
-
-		if (selectEnabled && props.showOnlySelected && !selected) return false;
-
-		return (
-			<RowBase
-				onClick={props.clickToSelect ? handleChange : null}
-				selected={selectEnabled && selected}
-				unselectable={selectEnabled && unselectable}
-				className={typeof className === 'function'
-					? className(rowData, props.index)
-					: className}
-				selectedClassName={props.selectedClassName}
-				onMouseEnter={this.onMouseEnter}
-				onMouseLeave={this.onMouseLeave}
-			>
-				{ (selectEnabled && !props.hideSelectColumn) ?
-					<RowSelect
-						type={props.mode}
-						checked={selected}
-						onChange={handleChange}
-						disabled={unselectable}
-						name={props.mode === 'radio' ? 'selected' : null}
-					/>
-					: null }
-				{ map([...props.columnInfo], ([key, column]) => (
+				return (
 					<Cell
-						key={key} columnName={key}
-						column={column} rowData={rowData}
-						rowId={props.id}
-						className={column.className}
+						key={column.dataField}
 						hidden={column.hidden}
-						editable={column.editable}
-						cellEdit={props.cellEdit}
-						clickToSelectAndEditCell={selectEnabled && props.clickToSelectAndEditCell}
+						className={typeof column.className === 'function'
+							?	column.className(cell, row, index, colIndex)
+							: column.className}
+						onClick={simpleBind(column.onCellClick, cell, row, index, colIndex)}
 					>
-						{
-							column.format(rowData[key], rowData, props.index)
-							|| props.noDataText
-						}
+						{ column.format(cell, row) }
 					</Cell>
-				)) }
-			</RowBase>
-		);
-	}
-}
+				);
+			})}
+		</RowBase>
+	);
+};
 
 Row.propTypes = {
-	id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-	columnInfo: PropTypes.instanceOf(Map).isRequired,
 	rowData: PropTypes.object.isRequired,
-	index: PropTypes.number.isRequired,
-	noDataText: PropTypes.node,
-	className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+	columns: PropTypes.arrayOf(PropTypes.shape({
+		dataField: PropTypes.string.isRequired,
+		format: PropTypes.func, // (cell, row) => ReactNode
+		hidden: PropTypes.bool,
+		// (cell, row, rowIndex) => string
+		columnClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+		onCellClick: PropTypes.func, // (cell, row, rowIndex) => void
+	})).isRequired,
+	rowIndex: PropTypes.number.isRequired,
 
-	onRowMouseEnter: PropTypes.func,
-	onRowMouseOut: PropTypes.func,
+	// (row, rowIndex) => string
+	rowClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 
-	cellEdit: PropTypes.object,
-	selectEnabled: PropTypes.bool,
-	mode: PropTypes.oneOf(['radio', 'checkbox']),
-	clickToSelect: PropTypes.bool,
-	clickToSelectAndEditCell: PropTypes.bool,
-	selectedClassName: PropTypes.string,
-	selected: PropTypes.bool,
-	unselectable: PropTypes.bool,
-	hideSelectColumn: PropTypes.bool,
-	showOnlySelected: PropTypes.bool,
-	onSelect: PropTypes.func,
+	onRowClick: PropTypes.func, // (row) => void
+	onRowMouseEnter: PropTypes.func, // (row) => void
+	onRowMouseLeave: PropTypes.func, // (row) => void
 };
+
+export default Row;

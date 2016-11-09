@@ -1,14 +1,12 @@
 import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
 export default {
 	entry: 'src/index.js',
-	external: ['react', 'lodash-es'],
-	globals: { react: 'React', 'lodash-es': '_' },
+	external: ['react'],
+	globals: { react: 'React' },
 	plugins: [
 		babel({ include: 'src/**', exclude: 'node_modules/**' }),
-		commonjs(),
 		nodeResolve(),
 	],
 	sourceMap: true,

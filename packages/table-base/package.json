@@ -9,8 +9,7 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "dependencies": {
-    "react": "^15.3.2",
-    "lodash-es": "^4.16.5"
+    "react": "^15.3.2"
   },
   "devDependencies": {
     "@types/react": "^0.14.43",
@@ -18,16 +17,12 @@
     "@ubc-farm/utils": "^4.1.0",
     "babel-plugin-external-helpers": "^6.18.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
-    "babel-preset-es2016": "^6.16.0",
-    "babel-preset-es2017": "^6.16.0",
-    "es7-object-polyfill": "0.0.3",
     "eslint": "^3.9.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.4.1",
     "rollup": "^0.36.3",
     "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-watch": "^2.5.0"
   },
