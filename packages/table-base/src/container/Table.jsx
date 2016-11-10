@@ -15,6 +15,10 @@ function getKeyField(columns, keyFieldProp) {
 
 const Table = (props) => {
 	const columns = Children.map(props.children, col => col.props);
+	let keyField;
+	if (Array.isArray(props.tableData) || props.tableData instanceof Set) {
+		keyField = getKeyField(columns, props.keyField);
+	}
 
 	return (
 		<TableBase className={props.tableClassName}>
@@ -25,7 +29,7 @@ const Table = (props) => {
 				{ props.children }
 			</Head>
 			<Body
-				keyField={getKeyField(columns, props.keyField)}
+				keyField={keyField}
 				tableData={props.tableData}
 				columns={columns}
 				rowClassName={props.rowClassName}
@@ -40,7 +44,12 @@ const Table = (props) => {
 
 Table.propTypes = {
 	children: PropTypes.node.isRequired,
-	tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	tableData: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.object),
+		PropTypes.instanceOf(Set),
+		PropTypes.instanceOf(Map),
+		PropTypes.object,
+	]).isRequired,
 	keyField: PropTypes.string,
 
 	// (row, rowIndex) => string

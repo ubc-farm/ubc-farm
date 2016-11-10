@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/table-base",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Code for a react powered table",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",

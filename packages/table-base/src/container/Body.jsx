@@ -4,9 +4,12 @@ import Row from './Row.jsx';
 /** @jsx createElement */
 
 /** Presentational component for a tbody */
-const Body = props => (
-	<BodyBase className={props.bodyClassName}>
-		{ props.tableData.map((rowData, rowIndex) => (
+const Body = (props) => {
+	let rows;
+	const table = props.tableData;
+
+	if (Array.isArray(table) || table instanceof Set) {
+		rows = Array.from(table).map((rowData, rowIndex) => (
 			<Row
 				key={rowData[props.keyField]}
 				rowData={rowData}
@@ -17,14 +20,47 @@ const Body = props => (
 				onRowMouseEnter={props.onRowMouseEnter}
 				onRowMouseLeave={props.onRowMouseLeave}
 			/>
-		)) }
-	</BodyBase>
-);
+		));
+	} else if (table instanceof Map) {
+		rows = Array.from(table).map(([key, rowData], rowIndex) => (
+			<Row
+				key={key}
+				rowData={rowData}
+				columns={props.columns}
+				rowIndex={rowIndex}
+				rowClassName={props.rowClassName}
+				onRowClick={props.onRowClick}
+				onRowMouseEnter={props.onRowMouseEnter}
+				onRowMouseLeave={props.onRowMouseLeave}
+			/>
+		));
+	} else {
+		rows = Object.keys(table).map((key, rowIndex) => (
+			<Row
+				key={key}
+				rowData={table[key]}
+				columns={props.columns}
+				rowIndex={rowIndex}
+				rowClassName={props.rowClassName}
+				onRowClick={props.onRowClick}
+				onRowMouseEnter={props.onRowMouseEnter}
+				onRowMouseLeave={props.onRowMouseLeave}
+			/>
+		));
+	}
+
+	return <BodyBase className={props.bodyClassName}>{ rows }</BodyBase>;
+};
 
 Body.propTypes = {
-	tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
+	tableData: PropTypes.oneOfType([
+		PropTypes.arrayOf(PropTypes.object),
+		PropTypes.instanceOf(Set),
+		PropTypes.instanceOf(Map),
+		PropTypes.object,
+	]).isRequired,
 	columns: PropTypes.arrayOf(PropTypes.object).isRequired,
-	keyField: PropTypes.string.isRequired,
+	keyField: PropTypes.string,
 
 	// (row, rowIndex) => string
 	rowClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
