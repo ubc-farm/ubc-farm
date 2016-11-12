@@ -6,7 +6,7 @@ import inputToRow from './inputToRow.js';
 /** @jsx createElement */
 
 const AddItem = props => (
-	<form onSubmit={props.handleSubmit}>
+	<form onSubmit={props.handleSubmit} className="inventory-AddItem">
 		<div className="inventory-AddItem-row">
 			<label htmlFor="class">Class</label>
 			<Field name="class" component="select">
