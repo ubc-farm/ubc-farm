@@ -1,3 +1,5 @@
+import { getSelected } from './selected.js';
+
 const INIT = 'inventory/table/INIT';
 const ADD_ROW = 'inventory/table/ADD_ROW';
 const DELETE_ROW = 'inventory/table/DELETE_ROW';
@@ -29,7 +31,7 @@ export default function tableReducer(state = [], action = {}) {
 }
 
 
-/** @returns {Array<Array>} table data */
+/** @returns {Array<Object>} table data */
 export const getTable = store => store.table;
 /** @returns {Array} one column from the table */
 export const getColumn = (store, field) => store.table.map(row => row[field]);
@@ -43,3 +45,12 @@ export const addRow = newRow => ({ type: ADD_ROW, payload: newRow });
 export const deleteRow = index => ({ type: DELETE_ROW, index });
 /** Replace a row in the table */
 export const editRow = (index, row) => ({ type: EDIT_ROW, index, payload: row });
+
+export function deleteSelected() {
+	return (dispatch, getState) => {
+		const id = getSelected(getState());
+		const selectedIndex = getTable(getState()).findIndex(row => row.id === id);
+
+		return dispatch(deleteRow(selectedIndex));
+	}
+}

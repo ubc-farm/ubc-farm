@@ -1,6 +1,3 @@
-import { createSelector } from 'reselect';
-import { getColumn } from './table.js';
-
 const TOGGLE = 'inventory/selected/TOGGLE';
 
 export default function selectedReducer(state = null, action = {}) {
@@ -17,6 +14,8 @@ export default function selectedReducer(state = null, action = {}) {
 export const getSelected = store => store.selected;
 /** @returns {boolean} is the row selected */
 export const isSelected = (store, id) => getSelected(store) === id;
+/** @returns {boolean} is any row selected */
+export const anySelected = store => getSelected(store) !== null;
 
 
 export const toggle = row => ({ type: TOGGLE, payload: row });
