@@ -14,7 +14,7 @@ export default {
 		babel({
 			plugins: ['transform-react-jsx', 'external-helpers'],
 		}),
-		nodeResolve({ jsnext: true }),
+		nodeResolve(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),

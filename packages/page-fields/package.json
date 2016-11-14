@@ -1,38 +1,52 @@
 {
-	"name": "ubc-farm-page-fields",
-	"version": "1.2.0",
-	"description": "Field overview page",
-	"author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
-	"license": "MIT",
-	"repository": "https://github.com/NotWoods/ubc-farm/page-fields",
-	"browser": "dist/index.iife.js",
-	"private": true,
-	"dependencies": {
-		"react": "15.3.0",
-		"react-dom": "15.3.0"
-	},
-	"devDependencies": {
-		"rollup": "0.34.2",
-		"rollup-plugin-babel": "^2.6.1",
-		"rollup-plugin-node-resolve": "^2.0.0",
-		"rollup-plugin-commonjs": "^3.3.1",
-		"rollup-plugin-replace": "^1.1.1",
-		"babel-plugin-transform-react-jsx": "^6.8.0",
-		"babel-plugin-external-helpers-2": "^6.3.13",
-		"redux": "^3.5.2",
-		"react-redux": "^4.4.5",
-		"redux-thunk": "^2.1.0",
-		"reselect": "^2.5.3",
-		"ubc-farm-utils": "ubc-farm/utils",
-		"ribbon-toolbar": "ubc-farm/ribbon-toolbar#2.1.0"
-	},
-	"scripts": {
-		"prepublish": "rollup -c"
-	},
-	"files": [
-		"dist",
-		"styles",
-		"views",
-		"src"
-	]
+  "name": "ubc-farm-page-fields",
+  "version": "1.2.0",
+  "description": "Field overview page",
+  "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
+  "license": "MIT",
+  "repository": "https://github.com/NotWoods/ubc-farm/page-fields",
+  "browser": "dist/index.iife.js",
+  "private": true,
+  "dependencies": {
+    "@types/joi": "^9.0.32",
+    "@types/knex": "0.0.35",
+    "boom": "^4.2.0",
+    "geojson-area": "^0.2.1",
+    "geojson-validation": "^0.1.6",
+    "joi": "^9.2.0",
+    "knex": "0.12.6",
+    "react": "~15.3.0",
+    "react-dom": "~15.3.0"
+  },
+  "devDependencies": {
+    "@types/boom": "0.0.32",
+    "@types/knex": "0.0.35",
+    "@ubc-farm/eslint-config": "^4.1.0",
+    "babel-plugin-external-helpers-2": "^6.3.13",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "eslint": "^3.10.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.6.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
+    "reselect": "^2.5.3",
+    "ribbon-toolbar": "ubc-farm/ribbon-toolbar#2.1.0",
+    "rollup": "0.34.2",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.3.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "ubc-farm-utils": "ubc-farm/utils"
+  },
+  "scripts": {
+    "prepublish": "rollup -c"
+  },
+  "files": [
+    "dist",
+    "styles",
+    "views",
+    "src"
+  ]
 }
