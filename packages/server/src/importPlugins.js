@@ -3,8 +3,7 @@ import PluginGlob from './PluginGlob.js';
 import requirePlugin from './requirePlugin.js';
 
 function isGlob(pattern) {
-	return pattern.includes('*')
-	|| pattern.includes('/') || pattern.includes('\\');
+	return pattern.includes('*');
 }
 
 /**

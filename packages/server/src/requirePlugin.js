@@ -83,6 +83,7 @@ export default async function requirePlugin(sourcePath, forceExt) {
 				basedir: process.cwd(),
 				packageFilter(pkg, pkgfile) {
 					config = getSubsetFrom(pkg);
+
 					if (typeof config === 'string') {
 						return config;
 					} else if (typeof config === 'object' && config !== null) {

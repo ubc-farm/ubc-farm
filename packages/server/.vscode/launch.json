@@ -17,13 +17,14 @@
 			"name": "Launch CLI",
 			"program": "${workspaceRoot}\\bin\\src\\index.js",
 			"cwd": "${workspaceRoot}",
-			"preLaunchTask": "prepare",
+			"preLaunchTask": "prepare:main",
 			"args": [
-				"test/fixture/package.json"
+				"test/fixture",
+				"--stack"
 			],
 			"sourceMaps": true,
 			"outFiles": [
-				"${workspaceRoot}\\bin\\ubc-farm-server,js",
+				"${workspaceRoot}\\bin\\ubc-farm-server.js",
 				"${workspaceRoot}\\dist\\**\\*.js"
 			]
 		},
