@@ -9,8 +9,8 @@ const item = Joi.object().keys({
 	entryDate: Joi.date(),
 	lifeSpan: Joi.string().regex(
 		/^P(?!$)(\d+Y)?(\d+M)?(\d+W)?(\d+D)?(T(?=\d+[HMS])(\d+H)?(\d+M)?(\d+S)?)?$/,
-		'ISO 8601 Duration'
-		),
+		'ISO 8601 Duration',
+	),
 	location: Joi.string(),
 	salvageValue: Joi.number().integer().allow(null),
 	barcode: Joi.string(),

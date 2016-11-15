@@ -1,8 +1,11 @@
 import { name, version } from '../../package.json';
 
-export function register(server, opts, next) {
-	server.route();
+import api from './table.js';
+import views from './views.js';
 
+export function register(server, opts, next) {
+	server.route(api);
+	server.route(views);
 	next();
 }
 
