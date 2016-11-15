@@ -1,11 +1,34 @@
-<a name="Money"></a>
+## Classes
 
-## Money
-A class used to represent money. Internally the money value is stored
+<dl>
+<dt><a href="#Money">Money</a></dt>
+<dd><p>A class used to represent money. Internally the money value is stored
 as cents, so most of the time it will be an integer which can be used
 for math without floating point troubles.
 It can also be formatted with the toString() function, utilizing
-Number.toLocaleString().
+Number.toLocaleString().</p>
+</dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#centsToString">centsToString(cents, [locale], [options])</a></dt>
+<dd><p>Returns a formatted currency string.
+If value is NaN, an empty string is returned.</p>
+</dd>
+<dt><a href="#stringToCents">stringToCents(str)</a> ⇒ <code>number</code></dt>
+<dd><p>Converts a string representing money to a number representing cents</p>
+</dd>
+<dt><a href="#floatToCents">floatToCents(float)</a></dt>
+<dd><p>Converts a float representing dollars to a number representing cents</p>
+</dd>
+</dl>
+
+<a name="Money"></a>
+
+## Money
+A class used to represent money. Internally the money value is storedas cents, so most of the time it will be an integer which can be usedfor math without floating point troubles.It can also be formatted with the toString() function, utilizingNumber.toLocaleString().
 
 **Kind**: global class  
 
@@ -64,9 +87,7 @@ Returns the cents of this money.
 
 ### money.toInteger() ⇒ <code>number</code>
 **Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - the integer value of this money, stripping
-any fractional cents. Useful for doing money related math,
-as integers won't suffer from floating point problems.  
+**Returns**: <code>number</code> - the integer value of this money, strippingany fractional cents. Useful for doing money related math,as integers won't suffer from floating point problems.  
 **Example**  
 ```js
 new Money('$10.99').toInteger() === 1099
@@ -75,13 +96,11 @@ new Money('$10.99').toInteger() === 1099
 
 ### money.valueOf() ⇒ <code>number</code>
 **Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - float representation of the money
-Will be NaN if the internal value is null.  
+**Returns**: <code>number</code> - float representation of the moneyWill be NaN if the internal value is null.  
 <a name="Money+toString"></a>
 
 ### money.toString([locale], [options])
-Returns a formatted currency string.
-If value is NaN, an empty string is returned.
+Returns a formatted currency string.If value is NaN, an empty string is returned.
 
 **Kind**: instance method of <code>[Money](#Money)</code>  
 **See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString  
@@ -111,4 +130,52 @@ If value is NaN, an empty string is returned.
 **Example**  
 ```js
 Money.fromInteger(1099) == new Money('$10.99')
+```
+<a name="centsToString"></a>
+
+## centsToString(cents, [locale], [options])
+Returns a formatted currency string.If value is NaN, an empty string is returned.
+
+**Kind**: global function  
+**See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| cents | <code>number</code> |  |  |
+| [locale] | <code>string</code> |  |  |
+| [options] | <code>Object</code> |  |  |
+| [options.parentheses] | <code>boolean</code> |  | wrap negative numbers in parentheses |
+| [options.currency] | <code>string</code> | <code>&quot;CAD&quot;</code> | currency locale to return |
+
+<a name="stringToCents"></a>
+
+## stringToCents(str) ⇒ <code>number</code>
+Converts a string representing money to a number representing cents
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| str | <code>string</code> | value converted into the Money value. Any non-digit values, except for the first . character, are stripped and the result is stored. |
+| [options.trunc] | <code>boolean</code> | truncate fractional cents. If true, an integer will be returned. |
+
+<a name="floatToCents"></a>
+
+## floatToCents(float)
+Converts a float representing dollars to a number representing cents
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| float | <code>number</code> | to convert into cents. |
+| [options.trunc] | <code>boolean</code> | truncate fractional cents. If true, an integer will be returned. |
+
+**Example**  
+```js
+floatToCents(1.99) === 199
+```
+**Example**  
+```js
+floatToCents(8.959, { trunc: false }) === 895.9
 ```

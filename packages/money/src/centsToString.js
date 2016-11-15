@@ -6,7 +6,7 @@
  * @param {Object} [options]
  * @param {boolean} [options.parentheses] - wrap negative numbers
  * in parentheses
- * @param {string} [options.currency=USD] - currency locale to return
+ * @param {string} [options.currency=CAD] - currency locale to return
  * @see https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
  */
 export default function centsToString(cents, locale, options) {
