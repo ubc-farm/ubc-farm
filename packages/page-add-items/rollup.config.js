@@ -5,18 +5,16 @@ import replace from 'rollup-plugin-replace';
 
 export default {
 	sourceMap: true,
+	entry: 'src/index.jsx',
+	dest: 'dist/index.js',
 	format: 'iife',
 	plugins: [
-		babel({
-			plugins: ['transform-react-jsx', 'external-helpers'],
-		}),
-		nodeResolve({ jsnext: true }),
+		babel({ exclude: 'node_modules/**' }),
+		nodeResolve(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs({
-			exclude: ['../node_modules/lodash-es/**', 'node_modules/lodash-es/**'],
-		}),
+		commonjs(),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {
