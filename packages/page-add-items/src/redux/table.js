@@ -52,5 +52,5 @@ export function deleteSelected() {
 		const selectedIndex = getTable(getState()).findIndex(row => row.id === id);
 
 		return dispatch(deleteRow(selectedIndex));
-	}
+	};
 }

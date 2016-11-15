@@ -1,78 +1,94 @@
-import { createElement } from 'react';
-import { Field, reduxForm } from 'redux-form';
-
+import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import reformed from 'react-reformed';
+import { connect } from 'react-redux';
+import { classlist as cx } from '@ubc-farm/utils';
 import { addRow } from '../redux/table.js';
+import { stopAdding, isAdding } from '../redux/adding.js';
 import inputToRow from './inputToRow.js';
-/** @jsx createElement */
 
-const AddItem = props => (
-	<form onSubmit={props.handleSubmit} className="inventory-AddItem">
+const AddItem = ({ bindInput, model, onSubmit, className }) => (
+	<form
+		onSubmit={(e) => { e.preventDefault(); onSubmit(model); }}
+		className={cx('inventory-AddItem', className)}
+	>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="class">Class</label>
-			<Field name="class" component="select">
+			<select {...bindInput('class')}>
 				<option value="Variable">Variable</option>
 				<option value="Fixed">Fixed</option>
-			</Field>
+			</select>
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="product">Product</label>
-			<Field name="product" component="input" type="text" />
+			<input type="text" {...bindInput('product')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="description">Description</label>
-			<Field name="description" component="input" type="text" />
+			<input type="text" {...bindInput('description')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="quantity">Quantity</label>
-			<Field name="quantity" component="input" type="number" />
+			<input type="number" {...bindInput('quantity')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="unit">Unit</label>
-			<Field name="unit" component="select">
+			<select {...bindInput('unit')}>
 				<option value="kg">kg</option>
 				<option value="each">each</option>
-			</Field>
+			</select>
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="valuePerUnit">Value / unit</label>
-			<Field name="valuePerUnit" component="input" type="number" step="0.01" />
+			<input type="number" step="0.01" {...bindInput('valuePerUnit')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="entryDate">Entry date</label>
-			<Field name="entryDate" component="input" type="datetime-local" />
+			<input type="date" {...bindInput('entryDate')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="lifeSpan">Lifespan</label>
-			<Field name="lifeSpan" component="input" type="text" />
+			<input type="text" {...bindInput('lifeSpan')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="location">Location</label>
-			<Field name="location" component="input" type="text" />
+			<input type="text" {...bindInput('location')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="salvageValue">Salvage Value</label>
-			<Field name="salvageValue" component="input" type="number" step="0.01" />
+			<input type="number" step="0.01" {...bindInput('salvageValue')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="barcode">Barcode</label>
-			<Field name="barcode" component="input" type="text" />
+			<input type="text" {...bindInput('barcode')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="supplier">Supplier</label>
-			<Field name="supplier" component="input" type="text" />
+			<input type="text" {...bindInput('supplier')} />
 		</div>
 		<div className="inventory-AddItem-row">
 			<label htmlFor="sku">SKU</label>
-			<Field name="sku" component="input" type="text" />
+			<input type="text" {...bindInput('sku')} />
 		</div>
 
 		<button type="submit">Add</button>
 	</form>
 );
 
-export default reduxForm({
-	form: 'add-inventory',
-	onSubmit(values, dispatch) {
-		dispatch(addRow(inputToRow(values)));
-	},
-})(AddItem);
+AddItem.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	model: PropTypes.object.isRequired,
+	bindInput: PropTypes.func.isRequired,
+	className: PropTypes.string,
+};
+
+export default connect(
+	state => ({
+		className: isAdding(state) ? 'inventory-AddItem--open' : null,
+	}),
+	dispatch => ({
+		onSubmit(model) {
+			dispatch(addRow(inputToRow(model)));
+			dispatch(stopAdding());
+		},
+	}),
+)(reformed()(AddItem));

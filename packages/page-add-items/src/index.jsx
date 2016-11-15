@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './redux/index.js';
 import TableContainer from './table/TableContainer.jsx';
 
-export default interactive.then(() => render(
+interactive.then(() => render(
 	<Provider store={store}>
 		<TableContainer />
 	</Provider>,

@@ -28,14 +28,14 @@ const InventoryTable = props => (
 		<Column field="unit">Unit</Column>
 		<Column
 			field="valuePerUnit"
-			format={int => centsToString(int)}
+			format={int => (int ? centsToString(int) : null)}
 		>
 			Value / unit
 		</Column>
 		<Column field="entryDate">Entry date</Column>
 		<Column
 			field="lifeSpan"
-			format={iso => moment.duration(iso).humanize()}
+			format={iso => (iso ? moment.duration(iso).humanize() : null)}
 		>
 			Lifespan
 		</Column>
@@ -55,7 +55,7 @@ const InventoryTable = props => (
 InventoryTable.propTypes = {
 	selected: PropTypes.instanceOf(Set).isRequired,
 	onChange: PropTypes.func.isRequired,
-}
+};
 
 export default connect(
 	state => ({
@@ -64,5 +64,5 @@ export default connect(
 	}),
 	dispatch => ({
 		onChange: id => dispatch(toggle(id)),
-	})
+	}),
 )(InventoryTable);
