@@ -1,7 +1,7 @@
 import test from 'tape';
 import { stringToCents, floatToCents } from '../src/index.js';
 
-test('Converts number types', t => {
+test('Converts number types', (t) => {
 	t.equal(floatToCents(0), 0, 'value is 0 cents for parameter 0');
 	t.equal(floatToCents(1), 100, 'value is 100 cents for parameter 1');
 
@@ -16,7 +16,7 @@ test('Converts number types', t => {
 	t.end();
 });
 
-test('Converts string types', t => {
+test('Converts string types', (t) => {
 	t.equal(stringToCents('0'), 0, '0 string returns 0');
 	t.equal(stringToCents('3'), 300, 'string 3 returns 300 cents');
 

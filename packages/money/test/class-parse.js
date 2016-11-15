@@ -1,7 +1,7 @@
 import test from 'tape';
 import Money from '../src/index.js';
 
-test('Returns NaN for unsupported types', t => {
+test('Returns NaN for unsupported types', (t) => {
 	t.ok(isNaN(new Money()), 'undefined value is NaN');
 	t.ok(isNaN(new Money(undefined)), 'undefined value is NaN');
 
@@ -15,7 +15,7 @@ test('Returns NaN for unsupported types', t => {
 	t.end();
 });
 
-test('Converts number types', t => {
+test('Converts number types', (t) => {
 	t.equal(new Money(0).value, 0, 'value is 0 cents for parameter 0');
 	t.equal(new Money(1).value, 100, 'value is 100 cents for parameter 1');
 
@@ -28,7 +28,7 @@ test('Converts number types', t => {
 	t.end();
 });
 
-test('Converts string types', t => {
+test('Converts string types', (t) => {
 	t.equal(new Money('0').value, 0, '0 string returns 0');
 	t.equal(new Money('3').value, 300, 'string 3 returns 300 cents');
 
@@ -46,7 +46,7 @@ test('Converts string types', t => {
 	t.end();
 });
 
-test('Tries to use valueOf()', t => {
+test('Tries to use valueOf()', (t) => {
 	const fixture = { valueOf: () => 0 };
 
 	function fixtureFunc() {}
