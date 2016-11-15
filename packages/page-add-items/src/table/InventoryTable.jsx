@@ -1,5 +1,5 @@
 import { createElement, PropTypes } from 'react';
-import Table, { Columns } from '@ubc-farm/table-base';
+import Table, { Column } from '@ubc-farm/table-base';
 import { centsToString } from '@ubc-farm/money';
 import moment from 'moment';
 import { connect } from 'react-redux';
@@ -14,7 +14,8 @@ const InventoryTable = props => (
 		<Column
 			field="id" isKey
 			format={id => (
-				<input type="radio"
+				<input
+					type="radio"
 					checked={props.selected === id}
 					onChange={() => props.onChange(id)}
 				/>
@@ -28,23 +29,23 @@ const InventoryTable = props => (
 		<Column
 			field="valuePerUnit"
 			format={int => centsToString(int)}
-			>
+		>
 			Value / unit
-			</Column>
+		</Column>
 		<Column field="entryDate">Entry date</Column>
 		<Column
 			field="lifeSpan"
 			format={iso => moment.duration(iso).humanize()}
-			>
+		>
 			Lifespan
-			</Column>
+		</Column>
 		<Column field="location">Location</Column>
 		<Column
 			field="salvageValue"
-			format={int => int === null ? 'N/A' : centsToString(int)}
-			>
+			format={int => (int === null ? 'N/A' : centsToString(int))}
+		>
 			Salvage Value
-			</Column>
+		</Column>
 		<Column field="barcode">Barcode</Column>
 		<Column field="supplier" format={nullToNA}>Supplier</Column>
 		<Column field="sku" format={nullToNA}>SKU</Column>

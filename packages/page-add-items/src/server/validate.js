@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-export const item = Joi.object().keys({
+const item = Joi.object().keys({
 	class: Joi.any().only('Variable', 'Fixed'),
 	product: Joi.string(),
 	description: Joi.string(),
@@ -18,4 +18,4 @@ export const item = Joi.object().keys({
 	sku: Joi.string().allow(null),
 });
 
-export const list = Joi.array().items(item);
+export default Joi.array().items(item).single();

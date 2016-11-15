@@ -1,4 +1,5 @@
 import { unparse } from 'babyparse';
+import schema from './validate.js';
 
 export const fields = [
 	'id',
@@ -20,7 +21,7 @@ export const fields = [
 export default [
 	{
 		method: 'GET',
-		path: '/inventory/table/headers',
+		path: '/table/headers',
 		handler(request, reply) {
 			const response = request.query.reverse != null
 				? fields.reduce((obj, field, i) => { obj[field] = i; return obj; }, {})
@@ -31,7 +32,17 @@ export default [
 	},
 	{
 		method: 'GET',
-		path: '/inventory/table',
+		path: '/json',
+		handler(request, reply) {
+
+		},
+		config: {
+			response: { schema },
+		},
+	},
+	{
+		method: 'GET',
+		path: '/table',
 		handler(request, reply) {
 			// TODO get data
 			return reply(unparse(data, { newline: '\n' })).type('text/csv');
@@ -39,9 +50,14 @@ export default [
 	},
 	{
 		method: 'POST',
-		path: '/inventory/table',
+		path: '/table',
 		handler(request, reply) {
 			// TODO parse patch to update database
+		},
+		config: {
+			validate: {
+				payload: schema,
+			},
 		},
 	},
 ];

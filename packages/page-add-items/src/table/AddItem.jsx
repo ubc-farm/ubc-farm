@@ -74,5 +74,5 @@ export default reduxForm({
 	form: 'add-inventory',
 	onSubmit(values, dispatch) {
 		dispatch(addRow(inputToRow(values)));
-	}
+	},
 })(AddItem);

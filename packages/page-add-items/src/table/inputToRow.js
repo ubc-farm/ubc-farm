@@ -21,5 +21,5 @@ export default function inputToRow(inputValues) {
 		barcode: inputValues.barcode,
 		supplier: inputValues.supplier,
 		sku: inputValues.sku,
-	}
+	};
 }
