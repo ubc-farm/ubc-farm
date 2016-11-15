@@ -8,7 +8,6 @@
   "browser": "dist/index.iife.js",
   "private": true,
   "dependencies": {
-    "@types/redux-thunk": "^2.1.31",
     "@ubc-farm/money": "^3.0.0",
     "@ubc-farm/table-base": "^2.2.0",
     "babyparse": "^0.4.6",
@@ -23,9 +22,8 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "@types/babyparse": "0.0.30",
+    "@types/redux-thunk": "^2.1.31",
     "@types/joi": "^9.0.32",
-    "@types/moment": "^2.13.0",
     "@ubc-farm/eslint-config": "^4.1.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-plugin-transform-react-jsx": "^6.8.0",
@@ -38,11 +36,7 @@
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^3.3.1",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1",
-    "ubc-farm-inputs": "ubc-farm/inputs",
-    "ubc-farm-money": "ubc-farm/money",
-    "ubc-farm-table-base": "ubc-farm/table-base#dist",
-    "ubc-farm-utils": "ubc-farm/utils"
+    "rollup-plugin-replace": "^1.1.1"
   },
   "scripts": {
     "prepublish:items": "rollup -c -o dist/item.js src/items/index.js",
