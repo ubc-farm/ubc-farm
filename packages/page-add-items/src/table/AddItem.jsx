@@ -33,6 +33,7 @@ const AddItem = ({ bindInput, model, onSubmit, className }) => (
 		<div className="inventory-AddItem-row">
 			<label htmlFor="unit">Unit</label>
 			<select {...bindInput('unit')}>
+				<option value="">N/A</option>
 				<option value="kg">kg</option>
 				<option value="each">each</option>
 			</select>
@@ -84,6 +85,21 @@ AddItem.propTypes = {
 export default connect(
 	state => ({
 		className: isAdding(state) ? 'inventory-AddItem--open' : null,
+		initialModel: {
+			class: 'Variable',
+			product: '',
+			description: '',
+			quantity: '',
+			unit: '',
+			valuePerUnit: '',
+			entryDate: '',
+			lifeSpan: '',
+			location: '',
+			salvageValue: '',
+			barcode: '',
+			supplier: '',
+			sku: '',
+		},
 	}),
 	dispatch => ({
 		onSubmit(model) {

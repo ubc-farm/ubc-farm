@@ -10,7 +10,10 @@ import { getSelected, toggle } from '../redux/selected.js';
 function nullToNA(str) { return str === null ? 'N/A' : str; }
 
 const InventoryTable = props => (
-	<Table {...props}>
+	<Table
+		{...props}
+		rowClassName={row => (props.selected === row.id ? 'row--selected' : null)}
+	>
 		<Column
 			field="id" isKey
 			format={id => (
@@ -24,15 +27,16 @@ const InventoryTable = props => (
 		<Column field="class">Class</Column>
 		<Column field="product">Product</Column>
 		<Column field="description">Description</Column>
-		<Column field="quantity">Quantity</Column>
+		<Column field="quantity" columnClassName="number-col">Quantity</Column>
 		<Column field="unit">Unit</Column>
 		<Column
 			field="valuePerUnit"
+			columnClassName="number-col"
 			format={int => (int ? centsToString(int) : null)}
 		>
 			Value / unit
 		</Column>
-		<Column field="entryDate">Entry date</Column>
+		<Column field="entryDate" columnClassName="number-col">Entry date</Column>
 		<Column
 			field="lifeSpan"
 			format={iso => (iso ? moment.duration(iso).humanize() : null)}
@@ -42,7 +46,7 @@ const InventoryTable = props => (
 		<Column field="location">Location</Column>
 		<Column
 			field="salvageValue"
-			format={int => (int === null ? 'N/A' : centsToString(int))}
+			format={int => (int ? centsToString(int) : nullToNA(int))}
 		>
 			Salvage Value
 		</Column>
