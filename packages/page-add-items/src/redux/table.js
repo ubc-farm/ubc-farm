@@ -1,4 +1,4 @@
-import { getSelected } from './selected.js';
+import { getSelected, toggle } from './selected.js';
 
 const INIT = 'inventory/table/INIT';
 const ADD_ROW = 'inventory/table/ADD_ROW';
@@ -51,6 +51,7 @@ export function deleteSelected() {
 		const id = getSelected(getState());
 		const selectedIndex = getTable(getState()).findIndex(row => row.id === id);
 
-		return dispatch(deleteRow(selectedIndex));
+		dispatch(deleteRow(selectedIndex));
+		dispatch(toggle(id));
 	};
 }
