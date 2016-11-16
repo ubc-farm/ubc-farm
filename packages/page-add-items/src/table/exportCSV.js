@@ -1,3 +1,5 @@
+import { csvFormat } from 'd3-dsv';
+
 const fields = [
 	'id',
 	'class',
@@ -15,10 +17,6 @@ const fields = [
 	'sku',
 ];
 
-function wrap(text) {
-	return text.includes(',') ? `"${text}` : text;
-}
-
 export function download(filename, text) {
 	const element = document.createElement('a');
 	element.setAttribute('href',
@@ -32,16 +30,7 @@ export function download(filename, text) {
 }
 
 export function createCSV(tableData) {
-	const header = fields.join(',');
-
-	const rows = tableData.reduce((csv, row) => {
-		const [firstField, ...restFields] = fields;
-		let rowText = `${wrap(row[firstField])}`;
-		rowText += restFields.reduce((txt, f) => `${txt},${wrap(row[f])}`, '');
-		return `${rowText}\n`;
-	}, '');
-
-	return `${header}\n${rows}`;
+	return csvFormat(tableData, fields);
 }
 
 export default function exportCSV(tableData) {
