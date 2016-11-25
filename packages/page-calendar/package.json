@@ -11,6 +11,8 @@
     "server-plugin": "server/out/index.js"
   },
   "dependencies": {
+    "@ubc-farm/utils": "^4.1.0",
+    "moment": "^2.17.0",
     "react": "15.3.0",
     "react-dom": "15.3.0",
     "redux-actions": "^1.1.0"

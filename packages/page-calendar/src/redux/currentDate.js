@@ -22,7 +22,7 @@ export default function currentDateReducer(state = moment(), action) {
 export const getCurrentDate = state => state.currentDate;
 
 
-export const selectDay = date => ({ type: SELECT_DAY, payload: date })
+export const selectDay = date => ({ type: SELECT_DAY, payload: date });
 export const nextMonth = meta => ({ type: ADJUST_MONTH, payload: 1, meta });
 export const lastMonth = meta => ({ type: ADJUST_MONTH, payload: -1, meta });
 export const nextDay = meta => ({ type: ADJUST_DAY, payload: 1, meta });
