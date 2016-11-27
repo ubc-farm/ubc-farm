@@ -1,11 +1,12 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import moment from 'moment';
+import { connect } from 'react-redux';
 import { classlist as cx } from '@ubc-farm/utils';
+import { getEventTypes } from '../redux/events.js';
 
 /**
  * Used to represent a single date of the month inside the month view.
  */
-export default function DateEvents({ events }) {
+function DateEvents({ events }) {
 	const moreEvents = events.length > 2;
 	return (
 		<ul className="MonthView-DateEvents">
@@ -20,3 +21,9 @@ export default function DateEvents({ events }) {
 DateEvents.propTypes = {
 	events: PropTypes.arrayOf(PropTypes.string),
 };
+
+export default connect(
+	(state, { dateIso }) => ({
+		events: Array.from(getEventTypes(state, dateIso)),
+	}),
+)(DateEvents);

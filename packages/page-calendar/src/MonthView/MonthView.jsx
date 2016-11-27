@@ -1,17 +1,18 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import moment from 'moment';
-
+import { connect } from 'react-redux';
+import { getCurrentDate } from '../redux/currentDate.js';
 import WeekdayNames from './WeekdayNames.jsx';
 import Week from './Week.jsx';
 
-export default function MonthView({ currentDate, fiveDay }) {
+function MonthView({ currentDate, fiveDay }) {
 	const copy = moment(currentDate);
 	const startWeek = copy.startOf('month').week();
 	const endWeek = copy.endOf('month').week();
 
 	const children = [];
 	for (let i = startWeek; i <= endWeek; i += 1) {
-		children.push(<Week key={i} weekNum={i} fiveDay={fiveDay}	/>);
+		children.push(<Week key={i} weekNum={i} fiveDay={fiveDay} currentDate={currentDate}	/>);
 	}
 
 	return (
@@ -29,3 +30,7 @@ MonthView.propTypes = {
 	currentDate: PropTypes.instanceOf(Date).isRequired,
 	fiveDay: PropTypes.bool,
 };
+
+export default connect(
+	state => ({ currentDate: getCurrentDate(state) }),
+)(MonthView);

@@ -20,15 +20,15 @@ export const getAllEvents = state => state.events;
 export const getEvents = (state, dateIso) => getAllEvents(state)[dateIso] || [];
 /**
  * @param {string} dateIso in format YYYY-MM-DD
- * @returns {string[]} event types on this day
+ * @returns {Set<string>} event types on this day
  */
 export function getEventTypes(state, dateIso) {
 	const types = getEvents(state, dateIso).map(event => event.type);
-	return Array.from(new Set(types));
+	return new Set(types);
 }
 /**
  * @param {Date} month
- * @returns {string[][]} array of event type arrays. each sub array represents
+ * @returns {Array<Set<string>>} array of event type arrays. each sub array represents
  * one day.
  */
 export function getMonthEventTypes(state, month) {
@@ -37,3 +37,13 @@ export function getMonthEventTypes(state, month) {
 	return new Array(daysInMonth).fill()
 		.map((v, i) => getEventTypes(state, copy.date(i + i).format('YYYY-MM-DD')));
 }
+
+
+export const deserializeEvents = events => ({
+	type: DESERIALIZE_EVENTS,
+	payload: events,
+});
+export const deserializeEventsError = error => ({
+	type: DESERIALIZE_EVENTS,
+	error,
+});
