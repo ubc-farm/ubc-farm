@@ -10,8 +10,9 @@ import DateEvents from './DateEvents.jsx';
  */
 function DateElement({ thisDate, currentDate, onClick, children }) {
 	return (
-		<div
+		<a
 			onClick={onClick}
+			href={`#${thisDate.format('Y-MM-DD')}`}
 			className={cx('MonthView-Date', {
 				'MonthView-Date--current': thisDate.isSame(currentDate, 'day'),
 				'MonthView-Date--today': thisDate.isSame(moment(), 'day'),
@@ -20,7 +21,7 @@ function DateElement({ thisDate, currentDate, onClick, children }) {
 		>
 			<span className="MonthView-Date-num">{ thisDate.date() }</span>
 			{ children }
-		</div>
+		</a>
 	);
 }
 
@@ -39,6 +40,9 @@ export default connect(
 		return { thisDate, children };
 	},
 	(dispatch, { date }) => ({
-		onClick() { dispatch(selectDay(date)); },
+		onClick(e) {
+			e.preventDefault();
+			dispatch(selectDay(date));
+		},
 	}),
 )(DateElement);

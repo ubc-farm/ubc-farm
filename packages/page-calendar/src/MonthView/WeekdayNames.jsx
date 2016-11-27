@@ -6,13 +6,13 @@ export default function WeekdayNames({ single, fiveDay }) {
 	if (fiveDay) weekdays = weekdays.slice(1, 6);
 
 	return (
-		<div className="MonthView-WeekdayNames">
+		<header className="MonthView-WeekdayNames">
 			{ weekdays.map(weekday => (
 				<span className="MonthView-WeekdayNames-weekday" key={weekday}>
 					{ single ? weekday.charAt(0) : weekday }
 				</span>
 			)) }
-		</div>
+		</header>
 	);
 }
 

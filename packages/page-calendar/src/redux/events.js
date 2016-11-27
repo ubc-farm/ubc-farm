@@ -35,7 +35,7 @@ export function getMonthEventTypes(state, month) {
 	const copy = moment(month);
 	const daysInMonth = copy.daysInMonth();
 	return new Array(daysInMonth).fill()
-		.map((v, i) => getEventTypes(state, copy.date(i + i).format('YYYY-MM-DD')));
+		.map((v, i) => getEventTypes(state, copy.date(i + i).format('Y-MM-DD')));
 }
 
 
