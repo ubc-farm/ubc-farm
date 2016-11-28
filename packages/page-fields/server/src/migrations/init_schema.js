@@ -1,20 +1,18 @@
 exports.up = knex => knex.schema
-	.withSchema('fields')
 	.createTable('fields', (table) => {
-		table.string('id').primary();
+		table.string('id').increments();
 		table.string('name');
 		table.json('path');
 		table.json('crops').notNullable();
-		table.string('location')
+		table.string('area')
 			.notNullable()
-			.references('locations.name');
+			.references('area.name');
 	})
-	.createTable('locations', (table) => {
+	.createTable('area', (table) => {
 		table.string('name').primary();
 		table.json('geometry').notNullable();
 	});
 
 exports.down = knex => knex.schema
-	.withSchema('fields')
 	.dropTable('fields')
-	.dropTable('locations');
+	.dropTable('area');
