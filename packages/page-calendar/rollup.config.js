@@ -15,7 +15,7 @@ export default {
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}),
-		commonjs()
+		commonjs(),
 	],
 	external: ['react', 'react-dom'],
 	globals: {

@@ -21,6 +21,7 @@
     "redux-actions": "^1.1.0"
   },
   "devDependencies": {
+    "@ubc-farm/babel-preset": "^1.0.0",
     "@ubc-farm/eslint-config": "^4.1.0",
     "eslint": "^3.11.0",
     "eslint-plugin-import": "^2.2.0",
@@ -39,5 +40,10 @@
   ],
   "config": {
     "port": 3002
+  },
+  "babel": { "presets": ["@ubc-farm/babel-preset"] },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config/react.yaml",
+    "env": { "browser": true }
   }
 }
