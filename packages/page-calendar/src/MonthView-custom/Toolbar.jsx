@@ -9,21 +9,21 @@ function Toolbar({ currentDate, onLastClick, onNextClick, onTitleClick }) {
 		<header className="MonthView-Toolbar">
 			<h4 className="MonthView-Toolbar-title" onClick={onTitleClick}>
 				{ currentDate.display('MMMM, Y') }
-				<button
-					type="button"
-					onClick={onLastClick}
-					className="MonthView-Toolbar-button MonthView-Toolbar-lastbutton"
-				>
-					‹
-				</button>
-				<button
-					type="button"
-					onClick={onNextClick}
-					className="MonthView-Toolbar-button MonthView-Toolbar-nextbutton"
-				>
-					›
-				</button>
 			</h4>
+			<button
+				type="button"
+				onClick={onLastClick}
+				className="MonthView-Toolbar-button MonthView-Toolbar-lastbutton"
+			>
+				‹
+			</button>
+			<button
+				type="button"
+				onClick={onNextClick}
+				className="MonthView-Toolbar-button MonthView-Toolbar-nextbutton"
+			>
+				›
+			</button>
 		</header>
 	);
 }
