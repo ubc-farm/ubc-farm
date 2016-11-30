@@ -7,23 +7,25 @@ import { getCurrentDate, lastMonth, nextMonth } from '../redux/currentDate.js';
 function Toolbar({ currentDate, onLastClick, onNextClick, onTitleClick }) {
 	return (
 		<header className="MonthView-Toolbar">
-			<h4 className="MonthView-Toolbar-title" onClick={onTitleClick}>
-				{ currentDate.display('MMMM, Y') }
-			</h4>
-			<button
-				type="button"
-				onClick={onLastClick}
-				className="MonthView-Toolbar-button MonthView-Toolbar-lastbutton"
-			>
-				‹
-			</button>
-			<button
-				type="button"
-				onClick={onNextClick}
-				className="MonthView-Toolbar-button MonthView-Toolbar-nextbutton"
-			>
-				›
-			</button>
+			<div className="MonthView-Toolbar-wrapper">
+				<h4 className="MonthView-Toolbar-title" onClick={onTitleClick}>
+					{ currentDate.format('MMMM, Y') }
+				</h4>
+				<button
+					type="button"
+					onClick={onLastClick}
+					className="MonthView-Toolbar-button MonthView-Toolbar-lastbutton"
+				>
+					‹
+				</button>
+				<button
+					type="button"
+					onClick={onNextClick}
+					className="MonthView-Toolbar-button MonthView-Toolbar-nextbutton"
+				>
+					›
+				</button>
+			</div>
 		</header>
 	);
 }

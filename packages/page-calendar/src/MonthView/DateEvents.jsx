@@ -24,6 +24,7 @@ DateEvents.propTypes = {
 
 export default connect(
 	(state, { dateIso }) => ({
-		events: Array.from(getEventTypes(state, dateIso)),
+		// events: Array.from(getEventTypes(state, dateIso)),
+		events: ['e-one', 'e-two', 'e-three'],
 	}),
 )(DateEvents);

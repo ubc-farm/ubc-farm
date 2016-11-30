@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@ubc-farm/utils": "^4.1.0",
-    "antd": "^2.5.0",
     "moment": "^2.17.0",
     "normalize": "^0.3.1",
     "react": "15.3.0",
@@ -29,11 +28,14 @@
     "reselect": "^2.5.3",
     "rollup": "0.34.2",
     "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^3.3.1",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-json": "^2.0.2",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "ubc-farm-server ./package.json"
+  },
   "files": [
     "server/public",
     "server/out"
@@ -41,9 +43,15 @@
   "config": {
     "port": 3002
   },
-  "babel": { "presets": ["@ubc-farm/babel-preset"] },
+  "babel": {
+    "presets": [
+      "@ubc-farm/babel-preset"
+    ]
+  },
   "eslintConfig": {
     "extends": "@ubc-farm/eslint-config/react.yaml",
-    "env": { "browser": true }
+    "env": {
+      "browser": true
+    }
   }
 }

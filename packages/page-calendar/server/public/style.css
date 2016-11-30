@@ -1,0 +1,55 @@
+.MonthView {
+	display: table;
+}
+
+.MonthView-Toolbar {
+	display: table-caption;
+}
+.MonthView-Toolbar-wrapper {
+	display: flex;
+}
+.MonthView-Toolbar-title {
+	display: inline-block;
+	margin: 0 auto 0 0;
+}
+
+.MonthView-MonthDays {
+	display: table-row-group;
+	text-align: center;
+}
+.MonthView-Week, .MonthView-WeekdayNames {
+	display: table-row;
+}
+.MonthView-Date, .MonthView-WeekdayNames-weekday {
+	display: table-cell;
+	padding: 0.5em 1em;
+}
+
+.MonthView-Date {
+	text-decoration: none;
+	color: inherit;
+}
+.MonthView-Date--othermonth {
+	opacity: 0.5;
+}
+
+.MonthView-DateEvents {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+.MonthView-DateEvents-event, .MonthView-DateEvents-more {
+	display: inline-block;
+	font-size: 0.5em;
+	width: 0.5em;
+	height: 0.5em;
+	line-height: 0.9em;
+	background: gray;
+	border-radius: 50%;
+	margin: 0.15em;
+}
+.MonthView-DateEvents-more {
+	background: none;
+	color: gray;
+	font-weight: bold;
+}
