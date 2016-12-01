@@ -19,8 +19,15 @@ function DateElement({ date, isCurrent, isToday, isOtherMonth, onClick, children
 				'MonthView-Date--othermonth': isOtherMonth,
 			})}
 		>
-			<span className="MonthView-Date-num">{ date.date() }</span>
-			{ children }
+			<div
+				className={cx('MonthView-Date-wrapper', {
+					'MonthView-Date-wrapper--current': isCurrent,
+					'MonthView-Date-wrapper--today': isToday,
+				})}
+			>
+				<span className="MonthView-Date-num">{ date.date() }</span>
+				{ children }
+			</div>
 		</a>
 	);
 }
@@ -37,11 +44,13 @@ DateElement.propTypes = {
 export default connect(
 	(state, { date, currentDate }) => {
 		const isOtherMonth = !date.isSame(currentDate, 'month');
+		const isCurrent = date.isSame(currentDate, 'day');
+		const isToday = date.isSame(moment(), 'day');
 		return {
 			isOtherMonth,
-			isCurrent: date.isSame(currentDate, 'day'),
-			isToday: date.isSame(moment(), 'day'),
-			children: isOtherMonth
+			isCurrent,
+			isToday,
+			children: isOtherMonth || isCurrent || isToday
 				? null
 				: <DateEvents dateIso={date.format('YYYY-MM-DD')} />,
 		};

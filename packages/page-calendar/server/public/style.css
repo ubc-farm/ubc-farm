@@ -28,10 +28,39 @@
 .MonthView-Date {
 	text-decoration: none;
 	color: inherit;
+  width: 1.5em;
+  height: 1.5em;
+	position: relative;
 }
 .MonthView-Date--othermonth {
 	opacity: 0.5;
 }
+
+.MonthView-Date-wrapper {
+	height: 1.5em;
+}
+.MonthView-Date-wrapper::before {
+	position: absolute;
+	content: '';
+	z-index: -1;
+	left: 0;
+	right: 0;
+	top: 0;
+	border-radius: 50%;
+	height: 2em;
+	width: 2em;
+	margin: 0 auto;
+}
+.MonthView-Date-wrapper--current::before {
+	background: rgba(0, 0, 0, 0.2);
+}
+.MonthView-Date-wrapper--today::before {
+	background: green;
+}
+.MonthView-Date--today {
+	color: white;
+}
+
 
 .MonthView-DateEvents {
 	margin: 0;
