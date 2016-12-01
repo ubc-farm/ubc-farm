@@ -1,23 +1,18 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { classlist as cx } from '@ubc-farm/utils';
-import { connect } from 'react-redux';
 import moment from 'moment';
 import DefaultMap from './DefaultMap.js';
 import Item from './Item.jsx';
 
-const AgendaItem = connect(
-	(state, { event: { title, type, allDay, done, location } }) => ({
-		done,
-		title,
-		subtitle: allDay ? null : location,
-		className: cx(type, { 'Agenda-Item--allDay': allDay }),
-	}),
-)(Item);
-
 // eslint-disable-next-line react/prop-types
-const AgendaCell = ({ event, event: { length } }) => (
-	<td rowSpan={Math.ceil(length / 30)}>
-		<AgendaItem event={event} />
+const AgendaCell = ({ event, rowSpan }) => (
+	<td rowSpan={rowSpan || Math.ceil(event.length / 30)}>
+		<Item
+			done={event.done}
+			title={event.title}
+			subtitle={event.allDay ? null : event.location}
+			className={cx(event.type, { 'Agenda-Item--allDay': event.allDay })}
+		/>
 	</td>
 );
 
@@ -52,7 +47,7 @@ export default function Day({
 						{ dayHeader }
 					</th>
 					<td className="Agenda-Day-allday">
-						{eventMap.get('allDay').map(event => <AgendaItem event={event} />)}
+						{eventMap.get('allDay').map(event => <AgendaCell event={event} />)}
 					</td>
 				</tr>
 			</thead>

@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { getCurrentDate } from './currentDate.js';
 
 export const DESERIALIZE_EVENTS = 'calendar/currentDate/DESERIALIZE_EVENTS';
 
@@ -18,6 +19,10 @@ export default function currentDateReducer(state = {}, action) {
 export const getAllEvents = state => state.events;
 /** @returns {Object[]} events on this day */
 export const getEvents = (state, dateIso) => getAllEvents(state)[dateIso] || [];
+export const getSelectedEvents = state => getEvents(
+	state,
+	getCurrentDate(state).format('Y-MM-DD'),
+);
 /**
  * @param {string} dateIso in format YYYY-MM-DD
  * @returns {Set<string>} event types on this day

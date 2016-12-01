@@ -82,3 +82,15 @@
 	color: gray;
 	font-weight: bold;
 }
+
+
+.Agenda-DateHeader {
+	display: flex;
+	flex-flow: column;
+}
+.Agenda-DateHeader-num {
+	font-size: 2em;
+}
+.Agenda-DateHeader--today {
+	color: green;
+}
