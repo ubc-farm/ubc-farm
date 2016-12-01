@@ -6,7 +6,7 @@ export default class DefaultMap extends Map {
 	}
 
 	get(key) {
-		if (!this.has(key)) this.set(this.defaultBuilder());
+		if (!this.has(key)) this.set(key, this.defaultBuilder());
 		return super.get(key);
 	}
 }

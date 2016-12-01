@@ -5,7 +5,7 @@ import DefaultMap from './DefaultMap.js';
 import Item from './Item.jsx';
 
 // eslint-disable-next-line react/prop-types
-const AgendaCell = ({ event, rowSpan }) => (
+const AgendaCell = ({ event = {}, rowSpan }) => (
 	<td rowSpan={rowSpan || Math.ceil(event.length / 30)}>
 		<Item
 			done={event.done}

@@ -10,7 +10,7 @@ const Agenda = ({ events, date }) => (
 	<div className="Agenda">
 		<a>Yesterday</a>
 		<Day
-			event={events}
+			events={events}
 			dayHeader={<DateHeader date={date} />}
 		/>
 		<a>Tomorrow</a>
