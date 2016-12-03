@@ -3,8 +3,9 @@ import { Server } from 'hapi';
 import Inert from 'inert';
 import Vision from 'vision';
 import Handlebars from 'handlebars';
+import KnexDecorators from '@ubc-farm/knex-connection/plugin';
 
-const showDebug = process.env.NODE_ENV === 'development' && ['error'];
+const showDebug = (process.env.NODE_ENV || process.env.NODE_ENV === 'development') && ['error'];
 
 const server = new Server({
 	connections: {
@@ -25,8 +26,8 @@ server.connection({
 	labels: 'default',
 });
 
-export default (async () => {
-	await server.register([Inert, Vision]);
+export const serverPrep = (async () => {
+	await server.register([Inert, Vision, KnexDecorators]);
 
 	await server.views({
 		engines: { hbs: Handlebars },
@@ -48,3 +49,5 @@ export default (async () => {
 
 	return server;
 })();
+
+export default server;
