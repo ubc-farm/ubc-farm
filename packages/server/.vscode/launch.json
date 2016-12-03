@@ -19,7 +19,7 @@
 			"cwd": "${workspaceRoot}",
 			"preLaunchTask": "prepare:main",
 			"args": [
-				"test/fixture",
+				"test/fixture/package.json",
 				"--stack"
 			],
 			"sourceMaps": true,
