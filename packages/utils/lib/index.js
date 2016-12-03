@@ -1,4 +1,5 @@
 export { default as assert, AssertionError } from './assert.js';
+export { default as chain } from './chain.js';
 export { default as classlist } from './classList.js';
 export * from './convertToMap.js';
 export { default as coroutine } from './coroutine.js';
