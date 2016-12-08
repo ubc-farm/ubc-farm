@@ -33,4 +33,4 @@ exports.up = knex => knex.schema
 exports.down = knex => knex.schema
 	.dropTable('people')
 	.dropTable('employees')
-	.dropTable('researchers')
+	.dropTable('researchers');

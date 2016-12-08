@@ -7,16 +7,12 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		babel({
-			plugins: ['transform-react-jsx', 'external-helpers'],
-		}),
-		nodeResolve({ jsnext: true }),
+		babel({ exclude: 'node_modules/**' }),
+		nodeResolve(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
-		commonjs({
-			exclude: 'node_modules/lodash-es/**',
-		}),
+		commonjs(),
 	],
 	external: ['react', 'react-dom', 'tape'],
 	globals: {
