@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import Person from './Person.js';
 
 export default Person.keys({
-	_id: Joi.string().regex(/^person\/employee\/\w+$/),
+	_id: Joi.string().regex(/^person\/researcher\/\w+$/),
 	position: Joi.string(),
 	faculty: Joi.string(),
 	department: Joi.string(),
