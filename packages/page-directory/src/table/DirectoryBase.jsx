@@ -7,14 +7,14 @@ const DirectoryBase = ({ tableData, onHeaderClick, headerClassNames = {} }) => (
 		<Column
 			field="role"
 			format={startCase}
-			onHeaderClick={onHeaderClick}
+			onHeaderClick={() => onHeaderClick('role')}
 			headerClassName={headerClassNames.role}
 		>
 			ID
 		</Column>
 		<Column
 			field="email"
-			onHeaderClick={onHeaderClick}
+			onHeaderClick={() => onHeaderClick('email')}
 			headerClassName={headerClassNames.email}
 		>
 			Email
@@ -32,7 +32,7 @@ const DirectoryBase = ({ tableData, onHeaderClick, headerClassNames = {} }) => (
 					return phone;
 				}
 			}}
-			onHeaderClick={onHeaderClick}
+			onHeaderClick={() => onHeaderClick('phoneNumber')}
 			headerClassName={headerClassNames.phoneNumber}
 		>
 			Phone
@@ -49,7 +49,7 @@ const DirectoryBase = ({ tableData, onHeaderClick, headerClassNames = {} }) => (
 					`${addressLocality}, ${addressRegion} ${postalCode}`,
 				].join('\n');
 			}}
-			onHeaderClick={onHeaderClick}
+			onHeaderClick={() => onHeaderClick('addressMailing')}
 			headerClassName={headerClassNames.address}
 		>
 			Address
@@ -59,7 +59,7 @@ const DirectoryBase = ({ tableData, onHeaderClick, headerClassNames = {} }) => (
 
 DirectoryBase.propTypes = {
 	tableData: PropTypes.arrayOf(PropTypes.object),
-	onHeaderClick: PropTypes.func,
+	onHeaderClick: PropTypes.func.isRequired,
 	headerClassNames: PropTypes.shape({
 		role: PropTypes.string,
 		email: PropTypes.string,

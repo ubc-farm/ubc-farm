@@ -1,4 +1,5 @@
 import * as Joi from 'joi';
+import db from '../pouchdb.js';
 import Person from '../schema/Person.js';
 import transfrom from '../schema/transform.js';
 
