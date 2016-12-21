@@ -5,16 +5,22 @@
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/page-directory",
-  "browser": "dist/index.iife.js",
-  "private": true,
+  "browser": "public/index.js",
+  "ubc-farm": {
+    "server-plugin": "api.js"
+  },
   "dependencies": {
-    "joi": "^10.0.5",
-    "react": "15.3.0",
-    "react-dom": "15.3.0"
+    "pouchdb": "^6.1.0",
+    "pouchdb-find": "^0.10.4",
+    "joi": "^10.0.5"
+  },
+  "peerDependencies": {
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   },
   "devDependencies": {
     "@ubc-farm/babel-preset": "^1.0.0",
-    "@ubc-farm/eslint-config": "^4.1.0",
+    "@ubc-farm/eslint-config": "^4.2.0",
     "@ubc-farm/utils": "^4.1.0",
     "eslint": "^3.11.1",
     "eslint-plugin-import": "^2.2.0",
@@ -36,13 +42,15 @@
     "prepublish": "npm run prepublish:list && npm run prepublish:add"
   },
   "files": [
-    "dist",
-    "styles",
-    "views",
-    "server"
+    "api.js",
+    "api.js.map",
+    "public"
   ],
   "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config/react.yaml"
+    "extends": "@ubc-farm/eslint-config/react.yaml",
+    "env": {
+      "browser": true
+    }
   },
   "babel": {
     "preset": "@ubc-farm/babel-preset"
