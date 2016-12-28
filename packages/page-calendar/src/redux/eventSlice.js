@@ -1,21 +1,10 @@
 import { handle } from 'redux-pack';
-import moment from 'moment';
 
-function findEvents(date, view) {
-	let start;
-	let end;
-	if (view === 'agenda') {
-		start = moment(date).startOf('day');
-		end = moment(start).add(1, 'weeks').endOf('day');
-	} else {
-		start = moment(date).startOf(view);
-		end = moment(date).endOf(view);
-	}
-
+function findEvents([rangeStart, rangeEnd]) {
 	return db.find({
 		selector: {
-			start: { $gte: start.valueOf(), $lt: end.valueOf() },
-			end: { $gte: start.valueOf(), $lt: end.valueOf() },
+			start: { $lt: rangeEnd.valueOf() },
+			end: { $gt: rangeStart.valueOf() },
 		},
 		fields: ['_id', 'title', 'allDay', 'start', 'end'],
 	});
@@ -30,10 +19,7 @@ export default function eventSliceReducer(state = [], action) {
 		case REFRESH_EVENTS: {
 			const { payload } = action;
 			return handle(state, action, {
-				start: s => s,
-				finish: s => s,
-				failure: s => s,
-				success: s => Object.assign({}, s, payload),
+				success: () => payload.docs,
 			});
 		}
 		default:
@@ -46,7 +32,10 @@ export default function eventSliceReducer(state = [], action) {
 export const getEvents = state => state.eventSlice;
 
 // Actions
-export const refreshEvents = (date, view) => ({
+export const refreshEvents = range => ({
 	type: REFRESH_EVENTS,
-	promise: findEvents(date, view),
+	promise: findEvents(range),
+	meta: {
+		interval: `${range[0].format('Y-MM-DD')}/${range[1].format('Y-MM-DD')}`,
+	},
 });
