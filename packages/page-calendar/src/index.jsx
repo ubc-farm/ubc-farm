@@ -3,14 +3,15 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import MonthView from './MonthView/index.jsx';
-import Agenda from './Agenda/index.jsx';
-import store from './redux/index.js';
+import BigCalendar from './calendar/BigCalendar.js';
+import configureStore from './redux/index.js';
+import db from './pouchdb.js';
 
 render(
-	<Provider store={store}>
+	<Provider store={configureStore(db)}>
 		<div>
 			<MonthView />
-			<Agenda />
+			<BigCalendar />
 		</div>
 	</Provider>,
 	document.getElementById('reactRoot'),

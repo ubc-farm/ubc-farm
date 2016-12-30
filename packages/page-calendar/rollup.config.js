@@ -7,7 +7,7 @@ export default {
 	entry: 'src/index.jsx',
 	sourceMap: true,
 	targets: [
-		{ dest: 'server/public/index.js', format: 'iife' },
+		{ dest: 'public/index.js', format: 'iife' },
 	],
 	plugins: [
 		babel({ exclude: 'node_modules/**' }),

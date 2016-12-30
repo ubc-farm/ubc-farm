@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { getDate } from './currentView.js';
 import { getEvents } from './eventDB.js';
 
-const monthRange = createSelector(
+const computeMonthRange = createSelector(
 	getDate,
 	date => [date.clone().startOf('month'), date.clone().endOf('month')],
 );
@@ -18,13 +18,17 @@ function generateBaseMap(date) {
 export const getMonthIcons = createSelector(
 	getEvents,
 	getDate,
-	(events, date) => {
-		const [rangeStart, rangeEnd] = monthRange(date).map(d => d.unix());
+	computeMonthRange,
+	(events, date, monthRange) => {
+		const [rangeStart, rangeEnd] = monthRange.map(d => d.unix());
 
 		const base = generateBaseMap(date);
 
 		for (const { start, end, type } of events) {
-			if (start < rangeEnd && end > rangeStart) {
+			if (
+				(start < rangeEnd && start >= rangeStart) ||
+				(end > rangeStart && end <= rangeEnd)
+			) {
 				const dayOfMonth = moment.unix(start).date();
 				base.get(dayOfMonth).add(type);
 			}

@@ -7,11 +7,11 @@ export default function WeekdayNames({ single, fiveDay }) {
 
 	return (
 		<header className="MonthView-WeekdayNames">
-			{ weekdays.map(weekday => (
+			{weekdays.map(weekday => (
 				<span className="MonthView-WeekdayNames-weekday" key={weekday}>
 					{ single ? weekday.charAt(0) : weekday }
 				</span>
-			)) }
+			))}
 		</header>
 	);
 }

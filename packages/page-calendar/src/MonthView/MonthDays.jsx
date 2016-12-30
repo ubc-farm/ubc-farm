@@ -1,7 +1,7 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { getCurrentDate } from '../redux/currentDate.js';
+import { getDate } from '../redux/currentView.js';
 import WeekdayNames from './WeekdayNames.jsx';
 import Week from './Week.jsx';
 
@@ -30,5 +30,5 @@ MonthDays.propTypes = {
 };
 
 export default connect(
-	state => ({ currentDate: getCurrentDate(state) }),
+	state => ({ currentDate: getDate(state) }),
 )(MonthDays);

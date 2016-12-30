@@ -2,7 +2,7 @@ import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { classlist as cx } from '@ubc-farm/utils';
-import { selectDay } from '../redux/currentDate.js';
+import { getDate, selectDate } from '../redux/currentView.js';
 import DateEvents from './DateEvents.jsx';
 
 /**
@@ -42,10 +42,13 @@ DateElement.propTypes = {
 };
 
 export default connect(
-	(state, { date, currentDate }) => {
+	(state, { date }) => {
+		const currentDate = getDate(state);
+
 		const isOtherMonth = !date.isSame(currentDate, 'month');
 		const isCurrent = date.isSame(currentDate, 'day');
 		const isToday = date.isSame(moment(), 'day');
+
 		return {
 			isOtherMonth,
 			isCurrent,
@@ -55,10 +58,10 @@ export default connect(
 				: <DateEvents dateIso={date.format('YYYY-MM-DD')} />,
 		};
 	},
-	(dispatch, { date, currentDate }) => ({
+	(dispatch, { date }) => ({
 		onClick(e) {
 			e.preventDefault();
-			dispatch(selectDay(date.date(), !date.isSame(currentDate, 'month')));
+			dispatch(selectDate(date));
 		},
 	}),
 )(DateElement);

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { createSelector } from 'reselect';
+import { createAction } from 'redux-actions';
 
 const NAVIGATE = 'calendar/currentView/NAVIGATE';
 const SELECT_DAY = 'calendar/currentView/SELECT_DAY';
@@ -11,18 +12,19 @@ const defaultState = {
 };
 
 // Reducer
-export default function currentView(state = defaultState, action) {
-	switch (action.type) {
+export default function currentView(state = defaultState, { type, payload }) {
+	switch (type) {
 		case NAVIGATE:
-			return action.payload;
+			return payload;
 
 		case SELECT_DAY:
-			return Object.assign({}, state, { date: moment(action.payload) });
+			return Object.assign({}, state, { date: moment(payload) });
 
 		case CHANGE_VIEW:
-			return Object.assign({}, state, { view: action.payload });
+			return Object.assign({}, state, { view: payload });
 
-		default: return state;
+		default:
+			return state;
 	}
 }
 
@@ -43,5 +45,5 @@ export const getDateRange = createSelector(
 
 // Actions
 export const navigate = (date, view) => ({ type: NAVIGATE, payload: { date, view } });
-export const selectDay = date => ({ type: SELECT_DAY,	payload: moment(date) });
-export const changeView = view => ({ type: CHANGE_VIEW, payload: view });
+export const selectDate = createAction(SELECT_DAY, date => moment(date));
+export const changeView = createAction(CHANGE_VIEW);

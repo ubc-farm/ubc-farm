@@ -1,7 +1,7 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { connect } from 'react-redux';
 import { classlist as cx } from '@ubc-farm/utils';
-import { getEventTypes } from '../redux/events.js';
+import { getDayIcons } from '../redux/monthIcons.js';
 
 /**
  * Used to represent a single date of the month inside the month view.
@@ -23,8 +23,7 @@ DateEvents.propTypes = {
 };
 
 export default connect(
-	(state, { dateIso }) => ({
-		events: Array.from(getEventTypes(state, dateIso)),
-		// events: ['e-one', 'e-two', 'e-three'],
+	(state, { dayOfMonth }) => ({
+		events: Array.from(getDayIcons(state, dayOfMonth)),
 	}),
 )(DateEvents);
