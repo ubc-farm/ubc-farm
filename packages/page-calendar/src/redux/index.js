@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux';
-import currentDate from './currentDate.js';
-import events from './events.js';
+import currentView from './currentView.js';
+import eventDB from './eventDB.js';
 
 export const reducer = combineReducers({
-	currentDate,
-	events,
+	currentView,
+	eventDB,
 });
 
 export default createStore(

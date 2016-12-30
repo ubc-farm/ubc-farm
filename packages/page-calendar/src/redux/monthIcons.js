@@ -1,50 +1,55 @@
-import { handle } from 'redux-pack';
+import moment from 'moment';
+import { createSelector } from 'reselect';
+import { getDate } from './currentView.js';
+import { getEvents } from './eventDB.js';
 
-function generateBase(date) {
-	const base = {};
+const monthRange = createSelector(
+	getDate,
+	date => [date.clone().startOf('month'), date.clone().endOf('month')],
+);
+
+function generateBaseMap(date) {
+	const base = new Map();
 	const daysInMonth = date ? date.daysInMonth() : 31;
-	for (let i = 1; i <= daysInMonth; i += 1) base[i] = new Set();
+	for (let i = 1; i <= daysInMonth; i += 1) base.set(i, new Set());
 	return base;
 }
 
-function findMonthEventTypes([rangeStart, rangeEnd]) {
-	return db.find({
-		selector: {
-			start: { $lt: rangeEnd.valueOf() },
-			end: { $gt: rangeStart.valueOf() },
-		},
-		fields: ['type', 'start'],
-	});
-}
+export const getMonthIcons = createSelector(
+	getEvents,
+	getDate,
+	(events, date) => {
+		const [rangeStart, rangeEnd] = monthRange(date).map(d => d.unix());
 
+		const base = generateBaseMap(date);
 
-const READ_TYPES = 'calendar/monthIcons/READ_TYPES';
-
-// Reducer
-export default function monthIcons(state = generateBase(), action, currentView) {
-	switch (action.type) {
-		case READ_TYPES: {
-			const { payload } = action;
-			return handle(state, action, {
-				success: () => payload.docs.reduce((newState, { type, start }) => {
-					const date = start.date();
-					newState[date].add(type);
-					return newState;
-				}, generateBase(currentView.date)),
-			});
+		for (const { start, end, type } of events) {
+			if (start < rangeEnd && end > rangeStart) {
+				const dayOfMonth = moment.unix(start).date();
+				base.get(dayOfMonth).add(type);
+			}
 		}
 
-		default: return state;
-	}
-}
+		return base;
+	},
+);
 
-// Selectors
-export const getMonthIcons = state => state.monthIcons;
-export const getDayIcons = (state, dayOfMonth) => state.monthIcons[dayOfMonth];
+export const getDayIcons = (state, dayOfMonth) => getMonthIcons(state).get(dayOfMonth);
 
-// Actions
-export const readMonthEventTypes = range => ({
-	type: READ_TYPES,
-	promise: findMonthEventTypes(range),
-	meta: { month: range[0].month() },
-});
+export const getTruncatedIcons = createSelector(
+	getMonthIcons,
+	(monthIcons) => {
+		const truncatedMap = new Map();
+		for (const [dayOfMonth, set] of monthIcons) {
+			let newSet = set;
+			if (set.size > 3) {
+				const [first, second] = set;
+				newSet = new Set().add(first).add(second).add('more');
+			}
+
+			truncatedMap.set(dayOfMonth, newSet);
+		}
+
+		return truncatedMap;
+	},
+);
