@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { classlist as cx } from '@ubc-farm/utils';
 import { getDayIcons } from '../redux/monthIcons.js';
 
-/**
- * Used to represent a single date of the month inside the month view.
- */
 function DateEvents({ events }) {
 	const moreEvents = events.length > 2;
 	return (

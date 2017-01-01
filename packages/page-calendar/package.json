@@ -5,16 +5,20 @@
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/page-calendar",
-  "browser": "server/public/index.js",
-  "main": "server/out/index.js",
+  "browser": "public/index.js",
+  "main": "api.js",
   "ubc-farm": {
-    "server-plugin": "server/out/index.js"
+    "server-plugin": "api.js"
   },
   "dependencies": {
     "@ubc-farm/utils": "^4.1.0",
+    "es7-object-polyfill": "0.0.3",
+    "joi": "^10.1.0",
     "moment": "^2.17.0",
     "normalize": "^0.3.1",
     "pouch-redux-middleware": "^0.5.0",
+    "pouchdb": "^6.1.0",
+    "pouchdb-find": "^0.10.4",
     "react": "15.3.0",
     "react-big-calendar": "^0.11.1",
     "react-dom": "15.3.0",
@@ -28,21 +32,28 @@
     "@ubc-farm/eslint-config": "^4.1.0",
     "eslint": "^3.11.0",
     "eslint-plugin-import": "^2.2.0",
+    "events": "^1.1.1",
     "redux": "^3.5.2",
     "reselect": "^2.5.3",
     "rollup": "0.34.2",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-json": "^2.0.2",
+    "rollup-plugin-node-builtins": "^2.0.0",
+    "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1"
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-watch": "^2.5.0"
   },
   "scripts": {
-    "start": "ubc-farm-server ./package.json"
+    "start": "ubc-farm-server ./package.json",
+    "prepare": "rollup -c",
+    "prepare:server": "rollup -c rollup.config.server.js"
   },
   "files": [
-    "server/public",
-    "server/out"
+    "api.js",
+    "api.js.map",
+    "public"
   ],
   "config": {
     "port": 3002

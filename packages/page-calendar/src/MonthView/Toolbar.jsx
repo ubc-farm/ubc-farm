@@ -1,6 +1,5 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import moment from 'moment';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getDate } from '../redux/currentView.js';
 

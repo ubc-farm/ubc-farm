@@ -15,7 +15,7 @@ const defaultState = {
 export default function currentView(state = defaultState, { type, payload }) {
 	switch (type) {
 		case NAVIGATE:
-			return payload;
+			return { date: moment(payload.date), view: payload.view };
 
 		case SELECT_DAY:
 			return Object.assign({}, state, { date: moment(payload) });

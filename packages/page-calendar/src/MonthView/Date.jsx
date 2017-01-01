@@ -55,7 +55,7 @@ export default connect(
 			isToday,
 			children: isOtherMonth || isCurrent || isToday
 				? null
-				: <DateEvents dateIso={date.format('YYYY-MM-DD')} />,
+				: <DateEvents dayOfMonth={date.date()} />,
 		};
 	},
 	(dispatch, { date }) => ({
