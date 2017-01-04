@@ -1,0 +1,35 @@
+{
+  "name": "@ubc-farm/calendar",
+  "version": "0.0.0",
+  "description": "React calendar component",
+  "main": "index.js",
+  "author": "Tiger Oakes",
+  "license": "MIT",
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.2",
+    "@ubc-farm/eslint-config": "^4.2.0",
+    "benthos": "^0.3.0",
+    "eslint": "^3.12.2",
+    "eslint-plugin-import": "^2.2.0",
+    "rollup": "^0.40.0",
+    "rollup-plugin-alias": "^1.2.0",
+    "rollup-plugin-node-resolve": "^2.0.0"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.4",
+    "moment": "^2.17.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.1",
+    "recompose": "^0.21.2",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.2.0",
+    "twix": "^1.1.3"
+  },
+  "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config"
+  }
+}
