@@ -41,7 +41,7 @@ let AgendaEvent = ({ title, timeText }) => (
 );
 AgendaEvent.propTypes = {
 	title: PropTypes.string,
-	timeText: PropTypes.string,
+	timeText: PropTypes.node,
 };
 
 const calendarFormats = { sameDay: 'h:mm A' };
@@ -51,10 +51,23 @@ AgendaEvent = connect(
 		const currentDate = getDate(state);
 
 		let timeText;
-		if (allDay) timeText = 'allDay';
+		if (allDay) timeText = 'all-day';
 		else {
-			timeText = start.calendar(currentDate, calendarFormats);
-			if (end) timeText += ` ${end.calendar(currentDate, calendarFormats)}`;
+			timeText = (
+				<time dateTime={start.toISOString()}>
+					{ start.calendar(start, calendarFormats) }
+				</time>
+			);
+
+			if (end) {
+				timeText = [
+					timeText,
+					' - ',
+					<time dateTime={end.toISOString()}>
+						{ end.calendar(start, calendarFormats) }
+					</time>,
+				];
+			}
 		}
 		return Object.assign({}, event, { timeText, currentDate: null });
 	},

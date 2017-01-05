@@ -5,6 +5,8 @@ import Agenda from '../src/calendar/Agenda.jsx';
 import store from './store.js';
 import generateEvents from './generateEvents.js';
 
+import '../www/agenda.css';
+
 storiesOf('Button', module)
   .add('basic', () => (
     <Provider store={store}>
