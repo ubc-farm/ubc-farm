@@ -1,6 +1,6 @@
 import { createElement, PropTypes, Component } from 'react';
 import PouchDB from 'pouchdb';
-import YearComponent from '../YearComponent.js';
+import DataComponent from '../DataComponent.js';
 import Chart from './Chart.jsx';
 /** @jsx createElement */
 
@@ -13,8 +13,8 @@ const plantDB = new PouchDB('plants');
  * @param {React.Component} component
  * @returns {React.Component}
  */
-export default function databaseHOC(component) {
-	return class CaloriesComponent extends YearComponent {
+export default function hoc(component) {
+	return class CaloriesComponent extends DataComponent {
 		async loadData() {
 			const crops = await cropDB.allDocs({ include_docs: true });
 			const amounts = crops.rows.reduce((map, { variety, quantity }) => {
@@ -32,7 +32,7 @@ export default function databaseHOC(component) {
 					name,
 					calories: calories * amounts.get(_id),
 				}))
-				.sort((a, b) => b.calories - a.calories);
+				.sort((a, b) => a.calories - b.calories);
 		}
 
 		render() { return createElement(component, this.state); }
