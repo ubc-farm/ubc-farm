@@ -1,4 +1,6 @@
 import { createElement, PropTypes, Component } from 'react';
+import PouchDB from 'pouchdb';
+import DataComponent from '../DataComponent.js';
 /** @jsx createElement */
 
 const db = new PouchDB('long-term');
@@ -10,11 +12,6 @@ function loadYearData(year) {
 	}).then(docs => docs.rows);
 }
 
-function updateState() {
-	return loadData(this.props.year)
-		.then(data => this.setState({ data }));
-}
-
 /**
  * Higher Order Component that wraps the given component so that it receives
  * data from the long-term database. Its data will represent a given year.
@@ -22,7 +19,7 @@ function updateState() {
  * @returns {React.Component}
  */
 export default function databaseHOC(component) {
-	return class DatabaseComponent extends Component {
+	return class DatabaseComponent extends DataComponent {
 		static get propTypes() {
 			return { year: PropTypes.number };
 		}
@@ -30,14 +27,12 @@ export default function databaseHOC(component) {
 			return { year: new Date().getFullYear() };
 		}
 
-		constructor(props) {
-			super(props);
-			this.state = { data: [] };
+		loadData() {
+			return loadYearData(this.props.year);
 		}
 
-		componentDidMount() { updateState.call(this); }
 		componentWillReceiveProps(nextProps) {
-			if (nextProps.year !== this.props.year) { updateState.call(this); }
+			if (nextProps.year !== this.props.year) { this.handleLoadData(); }
 		}
 
 		render() { return createElement(component, this.state); }
