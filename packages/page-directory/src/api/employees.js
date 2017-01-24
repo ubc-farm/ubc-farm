@@ -1,25 +1,20 @@
-import * as Joi from 'joi';
-import db from '../pouchdb.js';
-import Employee from '../schema/Employee.js';
-import transfrom from '../schema/transform.js';
-import { person } from '../schema/uris.js';
+import { floatToCents } from '@ubc-farm/money';
+import { allPeople, getPerson, putPerson } from './people.js';
 
-export const getEmployee = {
-	method: 'GET',
-	path: '/employees/{id}',
-	handler({ params: { id } }, reply) {
-		return reply(
-			db.get(person({ role: 'employee', id }))
-		).type('application/json');
-	},
-	config: { response: { schema: Employee } }
+export function allEmployees(options) {
+	const opts = Object.assign({}, options);
+	opts.role = 'employee';
+	return allPeople(opts);
 }
 
-export const addEmployee = {
-	method: 'POST',
-	path: '/employees',
-	handler({ payload }, reply) {
-		return reply(db.put(transfrom(payload))).type('application/json');
-	},
-	config: { validate: { payload: Employee } }
+export function getEmployee(id) {
+	return getPerson(`employee/${id}`);
+}
+
+export function putEmployee(payload) {
+	const data = Object.assign({}, payload);
+	data.pay = floatToCents(payload.pay);
+	data.role = 'employee';
+
+	return putPerson(data);
 }

@@ -1,31 +1,32 @@
-import * as Joi from 'joi';
+import { snakeCase } from 'lodash';
+import { newId } from '@ubc-farm/utils';
 import db from '../pouchdb.js';
-import Person from '../schema/Person.js';
-import transfrom from '../schema/transform.js';
 
-export const getPeople = {
-	method: 'GET',
-	path: '/people',
-	handler(request, reply) {
-		return reply(db.allDocs()).type('application/json');
-	},
-	config: { response: { schema: Joi.array().items(Person) } }
+export function allPeople(options) {
+	if (!options.role) return db.allDocs(options);
+
+	const { include_docs, limit, skip, descending } = options;
+	const role = snakeCase(options.role);
+
+	return db.get({
+		startkey: `${role}/`,
+		endkey: `${role}/\uffff`,
+		include_docs,
+		limit,
+		skip,
+		descending,
+	});
 }
 
-export const getPerson = {
-	method: 'GET',
-	path: '/people/{id}',
-	handler({ params: { id } }, reply) {
-		return reply(db.get(`person/${id}`)).type('application/json');
-	},
-	config: { response: { schema: Person } }
+export function getPerson(id) {
+	return db.get(id);
 }
 
-export const addPerson = {
-	method: 'POST',
-	path: '/people',
-	handler({ payload }, reply) {
-		return reply(db.put(transfrom(payload))).type('application/json');
-	},
-	config: { validate: { payload: Person } }
+export function putPerson(payload) {
+	const data = Object.assign({}, payload);
+
+	data._id = `${snakeCase(payload.role)}/${payload._id || newId('')}`;
+	delete data.role;
+
+	return db.put(data);
 }

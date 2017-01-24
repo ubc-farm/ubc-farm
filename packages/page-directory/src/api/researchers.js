@@ -1,25 +1,22 @@
-import * as Joi from 'joi';
-import db from '../pouchdb.js';
-import Researcher from '../schema/Researcher.js';
-import transfrom from '../schema/transform.js';
-import { person } from '../schema/uris.js';
+import { allPeople, getPerson, putPerson } from './people.js';
 
-export const getResearcher = {
-	method: 'GET',
-	path: '/researchers/{id}',
-	handler({ params: { id } }, reply) {
-		return reply(
-			db.get(person({ role: 'researcher', id }))
-		).type('application/json');
-	},
-	config: { response: { schema: Researcher } }
+export function allResearchers(options) {
+	const opts = Object.assign({}, options);
+	opts.role = 'researcher';
+	return allPeople(opts);
 }
 
-export const addResearcher = {
-	method: 'POST',
-	path: '/researchers',
-	handler({ payload }, reply) {
-		return reply(db.put(transfrom(payload))).type('application/json');
-	},
-	config: { validate: { payload: Researcher } }
+export function getResearcher(id) {
+	return getPerson(`researcher/${id}`);
 }
+
+export function putResearcher(payload) {
+	const data = Object.assign({}, payload);
+	data.role = 'researcher';
+	if (typeof payload.coursesTaught !== 'string') {
+		data.coursesTaught = payload.coursesTaught.split(/\\r?\\n/);
+	}
+
+	return putPerson(data);
+}
+
