@@ -30,7 +30,7 @@ exports.useLayout = function useLayout(html, layoutName = 'default', context) {
 
 	Handlebars.registerPartial('body', html);
 
-	const output = Handlebars.compile(layouts.get(layoutName))(context);
+	const output = Handlebars.compile(layouts.get(layoutName), { noEscape: true })(context);
 	Handlebars.registerPartial('body', '');
 	return output;
 }

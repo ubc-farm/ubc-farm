@@ -1,27 +1,27 @@
 - label: Dashboard
   link: /
-  icon: /images/icons/dashboard.png
+  icon: /images/icons/dashboard.svg
 
 - label: Fields
   link: /fields
-  icon: /images/icons/fields.png
+  icon: /images/icons/fields.svg
 
 - label: Equipment
   link: /equipment
-  icon: /images/icons/equipment.png
+  icon: /images/icons/equipment.svg
 
 - label: Invoices
   link: /invoices
-  icon: /images/icons/invoices.png
+  icon: /images/icons/invoices.svg
 
 - label: Inputs
   link: /inputs
-  icon: /images/icons/inputs.png
+  icon: /images/icons/inputs.svg
 
 - label: Directory
   link: /directory
-  icon: /images/icons/directory.png
+  icon: /images/icons/directory.svg
 
 - label: Calendar
   link: /calendar
-  icon: /images/icons/calendar.png
+  icon: /images/icons/calendar.svg

@@ -5,7 +5,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 4em;
+	height: var(--header-height);
 }
 
 .page-title {

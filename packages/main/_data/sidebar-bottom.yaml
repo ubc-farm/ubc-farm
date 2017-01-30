@@ -1,7 +1,7 @@
 - label: User
   link: /me
-  icon: /images/icons/user.png
+  icon: /images/icons/user.svg
 
 - label: Help
   link: /help
-  icon: /images/icons/help.png
+  icon: /images/icons/help.svg

@@ -25,7 +25,7 @@
 	background: #3ba648;
 
 	height: 3em;
-	padding: 0.5em;
+	padding: calc(calc(var(--header-height) - 3em) / 2) 0.5em;
 }
 
 .sidebar-items, .sidebar-bottom-items {

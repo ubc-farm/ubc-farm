@@ -52,7 +52,7 @@ module.exports = function compileFile(file, baseContext) {
 			case '.hbs':
 				filename = filename || changeExtension('.html', file);
 
-				const template = Handlebars.compile(content);
+				const template = Handlebars.compile(content, { noEscape: true });
 				const output = layout
 					? useLayout(template, layout, data)
 					: template(content);
