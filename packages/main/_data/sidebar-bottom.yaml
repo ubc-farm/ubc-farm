@@ -1,0 +1,7 @@
+- label: User
+  link: /me
+  icon: /images/icons/user.png
+
+- label: Help
+  link: /help
+  icon: /images/icons/help.png

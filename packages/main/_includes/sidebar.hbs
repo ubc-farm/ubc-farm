@@ -4,11 +4,22 @@
 			alt="{{data.app.title}}"
 			src="{{data.app.logo}}"
 			srcset="{{join data.app.logo-srcset}}"
-			width="64" height="64">
+			width="48" height="48">
 	</header>
 
 	<ul class="sidebar-items">
 		{{#each data.sidebar}}
+		<li class="sidebar-item">
+			<a class="sidebar-item-link" href={{this.link}}>
+				<img class="sidebar-item-icon" alt="" src="{{this.icon}}">
+				{{this.label}}
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+
+	<ul class="sidebar-bottom-items">
+		{{#each data.sidebar-bottom}}
 		<li class="sidebar-item">
 			<a class="sidebar-item-link" href={{this.link}}>
 				<img class="sidebar-item-icon" alt="" src="{{this.icon}}">
