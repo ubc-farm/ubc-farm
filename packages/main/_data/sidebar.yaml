@@ -1,0 +1,27 @@
+- label: Dashboard
+  link: /
+  icon: /images/icons/dashboard.png
+
+- label: Fields
+  link: /fields
+  icon: /images/icons/fields.png
+
+- label: Equipment
+  link: /equipment
+  icon: /images/icons/equipment.png
+
+- label: Invoices
+  link: /invoices
+  icon: /images/icons/invoices.png
+
+- label: Inputs
+  link: /inputs
+  icon: /images/icons/inputs.png
+
+- label: Directory
+  link: /directory
+  icon: /images/icons/directory.png
+
+- label: Calendar
+  link: /calendar
+  icon: /images/icons/calendar.png

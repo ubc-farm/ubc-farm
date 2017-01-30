@@ -1,0 +1,20 @@
+<nav class="sidebar">
+	<header class="sidebar-head">
+		<img class="main-logo"
+			alt="{{data.app.title}}"
+			src="{{data.app.logo}}"
+			srcset="{{join data.app.logo-srcset}}"
+			width="64" height="64">
+	</header>
+
+	<ul class="sidebar-items">
+		{{#each data.sidebar}}
+		<li class="sidebar-item">
+			<a class="sidebar-item-link" href={{this.link}}>
+				<img class="sidebar-item-icon" alt="" src="{{this.icon}}">
+				{{this.label}}
+			</a>
+		</li>
+		{{/each}}
+	</ul>
+</nav>
