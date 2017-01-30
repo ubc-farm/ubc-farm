@@ -6,6 +6,7 @@
     "handlebars-helpers": "^0.8.0",
     "js-yaml": "^3.7.0",
     "marked": "^0.3.6",
-    "promisify-node": "^0.4.0"
+    "promisify-node": "^0.4.0",
+    "resolve": "^1.2.0"
   }
 }

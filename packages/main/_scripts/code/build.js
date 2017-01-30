@@ -1,7 +1,8 @@
 const promisify = require('promisify-node');
 const glob = promisify('glob');
 const handlebars = require('handlebars');
-require('handlebars-helpers')({ handlebars })
+require('handlebars-helpers')({ handlebars });
+require('./resolveHelper.js')({ handlebars });
 const loadData = require('./loadData.js');
 const registerIncludes = require('./registerIncludes.js');
 const copyFile = require('./copyFile.js');
