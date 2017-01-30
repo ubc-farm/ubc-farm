@@ -32,7 +32,7 @@ module.exports = function copyFile(file, baseContext) {
 			.then(() => compileFile(file, baseContext))
 			.then(({ filename, output, nochanges }) => {
 				const dest = siteDir(filename);
-				return nochanges ? streamCopy(file, dest) : writeFile(dest, output);
+				return writeFile(dest, output);
 			});
 	});
 }

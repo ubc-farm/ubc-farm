@@ -12,7 +12,8 @@ function changeExtension(ext, path) {
 }
 
 module.exports = function compileFile(file, baseContext) {
-	return readFile(file, 'utf8').then((text) => {
+	return readFile(file).then((buffer) => {
+		const text = buffer.toString();
 		const hasFrontMatter = matter.test(text);
 		let filename;
 
@@ -44,7 +45,7 @@ module.exports = function compileFile(file, baseContext) {
 			default:
 				filename = filename || file;
 				if (!hasFrontMatter) {
-					return { filename, output: text, data, nochanges: true };
+					return { filename, output: buffer, data, nochanges: true };
 				}
 
 				// fall through
