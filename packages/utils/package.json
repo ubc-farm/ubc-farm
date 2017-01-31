@@ -8,10 +8,6 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "devDependencies": {
-    "@ubc-farm/eslint-config": "^4.0.0",
-    "eslint": "^3.9.0",
-    "eslint-plugin-import": "^2.0.1",
-    "rollup": "0.34.2",
     "tape": "^4.6.0"
   },
   "scripts": {
@@ -24,5 +20,8 @@
     "lib",
     "GeoJSON",
     "index.js"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config"
+  }
 }

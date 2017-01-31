@@ -26,21 +26,10 @@
     "react-dom": "^15.3.0"
   },
   "devDependencies": {
-    "@ubc-farm/babel-preset": "^1.0.0",
-    "@ubc-farm/eslint-config": "^4.2.0",
     "@ubc-farm/utils": "^4.1.0",
-    "eslint": "^3.11.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
-    "reselect": "^2.5.3",
-    "rollup": "0.34.2",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^3.3.1",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1"
+    "reselect": "^2.5.3"
   },
   "scripts": {
     "prepublish:list": "rollup -c -o dist/index.iife.js src/table/index.js",

@@ -14,12 +14,7 @@
   "devDependencies": {
     "@types/joi": "^9.0.32",
     "@types/node-fetch": "^1.6.5",
-    "@ubc-farm/server": "^2.3.1",
-    "@ubc-farm/eslint-config": "ubc-farm/eslint-config",
-    "eslint": "^3.8.1",
-    "eslint-plugin-import": "^2.0.1",
-    "rollup": "^0.36.3",
-    "rollup-plugin-json": "^2.0.2"
+    "@ubc-farm/server": "^2.3.1"
   },
   "peerDependencies": {
     "@ubc-farm/server": "^2.3.1"
@@ -35,6 +30,12 @@
       "routes": {
         "prefix": "/lookup"
       }
+    }
+  },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config/basic.yaml",
+    "rules": {
+      "import/prefer-default-export": "off"
     }
   }
 }

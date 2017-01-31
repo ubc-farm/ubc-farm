@@ -28,22 +28,11 @@
     "redux-pack": "^0.1.4"
   },
   "devDependencies": {
-    "@ubc-farm/babel-preset": "^1.0.0",
-    "@ubc-farm/eslint-config": "^4.1.0",
-    "eslint": "^3.11.0",
-    "eslint-plugin-import": "^2.2.0",
     "events": "^1.1.1",
     "redux": "^3.5.2",
     "reselect": "^2.5.3",
-    "rollup": "0.34.2",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^5.0.5",
-    "rollup-plugin-json": "^2.0.2",
     "rollup-plugin-node-builtins": "^2.0.0",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1",
-    "rollup-watch": "^2.5.0"
+    "rollup-plugin-node-globals": "^1.1.0"
   },
   "scripts": {
     "start": "ubc-farm-server ./package.json",

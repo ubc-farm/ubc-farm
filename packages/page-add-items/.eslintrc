@@ -1,6 +1,0 @@
-{
-	"extends": "@ubc-farm/eslint-config/react.yaml",
-	"env": {
-		"browser": true
-	}
-}

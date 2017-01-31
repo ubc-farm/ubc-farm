@@ -1,4 +1,0 @@
----
- extends: '@ubc-farm/eslint-config/basic.yaml'
- rules:
-   import/prefer-default-export: off

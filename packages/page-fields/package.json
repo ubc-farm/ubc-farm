@@ -21,23 +21,13 @@
   "devDependencies": {
     "@types/boom": "0.0.32",
     "@types/knex": "0.0.35",
-    "@ubc-farm/eslint-config": "^4.1.0",
     "babel-plugin-external-helpers-2": "^6.3.13",
     "babel-plugin-transform-react-jsx": "^6.8.0",
-    "eslint": "^3.10.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.6.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.3",
     "ribbon-toolbar": "ubc-farm/ribbon-toolbar#2.1.0",
-    "rollup": "0.34.2",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^3.3.1",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1",
     "ubc-farm-utils": "ubc-farm/utils"
   },
   "scripts": {
@@ -48,5 +38,8 @@
     "styles",
     "views",
     "src"
-  ]
+  ],
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config"
+  }
 }

@@ -6,12 +6,7 @@
     "victory": "^0.15.0"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.35.2",
-    "@ubc-farm/eslint-config": "^4.2.0",
-    "eslint": "^3.13.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0"
+    "@kadira/storybook": "^2.35.2"
   },
   "scripts": {
     "storybook": "start-storybook -p 9001 -c .storybook"

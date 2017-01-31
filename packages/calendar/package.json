@@ -7,13 +7,8 @@
   "license": "MIT",
   "devDependencies": {
     "@kadira/storybook": "^2.35.2",
-    "@ubc-farm/eslint-config": "^4.2.0",
     "benthos": "^0.3.0",
-    "eslint": "^3.12.2",
-    "eslint-plugin-import": "^2.2.0",
-    "rollup": "^0.40.0",
-    "rollup-plugin-alias": "^1.2.0",
-    "rollup-plugin-node-resolve": "^2.0.0"
+    "rollup-plugin-alias": "^1.2.0"
   },
   "dependencies": {
     "lodash-es": "^4.17.4",

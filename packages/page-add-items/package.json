@@ -29,23 +29,11 @@
   "devDependencies": {
     "@types/joi": "^9.0.32",
     "@types/redux-thunk": "^2.1.31",
-    "@ubc-farm/eslint-config": "^4.1.0",
     "@ubc-farm/server": "^2.4.0",
     "babel-plugin-external-helpers": "^6.8.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-es2017": "^6.16.0",
-    "babel-preset-react": "^6.16.0",
-    "eslint": "^3.9.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.6.0",
-    "rollup": "0.34.2",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^5.0.5",
-    "rollup-plugin-json": "^2.0.2",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1",
-    "rollup-watch": "^2.5.0"
+    "babel-preset-react": "^6.16.0"
   },
   "scripts": {
     "prepare:client": "rollup -c -w",
@@ -60,5 +48,11 @@
   ],
   "config": {
     "port": 3001
+  },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config/react.yaml",
+    "env": {
+      "browser": true
+    }
   }
 }

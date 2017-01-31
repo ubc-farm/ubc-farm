@@ -21,11 +21,6 @@
     "redux-form": "^6.0.0-rc.5",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.3",
-    "rollup": "0.34.2",
-    "rollup-plugin-babel": "^2.6.1",
-    "rollup-plugin-commonjs": "^3.3.1",
-    "rollup-plugin-node-resolve": "^2.0.0",
-    "rollup-plugin-replace": "^1.1.1",
     "spherical-geometry-js": "github:notwoods/spherical-geometry-js",
     "ubc-farm-page-fields": "ubc-farm/page-fields",
     "ubc-farm-utils": "ubc-farm/utils"
