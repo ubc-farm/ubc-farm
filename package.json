@@ -1,4 +1,7 @@
 {
+  "name": "@ubc-farm/monorepo",
+  "private": true,
+  "license": "MIT",
   "devDependencies": {
     "@ubc-farm/babel-preset": "^1.0.0",
     "@ubc-farm/eslint-config": "^4.2.0",

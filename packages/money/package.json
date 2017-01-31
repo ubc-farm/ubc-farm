@@ -21,8 +21,5 @@
   },
   "files": [
     "dist"
-  ],
-  "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config"
-  }
+  ]
 }

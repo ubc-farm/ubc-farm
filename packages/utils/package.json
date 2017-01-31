@@ -20,8 +20,5 @@
     "lib",
     "GeoJSON",
     "index.js"
-  ],
-  "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config"
-  }
+  ]
 }

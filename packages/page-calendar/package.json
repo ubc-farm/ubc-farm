@@ -47,11 +47,6 @@
   "config": {
     "port": 3002
   },
-  "babel": {
-    "presets": [
-      "@ubc-farm/babel-preset"
-    ]
-  },
   "eslintConfig": {
     "extends": "@ubc-farm/eslint-config/react.yaml",
     "env": {

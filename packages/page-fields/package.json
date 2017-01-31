@@ -38,8 +38,5 @@
     "styles",
     "views",
     "src"
-  ],
-  "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config"
-  }
+  ]
 }

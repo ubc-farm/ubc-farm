@@ -1,0 +1,3 @@
+{
+	"extends": "@ubc-farm/eslint-config"
+}
