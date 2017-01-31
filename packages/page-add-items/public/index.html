@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://unpkg.com/react@15/dist/react.js"></script>
+	<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+	<script async src="index.js"></script>
+	<title>Inventory | UBC Farm</title>
+	<style>
+		.inventory-AddItem {
+			position: absolute;
+			background: white;
+			padding: 1em;
+			top: 0;
+			left: 0;
+			right: 0;
+			max-width: 20em;
+			margin: auto;
+			box-shadow: 0 0.05em 0.1em rgba(0,0,0,0.3);
+			transform: translateY(-101%);
+			transition: transform 0.3s ease-in;
+		}
+
+		.inventory-AddItem--open {
+			transform: translateY(0.5em);
+		}
+
+		.inventory-AddItem-row {
+			margin: 0.25em;
+		}
+
+		.inventory-AddItem-row label {
+			width: 7em;
+			display: inline-block;
+			margin-right: 1em;
+			text-align: right;
+		}
+
+		button {
+			padding: 0.5em 2em;
+			font-weight: bold;
+			margin: 0.2em;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin: 0 auto;
+		}
+
+		tr {
+			border-bottom: 1px solid darkblue;
+		}
+
+		td {
+			padding: 0.3em;
+		}
+
+		th {
+			padding: 0.5em 1em;
+		}
+
+		.farmtable-Head-row {
+			border-bottom-width: 0.2em;
+			color: darkblue;
+		}
+
+		.row--selected {
+			background: #f1f1f1;
+		}
+
+		.inventory-Toolbar {
+			text-align: center;
+		}
+
+		.number-col {
+			text-align: right;
+		}
+	</style>
+</head>
+<body>
+	<div id="reactRoot"></div>
+</body>
+</html>

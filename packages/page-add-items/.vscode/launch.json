@@ -1,0 +1,24 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch via NPM",
+			"type": "node",
+			"request": "launch",
+			"cwd": "${workspaceRoot}",
+			"outFiles": ["api.js"],
+			"smartStep": true,
+			"sourceMaps": true,
+			"runtimeExecutable": "npm",
+			"windows": { "runtimeExecutable": "npm.cmd" },
+			"runtimeArgs": ["start"],
+			"preLaunchTask": "prepare:server"
+		},
+		{
+			"name": "Attach to Process",
+			"type": "node2",
+			"request": "attach",
+			"port": 9229
+		}
+	]
+}
