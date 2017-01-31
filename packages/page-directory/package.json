@@ -40,11 +40,5 @@
     "api.js",
     "api.js.map",
     "public"
-  ],
-  "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config/react.yaml",
-    "env": {
-      "browser": true
-    }
-  }
+  ]
 }

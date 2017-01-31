@@ -1,6 +1,0 @@
-{
-	"extends": "@ubc-farm/eslint-config/react.yaml",
-	"rules": {
-		"react/no-unused-prop-types": "off"
-	}
-}

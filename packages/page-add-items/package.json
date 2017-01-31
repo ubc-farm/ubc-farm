@@ -48,11 +48,5 @@
   ],
   "config": {
     "port": 3001
-  },
-  "eslintConfig": {
-    "extends": "@ubc-farm/eslint-config/react.yaml",
-    "env": {
-      "browser": true
-    }
   }
 }

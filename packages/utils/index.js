@@ -1,4 +1,4 @@
-import * as GeoJSON from './GeoJSON/index.js';
+import * as GeoJSON from './geojson/index.js';
 
 export { GeoJSON };
 export * from './lib/index.js';

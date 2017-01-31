@@ -1,5 +1,4 @@
-import test from 'tape';
-import {arrayToMap, arrayToObjectMap, mapToObject} from '../'
+import { arrayToMap, arrayToObjectMap, mapToObject } from '../';
 
 const array = [
 	{
@@ -11,44 +10,35 @@ const array = [
 		id: 'ds2133214',
 		key: 'john',
 		john: 'smith'
-	}			
-]
+	},
+];
 
-test('arrayToMap', t => {
+test('arrayToMap', () => {
 	const map = arrayToMap(array, 'id');
-	t.assert(map instanceof Map, 'should return a Map');
+	expect(map).toBeInstanceOf(Map);
 
 	const keys = [...map.keys()];
 	const values = [...map.values()];
 
-	t.deepLooseEqual(keys, [1, 'ds2133214'], 
-		'keys should correspond to the values of the "id" property');
+	expect(keys).toEqual([1, 'ds2133214']);
+	expect(keys[0]).toBe(1);
+	expect(values[0]).toEqual(array[0]);
+});
 
-	t.equal(keys[0], 1, 'should allow for non-string keys');
-	t.deepEqual(values[0], array[0], 
-		'values should be equivalent to the original objects in the array');
-	t.end();
-})
-
-test('arrayToObjectMap', t => {
+test('arrayToObjectMap', () => {
 	const object = arrayToObjectMap(array, 'id');
 	const keys = Object.keys(object);
 
-	t.deepEqual(keys, ['1', 'ds2133214'],
-		'keys should correspond to the values of the "id" property');
-	t.equal(keys[0], '1', 'non-string keys should be converted into strings');
-	t.deepEqual(object[keys[0]], array[0],
-		'values should be equivalent to the original objects in the array');
-	t.end();
-})
+	expect(keys).toEqual(['1', 'ds2133214']);
+	expect(keys[0]).toBe('1');
+	expect(object[keys[0]]).toEqual(array[0]);
+});
 
-test('mapToObject', t => {
-	const map = arrayToMap(array, 'id'), object = mapToObject(map);
-	
-	t.deepEqual(map.get('ds2133214'), object.ds2133214,
-		'values are the same in the map and object')
-	t.equal(object['1'], undefined,
-		'non-string keys are ignored')
+test('mapToObject', () => {
+	const map = arrayToMap(array, 'id');
+	const object = mapToObject(map);
 
-	t.end();
-})
+	expect(map.get('ds2133214')).toEqual(object.ds2133214);
+
+	expect(object['1']).toBeUndefined();
+});

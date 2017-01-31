@@ -1,6 +1,6 @@
 const has = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop);
 
-export const REMOVED = Symbol();
+export const REMOVED = Symbol('Removed item');
 
 /**
  * Returns an object only containing properties that have changed between
@@ -28,7 +28,7 @@ export default function diff(oldStore, newStore) {
 	} else if (typeof newStore === 'object' && newStore !== null) {
 		const oldKeys = Object.keys(oldStore);
 		const difference = {};
-		for (const newKey in newStore) {
+		for (const newKey of Object.keys(newStore)) {
 			if (!has(oldStore, newKey)) difference[newKey] = newStore[newKey];
 			else {
 				const subdiff = diff(oldStore[newKey], newStore[newKey]);
