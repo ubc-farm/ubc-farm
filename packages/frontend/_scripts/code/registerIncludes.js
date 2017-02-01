@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 const promisify = require('promisify-node');
 const { readFile, readdir } = promisify('fs');
 const { join, parse } = require('path');

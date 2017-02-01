@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import */
 const promisify = require('promisify-node');
 const { writeFile, stat, mkdir } = promisify('fs');
 const { join, dirname } = require('path');
@@ -19,9 +20,9 @@ module.exports = function copyFile(file, baseContext) {
 
 		return makeDirIfMissing(dirname(file))
 			.then(() => compileFile(file, baseContext))
-			.then(({ filename, output, nochanges }) => {
+			.then(({ filename, output }) => {
 				const dest = siteDir(filename);
-				return writeFile(dest, output);
+				return output ? writeFile(dest, output) : false;
 			});
 	});
 }

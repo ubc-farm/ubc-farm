@@ -1,3 +1,4 @@
+/* eslint-disable import/newline-after-import,no-console */
 const promisify = require('promisify-node');
 const glob = promisify('glob');
 const handlebars = require('handlebars');

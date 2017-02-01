@@ -1,10 +1,11 @@
+/* eslint-disable import/newline-after-import */
 const promisify = require('promisify-node');
 const { readFile } = promisify('fs');
 const { extname, parse, format, posix } = require('path');
 const Handlebars = require('handlebars');
 const matter = require('gray-matter');
 const marked = promisify('marked');
-const { useLayout } = require('./layouts.js')
+const { useLayout } = require('./layouts.js');
 
 function changeExtension(ext, path) {
 	const { dir, name } = parse(path);
@@ -39,8 +40,8 @@ module.exports = function compileFile(file, baseContext) {
 			case '.md':
 				filename = changeExtension('.html', file);
 				return marked(content)
-					.then(html => layout ? useLayout(html, layout, data) : html)
-					.then(output =>	{ filename, output, data });
+					.then(html => (layout ? useLayout(html, layout, data) : html))
+					.then(output =>	({ filename, output, data }));
 
 			default:
 				filename = filename || file;
@@ -49,7 +50,7 @@ module.exports = function compileFile(file, baseContext) {
 				}
 
 				// fall through
-			case '.hbs':
+			case '.hbs': {
 				filename = filename || changeExtension('.html', file);
 
 				const template = Handlebars.compile(content, { noEscape: true });
@@ -58,6 +59,7 @@ module.exports = function compileFile(file, baseContext) {
 					: template(content);
 
 				return { filename, output, data };
+			}
 		}
 	});
-}
+};
