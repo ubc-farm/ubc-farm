@@ -12,14 +12,5 @@
 
 		<main class="main">{{> body}}</main>
 	</body>
-	{{#each page.scripts}}
-		{{#if (isString this)}}
-			<script src="{{../data.app.server}}{{this}}"></script>
-		{{else}}
-			<script
-				{{#if async}}async{{/if}}
-				src="{{../data.app.server}}{{src}}"
-			></script>
-		{{/if}}
-	{{/each}}
+	{{js page.scripts}}
 </html>

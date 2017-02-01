@@ -5,7 +5,7 @@
   "devDependencies": {
     "@types/jest": "^18.1.0",
     "@ubc-farm/babel-preset": "^1.0.0",
-    "@ubc-farm/eslint-config": "^5.1.0",
+    "@ubc-farm/eslint-config": "^5.2.0",
     "eslint": "^3.14.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",

@@ -15,9 +15,9 @@
     babel-preset-es2017 "^6.16.0"
     babel-preset-react "^6.16.0"
 
-"@ubc-farm/eslint-config@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@ubc-farm/eslint-config/-/eslint-config-5.1.0.tgz#96e8ad909c1554406025de006dda4ba452d2ac44"
+"@ubc-farm/eslint-config@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@ubc-farm/eslint-config/-/eslint-config-5.2.0.tgz#da6619cfc7b4a654887bae767885170f43cc4606"
 
 abab@^1.0.0:
   version "1.0.3"
