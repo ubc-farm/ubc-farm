@@ -7,6 +7,7 @@ require('./resolveHelper.js')({ handlebars });
 const loadData = require('./loadData.js');
 const registerIncludes = require('./registerIncludes.js');
 const copyFile = require('./copyFile.js');
+const scriptFolder = require('./scriptFolder.js');
 const { prepareLayouts } = require('./layouts.js');
 
 Promise.all([
@@ -14,6 +15,7 @@ Promise.all([
 	loadData(),
 	registerIncludes(),
 	prepareLayouts(),
+	scriptFolder(),
 ]).then(([files, data]) =>
 	Promise.all(files.map(file => copyFile(file, { data })))
 ).catch((err) => {

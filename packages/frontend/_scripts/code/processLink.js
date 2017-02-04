@@ -4,7 +4,7 @@ const { readFile, link, symlink } = promisify('fs');
 const { basename, dirname, join, posix } = require('path');
 const resolve = promisify('resolve');
 
-export class LinkFileError extends Error {}
+class LinkFileError extends Error {}
 
 /**
  * Parses a .link file and creates a symlink between the target location
@@ -14,15 +14,15 @@ export class LinkFileError extends Error {}
  * location as .link file.
  * @returns {Promise<void>} resolves when link has been written.
  */
-export default function processLink(file, target = file) {
+module.exports = function processLink(file, target = file) {
 	const targetPath = join(dirname(target), basename(target, '.link'));
 
-	return readFile(file).then((text) => {
+	return readFile(file, 'utf8').then((text) => {
 		if (!text.includes(':')) {
 			throw new LinkFileError('Missing ":" seperator');
 		}
 
-		const [linktype, modulePath] = text.split(text.indexOf(':')).map(str => str.trim());
+		const [linktype, modulePath] = text.split(':').map(str => str.trim());
 		const isFolder = modulePath.endsWith('');
 
 		let mklink;
