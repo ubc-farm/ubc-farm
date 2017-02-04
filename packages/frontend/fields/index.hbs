@@ -1,7 +1,10 @@
 ---
 layout: default
 title: Fields
-scripts:
-	- https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU
 ---
+<style>
+#googleMap { height: calc(100vh - var(--header-height)); }
+</style>
 <div id="googleMap"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"></script>
+<script async src="/packages/fields/browser/index.js"></script>

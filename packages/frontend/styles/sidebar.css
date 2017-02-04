@@ -1,15 +1,18 @@
+:root {
+	--expanded-sidebar-width: 11em;
+	--shrunk-sidebar-width: 5em;
+}
+
 .sidebar {
-	--expanded-width: 11em;
-	--shrunk-width: 5em;
 	font-weight: bold;
 	background: white;
 
 	float: left;
 	height: 100vh;
-	width: var(--shrunk-width);
+	width: var(--shrunk-sidebar-width);
 }
 .sidebar:hover, .sidebar-open {
-	width: var(--expanded-width);
+	width: var(--expanded-sidebar-width);
 }
 .sidebar:hover .sidebar-item-link,
 .sidebar-open .sidebar-item-link {
@@ -61,7 +64,7 @@
 
 	display: flex;
 	align-items: center;
-	width: var(--expanded-width);
+	width: var(--expanded-sidebar-width);
 }
 .sidebar-item-link:hover {
 	opacity: 1;

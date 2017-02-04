@@ -1,3 +1,7 @@
+:root {
+	--header-height: 4em;
+}
+
 .page-header {
 	background: #3ba648;
 	color: white;

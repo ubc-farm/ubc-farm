@@ -1,15 +1,15 @@
 import db from '../db.js';
 
 export default async function importFields(dataLayer) {
-	const response = await db.find({ fields: ['_id', 'geometry'] });
+	const response = await db.allDocs({ include_docs: true });
 
 	const collection = {
 		type: 'FeatureCollection',
-		features: response.docs.map(doc => ({
+		features: response.rows.map(({ geometry, _id, _rev }) => ({
 			type: 'Feature',
-			geometry: doc.geometry,
-			id: doc._id,
-			properties: { _rev: doc._rev },
+			geometry,
+			id: _id,
+			properties: { _rev },
 		})),
 	}
 

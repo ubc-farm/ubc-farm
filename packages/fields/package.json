@@ -6,7 +6,11 @@
 		"pouchdb-find": "^0.10.4",
 		"document-promises": "^3.0.0"
 	},
+	"devDependencies": {
+		"rollup": "^0.41.4",
+		"cross-env": "^3.1.4"
+	},
 	"scripts": {
-		"build-index": "rollup -c -i entry/index.js -o browser/index.js"
+		"build-index": "cross-env BABEL_ENV=chrome rollup -c -i entry/index.js -o browser/index.js"
 	}
 }

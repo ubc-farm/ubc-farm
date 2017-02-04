@@ -10,7 +10,7 @@ const copyFile = require('./copyFile.js');
 const scriptFolder = require('./scriptFolder.js');
 const { prepareLayouts } = require('./layouts.js');
 
-Promise.all([
+module.exports = Promise.all([
 	glob('**/*', { ignore: ['node_modules/**', '_*/**'] }),
 	loadData(),
 	registerIncludes(),
@@ -18,6 +18,4 @@ Promise.all([
 	scriptFolder(),
 ]).then(([files, data]) =>
 	Promise.all(files.map(file => copyFile(file, { data })))
-).catch((err) => {
-	console.error(err);
-});
+);

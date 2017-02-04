@@ -5,7 +5,7 @@ import watchChanges from '../src/pouch/watchChanges.js';
 import watchDblClick from '../src/googlemaps/watchDblClick.js';
 
 const mapready = parsed
-	.then(() => createMap)
+	.then(() => createMap())
 	.then(map => map.data);
 
 importFields(mapready);

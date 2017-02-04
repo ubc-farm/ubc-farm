@@ -1,1 +1,2 @@
-require('./code/build');
+require('./code/build')
+	.catch(err => console.error(err));

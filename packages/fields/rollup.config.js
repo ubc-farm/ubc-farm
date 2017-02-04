@@ -9,7 +9,7 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		babel({ exclude: 'node_modules/**' }),
+		// babel({ exclude: 'node_modules/**' }),
 		nodeResolve({ browser: true, preferBuiltins: false }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
