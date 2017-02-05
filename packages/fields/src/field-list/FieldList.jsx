@@ -1,6 +1,6 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Table, AutoSizer, Column } from 'react-virtualized';
-import { polygonArea, polygonCentroid } from 'd3-polygon';
+import { getLocationString, getAcres } from '../fieldData.js';
 
 const FieldList = ({ rows }) => (
 	<AutoSizer>
@@ -20,13 +20,11 @@ const FieldList = ({ rows }) => (
 				<Column dataKey="name" label="Field" />
 				<Column
 					dataKey="location" label="Location"
-					cellDataGetter={({ rowData }) => polygonCentroid(rowData.geometry.coordinates[0])}
-					cellRenderer={pos => `Lat ${pos[1].toPrecision(2)}, Long ${pos[0].toPrecision(2)}`}
+					cellDataGetter={({ rowData }) => getLocationString(rowData)}
 				/>
 				<Column
 					dataKey="area" label="Area"
-					cellDataGetter={({ rowData }) => polygonArea(rowData.geometry.coordinates[0])}
-					cellRenderer={area => `${area} m^2`}
+					cellDataGetter={({ rowData }) => getAcres(rowData)}
 				/>
 				<Column dataKey="crop" label="Crop Type" />
 			</Table>
