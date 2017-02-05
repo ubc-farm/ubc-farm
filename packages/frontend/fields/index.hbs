@@ -3,8 +3,20 @@ layout: default
 title: Fields
 ---
 <style>
-#googleMap { height: calc(100vh - var(--header-height)); }
+.main {
+	display: flex;
+	height: calc(100vh - var(--header-height));
+}
+.field-list {
+	flex: 1;
+}
+.map-wrapper {
+	width: 50%;
+}
 </style>
-<div id="googleMap"></div>
+<div class="field-list" id="reactRoot"></div>
+<div class="map-wrapper" id="googleMap"></div>
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"></script>
 <script async src="/packages/fields/browser/index.js"></script>

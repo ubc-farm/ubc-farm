@@ -9,7 +9,7 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		// babel({ exclude: 'node_modules/**' }),
+		babel({ exclude: 'node_modules/**', include: 'src/field-list/*.jsx' }),
 		nodeResolve({ browser: true, preferBuiltins: false }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
@@ -19,4 +19,9 @@ export default {
 		json(),
 		// globals(),
 	],
+	external: ['react', 'react-dom'],
+	globals: {
+		react: 'React',
+		'react-dom': 'ReactDOM',
+	},
 };

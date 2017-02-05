@@ -1,13 +1,11 @@
 import { parsed } from 'document-promises';
-import createMap from '../src/googlemaps/createMap.js';
-import importFields from '../src/pouch/importFields.js';
-import watchChanges from '../src/pouch/watchChanges.js';
-import watchDblClick from '../src/googlemaps/watchDblClick.js';
+import db from '../src/db.js';
+import setupMap from '../src/googlemaps/index.js';
+import createFieldList from '../src/field-list/index.jsx';
 
-const mapready = parsed
-	.then(() => createMap())
-	.then(map => map.data);
+const fields = db.allDocs({ include_docs: true }).then(res => res.rows);
 
-importFields(mapready);
-watchChanges(mapready);
-mapready.then(watchDblClick);
+parsed.then(() => {
+	setupMap(fields);
+	createFieldList(fields);
+});

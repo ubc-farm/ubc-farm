@@ -4,13 +4,19 @@
 	"dependencies": {
 		"pouchdb": "^6.1.1",
 		"pouchdb-find": "^0.10.4",
-		"document-promises": "^3.0.0"
+		"document-promises": "^3.0.0",
+		"react-virtualized": "^8.11.4",
+		"d3-polygon": "^1.0.2"
+	},
+	"peerDependencies": {
+		"react": "^15.4.2",
+		"react-dom": "^15.4.2"
 	},
 	"devDependencies": {
 		"rollup": "^0.41.4",
 		"cross-env": "^3.1.4"
 	},
 	"scripts": {
-		"build-index": "cross-env BABEL_ENV=chrome rollup -c -i entry/index.js -o browser/index.js"
+		"build-index": "rollup -c -i entry/index.js -o browser/index.js"
 	}
 }
