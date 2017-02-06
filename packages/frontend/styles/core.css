@@ -1,3 +1,7 @@
+:root {
+	--theme-color: #3ba648;
+}
+
 body {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background: #eee;
@@ -6,5 +10,5 @@ body {
 }
 
 .main {
-	margin-left: 5em;
+	margin-left: var(--shrunk-sidebar-width);
 }

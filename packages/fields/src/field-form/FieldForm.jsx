@@ -16,7 +16,12 @@ class FieldForm extends Component {
 					value: getArea(this.props.model),
 					onChange: e => this.props.setProperty(name, e.target.value),
 				};
-			default: return this.props.bindInput(name);
+			default:
+				return {
+					name,
+					value: this.props.model[name],
+					onChange: e => this.props.setProperty(name, e.target.value),
+				};
 		}
 	}
 
@@ -33,7 +38,7 @@ class FieldForm extends Component {
 				<label htmlFor="form-area">Area</label>
 				<input type="number" id="form-area" {...this.bindInput('area')} />
 			</form>
-		)
+		);
 	}
 }
 
@@ -47,7 +52,7 @@ FieldForm.propTypes = {
 			),
 		}),
 		location: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.number)]),
-		area: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+		area: PropTypes.number,
 	}).isRequired,
 	setProperty: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,

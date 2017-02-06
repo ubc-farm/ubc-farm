@@ -3,7 +3,7 @@
 }
 
 .page-header {
-	background: #3ba648;
+	background: var(--theme-color);
 	color: white;
 
 	display: flex;

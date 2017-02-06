@@ -25,7 +25,7 @@
 
 .sidebar-head {
 	text-align: center;
-	background: #3ba648;
+	background: var(--theme-color);
 
 	height: 3em;
 	padding: calc(calc(var(--header-height) - 3em) / 2) 0.5em;
