@@ -1,65 +1,78 @@
 /* eslint-disable import/newline-after-import */
 const promisify = require('promisify-node');
 const { readFile } = promisify('fs');
-const { extname, parse, format, posix } = require('path');
+const { extname, parse, format, join } = require('path');
 const Handlebars = require('handlebars');
 const matter = require('gray-matter');
 const marked = promisify('marked');
 const { useLayout } = require('./layouts.js');
 
-function changeExtension(ext, path) {
+function asHtml(path) {
 	const { dir, name } = parse(path);
-	return format({ dir, name, ext });
+	return format({ dir, name, ext: '.html' });
 }
 
-module.exports = function compileFile(file, baseContext) {
-	return readFile(file).then((buffer) => {
-		const text = buffer.toString();
-		const hasFrontMatter = matter.test(text);
-		let filename;
+function getDestinationPath(filePath, data) {
+	if (data.page && data.page.permalink) {
+		let { permalink } = data.page;
+		if (permalink.endsWith('/')) permalink = join(permalink, 'index.html');
 
-		let data = Object.assign({}, baseContext);
-		let content = text;
+		return permalink;
+	} else {
+		const ext = extname(filePath);
+		if (ext === '.md' || ext === '.hbs') return asHtml(filePath);
+		else return filePath;
+	}
+}
+
+function compileMarkdown(content, data) {
+	const html = marked(content);
+	if (data.page && data.page.layout) {
+		return html.then(body => useLayout(body, data.page.layout, data));
+	} else {
+		return html;
+	}
+}
+
+function compileHandlebars(content, data) {
+	const template = Handlebars.compile(content, { noEscape: true });
+
+	if (data.page && data.page.layout) {
+		return useLayout(template, data.page.layout, data);
+	} else {
+		return template(data);
+	}
+}
+
+/**
+ * @param {string} file path
+ * @param {Object} options
+ * @param {string} options.cwd
+ * @param {Object} options.context
+ * @returns {Promise<Array>}
+ */
+module.exports = function compileFile(file, { context, cwd }) {
+	return readFile(join(cwd, file)).then((buffer) => {
+		let text = buffer.toString();
+		const hasFrontMatter = matter.test(text);
+
+		const data = Object.assign({}, context);
 		if (hasFrontMatter) {
 			const matterResult = matter(text);
 			data.page = matterResult.data;
-			content = matterResult.content;
+			text = matterResult.content;
 		}
 
-		const { page } = data;
-		const layout = page ? page.layout : '';
-
-		if (page && page.permalink) {
-			filename = page.permalink;
-			if (filename.endsWith(posix.sep)) {
-				filename = posix.join(filename, 'index.html');
-			}
-		}
+		const filename = getDestinationPath(file, data);
 
 		switch (extname(file)) {
 			case '.md':
-				filename = changeExtension('.html', file);
-				return marked(content)
-					.then(html => (layout ? useLayout(html, layout, data) : html))
-					.then(output =>	({ filename, output, data }));
-
+				return Promise.all([filename, compileMarkdown(text, data)]);
 			default:
-				filename = filename || file;
-				if (!hasFrontMatter) {
-					return { filename, output: buffer, data, nochanges: true };
-				}
-
+				if (!hasFrontMatter) return [filename, buffer];
 				// fall through
-			case '.hbs': {
-				filename = filename || changeExtension('.html', file);
-
-				const template = Handlebars.compile(content, { noEscape: true });
-				const output = layout
-					? useLayout(template, layout, data)
-					: template(content);
-
-				return { filename, output, data };
-			}
+			case '.hbs':
+				return [filename, compileHandlebars(text, data)];
 		}
 	});
 };

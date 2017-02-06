@@ -1,6 +1,6 @@
 {
-	"name": "@ubc-farm/frontend",
-	"devDependencies": {
+  "name": "@ubc-farm/frontend",
+  "devDependencies": {
     "glob": "^7.1.1",
     "gray-matter": "^2.1.0",
     "handlebars": "^4.0.6",
@@ -12,5 +12,8 @@
   },
   "scripts": {
     "prepare": "node _scripts"
+  },
+  "dependencies": {
+    "fs-extra": "^2.0.0"
   }
 }

@@ -1,12 +1,13 @@
 /* eslint-disable import/newline-after-import */
 const promisify = require('promisify-node');
-const { readFile, readdir } = promisify('fs');
+const { readFile } = promisify('fs');
 const { join, extname, basename } = require('path');
 const { safeLoad } = require('js-yaml');
+const searchFolder = require('./searchFolder');
 
-function loadDataFile(file) {
-	const filepath = join('./_data', file);
-	return readFile(filepath).then((contents) => {
+function loadDataFile(file, { cwd }) {
+	const filepath = join(cwd, file);
+	return readFile(filepath, 'utf8').then((contents) => {
 		const ext = extname(filepath);
 		const name = basename(filepath, ext);
 
@@ -21,13 +22,11 @@ function loadDataFile(file) {
 	});
 }
 
-module.exports = function loadData() {
-	return readdir('./_data')
-		.then(files =>
-			Promise.all(files.map(loadDataFile)))
-		.then(dataset =>
-			dataset.reduce((obj, [filename, data]) => {
-				if (data !== null) obj[filename] = data;
-				return obj;
-			}, {}));
-}
+module.exports = function loadData(options) {
+	return searchFolder('_data', loadDataFile, options).then(dataset =>
+		dataset.reduce((obj, [filename, data]) => {
+			if (data !== null) obj[filename] = data;
+			return obj;
+		}, {})
+	);
+};

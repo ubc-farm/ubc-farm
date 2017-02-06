@@ -1,21 +1,21 @@
 /* eslint-disable import/newline-after-import,no-console */
 const promisify = require('promisify-node');
-const { readFile, readdir } = promisify('fs');
+const { readFile } = promisify('fs');
 const { join, parse } = require('path');
 const Handlebars = require('handlebars');
+const searchFolder = require('./searchFolder.js');
 
 const layouts = new Map();
 
-function prepareLayout(file) {
-	const filepath = join('./_layouts', file);
+function prepareLayout(file, { cwd }) {
+	const filepath = join(cwd, file);
 	const { name } = parse(file);
 
 	return readFile(filepath, 'utf8').then(text => layouts.set(name, text));
 }
 
-exports.prepareLayouts = function prepareLayouts() {
-	return readdir('./_layouts').then(files =>
-		Promise.all(files.map(prepareLayout)));
+exports.prepareLayouts = function prepareLayouts(options) {
+	return searchFolder('_layouts', prepareLayout, options);
 }
 
 /**
@@ -25,8 +25,8 @@ exports.prepareLayouts = function prepareLayouts() {
  * @returns {string}
  */
 exports.useLayout = function useLayout(html, layoutName = 'default', context) {
-	if (layouts.size === 0) {
-		console.warn('No layouts have been loaded');
+	if (!layouts.has(layoutName)) {
+		throw new Error(`${layoutName} not loaded`);
 	}
 
 	Handlebars.registerPartial('body', html);
