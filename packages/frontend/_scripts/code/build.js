@@ -10,10 +10,17 @@ const copyFile = require('./copyFile.js');
 const scriptFolder = require('./scriptFolder.js');
 const { prepareLayouts } = require('./layouts.js');
 
-const opts = {
-	cwd: resolve(process.argv[2]) || process.cwd(),
-	nodir: true,
+let cwd;
+let arg = process.argv[2];
+if (arg === '__dirname') {
+	cwd = resolve(__dirname, '../../');
+} else if (arg) {
+	cwd = resolve(arg);
+} else {
+	cwd = process.cwd();
 }
+
+const opts = { cwd, nodir: true };
 
 module.exports = Promise.all([
 	glob('**/*',
