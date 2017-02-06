@@ -17,7 +17,7 @@ export function getLocationString(field) {
 	if (typeof location === 'string') return location;
 	else if (location === null) return '';
 
-	const [lng, lat] = location.map(n => n.toPrecision(2));
+	const [lng, lat] = location.map(n => n.toFixed(2));
 	return `Lat: ${lat}, Long: ${lng}`;
 }
 
@@ -30,8 +30,11 @@ export function getLocationString(field) {
  */
 export function getArea({ area, geometry }) {
 	if (area) return area;
-	else if (geometry) return polygonArea(geometry.coordinates[0]) * 0.000247105;
-	else return null;
+	else if (geometry) {
+		return Math.ceil(polygonArea(geometry.coordinates[0]) * 0.000247105);
+	} else {
+		return null;
+	}
 }
 
 /**

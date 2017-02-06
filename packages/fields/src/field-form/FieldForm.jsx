@@ -13,7 +13,7 @@ class FieldForm extends Component {
 			case 'area':
 				return {
 					name,
-					value: getArea(this.props.model),
+					value: getArea(this.props.model) || '',
 					onChange: e => this.props.setProperty(name, e.target.value),
 				};
 			default:
@@ -27,16 +27,28 @@ class FieldForm extends Component {
 
 	render() {
 		return (
-			<form onSumbit={this.props.onSubmit}>
-				<label htmlFor="form-name">Field Name</label>
-				<input type="text" id="form-name" required {...this.bindInput('name')} />
+			<form
+				className="form"
+				onSubmit={(e) => {
+					e.preventDefault();
+					this.props.onSubmit();
+				}}
+			>
+				<label className="form-label" htmlFor="form-name">Field Name</label>
+				<div className="form-input">
+					<input type="text" id="form-name" required {...this.bindInput('name')} />
+				</div>
 
-				<label htmlFor="form-location">Location</label>
-				<input type="text" id="form-location" {...this.bindInput('location')} />
-				<label htmlFor="form-location">ac</label>
+				<label className="form-label" htmlFor="form-location">Location</label>
+				<div className="form-input">
+					<input type="text" id="form-location" {...this.bindInput('location')} />
+				</div>
 
-				<label htmlFor="form-area">Area</label>
-				<input type="number" id="form-area" {...this.bindInput('area')} />
+				<label className="form-label" htmlFor="form-area">Area</label>
+				<div className="form-input">
+					<input min={0} type="number" id="form-area" {...this.bindInput('area')} />
+					<label htmlFor="form-location">ac</label>
+				</div>
 			</form>
 		);
 	}

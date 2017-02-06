@@ -6,7 +6,8 @@
 		"pouchdb-find": "^0.10.4",
 		"document-promises": "^3.0.0",
 		"react-virtualized": "^8.11.4",
-		"d3-polygon": "^1.0.2"
+		"d3-polygon": "^1.0.2",
+		"shortid": "^2.2.6"
 	},
 	"peerDependencies": {
 		"react": "^15.4.2",
@@ -17,6 +18,8 @@
 		"cross-env": "^3.1.4"
 	},
 	"scripts": {
-		"build-index": "rollup -c -i entry/index.js -o browser/index.js"
+		"build-index": "rollup -c -i entry/index.js -o browser/index.js",
+		"build-edit": "rollup -c -i entry/edit.js -o browser/edit.js",
+		"build-new": "rollup -c -i entry/new.js -o browser/new.js"
 	}
 }

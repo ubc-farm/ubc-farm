@@ -1,5 +1,6 @@
 import createMap from '../googlemaps/createMap.js';
 
+import createControls from './controls.jsx';
 import setMode from './setMode.js';
 import styler from './styler.js';
 
@@ -16,7 +17,8 @@ export default function setupEditorMap(setProperty, defaultMode) {
 		newField.toGeoJson(json => setProperty('geometry', json.geometry));
 	}
 
-	setMode(map.data, handleChange, defaultMode);
+	const renderControls = createControls(map);
+	setMode(defaultMode, { data: map.data, renderControls, handleChange });
 
 	return function rerenderField({ geometry, _id }) {
 		map.data.addGeoJson({

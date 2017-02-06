@@ -9,13 +9,13 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		babel({ exclude: 'node_modules/**', include: 'src/field-list/*.jsx' }),
+		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 		nodeResolve({ browser: true, preferBuiltins: false }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 			'process.browser': JSON.stringify(true),
 		}),
-		commonjs(),
+		commonjs({ namedExports: { shortid: ['generate'] } }),
 		json(),
 		// globals(),
 	],

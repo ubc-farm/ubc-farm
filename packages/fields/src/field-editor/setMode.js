@@ -1,5 +1,7 @@
 /* eslint-disable no-use-before-define */
 
+import createControls from './controls.jsx';
+
 /*
  * Uses state machine to change the editing mode of the map.
  */
@@ -10,21 +12,25 @@ export const EDITING = Symbol('EditorMode.EDITING');
 export const DELETING = Symbol('EditorMode.DELETING');
 
 
-function useViewingMode(data, handleChange) {
+function useViewingMode(props) {
+	const { data } = props;
+
 	data.setDrawingMode(null);
 	const listener = data.addListener(
-		'dblclick', () => setMode(data, handleChange, EDITING));
+		'dblclick', () => setMode(EDITING, props));
 
 	return function clearViewingMode() {
 		listener.remove();
 	};
 }
 
-function useDrawingMode(data, handleChange) {
+function useDrawingMode(props) {
+	const { data, handleChange } = props;
+
 	data.setDrawingMode('Polygon');
-	const listener = data.addListener('addfeature', (field) => {
-		handleChange(field);
-		setMode(data, handleChange, VIEWING);
+	const listener = data.addListener('addfeature', ({ feature }) => {
+		handleChange(feature);
+		setMode(VIEWING, props);
 	});
 
 	return function clearDrawingMode() {
@@ -32,11 +38,14 @@ function useDrawingMode(data, handleChange) {
 	};
 }
 
-function useEditingMode(data, handleChange) {
+function useEditingMode(props) {
+	const { data, handleChange } = props;
+
 	data.setDrawingMode(null);
 	data.forEach(field => field.setProperty('editable', true));
-
-	const listener = data.addListener('setgeometry', handleChange);
+	const listener = data.addListener('setgeometry', ({ feature }) => {
+		handleChange(feature);
+	});
 
 	return function clearEditingMode() {
 		listener.remove();
@@ -44,16 +53,18 @@ function useEditingMode(data, handleChange) {
 	};
 }
 
-function useDeletingMode(data, handleChange) {
+function useDeletingMode(props) {
+	const { data, handleChange } = props;
+
 	data.setDrawingMode(null);
 	const listeners = [
-		data.addListener('click', (feature) => {
+		data.addListener('click', ({ feature }) => {
 			data.remove(feature);
 			handleChange(null);
-			setMode(data, handleChange, VIEWING);
+			setMode(VIEWING, props);
 		}),
-		data.addListener('mouseover', feature => feature.setProperty('deleted', true)),
-		data.addListener('mouseout', feature => feature.setProperty('deleted', false)),
+		data.addListener('mouseover', ({ feature }) => feature.setProperty('deleted', true)),
+		data.addListener('mouseout', ({ feature }) => feature.setProperty('deleted', false)),
 	];
 
 	return function clearDeletingMode() {
@@ -62,20 +73,24 @@ function useDeletingMode(data, handleChange) {
 }
 
 let callback = () => {};
-export default function setMode(data, handleChange, mode = VIEWING) {
+export default function setMode(mode = VIEWING, props) {
+	const { renderControls } = props;
+
 	callback();
+	renderControls({ mode, setMode: newMode => setMode(newMode, props) });
+
 	switch (mode) {
 		case VIEWING:
-			callback = useViewingMode(data);
+			callback = useViewingMode(props);
 			break;
 		case DRAWING:
-			callback = useDrawingMode(data);
+			callback = useDrawingMode(props);
 			break;
 		case EDITING:
-			callback = useEditingMode(data);
+			callback = useEditingMode(props);
 			break;
 		case DELETING:
-			callback = useDeletingMode(data);
+			callback = useDeletingMode(props);
 			break;
 		default:
 			callback = () => {};

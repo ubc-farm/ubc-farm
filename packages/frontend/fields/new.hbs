@@ -1,0 +1,46 @@
+---
+layout: default
+title: New Field
+---
+<style>
+.main {
+	display: flex;
+	height: calc(100vh - var(--header-height));
+}
+.field-form {
+	flex: 1;
+}
+.map-wrapper {
+	width: 50%;
+}
+.map-button {
+	width: 2em;
+	height: 2em;
+	background: white;
+	border: 0;
+	border-radius: 0.1em;
+	display: block;
+}
+.map-button::hover { background: lightgray; }
+.map-button[aria-pressed=true] { background: gray; }
+
+.map-button-pan { background-image: url('/images/buttons/pan.svg'); }
+.map-button-draw { background-image: url('/images/buttons/draw.svg'); }
+.map-button-edit {
+	background-image: url('/images/buttons/edit.svg');
+	border-bottom: 1px solid #f0f0f0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.map-button-delete {
+	background-image: url('/images/buttons/delete.svg');
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+</style>
+<div class="field-form" id="reactRoot"></div>
+<div class="map-wrapper" id="googleMap"></div>
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"></script>
+<script async src="/packages/fields/browser/new.js"></script>

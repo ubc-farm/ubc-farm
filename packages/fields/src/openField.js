@@ -5,6 +5,10 @@ import { parse } from 'querystring';
  * @returns {Promise<Object>}
  */
 export default function openField(db, query = window.location.search.slice(1)) {
+	if (!query) {
+		return new TypeError('Missing query string');
+	}
+
 	const { id } = parse(query);
 	if (id) return db.get(id);
 	else return Promise.reject();
