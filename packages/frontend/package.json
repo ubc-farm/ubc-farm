@@ -11,7 +11,7 @@
     "resolve": "^1.2.0"
   },
   "scripts": {
-    "prepare": "node _scripts"
+    "prepare": "node _scripts __dirname"
   },
   "dependencies": {
     "fs-extra": "^2.0.0"

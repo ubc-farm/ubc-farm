@@ -4,6 +4,7 @@ function navigateToFeaturePage(feature) {
 }
 
 export default function watchDblClick(dataLayer) {
-	const listener = dataLayer.addListener('dblclick', navigateToFeaturePage);
+	const listener = dataLayer.addListener(
+		'dblclick', ({ feature }) => navigateToFeaturePage(feature));
 	return () => listener.remove();
 }

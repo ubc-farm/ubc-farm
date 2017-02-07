@@ -1,20 +1,15 @@
-import { geoPath, geoOrthographic } from 'd3-geo';
-
-const w = 720; const h = 640;
-const projection = geoOrthographic()
-	.scale(3660)
-	.rotate([-3, -46.35])
-  .clipExtent([[0, 0], [w, h]])
-	.translate([w / 2, h / 2]);
-const path = geoPath.path().projection(projection);
+import geojsonArea from '@turf/area';
+import centroid from '@turf/centroid';
 
 /**
  * @returns {string|number[]|null}
  */
 export function getLocation({ location, geometry }) {
 	if (location) return location;
-	else if (geometry) return path.centroid(geometry);
-	else return null;
+	else if (geometry) {
+		const center = centroid({ type: 'Feature', geometry });
+		return center.geometry.coordinates;
+	} else return null;
 }
 
 /**
@@ -40,10 +35,9 @@ export function getLocationString(field) {
 export function getArea({ area, geometry }) {
 	if (area) return area;
 	else if (geometry) {
-		const earthAreaInAcres = 126e9;
-		const steradiansInSphere = 12.56637;
+		const polyArea = geojsonArea({ type: 'Feature', geometry });
 
-		return Math.ceil((path.area(geometry) / steradiansInSphere) * earthAreaInAcres);
+		return Math.ceil(polyArea * 0.000247105);
 	} else {
 		return null;
 	}

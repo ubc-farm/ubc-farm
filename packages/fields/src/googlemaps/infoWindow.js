@@ -1,5 +1,5 @@
-import { polygonCentroid } from 'd3-polygon';
 import db from '../db.js';
+import { getLocation } from '../fieldData.js';
 
 const { InfoWindow, Data } = window.google.maps;
 
@@ -11,15 +11,15 @@ export default function createInfoWindow(dataLayer) {
 		throw new TypeError('dataLayer is not an instance of google.maps.Data');
 	}
 
-	dataLayer.addListener('click', async (feature) => {
-		const polygon = feature.getGeometry();
+	dataLayer.addListener('click', ({ feature }) => {
+		feature.toGeoJson((json) => {
+			const [lng, lat] = getLocation(json);
+			infoWindow.setPostion({ lat, lng });
+			infoWindow.open();
+		});
 
-		const [lng, lat] = polygonCentroid(polygon.getAt(0).getArray());
-		infoWindow.setPostion({ lat, lng });
-		infoWindow.open();
-
-		const { name } = await db.get(feature.getId());
-		infoWindow.setContent(name);
+		db.get(feature.getId())
+			.then(doc => infoWindow.setContent(doc.name));
 	});
 
 	return infoWindow;

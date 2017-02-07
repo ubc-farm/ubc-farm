@@ -58,7 +58,7 @@ FieldForm.propTypes = {
 	model: PropTypes.shape({
 		name: PropTypes.string.isRequired,
 		geometry: PropTypes.shape({
-			type: PropTypes.oneOf(['Feature']),
+			type: PropTypes.oneOf(['Polygon']),
 			coordinates: PropTypes.arrayOf(
 				PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
 			),

@@ -15,7 +15,12 @@ export default {
 			'process.env.NODE_ENV': JSON.stringify('production'),
 			'process.browser': JSON.stringify(true),
 		}),
-		commonjs({ namedExports: { shortid: ['generate'] } }),
+		commonjs({
+			namedExports: {
+				shortid: ['generate'],
+				jsts: ['io'],
+			}
+		}),
 		json(),
 		// globals(),
 	],
