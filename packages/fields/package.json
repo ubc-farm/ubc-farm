@@ -15,8 +15,7 @@
 		"react-dom": "^15.4.2"
 	},
 	"devDependencies": {
-		"rollup": "^0.41.4",
-		"cross-env": "^3.1.4"
+		"rollup": "^0.41.4"
 	},
 	"scripts": {
 		"build-index": "rollup -c -i entry/index.js -o browser/index.js",
