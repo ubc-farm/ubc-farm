@@ -1,6 +1,6 @@
 {
 	"name": "@ubc-farm/fields",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"dependencies": {
 		"pouchdb": "^6.1.1",
 		"pouchdb-find": "^0.10.4",

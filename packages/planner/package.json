@@ -1,0 +1,19 @@
+{
+  "name": "@ubc-farm/planner",
+  "version": "2.0.0",
+  "dependencies": {
+    "redux": "^3.5.2",
+    "react-redux": "^4.4.5",
+    "vis-timeline": "ubc-farm/ports#vis-timeline"
+  },
+  "peerDependencies": {
+		"react": "^15.4.2",
+		"react-dom": "^15.4.2"
+	},
+  "devDependencies": {
+		"rollup": "^0.41.4"
+	},
+  "scripts": {
+    "prepublish": "rollup -c -i entry/index.js -o browser/index.js "
+  }
+}

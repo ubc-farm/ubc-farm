@@ -1,32 +1,27 @@
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
+import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 export default {
-	entry: 'src/index.js',
-	moduleName: 'Planner',
 	sourceMap: true,
-	targets: [
-		{ dest: 'dist/index.iife.js', format: 'iife' },
-	],
+	format: 'iife',
 	plugins: [
-		babel({
-			plugins: ['transform-react-jsx', 'external-helpers'],
-			exclude: 'node_modules/**',
-		}),
-		nodeResolve({ jsnext: true }),
+		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
+		nodeResolve({ browser: true, jsnext: true }),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('production'),
+			'process.browser': JSON.stringify(true),
 		}),
 		commonjs({
-			exclude: ['node_modules/moment/**', 'src/**'],
+			namedExports: {}
 		}),
+		json(),
 	],
-	external: ['react', 'react-dom', 'tape'],
+	external: ['react', 'react-dom'],
 	globals: {
 		react: 'React',
 		'react-dom': 'ReactDOM',
-		tape: 'test',
 	},
 };
