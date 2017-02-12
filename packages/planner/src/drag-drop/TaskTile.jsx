@@ -1,27 +1,18 @@
-import { createElement as h, PropTypes, Component } from 'react'; /** @jsx h */
-import { classlist as cx } from 'ubc-farm-utils';
+import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
+import { classlist as cx } from '@ubc-farm/utils';
 
 export default class TaskTile extends Component {
-	static get propTypes() {
-		return {
-			color: PropTypes.string.isRequired,
-			name: PropTypes.string.isRequired,
-		};
-	}
-
 	constructor(props) {
 		super(props);
 
 		this.handleDragStart = this.handleDragStart.bind(this);
 		this.handleDragEnd = this.handleDragEnd.bind(this);
 
-		this.state = {
-			dragging: false,
-		};
+		this.state = { dragging: false };
 	}
 
 	componentDidMount() {
-		this.ref.style.setProperty('--brand-primary', this.props.color);
+		this.ref.style.setProperty('--theme-color', this.props.color);
 	}
 
 	handleDragStart(e) {
@@ -42,13 +33,18 @@ export default class TaskTile extends Component {
 		return (
 			<span
 				className={cx('task-tile', name, { dragging })}
-				ref={s => { this.ref = s; }}
+				ref={(s) => { this.ref = s; }}
 				draggable="true"
 				onDragStart={this.handleDragStart}
 				onDragEnd={this.handleDragEnd}
 			>
-				{this.props.name}
+				{name}
 			</span>
 		);
 	}
 }
+
+TaskTile.propTypes = {
+	color: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+};

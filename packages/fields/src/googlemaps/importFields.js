@@ -5,11 +5,11 @@
 export default async function importFields(rows, dataLayer) {
 	const collection = {
 		type: 'FeatureCollection',
-		features: (await rows).map(({ geometry, _id, _rev }) => ({
+		features: (await rows).map(({ doc: { geometry }, id, value: { rev } }) => ({
 			type: 'Feature',
 			geometry,
-			id: _id,
-			properties: { _rev },
+			id,
+			properties: { rev },
 		})),
 	};
 

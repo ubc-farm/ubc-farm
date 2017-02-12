@@ -4,7 +4,9 @@
   "dependencies": {
     "redux": "^3.5.2",
     "react-redux": "^4.4.5",
-    "vis-timeline": "ubc-farm/ports#vis-timeline"
+    "vis-timeline": "ubc-farm/ports#vis-timeline",
+    "@ubc-farm/utils": "^4.2.0",
+    "lodash": "^0.0.0"
   },
   "peerDependencies": {
 		"react": "^15.4.2",
