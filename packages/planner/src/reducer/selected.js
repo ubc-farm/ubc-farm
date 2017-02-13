@@ -26,3 +26,4 @@ export const clearSelected = () => ({ type: CLEAR });
 
 export const getAllSelected = state => state.selected;
 export const getSelected = state => state.selected[0] || null;
+export const isAnySelected = state => state.selectted.length !== 0;
