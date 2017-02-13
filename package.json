@@ -28,5 +28,11 @@
   },
   "scripts": {
     "start": "http-server ./packages/frontend/_site"
+  },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config"
+  },
+  "babel": {
+    "presets": ["@ubc-farm/babel-preset"]
   }
 }
