@@ -1,9 +1,12 @@
 import Timeline from 'vis-timeline';
 import { generate } from 'shortid';
+import { observeStore } from '@ubc-farm/utils';
+import { setSelected, getAllSelected } from '../reducer/selected.js';
 import createTaskItems from './taskItems.js';
 import createLocationGroups from './locationGroups.js';
 
-async function handleAddItem(db, item, callback) {
+async function handleAddItem(item, callback) {
+	const db = this;
 	const row = Object.assign({ type: '', location: '' }, item);
 	row._id = `${row.type}/${row.location}/${generate()}`;
 	const res = await db.put(row);
@@ -13,7 +16,8 @@ async function handleAddItem(db, item, callback) {
 	callback(item);
 }
 
-async function handleMoveItem(db, item, callback) {
+async function handleMoveItem(item, callback) {
+	const db = this;
 	const { id, start, end, group } = item;
 	const task = await db.get(id);
 	let changed = false;
@@ -41,12 +45,13 @@ async function handleMoveItem(db, item, callback) {
 	}
 }
 
-async function handleRemoveItem(db, item, callback) {
+async function handleRemoveItem(item, callback) {
+	const db = this;
 	await db.remove({ _id: item.id, _rev: item._rev });
 	callback(item);
 }
 
-export default function createTimeline(databases) {
+export default function createTimeline(store, databases) {
 	const { tasks, taskTypes, locations } = databases;
 
 	const lastYear = new Date(new Date().getFullYear() - 1, 0);
@@ -57,20 +62,24 @@ export default function createTimeline(databases) {
 		createTaskItems(tasks, taskTypes),
 		createLocationGroups(locations),
 		{
-			onAdd: handleAddItem.bind(null, tasks),
-			onMove: handleMoveItem.bind(null, tasks),
-			onRemove: handleRemoveItem.bind(null, tasks),
+			onAdd: handleAddItem.bind(tasks),
+			onMove: handleMoveItem.bind(tasks),
+			onRemove: handleRemoveItem.bind(tasks),
 			min: lastYear,
 			max: nextYear,
 			editable: true,
 			selectable: true,
 			multiselect: false,
 			height: 'calc(50vh - 3rem)',
-		}
+		},
 	);
 
-	timeline.on('select', onSelect);
-	initSelector(timeline);
+	const unsub = observeStore(store, getAllSelected,
+		timeline.setSelection.bind(timeline));
 
+	const handleSelect = props => store.dispatch(setSelected(props.items));
+	timeline.on('select', handleSelect);
+
+	timeline.cancel = () => { unsub(); timeline.off('select', handleSelect); };
 	return timeline;
 }

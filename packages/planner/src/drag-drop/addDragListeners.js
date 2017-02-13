@@ -21,26 +21,20 @@ export default function addDragListeners(timeline, newTask, changeTaskType) {
 	function handleDrop(e) {
 		e.preventDefault();
 		const text = e.dataTransfer.getData('text/plain');
-		const eventProps = timeline.getEventProperties(e);
+		const { what, group, snappedTime, item } = timeline.getEventProperties(e);
 
-		switch (eventProps.what) {
-			case 'background': {
-				const { group, snappedTime } = eventProps;
-
+		switch (what) {
+			case 'background':
 				newTask({
-					locationId: group,
+					location: group,
 					start_time: snappedTime.valueOf(),
 					type: text,
 				});
 				break;
-			}
-			case 'item': {
-				const { item } = eventProps;
+
+			case 'item':
 				changeTaskType(item, text);
 				break;
-			}
-
-			default: break;
 		}
 	}
 
