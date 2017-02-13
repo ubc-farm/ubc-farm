@@ -1,0 +1,6 @@
+{
+	"name": "@ubc-farm/databases",
+	"dependencies": {
+		"pouchdb": "^6.1.2"
+	}
+}
