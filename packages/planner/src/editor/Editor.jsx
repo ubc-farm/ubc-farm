@@ -6,8 +6,12 @@ import EquipmentSelect from './EquipmentSelect.jsx';
 import DBWrapper from './DBWrapper.jsx';
 
 export default function createEditor(equipmentDB, locationDB) {
-	const WrappedLocationSelect = DBWrapper(locationDB)(LocationSelect);
-	const WrappedEquipmentSelect = DBWrapper(equipmentDB)(EquipmentSelect);
+	const WrappedLocationSelect = DBWrapper(
+		'options', 'doc.name', locationDB,
+	)(LocationSelect);
+	const WrappedEquipmentSelect = DBWrapper(
+		'options', 'doc.name', equipmentDB,
+	)(EquipmentSelect);
 
 	const Editor = ({ disabled, model, onSubmit, setProperty }) => {
 		const bindInput = name => ({

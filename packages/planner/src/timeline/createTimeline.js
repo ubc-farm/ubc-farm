@@ -78,7 +78,7 @@ export default function createTimeline(store, databases) {
 	const nextYear = new Date(new Date().getFullYear() + 2, 0, 0);
 
 	const timeline = new Timeline(
-		document.getElementById('timeline-mount'),
+		document.getElementById('timeline'),
 		createTaskItems(tasks, taskTypes),
 		createLocationGroups(locations),
 		{

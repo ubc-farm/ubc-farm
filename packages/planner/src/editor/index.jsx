@@ -1,5 +1,5 @@
 import { createElement } from 'react'; /** @jsx createElement */
-import { connect } from 'react-reformed';
+import { connect } from 'react-redux';
 import { render } from 'react-dom';
 import { isAnySelected } from '../reducer/selected.js';
 import { getModel, setEditorProp } from '../reducer/editor.js';

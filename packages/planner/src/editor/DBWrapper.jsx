@@ -1,19 +1,25 @@
 import { createElement, Component } from 'react'; /** @jsx createElement */
 import { chain, omit } from 'lodash';
-import LocationSelect from './LocationSelect.jsx';
 
-export default function DBWrapper(...dbs) {
-	return class WrappedLocationSelect extends Component {
+/**
+ * @param {string} key prop key to store database entries in
+ * @param {string|function} transformer function called with each row
+ * (row, id) => T
+ * @param {...PouchDB} dbs pouch databases to connect
+ * @returns {function} React.Component => React.Component
+ */
+export default function DBWrapper(key, transformer, ...dbs) {
+	return ReactComponent => class WrappedComponent extends Component {
 		constructor(props) {
 			super(props);
-			this.state = { options: [] };
+			this.state = { [key]: {} };
 			this.changes = [];
 
 			for (const db of dbs) {
 				db.allDocs({ include_docs: true })
-					.then(res => chain(res.rows).keyBy('id').mapValues('doc.name'))
+					.then(res => chain(res.rows).keyBy('id').mapValues(transformer))
 					.then(items => this.setState({
-						options: Object.assign({}, this.state.options, items)
+						[key]: Object.assign({}, this.state[key], items)
 					}));
 
 				const changes = db.changes({
@@ -22,10 +28,10 @@ export default function DBWrapper(...dbs) {
 					live: true,
 				}).on('change', ({ id, deleted, doc }) => {
 					if (deleted) {
-						this.setState({ options: omit(this.state.options, id) });
+						this.setState({ [key]: omit(this.state[key], id) });
 					} else {
 						this.setState({
-							options: Object.assign({}, this.state.options, { [id]: doc.name })
+							[key]: Object.assign({}, this.state[key], { [id]: doc.name })
 						});
 					}
 				});
@@ -39,7 +45,7 @@ export default function DBWrapper(...dbs) {
 		}
 
 		render() {
-			return <LocationSelect {...this.props} {...this.state} />;
+			return <ReactComponent {...this.props} {...this.state} />;
 		}
 	};
 }
