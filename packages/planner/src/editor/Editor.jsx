@@ -16,6 +16,7 @@ export default function createEditor(fieldDB, placesDB, equipmentDB) {
 			<TaskTimeInput {...{ disabled, bindInput }} />
 			<WrappedLocationSelect {...{ disabled, bindInput }} />
 			<WrappedEquipmentSelect {...{ disabled, bindInput }} />
+			<button type="submit">Submit</button>
 		</form>
 	);
 
