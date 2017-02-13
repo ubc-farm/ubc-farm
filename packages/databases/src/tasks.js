@@ -2,14 +2,24 @@ import { generate } from 'shortid';
 import { route } from 'docuri';
 import PouchDB from './utils/load-pouch.js';
 
-const uri = route(':type/:location/:hash');
+const uri = route(':location/:hash');
 
 export const db = new PouchDB('tasks');
-export default Promise.resolve(db);
+
+export default db.createIndex({
+	index: { fields: ['type'] }
+}).then(() => db);
 
 function dateToMilli(date) {
 	if (!date) return null
 	return new Date(date).getTime();
+}
+
+function getTasksForLocation(locationID, options) {
+	return db.allDocs(Object.assign({}, options, {
+		startkey: locationID,
+		endkey: `${locationID}\uffff`,
+	}));
 }
 
 db.transform({
@@ -18,9 +28,8 @@ db.transform({
 
 		const isDocURI = _id && uri(_id);
 		if (!isDocURI) {
-			const { type = ' ', location = ' ', hash = _id || generate() } = doc;
-			doc._id = uri({ type, location, hash });
-			delete doc.type;
+			const { location = ' ', hash = _id || generate() } = doc;
+			doc._id = uri({ location, hash });
 			delete doc.location;
 			delete doc.hash;
 		}

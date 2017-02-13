@@ -7,6 +7,6 @@ const fields = db.allDocs({ include_docs: true })
 	.then(res => res.rows.map(row => row.doc));
 
 parsed.then(() => {
-	setupMap(fields);
+	setupMap(db);
 	createFieldList(fields);
 });
