@@ -96,10 +96,8 @@ export default function createTimeline(store, databases) {
 
 	const unsub = observeStore(store, getAllSelected,
 		timeline.setSelection.bind(timeline));
-
 	const handleSelect = props => store.dispatch(setSelected(props.items));
 	timeline.on('select', handleSelect);
-
 	const removeDrag = addDragListeners(timeline,
 		task => handleAddItem.call(tasks, task, () => {}),
 		handleTypeChange.bind(tasks));

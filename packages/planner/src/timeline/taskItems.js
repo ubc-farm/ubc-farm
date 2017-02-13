@@ -8,6 +8,7 @@ function getColor(taskTypeDb, id) {
 	return taskTypeDb.get(id).then(doc => doc.color);
 }
 
+const hourInMilli = 3.6e+6;
 function toEntry({ doc }) {
 	const { _id, _rev, name, start_time, end_time, location } = doc;
 	const type = getType(_id);
@@ -16,7 +17,7 @@ function toEntry({ doc }) {
 		_rev,
 		content: name || type,
 		start: start_time,
-		end: end_time,
+		end: end_time || start_time + hourInMilli,
 		group: location,
 		className: type,
 		type: 'box',
