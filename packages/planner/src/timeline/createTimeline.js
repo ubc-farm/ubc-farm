@@ -4,6 +4,7 @@ import { observeStore } from '@ubc-farm/utils';
 import { setSelected, getAllSelected } from '../reducer/selected.js';
 import createTaskItems from './taskItems.js';
 import createLocationGroups from './locationGroups.js';
+import addDragListeners from './addDragListeners.js';
 
 async function handleAddItem(item, callback) {
 	const db = this;
@@ -51,6 +52,25 @@ async function handleRemoveItem(item, callback) {
 	callback(item);
 }
 
+async function handleTypeChange({ id }, type) {
+	const db = this;
+	const task = db.get(id);
+
+	const [, location, hash] = id.split('/');
+	task.type = type;
+	task._id = `${type}/${location}/${hash}`;
+
+	return db.put(task);
+}
+
+
+/**
+ * @param {redux.Store} store
+ * @param {Object} databases
+ * @param {PouchDB} databases.tasks
+ * @param {PouchDB} databases.taskTypes
+ * @param {PouchDB} databases.locations
+ */
 export default function createTimeline(store, databases) {
 	const { tasks, taskTypes, locations } = databases;
 
@@ -80,6 +100,14 @@ export default function createTimeline(store, databases) {
 	const handleSelect = props => store.dispatch(setSelected(props.items));
 	timeline.on('select', handleSelect);
 
-	timeline.cancel = () => { unsub(); timeline.off('select', handleSelect); };
+	const removeDrag = addDragListeners(timeline,
+		task => handleAddItem.call(tasks, task, () => {}),
+		handleTypeChange.bind(tasks));
+
+	timeline.cancel = () => {
+		unsub();
+		timeline.off('select', handleSelect);
+		removeDrag();
+	};
 	return timeline;
 }
