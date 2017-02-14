@@ -4,7 +4,11 @@ import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 
 export const db = new PouchDB('directory');
-export default Promise.resolve(db);
+export default Promise.all([
+	db.createIndex({ index: { fields: ['role'] } }),
+	db.createIndex({ index: { fields: ['name'] } }),
+	db.createIndex({ index: { fields: ['email'] } }),
+]).then(() => db);
 
 db.transform({
 	incoming(doc) {
@@ -18,6 +22,10 @@ db.transform({
 			else doc.addressMailing = doc.addressPhysical;
 		}
 
+		return doc;
+	},
+	outgoing(doc) {
+		doc.workingDays = new Set(doc.workingDays);
 		return doc;
 	},
 });

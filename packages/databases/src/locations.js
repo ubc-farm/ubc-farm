@@ -8,7 +8,11 @@ import PouchDB from './utils/load-pouch.js';
 export const uri = route(':type/:name/:hash');
 
 export const db = new PouchDB('locations');
-export default Promise.resolve(db);
+export default Promise.all([
+	db.createIndex({ index: { fields: ['name'] } }),
+	db.createIndex({ index: { fields: ['location'] } }),
+	db.createIndex({ index: { fields: ['crop'] } }),
+]).then(() => db);
 
 /**
  * @returns {string|number[]|null}

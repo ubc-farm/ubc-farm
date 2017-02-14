@@ -4,20 +4,16 @@ import PouchDB from './utils/load-pouch.js';
 
 export const db = new PouchDB('tasks');
 
-export default db.createIndex({
-	index: { fields: ['type'] }
-}).then(() => db);
+export default Promise.all([
+	db.createIndex({ index: { fields: ['type'] } }),
+	db.createIndex({ index: { fields: ['location'] } }),
+	db.createIndex({ index: { fields: ['start_time'] } }),
+	db.createIndex({ index: { fields: ['end_time'] } }),
+]).then(() => db);
 
 function dateToMilli(date) {
 	if (!date) return null;
 	return new Date(date).getTime();
-}
-
-export function getTasksForLocation(locationID, options) {
-	return db.allDocs(Object.assign({}, options, {
-		startkey: locationID,
-		endkey: `${locationID}\uffff`,
-	}));
 }
 
 db.transform({
