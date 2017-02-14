@@ -1,11 +1,10 @@
 import { parsed } from 'document-promises';
-import { generate } from 'shortid';
-import db from '../src/db.js';
+import db from '@ubc-farm/databases/src/locations.js';
 import setupEditorMap from '../src/field-editor/index.js';
 import renderFieldEditorForm from '../src/field-form/index.jsx';
 
 parsed.then(() => {
-	let field = { name: '', location: '', area: 0, geometry: null, _id: generate() };
+	let field = {};
 
 	function back() { window.location = '/fields'; }
 	function submit() { db.put(field).then(back); }

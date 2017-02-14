@@ -1,5 +1,5 @@
 import { parsed } from 'document-promises';
-import db from '../src/db.js';
+import db from '@ubc-farm/databases/src/locations.js';
 import openField from '../src/openField.js';
 import setupEditorMap from '../src/field-editor/index.js';
 import renderFieldEditorForm from '../src/field-form/index.jsx';

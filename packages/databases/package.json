@@ -10,10 +10,14 @@
 		"shortid": "^2.2.6",
 		"docuri": "^4.2.2",
 		"@turf/area": "^3.7.5",
-		"@turf/centroid": "^3.7.5"
+		"@turf/centroid": "^3.7.5",
+		"invariant": "^2.2.2"
 	},
 	"devDependencies": {
 		"rollup": "^0.41.4"
+	},
+	"optionalDependencies": {
+		"react": "^15.4.2"
 	},
 	"scripts": {
 		"prepare": "rollup -c -i src/index.js -o index.js",

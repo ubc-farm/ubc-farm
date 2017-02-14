@@ -1,25 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { generate } from 'shortid';
-import { route } from 'docuri';
 import PouchDB from './utils/load-pouch.js';
-
-export const uri = route(':role/:name/:hash');
+import BadRequestError from './utils/bad-request.js';
 
 export const db = new PouchDB('directory');
 export default Promise.resolve(db);
 
 db.transform({
 	incoming(doc) {
-		const { _id } = doc;
+		if (!doc.name) throw new BadRequestError('Missing name property');
 
-		const isDocURI = _id && uri(_id);
-		if (!isDocURI) {
-			const { role = 'none', name, hash = _id || generate() } = doc;
-			doc._id = uri({ role, name, hash });
-			delete doc.role;
-			delete doc.name;
-			delete doc.hash;
-		}
+		if (!doc._id) doc._id = generate();
+		if (!doc.role) doc.role = 'none';
 
 		if (!doc.addressMailing || !doc.addressPhysical) {
 			if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
@@ -28,7 +20,4 @@ db.transform({
 
 		return doc;
 	},
-	outgoing(doc) {
-		return Object.assign(doc, uri(doc._id));
-	}
 });

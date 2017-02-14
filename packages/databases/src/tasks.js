@@ -1,9 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { generate } from 'shortid';
-import { route } from 'docuri';
 import PouchDB from './utils/load-pouch.js';
-
-export const uri = route(':location/:hash');
 
 export const db = new PouchDB('tasks');
 
@@ -25,22 +22,11 @@ export function getTasksForLocation(locationID, options) {
 
 db.transform({
 	incoming(doc) {
-		const { _id } = doc;
-
-		const isDocURI = _id && uri(_id);
-		if (!isDocURI) {
-			const { location = ' ', hash = _id || generate() } = doc;
-			doc._id = uri({ location, hash });
-			delete doc.location;
-			delete doc.hash;
-		}
+		if (!doc._id) doc._id = generate();
 
 		doc.start_time = dateToMilli(doc.start_time);
 		doc.end_time = dateToMilli(doc.end_time);
 
 		return doc;
 	},
-	outgoing(doc) {
-		return Object.assign(doc, uri(doc._id));
-	}
 });

@@ -19,7 +19,7 @@ enum Day {
 }
 
 interface Person {
-	_id: string; // `${role}/${name}/${hash}`
+	_id: string;
 	_rev: string;
 	role: string; // employee, researcher, or something else. Default is 'none'
 	name: string; // First Last
@@ -29,7 +29,8 @@ interface Person {
 	addressPhysical?: string|Address;
 }
 
-interface Employee implements Person {
+interface Employee extends Person {
+	role: "employee";
 	pay?: number;
 	employmentType?: EmploymentType;
 	holidayDays?: Date[];
@@ -41,7 +42,8 @@ interface Employee implements Person {
 	workingDays?: Day[]; // set of days, should be unique
 }
 
-interface Researcher implements Person {
+interface Researcher extends Person {
+	role: "researcher";
 	position: string;
 	faculty: string;
 	department: string;

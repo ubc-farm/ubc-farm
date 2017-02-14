@@ -1,12 +1,9 @@
 import { parsed } from 'document-promises';
-import db from '../src/db.js';
+import db from '@ubc-farm/databases/src/locations.js';
 import setupMap from '../src/googlemaps/index.js';
 import createFieldList from '../src/field-list/index.jsx';
 
-const fields = db.allDocs({ include_docs: true })
-	.then(res => res.rows.map(row => row.doc));
-
 parsed.then(() => {
 	setupMap(db);
-	createFieldList(fields);
+	createFieldList(db);
 });

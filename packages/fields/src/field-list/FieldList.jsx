@@ -34,6 +34,7 @@ const FieldList = ({ rows }) => (
 
 FieldList.propTypes = {
 	rows: PropTypes.arrayOf(PropTypes.shape({
+		_id: PropTypes.string,
 		name: PropTypes.string,
 		geometry: PropTypes.shape({
 			type: PropTypes.oneOf(['Feature']),
