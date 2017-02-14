@@ -1,5 +1,10 @@
 # Interface
 ```typescript
+interface Crop {
+	variety: string; // name/id of the plant
+	quantity: number;
+}
+
 interface Location {
 	_id: string; // `${'field' || 'place'}/${hash}`
 	_rev: string;
@@ -11,6 +16,6 @@ interface Location {
 interface Field extends Location {
 	name: string; // name of the location
 	area?: number; // Only for fields
-	crop?: string; // ID of crop
+	crop?: Crop;
 }
 ```
