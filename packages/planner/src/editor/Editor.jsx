@@ -35,8 +35,8 @@ export default function createEditor(equipmentDB, locationDB) {
 		disabled: PropTypes.bool,
 		model: PropTypes.shape({
 			name: PropTypes.string,
-			start_time: PropTypes.instanceOf(Date),
-			end_time: PropTypes.instanceOf(Date),
+			start: PropTypes.instanceOf(Date),
+			end: PropTypes.instanceOf(Date),
 			location: PropTypes.string,
 			equipment: PropTypes.arrayOf(PropTypes.string)
 		}).isRequired,

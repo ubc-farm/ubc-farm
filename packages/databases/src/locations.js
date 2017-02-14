@@ -11,7 +11,7 @@ export const db = new PouchDB('locations');
 export default Promise.all([
 	db.createIndex({ index: { fields: ['name'] } }),
 	db.createIndex({ index: { fields: ['location'] } }),
-	db.createIndex({ index: { fields: ['crop'] } }),
+	db.createIndex({ index: { fields: ['crop.variety'] } }),
 ]).then(() => db);
 
 /**

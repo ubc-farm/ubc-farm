@@ -23,9 +23,8 @@ async function handleMoveItem(item, callback) {
 	const task = await db.get(id);
 	let changed = false;
 
-	if (task.start_time !== start || task.end_time !== end) {
-		task.start_time = start;
-		task.end_time = end;
+	if (task.start !== start || task.end !== end) {
+		Object.assign(task, { start, end });
 		changed = true;
 	}
 
@@ -56,10 +55,7 @@ async function handleTypeChange({ id }, type) {
 	const db = this;
 	const task = db.get(id);
 
-	const [, location, hash] = id.split('/');
 	task.type = type;
-	task._id = `${type}/${location}/${hash}`;
-
 	return db.put(task);
 }
 

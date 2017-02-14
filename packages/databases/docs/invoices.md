@@ -12,9 +12,10 @@ interface Sale {
 interface Invoice {
 	_id: number; // invoice #
 	_rev: string;
-	isPurchase: boolean; // if true, the invoice represents something the farm
-	                     // bought instead of something the farm sold. false by default.
-	date: Date;
+	isPurchase: Index<boolean>; // if true, the invoice represents something the
+	                            // farm bought instead of something the farm sold.
+															// false by default.
+	date: Index<Date>;
 	items: Sale[];
 	channel: string;
 	notes: string; // empty string by default

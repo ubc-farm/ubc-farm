@@ -10,14 +10,14 @@ function getColor(taskTypeDb, id) {
 
 const hourInMilli = 3.6e+6;
 function toEntry({ doc }) {
-	const { _id, _rev, name, start_time, end_time, location } = doc;
+	const { _id, _rev, name, start, end, location } = doc;
 	const type = getType(_id);
 	return {
 		id: _id,
 		_rev,
 		content: name || type,
-		start: start_time,
-		end: end_time || start_time + hourInMilli,
+		start,
+		end: end || start + hourInMilli,
 		group: location,
 		className: type,
 		type: 'box',

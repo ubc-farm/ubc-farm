@@ -6,13 +6,13 @@ const TaskTimeInput = ({ bindInput, disabled }) => (
 		<input
 			type="datetime-local" className="editor-input"
 			disabled={disabled}
-			{...bindInput('start_time')}
+			{...bindInput('start')}
 		/>
 		-
 		<input
 			type="datetime-local" className="editor-input"
 			disabled={disabled}
-			{...bindInput('end_time')}
+			{...bindInput('end')}
 		/>
 	</div>
 );

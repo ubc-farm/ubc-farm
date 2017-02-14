@@ -6,8 +6,8 @@ const defaultState = Object.freeze({
 	_id: null,
 	_rev: null,
 	name: '',
-	start_time: '',
-	end_time: '',
+	start: '',
+	end: '',
 	location: [],
 	equipment: [],
 });

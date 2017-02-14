@@ -21,9 +21,9 @@ enum Day {
 interface Person {
 	_id: string;
 	_rev: string;
-	role: string; // employee, researcher, or something else. Default is 'none'
-	name: string; // First Last
-	email?: string;
+	role: Index<string>; // employee, researcher, or something else. Default is 'none'
+	name: Index<string>; // First Last
+	email?: Index<string>;
 	phoneNumber?: string;
 	addressMailing?: string|Address;
 	addressPhysical?: string|Address;

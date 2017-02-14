@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { generate } from 'shortid';
+import { kebabCase, startCase } from 'lodash';
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 
@@ -15,7 +16,7 @@ db.transform({
 		if (!doc.name) throw new BadRequestError('Missing name property');
 
 		if (!doc._id) doc._id = generate();
-		if (!doc.role) doc.role = 'none';
+		doc.role = kebabCase(doc.role || 'none');
 
 		if (!doc.addressMailing || !doc.addressPhysical) {
 			if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
@@ -25,6 +26,7 @@ db.transform({
 		return doc;
 	},
 	outgoing(doc) {
+		doc.role = startCase(doc.role);
 		doc.workingDays = new Set(doc.workingDays);
 		return doc;
 	},

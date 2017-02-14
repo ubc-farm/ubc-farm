@@ -27,7 +27,7 @@ export default function addDragListeners(timeline, newTask, changeTaskType) {
 			case 'background':
 				newTask({
 					location: group,
-					start_time: snappedTime.valueOf(),
+					start: snappedTime.valueOf(),
 					type: text,
 				});
 				break;
