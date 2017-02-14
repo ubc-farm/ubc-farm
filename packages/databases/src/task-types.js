@@ -1,10 +1,14 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign,no-use-before-define */
 import { startCase } from 'lodash';
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 
 export const db = new PouchDB('task-types');
-export default Promise.resolve(db);
+export default db.allDocs({ limit: 0 })
+	.then(({ total_rows }) => {
+		if (total_rows === 0) return createDefaultTasks();
+	})
+	.then(() => db);
 
 db.transform({
 	incoming(doc) {
