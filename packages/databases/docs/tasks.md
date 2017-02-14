@@ -1,12 +1,17 @@
 # Interface
 ```typescript
+type ID = string;
+type Date = number; // date as unix timestamp in milliseconds
+
 interface Task {
-	_id: string;
+	_id: ID;
 	_rev: string;
-	type: string; // ID of some type
-	location: string; // ID of a location
+	type: ID; // ID of some type
+	location: ID; // ID of a location
 	name?: string; // name of the task
-	start_time?: number; // Date as milliseconds
-	end_time?: number; // Date as milliseconds
+	start?: Date;
+	end?: Date;
+	allDay: boolean;
+	done: boolean;
 }
 ```
