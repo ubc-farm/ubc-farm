@@ -6,6 +6,7 @@ import replace from 'rollup-plugin-replace';
 export default {
 	sourceMap: true,
 	format: 'umd',
+	moduleName: 'databases',
 	plugins: [
 		nodeResolve({ browser: true, preferBuiltins: false }),
 		replace({
@@ -15,6 +16,7 @@ export default {
 		commonjs({
 			namedExports: {
 				shortid: ['generate'],
+				docuri: ['route'],
 			}
 		}),
 		json(),

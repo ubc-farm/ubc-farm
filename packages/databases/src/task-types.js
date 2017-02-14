@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 

@@ -1,6 +1,8 @@
 {
 	"name": "@ubc-farm/databases",
 	"version": "1.0.0",
+	"module": "src/index.js",
+	"main": "index.js",
 	"dependencies": {
 		"pouchdb": "^6.1.2",
 		"pouchdb-find": "^0.10.5",
@@ -9,5 +11,12 @@
 		"docuri": "^4.2.2",
 		"@turf/area": "^3.7.5",
 		"@turf/centroid": "^3.7.5"
+	},
+	"devDependencies": {
+		"rollup": "^0.41.4"
+	},
+	"scripts": {
+		"prepare": "rollup -c -i src/index.js -o index.js",
+		"prepublish": "npm run prepare"
 	}
 }
