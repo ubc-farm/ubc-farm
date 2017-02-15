@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { generate } from 'shortid';
-import { kebabCase, startCase } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
+import startCase from 'lodash/startCase';
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 

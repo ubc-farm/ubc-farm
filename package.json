@@ -24,7 +24,7 @@
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-watch": "^3.2.2",
-    "webpack": "^2.2.1"
+    "react-addons-shallow-compare": "^15.4.2"
   },
   "scripts": {
     "start": "http-server ./packages/frontend/_site"

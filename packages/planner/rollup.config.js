@@ -15,7 +15,10 @@ export default {
 			'process.browser': JSON.stringify(true),
 		}),
 		commonjs({
-			namedExports: {}
+			namedExports: {
+				shortid: ['generate'],
+				docuri: ['route'],
+			}
 		}),
 		json(),
 	],

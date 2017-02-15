@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign,no-use-before-define */
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 

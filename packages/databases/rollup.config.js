@@ -5,7 +5,6 @@ import replace from 'rollup-plugin-replace';
 
 export default {
 	sourceMap: true,
-	format: 'umd',
 	moduleName: 'databases',
 	plugins: [
 		nodeResolve({ browser: true, preferBuiltins: false }),
@@ -21,6 +20,13 @@ export default {
 		}),
 		json(),
 	],
-	external: ['react'],
-	globals: { react: 'React' },
+	external: [
+		'react', 'pouchdb', 'pouchdb-find', 'transform-pouch', 'moment', 'lodash',
+	],
+	globals: {
+		react: 'React',
+		moment: 'moment',
+		pouchdb: 'PouchDB',
+		lodash: '_',
+	},
 };
