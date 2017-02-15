@@ -7,6 +7,14 @@
   "commands": {
     "publish": {
       "ignore": "ubc-farm-*"
+    },
+    "bootstrap": {
+      "ignore": [
+        "@ubc-farm/page-*",
+        "*page-*",
+        "server",
+        "redux-map"
+      ]
     }
   }
 }

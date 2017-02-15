@@ -2,6 +2,10 @@
   "name": "@ubc-farm/monorepo",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "start": "http-server ./packages/frontend/_site",
+    "bootstrap": "lerna bootstrap --hoist"
+  },
   "devDependencies": {
     "@types/jest": "^18.1.0",
     "@ubc-farm/babel-preset": "^1.0.0",
@@ -25,9 +29,6 @@
     "rollup-plugin-replace": "^1.1.1",
     "rollup-watch": "^3.2.2",
     "react-addons-shallow-compare": "^15.4.2"
-  },
-  "scripts": {
-    "start": "http-server ./packages/frontend/_site"
   },
   "eslintConfig": {
     "extends": "@ubc-farm/eslint-config"
