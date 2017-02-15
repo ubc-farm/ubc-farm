@@ -22,6 +22,7 @@
 	},
   "scripts": {
     "build-index": "rollup -c -i entry/index.js -o browser/index.js",
-    "prepare": "npm run build-index"
+    "prepare": "npm run build-index",
+    "prepublish": "npm run prepare"
   }
 }

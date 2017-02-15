@@ -6,7 +6,7 @@ import BadRequestError from './utils/bad-request.js';
 export const db = new PouchDB('task-types');
 export default db.allDocs({ limit: 0 })
 	.then(({ total_rows }) => {
-		if (total_rows === 0) return createDefaultTasks();
+		if (total_rows === 0) return createDefaultTypes();
 	})
 	.then(() => db);
 
@@ -22,7 +22,7 @@ db.transform({
 	}
 });
 
-export function createDefaultTasks() {
+export function createDefaultTypes() {
 	return db.bulkDocs([
 		{ _id: 'seeding', color: '#33691e' },
 		{ _id: 'irrigation', color: '#01579b' },

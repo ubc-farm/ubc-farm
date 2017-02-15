@@ -11,6 +11,6 @@ export default function setupMap(locationDB) {
 			return defaultToFeature(doc);
 		},
 	});
-	createInfoWindow(map.data);
+	createInfoWindow(map.data, locationDB);
 	watchDblClick(map.data);
 }

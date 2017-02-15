@@ -1,12 +1,8 @@
-import tasks from '@ubc-farm/databases/src/tasks.js';
-import taskTypes from '@ubc-farm/databases/src/task-types.js';
-import locations from '@ubc-farm/databases/src/locations.js';
 import { observeStore } from '@ubc-farm/utils';
 import { setSelected, getAllSelected } from '../reducer/selected.js';
 import createTimeline, { handleAddItem } from './createTimeline.js';
 import addDragListeners from './addDragListeners.js';
 
-const handleAdd = handleAddItem.bind(tasks);
 async function handleTypeChange({ id }, type) {
 	const db = this;
 	const task = db.get(id);
@@ -18,8 +14,9 @@ async function handleTypeChange({ id }, type) {
 /**
  * @param {redux.Store} store
  */
-export default function setupPlannerTimeline(store) {
+export default function setupPlannerTimeline(store, { tasks, taskTypes, locations }) {
 	const timeline = createTimeline(store, { tasks, taskTypes, locations });
+	const handleAdd = handleAddItem.bind(tasks);
 
 	const unsub = observeStore(
 		store, getAllSelected,

@@ -1,4 +1,4 @@
-import createMap from '../googlemaps/createMap.js';
+import { createMap } from '@ubc-farm/map-utils';
 
 import createControls from './controls.jsx';
 import setMode from './setMode.js';

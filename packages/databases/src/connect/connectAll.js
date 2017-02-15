@@ -28,9 +28,8 @@ import invariant from 'invariant';
  * @returns {function} A higher order component.
  * React.Component => React.Component
  */
-export default function connectAll(
-	transformer = doc => doc,
-	{
+export default function connectAll(transformer = doc => doc, options = {}) {
+	const {
 		rowKey = 'rows',
 		loadingKey = 'loading',
 		changes = true,
@@ -38,7 +37,8 @@ export default function connectAll(
 		getDisplayName = name => `PouchConnect(${name})`,
 		allDocsOptions = { include_docs: true },
 		changesOptions = { include_docs: true, live: true },
-	} = {}) {
+	} = typeof transformer === 'function' ? options : transformer;
+
 	invariant(
     typeof rowKey === 'string',
     `rowKey must be a string. Instead received ${JSON.stringify(rowKey)}`,

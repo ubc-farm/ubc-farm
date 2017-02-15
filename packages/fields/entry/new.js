@@ -1,9 +1,9 @@
 import { parsed } from 'document-promises';
-import db from '@ubc-farm/databases/src/locations.js';
+import { locations } from '@ubc-farm/databases';
 import setupEditorMap from '../src/field-editor/index.js';
 import renderFieldEditorForm from '../src/field-form/index.jsx';
 
-parsed.then(() => {
+Promise.all([locations, parsed]).then(([db]) => {
 	let field = {};
 
 	function back() { window.location = '/fields'; }

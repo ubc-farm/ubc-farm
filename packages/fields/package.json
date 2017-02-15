@@ -19,6 +19,7 @@
 		"build-index": "rollup -c -i entry/index.js -o browser/index.js",
 		"build-edit": "rollup -c -i entry/edit.js -o browser/edit.js",
 		"build-new": "rollup -c -i entry/new.js -o browser/new.js",
-		"prepare": "npm run build-index && npm run build-edit && npm run build-new"
+		"prepare": "npm run build-index && npm run build-edit && npm run build-new",
+		"prepublish": "npm run prepare"
 	}
 }

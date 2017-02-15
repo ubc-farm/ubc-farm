@@ -1,10 +1,14 @@
 import { parsed } from 'document-promises';
-import db from '@ubc-farm/databases/src/locations.js';
+import { locations } from '@ubc-farm/databases';
 import openField from '../src/openField.js';
 import setupEditorMap from '../src/field-editor/index.js';
 import renderFieldEditorForm from '../src/field-form/index.jsx';
 
-Promise.all([openField(db), parsed]).then(([savedField]) => {
+Promise.all([
+	locations,
+	locations.then(openField),
+	parsed,
+]).then(([db, savedField]) => {
 	let field = savedField;
 
 	function back() { window.location = '/fields'; }
