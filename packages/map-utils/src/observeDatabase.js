@@ -1,4 +1,14 @@
-import { omit } from 'lodash';
+const { Data } = window.google.maps;
+
+function omit(obj, ...keys) {
+	const ignore = new Set(keys);
+	const result = {};
+
+	Object.keys(obj).forEach((key) => {
+		if (!ignore.has(key)) result[key] = obj[key];
+	});
+	return result;
+}
 
 export function defaultToFeature(doc) {
 	return {
@@ -26,6 +36,10 @@ export default async function observeDatabase(
 		changeOptions = { include_docs: true, live: true },
 	} = {},
 ) {
+	if (!(mapDataLayer instanceof Data)) {
+		throw new TypeError('mapDataLayer must be google.maps.Data');
+	}
+
 	const { rows } = await db.allDocs(allDocsOptions);
 
 	mapDataLayer.addGeoJson({

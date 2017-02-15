@@ -1,0 +1,14 @@
+{
+	"name": "@ubc-farm/map-utils",
+	"version": "1.0.0",
+	"description": "Functions for working with the Google Maps JavaScript API",
+	"module": "src/index.js",
+	"main": "index.js",
+	"devDependencies": {
+		"rollup": "^0.41.4"
+	},
+	"scripts": {
+		"prepare": "rollup -m -i src/index.js -o index.js",
+		"prepublish": "npm run prepare"
+	}
+}
