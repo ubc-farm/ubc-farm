@@ -5,7 +5,7 @@ import startCase from 'lodash/startCase';
 import PouchDB from './utils/load-pouch.js';
 import BadRequestError from './utils/bad-request.js';
 
-export const db = new PouchDB('directory');
+export const db = new PouchDB('people');
 export default Promise.all([
 	db.createIndex({ index: { fields: ['role'] } }),
 	db.createIndex({ index: { fields: ['name'] } }),
@@ -14,7 +14,7 @@ export default Promise.all([
 
 db.transform({
 	incoming(doc) {
-		if (!doc.name) throw new BadRequestError('Missing name property');
+		// if (!doc.name) throw new BadRequestError('Missing name property');
 
 		if (!doc._id) doc._id = generate();
 		doc.role = kebabCase(doc.role || 'none');

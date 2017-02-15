@@ -12,7 +12,7 @@ export default db.allDocs({ limit: 0 })
 
 db.transform({
 	incoming(doc) {
-		if (!doc.color) throw new BadRequestError('Missing color property');
+		// if (!doc.color) throw new BadRequestError('Missing color property');
 
 		return doc;
 	},

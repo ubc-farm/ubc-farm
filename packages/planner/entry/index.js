@@ -6,6 +6,8 @@ import store from '../src/reducer/index.js';
 import createTaskPanel from '../src/task-panel/index.jsx';
 import setupPlannerTimeline from '../src/timeline/index.js';
 
+Object.assign(window, { equipment, locations, tasks, taskTypes });
+
 Promise.all([
 	equipment,
 	locations,

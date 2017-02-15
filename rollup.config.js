@@ -2,7 +2,8 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import replace from 'rollup-plugin-replace';
+// import replace from 'rollup-plugin-replace';
+import nodeGlobals from 'rollup-plugin-node-globals';
 
 const globals = {
 	react: 'React',
@@ -17,18 +18,20 @@ export default {
 	format: 'iife',
 	plugins: [
 		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
-		nodeResolve({ browser: true, preferBuiltins: false }),
-		replace({
+		nodeResolve({ browser: true, preferBuiltins: false, jsnext: true }),
+		/* replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.browser': JSON.stringify(true),
-		}),
+		}), */
 		commonjs({
 			namedExports: {
 				shortid: ['generate'],
 				docuri: ['route'],
+				events: ['EventEmitter'],
 			},
 		}),
 		json(),
+		nodeGlobals(),
 	],
 	globals,
 	external: Object.keys(globals),
