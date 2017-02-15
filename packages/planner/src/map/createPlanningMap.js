@@ -1,5 +1,4 @@
-import createMap from '@ubc-farm/fields/src/googlemaps/createMap.js';
-import observeDatabase from '@ubc-farm/fields/src/googlemaps/observeDatabase.js';
+import { createMap, observeDatabase } from '@ubc-farm/map-utils';
 
 function diffLists(_ids, _nextIds) {
 	const ids = new Set(_ids);

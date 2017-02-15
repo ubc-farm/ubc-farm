@@ -5,7 +5,8 @@
 		"document-promises": "^3.0.0",
 		"react-virtualized": "^8.11.4",
 		"lodash": "^4.17.4",
-		"@ubc-farm/databases": "^1.0.0"
+		"@ubc-farm/databases": "^1.0.0",
+		"@ubc-farm/map-utils": "^1.0.0"
 	},
 	"peerDependencies": {
 		"react": "^15.4.2",

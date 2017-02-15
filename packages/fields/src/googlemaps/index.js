@@ -1,5 +1,4 @@
-import createMap from './createMap.js';
-import observeDatabase, { defaultToFeature } from './observeDatabase.js';
+import { createMap, observeDatabase, defaultToFeature } from '@ubc-farm/map-utils';
 import createInfoWindow from './infoWindow.js';
 import watchDblClick from './watchDblClick.js';
 
