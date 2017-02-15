@@ -1,6 +1,6 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import VirtualizedSelect from 'react-virtualized-select';
-import { entries } from 'lodash';
+import entries from 'lodash/entries';
 
 const EquipmentSelect = ({ disabled, bindInput, options }) => (
 	<label className="editor-input-wrapper">

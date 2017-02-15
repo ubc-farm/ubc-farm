@@ -1,5 +1,5 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import connectAll from '@ubc-farm/databases/src/connect/connectAll.js';
+import { connectAll } from '@ubc-farm/databases';
 import TaskNameInput from './TaskNameInput.jsx';
 import TaskTimeInput from './TaskTimeInput.jsx';
 import LocationSelect from './LocationSelect.jsx';

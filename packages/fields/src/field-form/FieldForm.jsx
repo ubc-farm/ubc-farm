@@ -1,5 +1,5 @@
 import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
-import { getLocationString, getArea } from '@ubc-farm/databases/src/locations.js';
+import { getLocationString, getArea } from '@ubc-farm/databases';
 
 class FieldForm extends Component {
 	bindInput(name) {

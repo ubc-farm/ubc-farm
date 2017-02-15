@@ -1,6 +1,6 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Table, AutoSizer, Column } from 'react-virtualized';
-import { getLocationString, getAcres } from '@ubc-farm/databases/src/locations.js';
+import { getLocationString, getAcres } from '@ubc-farm/databases';
 
 const FieldList = ({ rows }) => (
 	<AutoSizer>

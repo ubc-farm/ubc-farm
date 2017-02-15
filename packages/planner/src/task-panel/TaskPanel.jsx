@@ -1,5 +1,5 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import { entries } from 'lodash';
+import entries from 'lodash/entries';
 import TaskTile from './TaskTile.jsx';
 
 /**

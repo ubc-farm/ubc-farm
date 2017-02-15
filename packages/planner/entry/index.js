@@ -13,7 +13,7 @@ Promise.all([
 	taskTypes,
 	parsed,
 ]).then(([equipmentDB, locationsDB, tasksDB, taskTypesDB]) => {
-	connectEditor(store, equipmentDB, locationsDB);
+	connectEditor(store, equipmentDB, locationsDB, tasksDB);
 	attachMap(store, locationsDB);
 	createTaskPanel(taskTypesDB);
 	setupPlannerTimeline(store, {
