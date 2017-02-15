@@ -1,5 +1,10 @@
-export { default as connect } from './connect/index.js';
-export { default as people } from './people.js';
+export { default as connectAll } from './connect/connectAll.js';
+
+export { default as equipment } from './equipment.js';
+export { default as invoices } from './invoices.js';
 export { default as locations } from './locations.js';
+export { default as longTerm } from './long-term.js';
+export { default as people } from './people.js';
+export { default as plants } from './plants.js';
 export { default as taskTypes } from './task-types.js';
 export { default as tasks } from './tasks.js';

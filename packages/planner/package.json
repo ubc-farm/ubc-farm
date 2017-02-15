@@ -7,7 +7,7 @@
     "vis-timeline": "ubc-farm/ports#vis-timeline",
     "@ubc-farm/utils": "^4.2.0",
     "lodash": "^4.17.4",
-    "react-reformed": "^1.0.1",
+    "document-promises": "^3.1.2",
     "react-virtualized-select": "^2.3.0",
     "shortid": "^2.2.6",
     "@ubc-farm/databases": "^1.0.0"
@@ -20,6 +20,7 @@
 		"rollup": "^0.41.4"
 	},
   "scripts": {
-    "build-index": "rollup -c -i entry/index.js -o browser/index.js "
+    "build-index": "rollup -c -i entry/index.js -o browser/index.js",
+    "prepare": "npm run build-index"
   }
 }

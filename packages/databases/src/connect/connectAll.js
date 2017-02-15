@@ -15,7 +15,7 @@ import invariant from 'invariant';
  * the component.
  *
  * @param {function} [transformer] a function that transforms a document
- * into a value stored in a prop for the child component
+ * into a value stored in a prop for the child component. (Object, string) => T
  * @param {Object} [options]
  * @param {string} [options.rowKey=rows]
  * @param {string} [options.loadingKey=loading]

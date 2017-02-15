@@ -8,7 +8,7 @@ const defaultState = Object.freeze({
 	name: '',
 	start: '',
 	end: '',
-	location: [],
+	location: null,
 	equipment: [],
 });
 

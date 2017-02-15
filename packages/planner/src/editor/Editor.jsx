@@ -1,17 +1,14 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import connectAll from '@ubc-farm/databases/src/connect/connectAll.js';
 import TaskNameInput from './TaskNameInput.jsx';
 import TaskTimeInput from './TaskTimeInput.jsx';
 import LocationSelect from './LocationSelect.jsx';
 import EquipmentSelect from './EquipmentSelect.jsx';
-import DBWrapper from './DBWrapper.jsx';
 
 export default function createEditor(equipmentDB, locationDB) {
-	const WrappedLocationSelect = DBWrapper(
-		'options', 'doc.name', locationDB,
-	)(LocationSelect);
-	const WrappedEquipmentSelect = DBWrapper(
-		'options', 'doc.name', equipmentDB,
-	)(EquipmentSelect);
+	const connect = connectAll(doc => doc.name, { rowKey: 'options' });
+	const WrappedLocationSelect = connect(LocationSelect);
+	const WrappedEquipmentSelect = connect(EquipmentSelect);
 
 	const Editor = ({ disabled, model, onSubmit, setProperty }) => {
 		const bindInput = name => ({
@@ -24,8 +21,8 @@ export default function createEditor(equipmentDB, locationDB) {
 			<form onSubmit={(e) => { e.preventDefault(); onSubmit(model); }}>
 				<TaskNameInput {...{ disabled, bindInput }} />
 				<TaskTimeInput {...{ disabled, bindInput }} />
-				<WrappedLocationSelect {...{ disabled, bindInput }} />
-				<WrappedEquipmentSelect {...{ disabled, bindInput }} />
+				<WrappedLocationSelect db={locationDB} {...{ disabled, bindInput }} />
+				<WrappedEquipmentSelect db={equipmentDB} {...{ disabled, bindInput }} />
 				<button type="submit">Submit</button>
 			</form>
 		);
