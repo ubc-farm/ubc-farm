@@ -6,7 +6,8 @@ import { getModel, setEditorProp } from '../reducer/editor.js';
 import createEditor from './Editor.jsx';
 
 export default function connectEditor(store, equipmentDB, locationsDB, tasksDB) {
-	const Editor = connect(
+	let Editor = createEditor(equipmentDB, locationsDB);
+	Editor = connect(
 		state => ({
 			disabled: isAnySelected(state),
 			model: getModel(state),
@@ -15,7 +16,7 @@ export default function connectEditor(store, equipmentDB, locationsDB, tasksDB) 
 			onSubmit: model => tasksDB.put(model),
 			setProperty: (key, value) => dispatch(setEditorProp(key, value)),
 		}),
-	)(createEditor(equipmentDB, locationsDB));
+	)(Editor);
 
 	render(<Editor store={store} />, document.getElementById('reactRoot'));
 }

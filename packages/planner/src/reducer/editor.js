@@ -8,7 +8,7 @@ const defaultState = Object.freeze({
 	name: '',
 	start: '',
 	end: '',
-	location: null,
+	location: '',
 	equipment: [],
 });
 
@@ -20,7 +20,9 @@ export default function editorReducer(state = defaultState, action) {
 			return action.payload;
 		case SET_PROPERTY: {
 			const { key, value } = action.payload;
-			return Object.assign({}, state, { [key]: value });
+			const newState = Object.assign({}, state);
+			newState[key] = value;
+			return newState;
 		}
 		default:
 			return state;
@@ -30,7 +32,7 @@ export default function editorReducer(state = defaultState, action) {
 export const clearEditor = () => ({ type: CLEAR });
 export const setEditorModel = model => ({ type: SET_MODEL, payload: model });
 export const setEditorProp = (key, value) => ({
-	type: SET_MODEL, payload: { key, value }
+	type: SET_PROPERTY, payload: { key, value }
 });
 
 export const getModel = state => state.editor;

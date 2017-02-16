@@ -1,12 +1,12 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import VirtualizedSelect from 'react-virtualized-select';
+import Select from 'react-select';
 import entries from 'lodash/entries';
 
 const EquipmentSelect = ({ disabled, bindInput, options }) => (
 	<label className="editor-input-wrapper">
 		<span className="editor-label">Equipment</span>
-		<VirtualizedSelect
-			async multi
+		<Select
+			multi
 			className="editor-input" disabled={disabled}
 			options={entries(options).map(([value, label]) => ({ value, label }))}
 			{...bindInput('equipment')}
