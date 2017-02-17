@@ -1,14 +1,12 @@
 {
 	"name": "@ubc-farm/fields",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"dependencies": {
-		"pouchdb": "^6.1.1",
-		"pouchdb-find": "^0.10.4",
 		"document-promises": "^3.0.0",
 		"react-virtualized": "^8.11.4",
-		"shortid": "^2.2.6",
-		"@turf/area": "^3.7.5",
-		"@turf/centroid": "^3.7.5"
+		"lodash": "^4.17.4",
+		"@ubc-farm/databases": "^1.0.0",
+		"@ubc-farm/map-utils": "^1.0.0"
 	},
 	"peerDependencies": {
 		"react": "^15.4.2",
@@ -21,6 +19,7 @@
 		"build-index": "rollup -c -i entry/index.js -o browser/index.js",
 		"build-edit": "rollup -c -i entry/edit.js -o browser/edit.js",
 		"build-new": "rollup -c -i entry/new.js -o browser/new.js",
-		"prepare": "npm run build-index && npm run build-edit && npm run build-new"
+		"prepare": "npm run build-index && npm run build-edit && npm run build-new",
+		"prepublish": "npm run prepare"
 	}
 }

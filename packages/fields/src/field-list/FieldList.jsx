@@ -1,6 +1,6 @@
 import { createElement, PropTypes } from 'react'; /** @jsx createElement */
 import { Table, AutoSizer, Column } from 'react-virtualized';
-import { getLocationString, getAcres } from '../fieldData.js';
+import { getLocationString, getAcres } from '@ubc-farm/databases';
 
 const FieldList = ({ rows }) => (
 	<AutoSizer>
@@ -34,6 +34,7 @@ const FieldList = ({ rows }) => (
 
 FieldList.propTypes = {
 	rows: PropTypes.arrayOf(PropTypes.shape({
+		_id: PropTypes.string,
 		name: PropTypes.string,
 		geometry: PropTypes.shape({
 			type: PropTypes.oneOf(['Feature']),

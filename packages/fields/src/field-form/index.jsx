@@ -4,7 +4,6 @@ import FieldForm from './FieldForm.jsx';
 import FieldEditorToolbar from './FieldEditorToolbar.jsx';
 
 export default function createFieldEditorForm(field, { setProperty, onSubmit, onCancel }) {
-	console.log(field);
 	render(
 		<FieldForm model={field} {...{ setProperty, onSubmit }} />,
 		document.getElementById('reactRoot'),

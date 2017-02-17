@@ -1,0 +1,34 @@
+---
+layout: default
+title: Planner
+---
+<link href='vis.css' rel='stylesheet'>
+<link href='tasks.css' rel='stylesheet'>
+<link href='equipment.css' rel='stylesheet'>
+<link href='main.css' rel='stylesheet'>
+<style>
+	.vis-item {
+		background: var(--brand-primary);
+		color: white;
+	}
+	.vis-item.vis-selected {
+		background: var(--brand-primary);
+		box-shadow: 0 0 4px #4195fc;
+	}
+</style>
+
+
+<aside class="planner-sidebar">
+	<div id='tasklist'></div>
+	<div id='reactRoot'></div>
+</aside>
+<section class="main-area">
+	<div id='timeline'></div>
+	<div id='googleMap'></div>
+</section>
+
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARDOjzy7qB7QdqbO0i5Gt5q_ogVcTSdWU"></script>
+
+<script async src="/packages/planner/browser/index.js"></script>

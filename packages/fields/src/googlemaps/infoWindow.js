@@ -1,10 +1,7 @@
-import db from '../db.js';
-import { getLocation } from '../fieldData.js';
-
 const { InfoWindow, Data } = window.google.maps;
 
 // on polygon click, open info window at field centroid
-export default function createInfoWindow(dataLayer) {
+export default function createInfoWindow(dataLayer, db) {
 	const infoWindow = new InfoWindow();
 
 	if (!(dataLayer instanceof Data)) {
@@ -13,8 +10,10 @@ export default function createInfoWindow(dataLayer) {
 
 	dataLayer.addListener('click', ({ feature }) => {
 		feature.toGeoJson((json) => {
-			const [lng, lat] = getLocation(json);
-			infoWindow.setPostion({ lat, lng });
+			if (Array.isArray(json.location)) {
+				const [lng, lat] = json.location;
+				infoWindow.setPostion({ lat, lng });
+			}
 			infoWindow.open();
 		});
 

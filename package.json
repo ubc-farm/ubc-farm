@@ -2,6 +2,10 @@
   "name": "@ubc-farm/monorepo",
   "private": true,
   "license": "MIT",
+  "scripts": {
+    "serve": "http-server ./packages/frontend/_site",
+    "bootstrap": "lerna bootstrap --hoist"
+  },
   "devDependencies": {
     "@types/jest": "^18.1.0",
     "@ubc-farm/babel-preset": "^1.0.0",
@@ -13,19 +17,29 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
+    "events": "^1.1.1",
     "jest": "^18.1.0",
     "lerna": "2.0.0-beta.34",
     "react": "^15.4.2",
+    "react-addons-shallow-compare": "^15.4.2",
     "react-dom": "^15.4.2",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-json": "^2.1.0",
+    "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-watch": "^3.2.2",
-    "typescript": "^2.1.5",
-    "webpack": "^2.2.1"
+    "typescript": "^2.1.5"
+  },
+  "eslintConfig": {
+    "extends": "@ubc-farm/eslint-config"
+  },
+  "babel": {
+    "presets": [
+      "@ubc-farm/babel-preset"
+    ]
   }
 }

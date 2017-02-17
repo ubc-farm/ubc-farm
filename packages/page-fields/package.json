@@ -31,7 +31,7 @@
     "ubc-farm-utils": "ubc-farm/utils"
   },
   "scripts": {
-    "prepublish": "rollup -c"
+    "old:prepublish": "rollup -c"
   },
   "files": [
     "dist",
