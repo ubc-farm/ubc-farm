@@ -23,4 +23,4 @@ Promise.all([
 		taskTypes: taskTypesDB,
 		locations: locationsDB
 	}),
-]));
+])).catch(err => console.error(err));
