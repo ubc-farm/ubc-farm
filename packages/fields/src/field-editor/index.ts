@@ -1,14 +1,17 @@
 import { createMap } from '@ubc-farm/map-utils';
 
-import createControls from './controls.jsx';
+import createControls from './controls.tsx';
 import setMode from './setMode.js';
-import styler from './styler.js';
+import styler from './styler.ts';
 
-export default function setupEditorMap(setProperty, defaultMode) {
-	const map = createMap();
+export default function setupEditorMap(
+	setProperty: (key: string, value: any) => void,
+	defaultMode: symbol,
+) {
+	const map: google.maps.Map = createMap();
 	map.data.setStyle(styler);
 
-	function handleChange(newField) {
+	function handleChange(newField: google.maps.Data.Feature) {
 		if (newField === null) {
 			setProperty('geometry', null);
 			return;
@@ -20,7 +23,7 @@ export default function setupEditorMap(setProperty, defaultMode) {
 	const renderControls = createControls(map);
 	setMode(defaultMode, { data: map.data, renderControls, handleChange });
 
-	return function rerenderField({ geometry, _id }) {
+	return function rerenderField({ geometry, _id }: { geometry: GeoJSON.DirectGeometryObject, _id: string }) {
 		map.data.addGeoJson({
 			name: 'Feature',
 			geometry,

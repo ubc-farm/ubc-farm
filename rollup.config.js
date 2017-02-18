@@ -4,6 +4,8 @@ import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 // import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
+import rollupTs from 'rollup-plugin-typescript';
+import typescript from 'typescript'
 
 const globals = {
 	react: 'React',
@@ -17,7 +19,6 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 		nodeResolve({ browser: true, preferBuiltins: false, jsnext: true }),
 		/* replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -32,6 +33,13 @@ export default {
 		}),
 		json(),
 		nodeGlobals(),
+		rollupTs({
+			tsconfig: false,
+			typescript,
+			allowJs: true,
+			strictNullChecks: true,
+		}),
+		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 	],
 	globals,
 	external: Object.keys(globals),

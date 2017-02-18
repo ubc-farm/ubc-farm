@@ -14,7 +14,7 @@ const deleted = Object.assign({}, base, {
 	fillColor: 'black',
 });
 
-export default function styler(feature) {
+export default function styler(feature: google.maps.Data.Feature) {
 	if (feature.getProperty('editable')) {
 		return editable;
 	} else if (feature.getProperty('deleted')) {
