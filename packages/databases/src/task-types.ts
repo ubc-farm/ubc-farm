@@ -1,9 +1,15 @@
 /* eslint-disable no-param-reassign,no-use-before-define */
 import startCase from 'lodash/startCase';
-import PouchDB from './utils/load-pouch.js';
-import BadRequestError from './utils/bad-request.js';
+import PouchDB from './utils/load-pouch';
 
-export const db = new PouchDB('task-types');
+export interface TaskType {
+	_id: string; // Type name
+	_rev: string;
+	color: string;
+	name?: string;
+}
+
+export const db = new PouchDB<TaskType>('task-types');
 export default db.allDocs({ limit: 0 })
 	.then(({ total_rows }) => {
 		if (total_rows === 0) return createDefaultTypes();
@@ -11,11 +17,6 @@ export default db.allDocs({ limit: 0 })
 	.then(() => db);
 
 db.transform({
-	incoming(doc) {
-		// if (!doc.color) throw new BadRequestError('Missing color property');
-
-		return doc;
-	},
 	outgoing(doc) {
 		doc.name = startCase(doc._id);
 		return doc;
@@ -23,7 +24,7 @@ db.transform({
 });
 
 export function createDefaultTypes() {
-	return db.bulkDocs([
+	return db.bulkDocs(<TaskType[]> [
 		{ _id: 'seeding', color: '#33691e' },
 		{ _id: 'irrigation', color: '#01579b' },
 		{ _id: 'pest-control', color: '#b71c1c' },

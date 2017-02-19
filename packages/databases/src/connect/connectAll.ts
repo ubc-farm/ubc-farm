@@ -2,6 +2,16 @@ import PouchDB from 'pouchdb';
 import { Component, PropTypes, createElement } from 'react';
 import invariant from 'invariant';
 
+interface ConnectAllOptions {
+	rowKey?: string;
+	loadingKey?: string;
+	changes?: boolean;
+	useMap?: boolean;
+	getDisplayName?: (name: string) => string;
+	allDocsOptions?: PouchDB.Core.AllDocsWithKeysOptions;
+	changesOptions?: PouchDB.Core.AllDocsWithKeysOptions;
+}
+
 /**
  * Connects a React component to a PouchDB database. Each row from the database
  * is set to the component under the 'rows' prop, or whatever custom rowKey
@@ -28,7 +38,10 @@ import invariant from 'invariant';
  * @returns {function} A higher order component.
  * React.Component => React.Component
  */
-export default function connectAll(transformer = doc => doc, options = {}) {
+export default function connectAll(
+	transformer = (doc: Object) => doc,
+	options: ConnectAllOptions = {}
+) {
 	const {
 		rowKey = 'rows',
 		loadingKey = 'loading',
@@ -61,7 +74,11 @@ export default function connectAll(transformer = doc => doc, options = {}) {
 			db: PropTypes.instanceOf(PouchDB).isRequired,
 		};
 
-		class ConnectAll extends Component {
+		class ConnectAll extends Component<any, any> {
+			db: PouchDB.Static;
+			changes: PouchDB.Core.Changes<Object> | null;
+			docError: Error | null;
+
 			constructor(props) {
 				super(props);
 
