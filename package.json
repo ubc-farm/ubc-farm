@@ -13,6 +13,7 @@
     "@ubc-farm/babel-preset": "^1.0.0",
     "@ubc-farm/eslint-config": "^5.2.1",
     "cross-env": "^3.1.4",
+    "denodeify": "^1.2.1",
     "eslint": "^3.14.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
