@@ -1,8 +1,9 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
 import Select from 'react-select';
 import entries from 'lodash/entries';
+import { SelectProps } from './IProps';
 
-const EquipmentSelect = ({ disabled, bindInput, options }) => (
+const EquipmentSelect: SFC<SelectProps> = ({ disabled, bindInput, options }) => (
 	<label className="editor-input-wrapper">
 		<span className="editor-label">Equipment</span>
 		<Select

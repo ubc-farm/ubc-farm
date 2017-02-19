@@ -1,6 +1,7 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
+import { InputProps } from './IProps';
 
-const TaskTimeInput = ({ bindInput, disabled }) => (
+const TaskTimeInput: SFC<InputProps> = ({ bindInput, disabled }) => (
 	<div className="editor-input-wrapper">
 		<span className="editor-label">Time</span>
 		<input
@@ -23,7 +24,6 @@ TaskTimeInput.propTypes = {
 };
 
 TaskTimeInput.defaultProps = {
-	value: '',
 	disabled: false,
 };
 

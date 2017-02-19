@@ -1,7 +1,8 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
 import entries from 'lodash/entries';
+import { SelectProps } from './IProps';
 
-const LocationSelect = ({ bindInput, disabled, options }) => (
+const LocationSelect: SFC<SelectProps> = ({ bindInput, disabled, options }) => (
 	<select disabled={disabled} {...bindInput('location')}>
 		<option value="" disabled />
 		{entries(options).map(([_id, name]) => (
@@ -18,7 +19,7 @@ LocationSelect.propTypes = {
 
 LocationSelect.defaultProps = {
 	disabled: false,
-	options: [],
+	options: {},
 };
 
 export default LocationSelect;

@@ -1,16 +1,24 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
-import { connectAll } from '@ubc-farm/databases';
-import TaskNameInput from './TaskNameInput.jsx';
-import TaskTimeInput from './TaskTimeInput.jsx';
-import LocationSelect from './LocationSelect.jsx';
-import EquipmentSelect from './EquipmentSelect.jsx';
+import { createElement, PropTypes, StatelessComponent } from 'react';
+/** @jsx createElement */
+import { connectAll, Task } from '@ubc-farm/databases';
+import TaskNameInput from './TaskNameInput';
+import TaskTimeInput from './TaskTimeInput';
+import LocationSelect from './LocationSelect';
+import EquipmentSelect from './EquipmentSelect';
+
+interface EditorProps {
+	disabled?: boolean;
+	model: Task;
+	onSubmit: (model: Task) => void;
+	setProperty: (key: string, value: any) => void;
+}
 
 export default function createEditor(equipmentDB, locationDB) {
 	const connect = connectAll(doc => doc.name, { rowKey: 'options' });
 	const WrappedLocationSelect = connect(LocationSelect);
 	const WrappedEquipmentSelect = connect(EquipmentSelect);
 
-	const Editor = ({ disabled, model, onSubmit, setProperty }) => {
+	const Editor: StatelessComponent<EditorProps> = ({ disabled, model, onSubmit, setProperty }) => {
 		const bindInput = name => ({
 			name,
 			value: model[name],

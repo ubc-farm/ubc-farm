@@ -1,5 +1,5 @@
 import PouchDB from 'pouchdb';
-import { Component, PropTypes, createElement } from 'react';
+import { Component, PropTypes, createElement, SFC } from 'react';
 import invariant from 'invariant';
 
 interface ConnectAllOptions {
@@ -38,8 +38,8 @@ interface ConnectAllOptions {
  * @returns {function} A higher order component.
  * React.Component => React.Component
  */
-export default function connectAll(
-	transformer = (doc: Object) => doc,
+export default function connectAll<T>(
+	transformer = (doc: Object, id: string) => <T> doc,
 	options: ConnectAllOptions = {}
 ) {
 	const {
@@ -59,7 +59,7 @@ export default function connectAll(
 
 	const changesOpts = Object.assign({}, changesOptions, { since: 'now' });
 
-	return function wrapWithConnect(WrappedComponent) {
+	return function wrapWithConnect(WrappedComponent: SFC<any>) {
 		invariant(
       typeof WrappedComponent === 'function',
       'You must pass a component to the function returned by ' +
@@ -75,7 +75,7 @@ export default function connectAll(
 		};
 
 		class ConnectAll extends Component<any, any> {
-			db: PouchDB.Static;
+			db: PouchDB.Database<T>;
 			changes: PouchDB.Core.Changes<Object> | null;
 			docError: Error | null;
 
@@ -115,10 +115,10 @@ export default function connectAll(
 
 			initDatabaseSubscription() {
 				const ready = this.db.allDocs(allDocsOptions).then(res =>
-					res.rows.map(row => [row.id, transformer(row.doc, row.id)])
+					res.rows.map(row => <[string, T]> [row.id, transformer(row.doc, row.id)])
 				)
 				.then((map) => {
-					let rows;
+					let rows: { [key: string]: T } | Map<string, T>;
 					if (useMap) rows = new Map(map);
 					else {
 						rows = {};
@@ -134,7 +134,7 @@ export default function connectAll(
 					this.changes = this.db.changes(changesOpts).on('change', res =>
 						ready.then(() => {
 							if (res.deleted) this.removeRow(res.id);
-							else this.updateRow(res.id, transformer(res.doc));
+							else this.updateRow(res.id, transformer(res.doc, res.id));
 						})
 					);
 				}

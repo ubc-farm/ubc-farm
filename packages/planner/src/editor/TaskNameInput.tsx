@@ -1,6 +1,7 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
+import { InputProps } from './IProps';
 
-const TaskNameInput = ({ bindInput, disabled }) => (
+const TaskNameInput: SFC<InputProps> = ({ bindInput, disabled }) => (
 	<label className="editor-input-wrapper">
 		<span className="editor-label">Name</span>
 		<input
@@ -17,7 +18,6 @@ TaskNameInput.propTypes = {
 };
 
 TaskNameInput.defaultProps = {
-	value: '',
 	disabled: false,
 };
 
