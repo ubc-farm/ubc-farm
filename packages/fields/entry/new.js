@@ -1,6 +1,6 @@
 import { parsed } from 'document-promises';
 import { locations } from '@ubc-farm/databases';
-import setupEditorMap from '../src/field-editor/index.js';
+import setupEditorMap from '../src/field-editor/index.ts';
 import renderFieldEditorForm from '../src/field-form/index.jsx';
 
 Promise.all([locations, parsed]).then(([db]) => {

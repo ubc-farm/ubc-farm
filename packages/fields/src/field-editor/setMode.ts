@@ -1,6 +1,5 @@
 /* eslint-disable no-use-before-define */
-
-import createControls from './controls.jsx';
+import { MapControlsProps } from './controls';
 
 /*
  * Uses state machine to change the editing mode of the map.
@@ -11,8 +10,14 @@ export const DRAWING = Symbol('EditorMode.DRAWING');
 export const EDITING = Symbol('EditorMode.EDITING');
 export const DELETING = Symbol('EditorMode.DELETING');
 
+interface SetModeProps {
+	renderControls: (props: MapControlsProps) => void;
+	data: google.maps.Data;
+	handleChange: (a: google.maps.Data.Feature | null) => void;
+};
 
-function useViewingMode(props) {
+
+function useViewingMode(props: SetModeProps) {
 	const { data } = props;
 
 	data.setDrawingMode(null);
@@ -24,7 +29,7 @@ function useViewingMode(props) {
 	};
 }
 
-function useDrawingMode(props) {
+function useDrawingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
 	data.setDrawingMode('Polygon');
@@ -38,7 +43,7 @@ function useDrawingMode(props) {
 	};
 }
 
-function useEditingMode(props) {
+function useEditingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
 	data.setDrawingMode(null);
@@ -53,7 +58,7 @@ function useEditingMode(props) {
 	};
 }
 
-function useDeletingMode(props) {
+function useDeletingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
 	data.setDrawingMode(null);
@@ -73,7 +78,7 @@ function useDeletingMode(props) {
 }
 
 let callback = () => {};
-export default function setMode(mode = VIEWING, props) {
+export default function setMode(mode = VIEWING, props: SetModeProps) {
 	const { renderControls } = props;
 
 	callback();

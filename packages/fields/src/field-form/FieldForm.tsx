@@ -1,7 +1,14 @@
 import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
 import { getLocationString, getArea } from '@ubc-farm/databases';
+import { Field } from '../IField';
 
-class FieldForm extends Component {
+interface FieldFormProps {
+	model: Field;
+	setProperty: (key: string, value: any) => void;
+	onSubmit: () => void;
+}
+
+class FieldForm extends Component<FieldFormProps, void> {
 	bindInput(name) {
 		switch (name) {
 			case 'location':

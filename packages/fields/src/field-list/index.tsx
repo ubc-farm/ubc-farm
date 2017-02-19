@@ -1,8 +1,9 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
 import { connectAll } from '@ubc-farm/databases';
+import { PouchDB } from 'pouchdb';
 import pick from 'lodash/pick';
-import FieldList from './FieldList.jsx';
+import FieldList from './FieldList';
 
 const connectToFields = connectAll(
 	(doc) => {
@@ -22,7 +23,7 @@ const connectToFields = connectAll(
 const mapValues = ReactComponent =>
 	({ rows }) => <ReactComponent rows={[...rows.values()]} />;
 
-export default function createFieldList(locationDB) {
+export default function createFieldList(locationDB: PouchDB) {
 	const ConnectedFieldList = connectToFields(mapValues(FieldList));
 
 	render(<ConnectedFieldList db={locationDB} />, document.getElementById('reactRoot'));

@@ -7,11 +7,11 @@
     "bootstrap": "lerna bootstrap --hoist"
   },
   "devDependencies": {
+    "@types/geojson": "^1.0.0",
+    "@types/googlemaps": "^3.26.1",
     "@types/jest": "^18.1.0",
     "@ubc-farm/babel-preset": "^1.0.0",
     "@ubc-farm/eslint-config": "^5.2.1",
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
     "cross-env": "^3.1.4",
     "eslint": "^3.14.1",
     "eslint-plugin-import": "^2.2.0",

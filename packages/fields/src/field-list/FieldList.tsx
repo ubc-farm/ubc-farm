@@ -1,8 +1,8 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, StatelessComponent } from 'react'; /** @jsx createElement */
 import { Table, AutoSizer, Column } from 'react-virtualized';
 import { getLocationString, getAcres } from '@ubc-farm/databases';
 
-const FieldList = ({ rows }) => (
+const FieldList: StatelessComponent = ({ rows }) => (
 	<AutoSizer>
 		{({ height, width }) => (
 			<Table

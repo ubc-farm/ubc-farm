@@ -1,6 +1,15 @@
-import { createElement, PropTypes } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, StatelessComponent, MouseEventHandler } from 'react';
+/** @jsx createElement */
 
-const FieldEditorToolbar = ({ onSubmit, onCancel, canSubmit }) => (
+interface FieldEditorToolbarProps {
+	onSubmit: () => void;
+	onCancel: MouseEventHandler;
+	canSubmit?: boolean;
+}
+
+const FieldEditorToolbar: StatelessComponent = (
+	{ onSubmit, onCancel, canSubmit }: FieldEditorToolbarProps
+) => (
 	<div>
 		<button onClick={onCancel}>Cancel</button>
 		<button onClick={onSubmit} disabled={!canSubmit}>Save</button>

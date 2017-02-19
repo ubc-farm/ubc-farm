@@ -1,4 +1,5 @@
-const { InfoWindow, Data } = window.google.maps;
+import { getLocation } from '@ubc-farm/databases';
+const { InfoWindow, Data } = google.maps;
 
 // on polygon click, open info window at field centroid
 export default function createInfoWindow(dataLayer, db) {
@@ -9,10 +10,15 @@ export default function createInfoWindow(dataLayer, db) {
 	}
 
 	dataLayer.addListener('click', ({ feature }) => {
-		feature.toGeoJson((json) => {
-			if (Array.isArray(json.location)) {
-				const [lng, lat] = json.location;
-				infoWindow.setPostion({ lat, lng });
+		feature.toGeoJson((json: GeoJSON.Feature<GeoJSON.Polygon>) => {
+			const location: string | [number, number] | null = getLocation({
+				location: feature.properties.location,
+				geometry: feature.geometry
+			});
+
+			if (Array.isArray(location)) {
+				const [lng, lat] = location;
+				infoWindow.setPosition({ lat, lng });
 			}
 			infoWindow.open();
 		});

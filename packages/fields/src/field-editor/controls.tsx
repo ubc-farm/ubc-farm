@@ -2,7 +2,7 @@ import { createElement, PropTypes, MouseEventHandler, StatelessComponent } from 
 import { render } from 'react-dom';
 import { VIEWING, DRAWING, EDITING, DELETING } from './setMode.js';
 
-const { ControlPosition } = window.google.maps;
+const { ControlPosition } = google.maps;
 
 type ButtonProps = {
 	onClick: MouseEventHandler;
@@ -30,7 +30,7 @@ const DeleteButton = ({ onClick, pressed }: ButtonProps) => (
 	/>
 );
 
-type MapControlsProps = {
+export interface MapControlsProps {
 	mode: symbol;
 	setMode: (newMode: symbol) => void;
 	hasField?: boolean;

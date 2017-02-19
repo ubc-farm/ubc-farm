@@ -1,7 +1,7 @@
 import { parsed } from 'document-promises';
 import { locations } from '@ubc-farm/databases';
-import openField from '../src/openField.js';
-import setupEditorMap from '../src/field-editor/index.js';
+import openField from '../src/openField.ts';
+import setupEditorMap from '../src/field-editor/index.ts';
 import renderFieldEditorForm from '../src/field-form/index.jsx';
 
 Promise.all([

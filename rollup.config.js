@@ -38,6 +38,7 @@ export default {
 			typescript,
 			allowJs: true,
 			strictNullChecks: true,
+			jsx: 'React',
 		}),
 		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 	],
