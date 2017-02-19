@@ -1,12 +1,18 @@
 import { parsed } from 'document-promises';
 import { locations } from '@ubc-farm/databases';
-import setupEditorMap from '../src/field-editor/index.ts';
-import renderFieldEditorForm from '../src/field-form/index.jsx';
+import { Field } from '../src/IField';
+import openField from '../src/openField';
+import setupEditorMap from '../src/field-editor/index';
+import renderFieldEditorForm from '../src/field-form/index';
 
-Promise.all([locations, parsed]).then(([db]) => {
-	let field = {};
+Promise.all([
+	locations,
+	locations.then(openField),
+	parsed,
+]).then(([db, savedField]) => {
+	let field: Field = savedField;
 
-	function back() { window.location = '/fields'; }
+	function back() { window.location.href = '/fields'; }
 	function submit() { db.put(field).then(back); }
 
 	const formProps = {
@@ -18,10 +24,11 @@ Promise.all([locations, parsed]).then(([db]) => {
 		onCancel: back,
 	};
 
-	setupEditorMap((n, geometry) => {
+	const renderField = setupEditorMap((n, geometry) => {
 		field = Object.assign({}, field, { geometry });
 		renderFieldEditorForm(field, formProps);
 	});
 
 	renderFieldEditorForm(field, formProps);
+	renderField(field);
 });

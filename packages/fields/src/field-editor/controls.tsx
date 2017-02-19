@@ -1,6 +1,7 @@
-import { createElement, PropTypes, MouseEventHandler, StatelessComponent } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, MouseEventHandler, StatelessComponent } from 'react';
+/** @jsx createElement */
 import { render } from 'react-dom';
-import { VIEWING, DRAWING, EDITING, DELETING } from './setMode.js';
+import { VIEWING, DRAWING, EDITING, DELETING } from './setMode';
 
 const { ControlPosition } = google.maps;
 

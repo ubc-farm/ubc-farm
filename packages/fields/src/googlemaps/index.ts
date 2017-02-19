@@ -1,4 +1,4 @@
-import { PouchDB } from 'pouchdb';
+import PouchDB from 'pouchdb';
 import { createMap, observeDatabase, defaultToFeature } from '@ubc-farm/map-utils';
 import createInfoWindow from './infoWindow';
 import watchDblClick from './watchDblClick';

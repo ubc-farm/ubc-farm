@@ -6,7 +6,7 @@ import styler from './styler';
 
 export default function setupEditorMap(
 	setProperty: (key: string, value: any) => void,
-	defaultMode: symbol,
+	defaultMode?: symbol,
 ) {
 	const map: google.maps.Map = createMap();
 	map.data.setStyle(styler);
@@ -25,7 +25,7 @@ export default function setupEditorMap(
 	setMode(defaultMode, { data: map.data, renderControls, handleChange });
 
 	return function rerenderField({ geometry, _id }: {
-		geometry: GeoJSON.DirectGeometryObject,
+		geometry: GeoJSON.Polygon,
 		_id: string,
 	}) {
 		map.data.addGeoJson({

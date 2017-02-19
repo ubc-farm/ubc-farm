@@ -19,7 +19,12 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		nodeResolve({ browser: true, preferBuiltins: false, jsnext: true }),
+		nodeResolve({
+			browser: true,
+			preferBuiltins: false,
+			jsnext: true,
+			extensions: ['.js', '.ts', '.tsx'],
+		}),
 		/* replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.browser': JSON.stringify(true),
@@ -29,6 +34,7 @@ export default {
 				shortid: ['generate'],
 				docuri: ['route'],
 				events: ['EventEmitter'],
+				'core-js/library/modules/es6.object.to.string.js': ['default'],
 			},
 		}),
 		json(),

@@ -13,12 +13,13 @@
 		"react-dom": "^15.4.2"
 	},
 	"devDependencies": {
-		"rollup": "^0.41.4"
+		"rollup": "^0.41.4",
+		"pouchdb": "^6.1.2"
 	},
 	"scripts": {
-		"build-index": "rollup -c -i entry/index.js -o browser/index.js",
-		"build-edit": "rollup -c -i entry/edit.js -o browser/edit.js",
-		"build-new": "rollup -c -i entry/new.js -o browser/new.js",
+		"build-index": "rollup -c -i entry/index.ts -o browser/index.js",
+		"build-edit": "rollup -c -i entry/edit.ts -o browser/edit.js",
+		"build-new": "rollup -c -i entry/new.ts -o browser/new.js",
 		"prepare": "npm run build-index && npm run build-edit && npm run build-new",
 		"prepublish": "npm run prepare"
 	}
