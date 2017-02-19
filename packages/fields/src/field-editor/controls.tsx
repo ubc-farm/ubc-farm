@@ -68,7 +68,15 @@ MapControls.propTypes = {
 	hasField: PropTypes.bool.isRequired,
 };
 
-
+/**
+ * Creates map controls for a corresponding Google Map.
+ * The controls are buttons styled by CSS, and the buttons that appear
+ * are dependent on the state of the map and the MapControlsProps.
+ * When a field exists on the screen, a button for editing the polygon shape
+ * and a button for deleting the polygon are shown. Otherwise, a button
+ * for drawing a fresh polygon is shown. Once the draw button is clicked,
+ * it switched to a select button to switch out of drawing mode.
+ */
 export default function createControls(map: google.maps.Map) {
 	const element = document.createElement('div');
 	map.controls[ControlPosition.LEFT_TOP].push(element);

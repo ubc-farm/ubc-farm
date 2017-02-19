@@ -8,6 +8,12 @@ interface FieldFormProps {
 	onSubmit: () => void;
 }
 
+/**
+ * A form that allows the user to set the field object's name.
+ * Additionally, the location and area can be manually set. If they are not
+ * manually set (or are cleared by the user), then they will be automatically
+ * calculated by the polygon corresponding to the field.
+ */
 class FieldForm extends Component<FieldFormProps, void> {
 	bindInput(name) {
 		switch (name) {

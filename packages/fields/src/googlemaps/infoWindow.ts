@@ -2,7 +2,9 @@ import PouchDB from 'pouchdb';
 import { getLocation } from '@ubc-farm/databases';
 const { InfoWindow, Data } = google.maps;
 
-// on polygon click, open info window at field centroid
+/**
+ * on polygon click, open info window at field centroid
+ */
 export default function createInfoWindow(dataLayer: google.maps.Data, db: PouchDB) {
 	const infoWindow = new InfoWindow();
 

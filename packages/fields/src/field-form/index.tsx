@@ -4,6 +4,9 @@ import { Field } from '../IField';
 import FieldForm from './FieldForm';
 import FieldEditorToolbar from './FieldEditorToolbar';
 
+/**
+ * Renders the editor toolbar and form
+ */
 export default function createFieldEditorForm(
 	field: Field,
 	{ setProperty, onSubmit, onCancel }: {

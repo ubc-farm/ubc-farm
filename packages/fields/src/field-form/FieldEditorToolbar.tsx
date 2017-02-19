@@ -7,6 +7,9 @@ interface FieldEditorToolbarProps {
 	canSubmit?: boolean;
 }
 
+/**
+ * A small toolbar to save or cancel changes to the field object in the database
+ */
 const FieldEditorToolbar: StatelessComponent = (
 	{ onSubmit, onCancel, canSubmit }: FieldEditorToolbarProps
 ) => (

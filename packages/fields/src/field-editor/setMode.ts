@@ -16,7 +16,10 @@ interface SetModeProps {
 	handleChange: (a: google.maps.Data.Feature | null) => void;
 };
 
-
+/**
+ * Viewing mode disables drawing on the map, and will switch to editing mode
+ * if a polygon is double clicked
+ */
 function useViewingMode(props: SetModeProps) {
 	const { data } = props;
 
@@ -29,6 +32,10 @@ function useViewingMode(props: SetModeProps) {
 	};
 }
 
+/**
+ * Drawing mode lets the user draw a new polygon representing a field.
+ * Once a feature is drawn, the mode switches to viewing.
+ */
 function useDrawingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
@@ -43,6 +50,10 @@ function useDrawingMode(props: SetModeProps) {
 	};
 }
 
+/**
+ * Editing mode disables drawing new fields but adds handles to existing fields.
+ * This mode is never automatically left, the user needs to disable it.
+ */
 function useEditingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
@@ -58,6 +69,11 @@ function useEditingMode(props: SetModeProps) {
 	};
 }
 
+/**
+ * Deleting mode disables drawing and listens for a click event on a polygon.
+ * Once clicked, the polygon is deleted. Additionally, it adds a hover effect
+ * to all polygons in the map.
+ */
 function useDeletingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
@@ -77,28 +93,40 @@ function useDeletingMode(props: SetModeProps) {
 	};
 }
 
-let callback = () => {};
+let exitCallback = () => {};
+
+/**
+ * A function used to set the control mode in the map, out of
+ * 'VIEWING', 'DRAWING', 'EDITING', and 'DELETING'. The mode can be
+ * altered by the user using control buttons rendered on the map.
+ *
+ * setMode calls an exit callback set by the last used mode to handle
+ * cleanup, then runs a function corresponding to the next desired mode.
+ * The map controls are re-rendered using React.
+ * Additionally, a props object gets passed around to keep track of useful
+ * tools for the various functions and React controls.
+ */
 export default function setMode(mode = VIEWING, props: SetModeProps) {
 	const { renderControls } = props;
 
-	callback();
+	exitCallback();
 	renderControls({ mode, setMode: newMode => setMode(newMode, props) });
 
 	switch (mode) {
 		case VIEWING:
-			callback = useViewingMode(props);
+			exitCallback = useViewingMode(props);
 			break;
 		case DRAWING:
-			callback = useDrawingMode(props);
+			exitCallback = useDrawingMode(props);
 			break;
 		case EDITING:
-			callback = useEditingMode(props);
+			exitCallback = useEditingMode(props);
 			break;
 		case DELETING:
-			callback = useDeletingMode(props);
+			exitCallback = useDeletingMode(props);
 			break;
 		default:
-			callback = () => {};
+			exitCallback = () => {};
 			break;
 	}
 }

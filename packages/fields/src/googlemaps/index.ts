@@ -3,6 +3,10 @@ import { createMap, observeDatabase, defaultToFeature } from '@ubc-farm/map-util
 import createInfoWindow from './infoWindow';
 import watchDblClick from './watchDblClick';
 
+/**
+ * Sets up the google map by connecting it to the database and adding
+ * click (open infowindow) and double-click (open field page) listeners.
+ */
 export default function setupMap(locationDB: PouchDB) {
 	const map = createMap();
 	observeDatabase(locationDB, map.data, {
