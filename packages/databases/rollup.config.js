@@ -2,6 +2,8 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
+import rollupTs from 'rollup-plugin-typescript';
+import typescript from 'typescript';
 
 export default {
 	sourceMap: true,
@@ -19,6 +21,12 @@ export default {
 			}
 		}),
 		json(),
+		rollupTs({
+			tsconfig: false,
+			typescript,
+			allowJs: true,
+			strictNullChecks: true,
+		}),
 	],
 	external: [
 		'react', 'pouchdb', 'pouchdb-find', 'transform-pouch', 'moment', 'lodash',

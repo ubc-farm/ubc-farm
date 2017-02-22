@@ -4,6 +4,8 @@ import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
 // import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
+import rollupTs from 'rollup-plugin-typescript';
+import typescript from 'typescript'
 
 const globals = {
 	react: 'React',
@@ -17,8 +19,12 @@ export default {
 	sourceMap: true,
 	format: 'iife',
 	plugins: [
-		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
-		nodeResolve({ browser: true, preferBuiltins: false, jsnext: true }),
+		nodeResolve({
+			browser: true,
+			preferBuiltins: false,
+			jsnext: true,
+			extensions: ['.js', '.ts', '.tsx'],
+		}),
 		/* replace({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.browser': JSON.stringify(true),
@@ -28,10 +34,19 @@ export default {
 				shortid: ['generate'],
 				docuri: ['route'],
 				events: ['EventEmitter'],
+				'core-js/library/modules/es6.object.to.string.js': ['default'],
 			},
 		}),
 		json(),
 		nodeGlobals(),
+		rollupTs({
+			tsconfig: false,
+			typescript,
+			allowJs: true,
+			strictNullChecks: true,
+			jsx: 'React',
+		}),
+		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 	],
 	globals,
 	external: Object.keys(globals),

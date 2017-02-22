@@ -1,5 +1,6 @@
 {
   "name": "@ubc-farm/frontend",
+  "main": "_scipts/code/build.js",
   "dependencies": {
     "glob": "^7.1.1",
     "gray-matter": "^2.1.0",
