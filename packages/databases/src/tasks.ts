@@ -4,24 +4,19 @@ import moment from 'moment';
 import PouchDB from './utils/load-pouch';
 import { ID, Index, DateNum } from './utils/typedefs';
 
-export interface StoredTask {
+export interface Task {
 	_id: ID;
 	_rev: string;
 	type: Index<ID>; // ID of some type
 	location: Index<ID>; // ID of a location
 	name?: string; // name of the task
-	start?: Index<DateNum>;
-	end?: Index<DateNum>;
+	start?: Index<DateNum> | moment.Moment;
+	end?: Index<DateNum> | moment.Moment;
 	allDay: boolean;
 	done: boolean;
 }
 
-export interface Task extends StoredTask {
-	start?: moment;
-	end?: moment;
-}
-
-export const db = new PouchDB<StoredTask>('tasks');
+export const db = new PouchDB<Task>('tasks');
 
 export default Promise.all([
 	db.createIndex({ index: { fields: ['type'] } }),
@@ -36,7 +31,7 @@ function dateToMilli(date) {
 }
 
 db.transform({
-	incoming(doc: Task): StoredTask {
+	incoming(doc: Task): Task {
 		if (!doc._id) doc._id = generate();
 
 		doc.start = dateToMilli(doc.start);
@@ -45,10 +40,9 @@ db.transform({
 
 		return doc;
 	},
-	outgoing(doc: StoredTask): Task {
-		const task = <Task> doc;
-		if (doc.start) task.start = moment(doc.start);
-		if (doc.end) task.start = moment(doc.end);
-		return task;
+	outgoing(doc: Task): Task {
+		if (doc.start) doc.start = moment(doc.start);
+		if (doc.end) doc.start = moment(doc.end);
+		return doc;
 	}
 });

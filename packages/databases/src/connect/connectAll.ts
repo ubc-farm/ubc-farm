@@ -8,8 +8,8 @@ interface ConnectAllOptions {
 	changes?: boolean;
 	useMap?: boolean;
 	getDisplayName?: (name: string) => string;
-	allDocsOptions?: PouchDB.Core.AllDocsWithKeysOptions;
-	changesOptions?: PouchDB.Core.AllDocsWithKeysOptions;
+	allDocsOptions?: PouchDB.Core.AllDocsOptions;
+	changesOptions?: PouchDB.Core.AllDocsOptions;
 }
 
 /**

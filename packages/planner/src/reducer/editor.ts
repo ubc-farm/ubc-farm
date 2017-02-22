@@ -1,6 +1,10 @@
+import { Task } from '@ubc-farm/databases';
+
 const CLEAR = 'planning/editor/CLEAR';
 const SET_MODEL = 'planning/editor/SET_MODEL';
 const SET_PROPERTY = 'planning/editor/SET_PROPERTY';
+
+export type IState = Task;
 
 const defaultState = Object.freeze({
 	_id: null,
@@ -12,7 +16,7 @@ const defaultState = Object.freeze({
 	equipment: [],
 });
 
-export default function editorReducer(state = defaultState, action) {
+export default function editorReducer(state: IState = defaultState, action) {
 	switch (action.type) {
 		case CLEAR:
 			return defaultState;
@@ -30,9 +34,9 @@ export default function editorReducer(state = defaultState, action) {
 }
 
 export const clearEditor = () => ({ type: CLEAR });
-export const setEditorModel = model => ({ type: SET_MODEL, payload: model });
-export const setEditorProp = (key, value) => ({
+export const setEditorModel = (model: IState) => ({ type: SET_MODEL, payload: model });
+export const setEditorProp = (key: string, value) => ({
 	type: SET_PROPERTY, payload: { key, value }
 });
 
-export const getModel = state => state.editor;
+export const getModel = state => <IState> state.editor;

@@ -1,6 +1,6 @@
 import { createMap, observeDatabase } from '@ubc-farm/map-utils';
 
-function diffLists(_ids, _nextIds) {
+function diffLists(_ids: string[], _nextIds: string[]) {
 	const ids = new Set(_ids);
 	const nextIds = new Set(_nextIds);
 

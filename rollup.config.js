@@ -2,10 +2,9 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
-// import replace from 'rollup-plugin-replace';
 import nodeGlobals from 'rollup-plugin-node-globals';
 import rollupTs from 'rollup-plugin-typescript';
-import typescript from 'typescript'
+import typescript from 'typescript';
 
 const globals = {
 	react: 'React',
@@ -25,10 +24,6 @@ export default {
 			jsnext: true,
 			extensions: ['.js', '.ts', '.tsx'],
 		}),
-		/* replace({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-			'process.browser': JSON.stringify(true),
-		}), */
 		commonjs({
 			namedExports: {
 				shortid: ['generate'],

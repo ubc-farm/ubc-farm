@@ -16,14 +16,16 @@
 		"docuri": "^4.2.2",
 		"@turf/area": "^3.7.5",
 		"@turf/centroid": "^3.7.5",
-		"invariant": "^2.2.2"
+		"invariant": "^2.2.2",
+		"dts-generator": "^2.1.0"
 	},
 	"optionalDependencies": {
 		"react": "^15.4.2"
 	},
 	"scripts": {
-		"prepare:umd": "rollup -c -i src/index.js -o index.js -f umd",
-		"prepare:es": "rollup -c -i src/index.js -o index.mjs -f es",
+		"prepare:umd": "rollup -c -i src/index.ts -o index.js -f umd",
+		"prepare:es": "rollup -c -i src/index.ts -o index.mjs -f es",
+		"dts": "dts-generator --project . --name databases --out index.d.ts",
 		"prepare": "npm run prepare:es && npm run prepare:umd",
 		"prepublish": "npm run prepare"
 	}

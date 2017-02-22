@@ -12,7 +12,9 @@ const defaultStyle = {
 	tilt: 0,
 };
 
-
+/**
+ * Creates a map on the #googleMap element
+ */
 export default function createMap(style = defaultStyle) {
 	return new Map(document.getElementById('googleMap'), style);
 }
