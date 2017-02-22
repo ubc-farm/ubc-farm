@@ -1,4 +1,5 @@
 import { createMap, observeDatabase } from '@ubc-farm/map-utils';
+import { Location } from '@ubc-farm/databases';
 
 function diffLists(_ids: string[], _nextIds: string[]) {
 	const ids = new Set(_ids);
@@ -10,7 +11,9 @@ function diffLists(_ids: string[], _nextIds: string[]) {
 	};
 }
 
-function rowToFeature(doc) {
+function rowToFeature(
+	doc: Location
+): GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.Point> | null {
 	if (!doc.geometry) return null;
 	return {
 		type: 'Feature',
@@ -20,8 +23,8 @@ function rowToFeature(doc) {
 	};
 }
 
-function setProperty(datalayer, prop, value) {
-	return (id) => {
+function setProperty(datalayer: google.maps.Data, prop: string, value) {
+	return (id: string) => {
 		const feature = datalayer.getFeatureById(id);
 		if (feature != null) feature.setProperty(prop, value);
 	};
@@ -36,13 +39,16 @@ function setProperty(datalayer, prop, value) {
  * @returns {function} setSelected function. Takes an ID and marks it as
  * selected on the map.
  */
-export default function createPlanningMap(onClick, ...dbs) {
+export default function createPlanningMap(
+	onClick: (id: string, feature: google.maps.Data.Feature) => void,
+	...dbs: PouchDB.Database<Location>[],
+) {
 	const map = createMap();
 
 	const observers = dbs.map(db => observeDatabase(db, map.data, rowToFeature));
 
 	let lastSelected = [];
-	function setSelected(ids) {
+	function setSelected(ids: string[]) {
 		const { added, removed } = diffLists(lastSelected, ids);
 		if (added.length === 0 && removed.length === 0) return;
 

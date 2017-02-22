@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"strictNullChecks": true,
+		"jsx": "react",
+		"target": "es2017",
+		"lib": [
+			"es2016", "es2017.object",
+			"dom", "dom.iterable",
+			"webworker"
+		]
+	},
+	"exclude": [
+		"node_modules",
+		"**/node_modules",
+		"rollup.config.js"
+	],
+	"include": [
+		"packages/*/src/**"
+	]
+}

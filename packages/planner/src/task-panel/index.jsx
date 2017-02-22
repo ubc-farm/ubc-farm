@@ -1,7 +1,7 @@
-import connectAll from '@ubc-farm/databases/src/connect/connectAll.js';
+import { connectAll } from '@ubc-farm/databases';
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
-import TaskPanel from './TaskPanel.jsx';
+import TaskPanel from './TaskPanel';
 
 export default function createTaskPanel(taskTypesDB) {
 	const WrappedPanel = connectAll(
