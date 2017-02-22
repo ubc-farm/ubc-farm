@@ -1,15 +1,28 @@
 /* eslint-disable import/newline-after-import */
-const promisify = require('promisify-node');
-const { readFile } = promisify('fs');
+const denodeify = require('denodeify');
+const readFile = denodeify(require('fs').readFile);
 const { extname, parse, format, join } = require('path');
 const Handlebars = require('handlebars');
 const matter = require('gray-matter');
-const marked = promisify('marked');
+const marked = denodeify(require('marked'));
 const { useLayout } = require('./layouts.js');
 
+/**
+ * Changes the extension of the path to .html
+ * @param {string} path to modify
+ * @returns {string}
+ */
 function asHtml(path) {
 	const { dir, name } = parse(path);
 	return format({ dir, name, ext: '.html' });
+}
+
+/**
+ * Checks if a layout is specified in the page data.
+ * @returns {boolean} true if a layout name is specified in page data
+ */
+function hasAssociatedLayout(data) {
+	return data.page && data.page.layout;
 }
 
 function getDestinationPath(filePath, data) {
@@ -25,15 +38,26 @@ function getDestinationPath(filePath, data) {
 	}
 }
 
-function compileMarkdown(content, data) {
-	const html = marked(content);
-	if (data.page && data.page.layout) {
-		return html.then(body => useLayout(body, data.page.layout, data));
+/**
+ * Compiles markdown file and wraps it in a layout if specified
+ * @param {string} content - markdown text to compile
+ * @param {Object} data to use as layout context
+ */
+async function compileMarkdown(content, data) {
+	const body = await marked(content);
+
+	if (hasAssociatedLayout(data)) {
+		return useLayout(body, data.page.layout, data);
 	} else {
-		return html;
+		return body;
 	}
 }
 
+/**
+ * Compiles handlebars file and wraps it in a layout if specified
+ * @param {string} content - markdown text to compile
+ * @param {Object} data to use as layout context
+ */
 function compileHandlebars(content, data) {
 	const template = Handlebars.compile(content, { noEscape: true });
 
@@ -45,11 +69,14 @@ function compileHandlebars(content, data) {
 }
 
 /**
+ * Reads the specified file then returns compiled output and a corresponding
+ * filename.
  * @param {string} file path
  * @param {Object} options
  * @param {string} options.cwd
  * @param {Object} options.context
- * @returns {Promise<Array>}
+ * @returns {Promise<[string, Buffer|string]>} first element is filename, second
+ * element is output
  */
 module.exports = function compileFile(file, { context, cwd }) {
 	return readFile(join(cwd, file)).then((buffer) => {

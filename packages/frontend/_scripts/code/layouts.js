@@ -1,6 +1,6 @@
 /* eslint-disable import/newline-after-import,no-console */
-const promisify = require('promisify-node');
-const { readFile } = promisify('fs');
+const denodeify = require('denodeify');
+const readFile = denodeify(require('fs').readFile);
 const { join, parse } = require('path');
 const Handlebars = require('handlebars');
 const searchFolder = require('./searchFolder.js');

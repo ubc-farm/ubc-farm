@@ -1,10 +1,16 @@
 /* eslint-disable import/newline-after-import */
-const promisify = require('promisify-node');
-const { readFile } = promisify('fs');
+const denodeify = require('denodeify');
+const readFile = denodeify(require('fs').readFile);
 const { join, extname, basename } = require('path');
 const { safeLoad } = require('js-yaml');
 const searchFolder = require('./searchFolder');
 
+/**
+ * Loads and parses YAML and JSON files, and returns its name and parsed content.
+ * If the file is a different data type, null is returned as the content.
+ * @param {string} file
+ * @returns {Promise<[string, Object|null]>}
+ */
 function loadDataFile(file, { cwd }) {
 	const filepath = join(cwd, file);
 	return readFile(filepath, 'utf8').then((contents) => {
@@ -22,11 +28,11 @@ function loadDataFile(file, { cwd }) {
 	});
 }
 
-module.exports = function loadData(options) {
-	return searchFolder('_data', loadDataFile, options).then(dataset =>
-		dataset.reduce((obj, [filename, data]) => {
-			if (data !== null) obj[filename] = data;
-			return obj;
-		}, {})
-	);
+module.exports = async function loadData(options) {
+	const dataset = await searchFolder('_data', loadDataFile, options);
+
+	return dataset.reduce((obj, [filename, data]) => {
+		if (data !== null) obj[filename] = data;
+		return obj;
+	}, {});
 };

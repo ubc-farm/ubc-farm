@@ -9,19 +9,25 @@ const copyFile = require('./copyFile.js');
 const scriptFolder = require('./scriptFolder.js');
 const { prepareLayouts } = require('./layouts.js');
 
-module.exports = function build(cwd) {
+module.exports = async function build(cwd, extraData) {
 	const opts = { cwd, nodir: true };
 
-	return Promise.all([
+	const [files, dataFiles] = await Promise.all([
 		glob('**/*',
 			Object.assign({}, opts, { ignore: ['node_modules/**', '_*/**'] })),
 		loadData(opts),
 		registerIncludes(opts),
 		prepareLayouts(opts),
 		scriptFolder(opts),
-	]).then(([files, data]) => {
-		const options = Object.assign({}, opts, { context: { data } });
-		const copies = files.map(file => copyFile(file, options));
-		return Promise.all(copies);
-	}).then(() => {});
+	]);
+
+	const options = Object.assign({}, opts, {
+		context: {
+			data: Object.assign({}, dataFiles, extraData),
+		}
+	});
+
+	return Promise.all(
+		files.map(file => copyFile(file, options))
+	);
 };
