@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import { DataItem, Timeline as visTimeline } from 'vis';
 import { Store } from 'redux';
 import { Task, TaskType, Location } from '@ubc-farm/databases';
@@ -12,8 +12,12 @@ type EditCallback = (item: DataItem | null) => void;
 
 const revs = new WeakMap<DataItem, string>();
 
-export async function handleAddItem(item: DataItem, callback: EditCallback) {
-	const db: PouchDB.Database<Task> = this;
+export async function handleAddItem(
+	this: PouchDB.Database<Task>,
+	item: DataItem,
+	callback: EditCallback,
+) {
+	const db = this;
 	const doc = itemToTask(item, revs);
 	if (!doc._id) doc._id = generate();
 
@@ -24,11 +28,19 @@ export async function handleAddItem(item: DataItem, callback: EditCallback) {
 	callback(item);
 }
 
-export async function handleTypeChange(item: DataItem, callback: EditCallback) {
-	const db: PouchDB.Database<Task> = this;
+export async function handleTypeChange(
+	this: PouchDB.Database<Task>,
+	item: DataItem,
+	callback: EditCallback,
+) {
+	const db = this;
 	const rev = revs.get(item);
+	if (!item.id) {
+		callback(null);
+		return;
+	}
 
-	const doc = await db.get(item.id.toString(), rev);
+	const doc = await db.get(item.id.toString(), { rev });
 	if (doc.type === item.className) return;
 
 	doc.type = item.className;
@@ -41,16 +53,25 @@ export async function handleTypeChange(item: DataItem, callback: EditCallback) {
  * start/end or the group (location) has changed, and updates the database and
  * timeline item accordingly.
  */
-async function handleMoveItem(item: DataItem, callback?: EditCallback) {
-	const db: PouchDB.Database<Task> = this;
+async function handleMoveItem(
+	this: PouchDB.Database<Task>,
+	item: DataItem,
+	callback: EditCallback,
+) {
+	const db = this;
 	let { id, start, end, group } = item;
+	if (!id) {
+		callback(null);
+		return;
+	}
+
 	const rev = revs.get(item);
 	id = id.toString();
 	start = <number> start.valueOf();
-	end = <number> end.valueOf();
+	end = <number> (end ? end.valueOf() : undefined);
 	group = <string> group;
 
-	const task = await db.get(id, rev);
+	const task = await db.get(id, { rev });
 	let changed = false;
 
 	if (task.start.valueOf() !== start || task.end.valueOf() !== end) {
@@ -71,9 +92,21 @@ async function handleMoveItem(item: DataItem, callback?: EditCallback) {
 	if (callback) callback(item);
 }
 
-async function handleRemoveItem(item: DataItem, callback: EditCallback) {
-	const db: PouchDB.Database<Task> = this;
-	await db.remove({ _id: item.id.toString(), _rev: revs.get(item) });
+async function handleRemoveItem(
+	this: PouchDB.Database<Task>,
+	item: DataItem,
+	callback: EditCallback
+) {
+	const db = this;
+	let _id = item.id;
+	const _rev = revs.get(item);
+	if (!_id || !_rev) {
+		callback(null);
+		return;
+	}
+
+	_id = _id.toString();
+	await db.remove({ _id, _rev });
 	callback(item);
 }
 

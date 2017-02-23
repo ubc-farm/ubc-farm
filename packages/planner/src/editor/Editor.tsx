@@ -1,6 +1,8 @@
-import { createElement, PropTypes, StatelessComponent } from 'react';
+import * as PouchDB from 'pouchdb';
+
+import { createElement, PropTypes, StatelessComponent, ChangeEvent } from 'react';
 /** @jsx createElement */
-import { connectAll, Task } from '@ubc-farm/databases';
+import { connectAll, Task, Equipment, Location } from '@ubc-farm/databases';
 import TaskNameInput from './TaskNameInput';
 import TaskTimeInput from './TaskTimeInput';
 import LocationSelect from './LocationSelect';
@@ -13,16 +15,19 @@ interface EditorProps {
 	setProperty: (key: string, value: any) => void;
 }
 
-export default function createEditor(equipmentDB, locationDB) {
-	const connect = connectAll(doc => doc.name, { rowKey: 'options' });
+export default function createEditor(
+	equipmentDB: PouchDB.Database<Equipment>,
+	locationDB: PouchDB.Database<Location>
+) {
+	const connect = connectAll((doc: Equipment|Location) => doc.name, { rowKey: 'options' });
 	const WrappedLocationSelect = connect(LocationSelect);
 	const WrappedEquipmentSelect = connect(EquipmentSelect);
 
 	const Editor: StatelessComponent<EditorProps> = ({ disabled, model, onSubmit, setProperty }) => {
-		const bindInput = name => ({
+		const bindInput = (name: string) => ({
 			name,
 			value: model[name],
-			onChange(e) { setProperty(name, e.target.value); },
+			onChange(e: ChangeEvent<any>) { setProperty(name, e.target.value); },
 		});
 
 		return (

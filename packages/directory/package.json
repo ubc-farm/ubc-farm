@@ -1,18 +1,12 @@
 {
-  "name": "@ubc-farm/planner",
-  "version": "2.0.0",
+  "name": "@ubc-farm/directory",
+  "version": "2.1.0",
   "dependencies": {
     "redux": "^3.5.2",
     "react-redux": "^4.4.5",
-    "vis-timeline": "ubc-farm/ports#vis-timeline",
     "@ubc-farm/utils": "^4.2.0",
     "lodash": "^4.17.4",
-    "document-promises": "^3.1.2",
-    "react-select": "^1.0.0-rc",
-    "shortid": "^2.2.6",
-    "@ubc-farm/databases": "^1.0.0",
-    "@ubc-farm/map-utils": "^1.0.0",
-    "redux-devtools-extension": "^2.13.0"
+    "document-promises": "^3.1.2"
   },
   "peerDependencies": {
 		"react": "^15.4.2",

@@ -1,6 +1,6 @@
+import * as PouchDB from 'pouchdb';
 import { Task, TaskType } from '@ubc-farm/databases';
 import { DataItem, DataSet as visDataSet } from 'vis';
-import PouchDB from 'pouchdb';
 
 import { DataSet } from 'vis-timeline';
 import moment from 'moment';
@@ -39,6 +39,7 @@ export function taskToItem(doc: Task, revMap: RevMap): DataItem {
 
 export function itemToTask(item: DataItem, revMap: RevMap): Task {
 	const type = item.className;
+	if (!item.id) throw new TypeError(`item missing ID! - ${JSON.stringify(item)}`);
 	return {
 		_id: item.id.toString(),
 		_rev: revMap.get(item),

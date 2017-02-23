@@ -47,7 +47,7 @@ export default function createPlanningMap(
 
 	const observers = dbs.map(db => observeDatabase(db, map.data, rowToFeature));
 
-	let lastSelected = [];
+	let lastSelected: string[] = [];
 	function setSelected(ids: string[]) {
 		const { added, removed } = diffLists(lastSelected, ids);
 		if (added.length === 0 && removed.length === 0) return;

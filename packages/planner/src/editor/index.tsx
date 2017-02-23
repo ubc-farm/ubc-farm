@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import { Store } from 'redux';
 import { Equipment, Location, Task } from '@ubc-farm/databases';
 import { createElement } from 'react'; /** @jsx createElement */

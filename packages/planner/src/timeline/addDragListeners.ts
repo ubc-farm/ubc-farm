@@ -27,17 +27,19 @@ export default function addDragListeners(
 			case 'background':
 				handleAddItem({
 					content: text,
-					className: group.toString(),
+					className: group ? group.toString() : undefined,
 					start: snappedTime.valueOf(),
 					type: text,
-				}, editedItem => items.add(editedItem, 'drop'));
+				}, editedItem => { if (editedItem) items.add(editedItem, 'drop') });
 				break;
 
 			case 'item': {
+				if (!itemID) return;
 				const item = items.get(itemID);
 				if (item.content === item.className) item.content = text;
 				item.className = text;
-				handleTypeChange(item, editedItem => items.update(editedItem, 'drop'));
+				handleTypeChange(item,
+					editedItem => { if (editedItem) items.update(editedItem, 'drop') });
 				break;
 			}
 		}

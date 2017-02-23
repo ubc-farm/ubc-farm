@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import { Location } from '@ubc-farm/databases';
 import { DataGroup, DataSet as visDataSet } from 'vis';
 
