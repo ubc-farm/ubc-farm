@@ -39,6 +39,9 @@ interface ConnectAllOptions {
 export function connectAll<P, T>(
 	transformer?: (doc: any, id: string) => T,
 	options?: ConnectAllOptions
+): (WrappedComponent: React.SFC<P>) => React.Component<P & { db: PouchDB.Database<T> }, any>
+export function connectAll<P>(
+	options?: ConnectAllOptions
 ): (WrappedComponent: React.SFC<P>) => React.Component<P, any>
 
 ///////////////////////////

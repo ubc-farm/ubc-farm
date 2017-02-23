@@ -1,6 +1,5 @@
 import PouchDB from 'pouchdb';
 import { Component, PropTypes, createElement, SFC } from 'react';
-import invariant from 'invariant';
 
 interface ConnectAllOptions {
 	rowKey?: string;
@@ -42,6 +41,11 @@ export default function connectAll<T>(
 	transformer = (doc: Object, id: string) => <T> doc,
 	options: ConnectAllOptions = {}
 ) {
+	if (typeof transformer !== 'function') {
+		options = transformer;
+		transformer = doc => doc;
+	}
+
 	const {
 		rowKey = 'rows',
 		loadingKey = 'loading',
@@ -50,22 +54,11 @@ export default function connectAll<T>(
 		getDisplayName = name => `PouchConnect(${name})`,
 		allDocsOptions = { include_docs: true },
 		changesOptions = { include_docs: true, live: true },
-	} = typeof transformer === 'function' ? options : transformer;
-
-	invariant(
-    typeof rowKey === 'string',
-    `rowKey must be a string. Instead received ${JSON.stringify(rowKey)}`,
-  );
+	} = options;
 
 	const changesOpts = Object.assign({}, changesOptions, { since: 'now' });
 
-	return function wrapWithConnect(WrappedComponent: SFC<any>) {
-		invariant(
-      typeof WrappedComponent === 'function',
-      'You must pass a component to the function returned by ' +
-      `connectAll. Instead received ${JSON.stringify(WrappedComponent)}`,
-    );
-
+	return function wrapWithConnect<P>(WrappedComponent: SFC<P>) {
 		const displayName = getDisplayName(
 			WrappedComponent.displayName || WrappedComponent.name || 'Component'
 		);
@@ -74,7 +67,9 @@ export default function connectAll<T>(
 			db: PropTypes.instanceOf(PouchDB).isRequired,
 		};
 
-		class ConnectAll extends Component<any, any> {
+		type DBProp = { db: PouchDB.Database<T> }
+
+		class ConnectAll extends Component<P & DBProp, any> {
 			db: PouchDB.Database<T>;
 			changes: PouchDB.Core.Changes<Object> | null;
 			docError: Error | null;
@@ -89,12 +84,6 @@ export default function connectAll<T>(
 				this.db = props.db;
 				this.changes = null;
 				this.docError = null;
-
-				invariant(this.db,
-          'Could not find "db" in either the context or props of ' +
-          `"${displayName}". Either wrap the root component in a <Provider>, ` +
-          `or explicitly pass "db" as a prop to "${displayName}".`
-        );
 
 				this.initDatabaseSubscription();
 			}
