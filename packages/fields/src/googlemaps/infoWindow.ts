@@ -1,11 +1,14 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import { getLocation } from '@ubc-farm/databases';
 const { InfoWindow, Data } = google.maps;
 
 /**
  * on polygon click, open info window at field centroid
  */
-export default function createInfoWindow(dataLayer: google.maps.Data, db: PouchDB) {
+export default function createInfoWindow(
+	dataLayer: google.maps.Data,
+	db: PouchDB.Database<{ name: string }>
+) {
 	const infoWindow = new InfoWindow();
 
 	if (!(dataLayer instanceof Data)) {
@@ -26,7 +29,8 @@ export default function createInfoWindow(dataLayer: google.maps.Data, db: PouchD
 			infoWindow.open();
 		});
 
-		db.get(feature.getId()).then(doc => infoWindow.setContent(doc.name));
+		db.get(feature.getId().toString())
+			.then(doc => infoWindow.setContent(doc.name));
 	});
 
 	return infoWindow;

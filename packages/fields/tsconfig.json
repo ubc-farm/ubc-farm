@@ -4,6 +4,8 @@
 		"strictNullChecks": true,
 		"jsx": "react",
 		"target": "es2017",
+		"noImplicitThis": true,
+		"jsxFactory": "createElement",
 		"lib": [
 			"es2016", "es2017.object",
 			"dom", "dom.iterable",

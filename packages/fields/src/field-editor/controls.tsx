@@ -1,4 +1,4 @@
-import { createElement, PropTypes, MouseEventHandler, StatelessComponent } from 'react';
+import { createElement, PropTypes, MouseEventHandler, SFC } from 'react';
 /** @jsx createElement */
 import { render } from 'react-dom';
 import { VIEWING, DRAWING, EDITING, DELETING } from './setMode';
@@ -6,7 +6,7 @@ import { VIEWING, DRAWING, EDITING, DELETING } from './setMode';
 const { ControlPosition } = google.maps;
 
 type ButtonProps = {
-	onClick: MouseEventHandler;
+	onClick: MouseEventHandler<any>;
 	pressed?: boolean;
 };
 
@@ -37,8 +37,8 @@ export interface MapControlsProps {
 	hasField?: boolean;
 };
 
-export const MapControls: StatelessComponent = ({ mode, setMode, hasField }: MapControlsProps) => {
-	let children = null;
+export const MapControls: SFC<MapControlsProps> = ({ mode, setMode, hasField }) => {
+	let children;
 	if (!hasField) {
 		if (mode === VIEWING) children = <DrawButton onClick={() => setMode(DRAWING)} />;
 		else children = <PanButton onClick={() => setMode(VIEWING)} />;
@@ -58,7 +58,7 @@ export const MapControls: StatelessComponent = ({ mode, setMode, hasField }: Map
 	}
 
 	return (
-		<div className="map-controls">{children}</div>
+		<div className="map-controls">{children || null}</div>
 	);
 };
 

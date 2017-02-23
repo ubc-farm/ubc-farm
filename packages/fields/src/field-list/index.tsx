@@ -1,7 +1,7 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
-import { connectAll } from '@ubc-farm/databases';
-import { PouchDB } from 'pouchdb';
+import { connectAll, Field } from '@ubc-farm/databases';
+import * as PouchDB from 'pouchdb';
 import pick from 'lodash/pick';
 import FieldList from './FieldList';
 
@@ -28,7 +28,7 @@ const mapValues = ReactComponent =>
  * Doesn't need to be called again - the database automatically updates the
  * state of the list
  */
-export default function createFieldList(locationDB: PouchDB) {
+export default function createFieldList(locationDB: PouchDB.Database<Field>) {
 	const ConnectedFieldList = connectToFields(mapValues(FieldList));
 
 	render(<ConnectedFieldList db={locationDB} />, document.getElementById('reactRoot'));

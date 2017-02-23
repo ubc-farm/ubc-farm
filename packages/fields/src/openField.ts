@@ -1,12 +1,12 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import { parse } from 'querystring';
-import { Field } from './IField';
+import { Field } from '@ubc-farm/databases';
 
 /**
  * Retrieves a field from database using a query string's id value
  */
 export default function openField(
-	db: PouchDB,
+	db: PouchDB.Database<Field>,
 	query = window.location.search.slice(1)
 ): Promise<Field> {
 	const { id } = parse(query);

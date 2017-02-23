@@ -1,18 +1,16 @@
-import { createElement, PropTypes, StatelessComponent, MouseEventHandler } from 'react';
+import { createElement, PropTypes, SFC, MouseEventHandler } from 'react';
 /** @jsx createElement */
 
 interface FieldEditorToolbarProps {
 	onSubmit: () => void;
-	onCancel: MouseEventHandler;
+	onCancel: MouseEventHandler<any>;
 	canSubmit?: boolean;
 }
 
 /**
  * A small toolbar to save or cancel changes to the field object in the database
  */
-const FieldEditorToolbar: StatelessComponent = (
-	{ onSubmit, onCancel, canSubmit }: FieldEditorToolbarProps
-) => (
+const FieldEditorToolbar: SFC<FieldEditorToolbarProps> = ({ onSubmit, onCancel, canSubmit }) => (
 	<div>
 		<button onClick={onCancel}>Cancel</button>
 		<button onClick={onSubmit} disabled={!canSubmit}>Save</button>

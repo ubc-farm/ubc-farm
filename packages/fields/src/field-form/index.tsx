@@ -1,6 +1,6 @@
 import { createElement, MouseEventHandler } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
-import { Field } from '../IField';
+import { Field } from '@ubc-farm/databases';
 import FieldForm from './FieldForm';
 import FieldEditorToolbar from './FieldEditorToolbar';
 
@@ -12,7 +12,7 @@ export default function createFieldEditorForm(
 	{ setProperty, onSubmit, onCancel }: {
 		setProperty: (key: string, value: any) => void,
 		onSubmit: () => void,
-		onCancel: MouseEventHandler
+		onCancel: MouseEventHandler<any>
 	}
 ) {
 	render(

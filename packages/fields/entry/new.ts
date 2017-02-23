@@ -1,6 +1,5 @@
 import { parsed } from 'document-promises';
-import { locations } from '@ubc-farm/databases';
-import { Field } from '../src/IField';
+import { locations, Field } from '@ubc-farm/databases';
 import setupEditorMap from '../src/field-editor/index';
 import renderFieldEditorForm from '../src/field-form/index';
 

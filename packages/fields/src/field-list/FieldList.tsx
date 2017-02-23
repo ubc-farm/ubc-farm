@@ -1,12 +1,11 @@
-import { createElement, PropTypes, StatelessComponent } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
 import { Table, AutoSizer, Column } from 'react-virtualized';
-import { getLocationString, getAcres } from '@ubc-farm/databases';
-import { Field } from '../IField';
+import { getLocationString, getAcres, Field } from '@ubc-farm/databases';
 
 /**
  * A component that displays a list of all fields in the farm.
  */
-const FieldList: StatelessComponent = ({ rows }: { rows: Field[] }) => (
+const FieldList: SFC<{ rows: Field[] }> = ({ rows }) => (
 	<AutoSizer>
 		{({ height, width }) => (
 			<Table

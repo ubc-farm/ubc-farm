@@ -1,6 +1,5 @@
 import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
-import { getLocationString, getArea } from '@ubc-farm/databases';
-import { Field } from '../IField';
+import { getLocationString, getArea, Field } from '@ubc-farm/databases';
 
 interface FieldFormProps {
 	model: Field;
