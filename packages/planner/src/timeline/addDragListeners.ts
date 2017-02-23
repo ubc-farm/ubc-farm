@@ -1,16 +1,16 @@
-function handleDragOver(e) {
+import { Timeline, DataItem, DataSet, DataGroup } from 'vis';
+
+import { handleAddItem, handleTypeChange } from './createTimeline';
+
+function handleDragOver(e: DragEvent) {
 	e.preventDefault();
 	e.dataTransfer.effectAllowed = 'all';
 }
 
-/**
- * Attaches drag listeners to provided Timeline
- * @param {vis.Timeline} Timeline
- * @param {function} newTask (Object) => void
- * @param {function} changeTaskType (id, string) => void
- * @returns {function} call to remove listeners
- */
-export default function addDragListeners(timeline, newTask, changeTaskType) {
+export default function addDragListeners(
+	timeline: Timeline,
+	items: DataSet<DataItem>,
+) {
 	const element = timeline.dom.center;
 
 	/**
@@ -18,23 +18,28 @@ export default function addDragListeners(timeline, newTask, changeTaskType) {
 	 * If dropped in the timeline's blank area, a task of that type is added.
 	 * If dropped ontop of an existing task, the task type is changed.
 	 */
-	function handleDrop(e) {
+	function handleDrop(e: DragEvent) {
 		e.preventDefault();
 		const text = e.dataTransfer.getData('text/plain');
-		const { what, group, snappedTime, item } = timeline.getEventProperties(e);
+		const { what, snappedTime, item: itemID, group } = timeline.getEventProperties(e);
 
 		switch (what) {
 			case 'background':
-				newTask({
-					location: group,
+				handleAddItem({
+					content: text,
+					className: group.toString(),
 					start: snappedTime.valueOf(),
 					type: text,
-				});
+				}, editedItem => items.add(editedItem, 'drop'));
 				break;
 
-			case 'item':
-				changeTaskType(item, text);
+			case 'item': {
+				const item = items.get(itemID);
+				if (item.content === item.className) item.content = text;
+				item.className = text;
+				handleTypeChange(item, editedItem => items.update(editedItem, 'drop'));
 				break;
+			}
 		}
 	}
 

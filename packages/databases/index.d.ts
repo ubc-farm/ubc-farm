@@ -179,13 +179,13 @@ export interface TaskType {
 export interface Task {
 	_id: ID;
 	_rev: string;
-	type: Index<ID>; // ID of some type
-	location: Index<ID>; // ID of a location
-	name?: string; // name of the task
+	type: Index<ID>;
+	location: Index<ID>;
+	name?: string;
 	start?: Index<DateNum> | moment.Moment;
 	end?: Index<DateNum> | moment.Moment;
-	allDay: boolean;
-	done: boolean;
+	allDay?: boolean;
+	done?: boolean;
 }
 
 ///////////////////////////

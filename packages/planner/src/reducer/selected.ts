@@ -3,6 +3,7 @@ const TOGGLE = 'planning/selected/TOGGLE';
 const CLEAR = 'planning/selected/CLEAR';
 
 export type IState = string[];
+interface FullState { selected: IState };
 
 export default function selectedReducer(state: IState = [], action) {
 	switch (action.type) {
@@ -22,10 +23,10 @@ export default function selectedReducer(state: IState = [], action) {
 	}
 }
 
-export const setSelected = ids => ({ type: SET, payload: ids });
-export const toggleSelected = id => ({ type: TOGGLE, payload: id });
+export const setSelected = (ids: IState) => ({ type: SET, payload: ids });
+export const toggleSelected = (id: string) => ({ type: TOGGLE, payload: id });
 export const clearSelected = () => ({ type: CLEAR });
 
-export const getAllSelected = state => <IState> state.selected;
-export const getSelected = state => <string> state.selected[0] || null;
-export const isAnySelected = state => state.selected.length !== 0;
+export const getAllSelected = (state: FullState) => <IState> state.selected;
+export const getSelected = (state: FullState) => <string> state.selected[0] || null;
+export const isAnySelected = (state: FullState) => state.selected.length !== 0;

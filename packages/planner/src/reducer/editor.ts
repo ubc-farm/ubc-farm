@@ -9,9 +9,10 @@ export type IState = Task;
 const defaultState = Object.freeze({
 	_id: null,
 	_rev: null,
+	type: '',
 	name: '',
-	start: '',
-	end: '',
+	start: null,
+	end: null,
 	location: '',
 	equipment: [],
 });

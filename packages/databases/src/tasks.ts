@@ -12,8 +12,8 @@ export interface Task {
 	name?: string; // name of the task
 	start?: Index<DateNum> | moment.Moment;
 	end?: Index<DateNum> | moment.Moment;
-	allDay: boolean;
-	done: boolean;
+	allDay?: boolean;
+	done?: boolean;
 }
 
 export const db = new PouchDB<Task>('tasks');

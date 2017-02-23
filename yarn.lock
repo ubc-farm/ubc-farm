@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/debug@*":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/debug/-/debug-0.0.29.tgz#a1e514adfbd92f03a224ba54d693111dbf1f3754"
+
 "@types/geojson@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.0.tgz#6af48a0d492c09068e97cb78e6bef940d57fb36d"
@@ -13,6 +17,128 @@
 "@types/jest@^18.1.0":
   version "18.1.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-18.1.1.tgz#6f63488c64726900885ab9cd5697bb7fa1b416cc"
+
+"@types/node@*":
+  version "7.0.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.5.tgz#96a0f0a618b7b606f1ec547403c00650210bfbb7"
+
+"@types/pouchdb-adapter-fruitdown@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-fruitdown/-/pouchdb-adapter-fruitdown-5.4.4.tgz#efe6ffe5cdd7752bb360de21d24f656554a77659"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-http@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-http/-/pouchdb-adapter-http-5.4.4.tgz#fb57a5bc502faeddb351e837b2c5ecc6fccf98da"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-idb@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-idb/-/pouchdb-adapter-idb-5.4.4.tgz#c8dc2dda79d097552d28837b1f1c0c715310f0be"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-leveldb@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-leveldb/-/pouchdb-adapter-leveldb-5.4.4.tgz#09d305071374661e0bb544531b725699a920a04b"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-localstorage@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-localstorage/-/pouchdb-adapter-localstorage-5.4.4.tgz#7fe97e33c0b493f691860eb1bf45ac04c84ea96d"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-memory@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-memory/-/pouchdb-adapter-memory-5.4.4.tgz#a7cc1fe0b2d5624b2ce17abd06a34431158716e7"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-node-websql@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-node-websql/-/pouchdb-adapter-node-websql-5.4.4.tgz#f6098174f1f39bc12cd3c3bffc2e7d6171036913"
+  dependencies:
+    "@types/pouchdb-adapter-websql" "*"
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-adapter-websql@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-adapter-websql/-/pouchdb-adapter-websql-5.4.4.tgz#2f882d4e68d578e0e7c041f4c322e73017cad492"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-browser@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-browser/-/pouchdb-browser-5.4.4.tgz#f31c33c574ef13877e080a94bf747ff4d475afab"
+  dependencies:
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-adapter-idb" "*"
+    "@types/pouchdb-core" "*"
+    "@types/pouchdb-mapreduce" "*"
+    "@types/pouchdb-replication" "*"
+
+"@types/pouchdb-core@*":
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-core/-/pouchdb-core-6.0.3.tgz#7c3e0e9da0a2d05f5202de07a1914ec7cf035283"
+  dependencies:
+    "@types/debug" "*"
+    "@types/node" "*"
+
+"@types/pouchdb-http@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-http/-/pouchdb-http-5.4.4.tgz#3b3dd43a3d327030e98dbdefb7b0461deef44963"
+  dependencies:
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-mapreduce@*":
+  version "5.4.6"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-mapreduce/-/pouchdb-mapreduce-5.4.6.tgz#90bdf2ac365ff7e55e76748e9472f3de3daf1ed9"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb-node@*":
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-node/-/pouchdb-node-5.4.4.tgz#24446f2ef00a3c39f29e209e1608dd233ce2b36c"
+  dependencies:
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-adapter-leveldb" "*"
+    "@types/pouchdb-core" "*"
+    "@types/pouchdb-mapreduce" "*"
+    "@types/pouchdb-replication" "*"
+
+"@types/pouchdb-replication@*":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb-replication/-/pouchdb-replication-6.0.0.tgz#3d472245b87bc1bfc92c10b23142804489436ccd"
+  dependencies:
+    "@types/pouchdb-core" "*"
+
+"@types/pouchdb@^5.4.28":
+  version "5.4.28"
+  resolved "https://registry.yarnpkg.com/@types/pouchdb/-/pouchdb-5.4.28.tgz#98fdfd25b1ff83d0fafe511155983cc8ecfacaaa"
+  dependencies:
+    "@types/pouchdb-adapter-fruitdown" "*"
+    "@types/pouchdb-adapter-http" "*"
+    "@types/pouchdb-adapter-idb" "*"
+    "@types/pouchdb-adapter-leveldb" "*"
+    "@types/pouchdb-adapter-localstorage" "*"
+    "@types/pouchdb-adapter-memory" "*"
+    "@types/pouchdb-adapter-node-websql" "*"
+    "@types/pouchdb-adapter-websql" "*"
+    "@types/pouchdb-browser" "*"
+    "@types/pouchdb-core" "*"
+    "@types/pouchdb-http" "*"
+    "@types/pouchdb-mapreduce" "*"
+    "@types/pouchdb-node" "*"
+    "@types/pouchdb-replication" "*"
+
+"@types/vis@^4.17.2":
+  version "4.17.2"
+  resolved "https://registry.yarnpkg.com/@types/vis/-/vis-4.17.2.tgz#c1076be40953a49be2800dd2ca74dc4992e6586e"
 
 "@ubc-farm/babel-preset@^1.0.0":
   version "1.1.0"
@@ -2307,6 +2433,10 @@ mkdirp@0.5.1, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
 ms@0.7.1:
   version "0.7.1"
