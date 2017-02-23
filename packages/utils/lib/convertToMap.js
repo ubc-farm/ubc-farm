@@ -40,7 +40,7 @@ export function mapToObject(map) {
 	const obj = {};
 
 	for (const [key, value] of map) {
-		if (typeof key === 'string') obj[key] = value;
+		if (typeof key === 'string' || typeof key === 'number') obj[key] = value;
 	}
 
 	return obj;

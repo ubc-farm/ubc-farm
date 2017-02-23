@@ -12,6 +12,7 @@
     "@types/jest": "^18.1.0",
     "@types/pouchdb": "^5.4.28",
     "@types/react": "^15.0.11",
+    "@types/redux": "^3.6.0",
     "@types/vis": "^4.17.2",
     "@ubc-farm/babel-preset": "^1.0.0",
     "@ubc-farm/eslint-config": "^5.2.1",
