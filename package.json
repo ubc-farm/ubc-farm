@@ -39,7 +39,7 @@
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-watch": "^3.2.2",
-    "typescript": "^2.1.5"
+    "typescript": "^2.2.1"
   },
   "eslintConfig": {
     "extends": "@ubc-farm/eslint-config"
