@@ -2,19 +2,23 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"strictNullChecks": true,
-		"jsx": "react",
-		"target": "es2017",
-		"noImplicitAny": true,
 		"noImplicitThis": true,
+
+		"target": "es2017",
+		"jsx": "react",
+		"jsxFactory": "createElement",
+
 		"lib": [
 			"es2016", "es2017.object",
 			"dom", "dom.iterable",
 			"webworker"
 		]
 	},
+	"include": [
+		"src/**",
+		"entry/**"
+	],
 	"exclude": [
-		"node_modules",
-		"**/node_modules",
-		"rollup.config.js"
+		"node_modules"
 	]
 }

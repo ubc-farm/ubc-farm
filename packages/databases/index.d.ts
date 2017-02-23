@@ -98,7 +98,10 @@ export interface Person {
 	role: Index<string>;
 	name: Index<string>;
 	email?: Index<string>;
-	phoneNumber?: string;
+	phone?: {
+		country: string;
+		number: string;
+	};
 	addressMailing?: string|Address;
 	addressPhysical?: string|Address;
 }

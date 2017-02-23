@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { generate } from 'shortid';
+import phone from 'phone';
 import kebabCase from 'lodash/kebabCase';
 import startCase from 'lodash/startCase';
 import PouchDB from './utils/load-pouch';
@@ -11,7 +12,10 @@ export interface Person {
 	role: Index<string>; // employee, researcher, or something else. Default is 'none'
 	name: Index<string>; // First Last
 	email?: Index<string>;
-	phoneNumber?: string;
+	phone?: {
+		country: string;
+		number: string;
+	};
 	addressMailing?: string|Address;
 	addressPhysical?: string|Address;
 }
@@ -55,6 +59,17 @@ db.transform({
 		if (!doc.addressMailing || !doc.addressPhysical) {
 			if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
 			else doc.addressMailing = doc.addressPhysical;
+		}
+
+		if (doc.phoneNumber) {
+			doc.phone = { country: 'CA', number: doc.phoneNumber };
+			delete doc.phoneNumber;
+		}
+
+		if (doc.phone) {
+			const [num, country] = phone(doc.phone.number, doc.phone.country);
+			doc.phone.number = num;
+			doc.phone.country = country;
 		}
 
 		return doc;
