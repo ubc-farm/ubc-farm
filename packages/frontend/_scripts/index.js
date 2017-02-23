@@ -4,7 +4,7 @@ const build = require('./code/build.js');
 const [,, arg] = process.argv;
 let cwd;
 if (arg === '__dirname') {
-	cwd = resolve(__dirname, '../../');
+	cwd = resolve(__dirname, '../');
 } else if (arg) {
 	cwd = resolve(arg);
 } else {

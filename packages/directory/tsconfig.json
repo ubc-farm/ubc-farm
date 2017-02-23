@@ -4,7 +4,7 @@
 		"strictNullChecks": true,
 		"noImplicitThis": true,
 
-		"target": "es2017",
+		"target": "esnext",
 		"jsx": "react",
 		"jsxFactory": "createElement",
 

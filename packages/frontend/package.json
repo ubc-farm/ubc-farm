@@ -2,16 +2,20 @@
   "name": "@ubc-farm/frontend",
   "main": "_scipts/code/build.js",
   "dependencies": {
+    "denodeify": "^1.2.1",
+    "fs-extra": "^2.0.0",
     "glob": "^7.1.1",
     "gray-matter": "^2.1.0",
     "handlebars": "^4.0.6",
     "handlebars-helpers": "^0.8.0",
     "js-yaml": "^3.7.0",
-    "marked": "^0.3.6",
-    "denodeify": "^1.2.1",
-    "fs-extra": "^2.0.0"
+    "marked": "^0.3.6"
   },
   "scripts": {
-    "prepare": "node _scripts __dirname"
+    "prepare": "node _scripts __dirname",
+    "prepublish": "npm run prepare --quiet"
+  },
+  "devDependencies": {
+    "@types/glob": "^5.0.30"
   }
 }

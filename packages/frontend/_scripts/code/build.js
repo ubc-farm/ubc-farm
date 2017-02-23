@@ -1,6 +1,6 @@
 /* eslint-disable import/newline-after-import,no-console */
-const promisify = require('promisify-node');
-const glob = promisify('glob');
+const denodeify = require('denodeify');
+const glob = denodeify(require('glob'));
 const handlebars = require('handlebars');
 require('handlebars-helpers')({ handlebars });
 const loadData = require('./loadData.js');
@@ -11,10 +11,10 @@ const { prepareLayouts } = require('./layouts.js');
 
 module.exports = async function build(cwd, extraData) {
 	const opts = { cwd, nodir: true };
+	console.log(cwd);
 
 	const [files, dataFiles] = await Promise.all([
-		glob('**/*',
-			Object.assign({}, opts, { ignore: ['node_modules/**', '_*/**'] })),
+		glob('**/*', Object.assign({}, opts, { ignore: ['node_modules/**', '_*/**'] })),
 		loadData(opts),
 		registerIncludes(opts),
 		prepareLayouts(opts),
@@ -27,7 +27,7 @@ module.exports = async function build(cwd, extraData) {
 		}
 	});
 
-	return Promise.all(
+	await Promise.all(
 		files.map(file => copyFile(file, options))
 	);
 };

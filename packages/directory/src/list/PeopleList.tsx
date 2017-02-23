@@ -12,16 +12,20 @@ const PeopleList: SFC<{ rows: Person[] }> = ({ rows }) => (
 				rowCount={rows.length}
 				rowGetter={({ index }) => rows[index]}
 			>
-				<Column dataKey="name" />
-				<Column dataKey="role" />
-				<Column dataKey="email"
+				<Column label="Name" dataKey="name" width={140} />
+				<Column label="Role" dataKey="role" width={140} />
+				<Column
+					label="Email" dataKey="email"
+					width={140}
 					cellRenderer={({ cellData: email }) => {
 						if (email == null) return '';
 						return <a href={`mailto:${email}`} title="Send email">{email}</a>;
 					}}
 				/>
-				<Column dataKey="phone.number" />
+				<Column label="Phone" dataKey="phone.number" width={140} />
 			</Table>
 		)}
 	</AutoSizer>
 );
+
+export default PeopleList;

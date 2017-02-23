@@ -35,7 +35,7 @@ export default {
 		json(),
 		nodeGlobals(),
 		rollupTs({
-			tsconfig: false,
+			// tsconfig: false,
 			typescript,
 			allowJs: true,
 			strictNullChecks: true,

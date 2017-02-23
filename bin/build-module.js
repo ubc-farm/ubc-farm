@@ -2,6 +2,8 @@
 
 'use strict';
 
+// TODO build script
+
 const { rollup } = require('rollup');
 const rollupPlugins = require('./rollupPlugins');
 const denodeify = require('denodeify');
