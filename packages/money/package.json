@@ -1,14 +1,14 @@
 {
   "name": "@ubc-farm/money",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Utility class used to represent money",
   "license": "MIT",
-  "repository": "https://github.com/ubc-farm/money",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "devDependencies": {
     "jsdoc-to-markdown": "^2.0.1",
+    "rollup": "^0.41.4",
     "rollup-plugin-multi-entry": "^2.0.1",
     "tape": "^4.6.0"
   },
@@ -20,6 +20,7 @@
     "test": "rollup -c rollup.config.test.js | node"
   },
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ]
 }

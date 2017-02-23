@@ -1,0 +1,16 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"strictNullChecks": true,
+		"target": "es2017",
+		"noImplicitThis": true,
+		"lib": [
+			"es2016", "es2017.object",
+			"dom", "dom.iterable",
+			"webworker"
+		]
+	},
+	"include": [
+		"src/**"
+	]
+}
