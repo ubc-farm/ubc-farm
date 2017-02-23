@@ -1,7 +1,12 @@
 import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
 import { classlist as cx } from '@ubc-farm/utils';
 
-export default class TaskTile extends Component {
+interface TaskTileProps { color: string, name: string }
+interface TaskTileState { dragging: boolean };
+
+export default class TaskTile extends Component<TaskTileProps, TaskTileState> {
+	ref: HTMLSpanElement
+
 	constructor(props) {
 		super(props);
 
@@ -34,7 +39,7 @@ export default class TaskTile extends Component {
 			<span
 				className={cx('task-tile', name, { dragging })}
 				ref={(s) => { this.ref = s; }}
-				draggable="true"
+				draggable
 				onDragStart={this.handleDragStart}
 				onDragEnd={this.handleDragEnd}
 			>

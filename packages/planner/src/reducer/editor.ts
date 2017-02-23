@@ -40,4 +40,4 @@ export const setEditorProp = (key: string, value) => ({
 	type: SET_PROPERTY, payload: { key, value }
 });
 
-export const getModel = state => <IState> state.editor;
+export const getModel = (state: { editor: IState }) => state.editor;

@@ -1,11 +1,11 @@
-import { connectAll } from '@ubc-farm/databases';
+import { connectAll, TaskType } from '@ubc-farm/databases';
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
 import TaskPanel from './TaskPanel';
 
 export default function createTaskPanel(taskTypesDB) {
 	const WrappedPanel = connectAll(
-		doc => doc.color,
+		(doc: TaskType) => doc.color,
 		{ rowKey: 'tasks' },
 	)(TaskPanel);
 

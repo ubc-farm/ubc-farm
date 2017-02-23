@@ -37,7 +37,7 @@ interface ConnectAllOptions {
 }
 
 export function connectAll<P, T>(
-	transformer?: (doc: Object, id: string) => T,
+	transformer?: (doc: any, id: string) => T,
 	options?: ConnectAllOptions
 ): (WrappedComponent: React.SFC<P>) => React.Component<P, any>
 
