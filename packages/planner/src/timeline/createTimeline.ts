@@ -72,7 +72,7 @@ async function handleMoveItem(
 	const task = await db.get(id, { rev });
 	let changed = false;
 
-	if (task.start.valueOf() !== start || task.end.valueOf() !== end) {
+	if (task.start != start || task.end != end) {
 		Object.assign(task, { start, end });
 		changed = true;
 	}

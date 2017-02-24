@@ -1,4 +1,4 @@
-import { Timeline, DataItem, DataSet, DataGroup } from 'vis';
+import { Timeline, DataItem, DataSet } from 'vis';
 import { Task } from '@ubc-farm/databases';
 import { handleAddItem, handleTypeChange } from './createTimeline';
 
