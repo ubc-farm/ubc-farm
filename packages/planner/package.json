@@ -10,7 +10,7 @@
     "document-promises": "^3.1.2",
     "react-select": "^1.0.0-rc",
     "shortid": "^2.2.6",
-    "@ubc-farm/databases": "^1.0.0",
+    "@ubc-farm/databases": "^2.0.0",
     "@ubc-farm/map-utils": "^1.0.0",
     "redux-devtools-extension": "^2.13.0"
   },

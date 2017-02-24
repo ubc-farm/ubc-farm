@@ -1,10 +1,15 @@
 import { parsed } from 'document-promises';
-import { equipment, locations, tasks, taskTypes } from '@ubc-farm/databases';
+import { getEquipment, getLocations, getTasks, getTaskTypes } from '@ubc-farm/databases';
 import connectEditor from '../src/editor/';
 import attachMap from '../src/map/';
 import store from '../src/reducer/';
 import createTaskPanel from '../src/task-panel/';
 import setupPlannerTimeline from '../src/timeline/';
+
+const equipment = getEquipment();
+const locations = getLocations();
+const tasks = getTasks();
+const taskTypes = getTaskTypes();
 
 Object.assign(window, { equipment, locations, tasks, taskTypes });
 

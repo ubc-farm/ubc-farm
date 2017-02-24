@@ -196,13 +196,13 @@ export interface Task {
 
 ///////////////////////////
 
-export function getEquipment(): PouchDB.Database<Equipment>;
-export function getInvoices(): PouchDB.Database<Invoice>;
-export function getLocations(): PouchDB.Database<Location>;
-export function getLongTerm(): PouchDB.Database<LongTermEntry>;
-export function getPeople(): PouchDB.Database<Person>;
-export function getTaskTypes(): PouchDB.Database<TaskType>;
-export function getTasks(): PouchDB.Database<Task>;
+export function getEquipment(): Promise<PouchDB.Database<Equipment>>;
+export function getInvoices(): Promise<PouchDB.Database<Invoice>>;
+export function getLocations(): Promise<PouchDB.Database<Location>>;
+export function getLongTerm(): Promise<PouchDB.Database<LongTermEntry>>;
+export function getPeople(): Promise<PouchDB.Database<Person>>;
+export function getTaskTypes(): Promise<PouchDB.Database<TaskType>>;
+export function getTasks(): Promise<PouchDB.Database<Task>>;
 
 ///////////////////////////
 

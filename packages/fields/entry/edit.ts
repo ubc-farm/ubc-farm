@@ -1,9 +1,10 @@
 import { parsed } from 'document-promises';
-import { locations, Field } from '@ubc-farm/databases';
+import { getLocations, Field } from '@ubc-farm/databases';
 import openField from '../src/openField';
 import setupEditorMap from '../src/field-editor/index';
 import renderFieldEditorForm from '../src/field-form/index';
 
+const locations = getLocations();
 Promise.all([
 	locations,
 	locations.then(openField),
