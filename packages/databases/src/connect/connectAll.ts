@@ -1,5 +1,8 @@
 import PouchDB from 'pouchdb';
-import { Component, PropTypes, createElement, SFC } from 'react';
+import {
+	Component, PropTypes, createElement,
+	ReactType, ComponentClass, ComponentState, ValidationMap
+} from 'react';
 
 interface ConnectAllOptions {
 	rowKey?: string;
@@ -62,26 +65,27 @@ export default function connectAll<Content, Value>(
 
 	const changesOpts = Object.assign({}, changesOptions, { since: 'now' });
 
-	return function wrapWithConnect<P extends Object>(WrappedComponent: SFC<P>) {
+	interface DBProp { db: PouchDB.Database<Content> }
+	return function wrapWithConnect(WrappedComponent: ReactType): ComponentClass<any> {
 		const displayName = getDisplayName(
-			WrappedComponent.displayName || WrappedComponent.name || 'Component'
+			typeof WrappedComponent === 'string'
+				? 'Component'
+				: WrappedComponent.displayName || WrappedComponent.name
 		);
 
 		const propTypes = {
 			db: PropTypes.instanceOf(PouchDB).isRequired,
 		};
 
-		type DBProp = { db: PouchDB.Database<Content> }
-
-		class ConnectAll extends Component<P & DBProp, any> {
+		class ConnectAll extends Component<DBProp, ComponentState> {
 			static displayName: string;
-			static propTypes: Object;
+			static propTypes: ValidationMap<any>;
 
 			db: PouchDB.Database<Content>;
 			changes: PouchDB.Core.Changes<Object> | null;
 			docError: Error | null;
 
-			constructor(props: P & DBProp) {
+			constructor(props: DBProp) {
 				super(props);
 
 				this.state = {
@@ -95,7 +99,7 @@ export default function connectAll<Content, Value>(
 				this.initDatabaseSubscription();
 			}
 
-			componentWillReceiveProps(nextProps: P & DBProp) {
+			componentWillReceiveProps(nextProps: DBProp) {
 				if (this.db !== nextProps.db) {
 					this.db = nextProps.db;
 					this.docError = null;

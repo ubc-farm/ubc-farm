@@ -7,7 +7,7 @@ import setupEditorMap from '../src/field-editor/index';
 import renderFieldEditorForm from '../src/field-form/index';
 
 Promise.all([getLocations(), parsed]).then(([db]) => {
-	let field: Field = { _id: generate(), name: '' };
+	let field: Field = { _id: generate(), _rev: '', name: '' };
 
 	function back() { window.location.href = '/fields'; }
 	function submit() { db.put(field).then(back); }

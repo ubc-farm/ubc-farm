@@ -6,7 +6,7 @@ import { parsed } from 'document-promises';
 import { connectAll, getPeople } from '@ubc-farm/databases';
 import PeopleList from './PeopleList';
 
-const Connected = connectAll({ useMap: true })(PeopleList);
+const Connected = connectAll({ useArray: true })(PeopleList);
 
 export default async function createPeopleList() {
 	const [db] = await Promise.all([getPeople(), parsed]);

@@ -1,4 +1,3 @@
-import * as PouchDB from 'pouchdb';
 import { getLocation } from '@ubc-farm/databases';
 const { InfoWindow, Data } = google.maps;
 
@@ -17,7 +16,7 @@ export default function createInfoWindow(
 
 	dataLayer.addListener('click', ({ feature }: google.maps.Data.MouseEvent) => {
 		feature.toGeoJson((json: GeoJSON.Feature<GeoJSON.Polygon>) => {
-			const location: string | [number, number] | null = getLocation({
+			const location = getLocation({
 				location: json.properties && json.properties.location,
 				geometry: json.geometry
 			});

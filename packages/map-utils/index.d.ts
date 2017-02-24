@@ -15,12 +15,12 @@ export function observeDatabase<T extends PouchDB.Core.Encodable>(
 	db: PouchDB.Database<T>,
 	mapDataLayer: google.maps.Data,
 	options?: {
-		toFeature?: (doc: T) => GeoJSON.Feature<any>,
-		allDocsOptions?: PouchDB.Core.AllDocsOptions,
+		toFeature?: (doc: T) => GeoJSON.Feature<any> | null | undefined,
+		allDocsOptions?: PouchDB.Core.AllDocsWithKeyOptions | PouchDB.Core.AllDocsWithKeysOptions | PouchDB.Core.AllDocsWithinRangeOptions,
 		changeOptions?: PouchDB.Core.ChangesOptions,
 	}
 ): Promise<PouchDB.Core.Changes<T>>
 
 export function defaultToFeature<T extends GeoJSON.GeometryObject>(
-	doc: { _id: string, geometry: T }
-): GeoJSON.Feature<T>;
+	doc?: { _id: string, geometry?: T }
+): GeoJSON.Feature<T> | null;

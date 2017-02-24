@@ -1,4 +1,3 @@
-import * as PouchDB from 'pouchdb';
 import { Location } from '@ubc-farm/databases';
 import { createMap, observeDatabase, defaultToFeature } from '@ubc-farm/map-utils';
 import createInfoWindow from './infoWindow';

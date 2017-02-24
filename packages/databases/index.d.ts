@@ -40,10 +40,10 @@ interface ConnectAllOptions {
 export function connectAll<Content, Value>(
 	transformer?: (doc: Content, id: string) => Value | null | undefined,
 	options?: ConnectAllOptions
-): <P>(WrappedComponent: React.SFC<P>) => React.Component<P & { db: PouchDB.Database<Content> }, any>
-export function connectAll(
+): (WrappedComponent: React.ReactType) => React.ComponentClass<any>
+export function connectAll<Content>(
 	options?: ConnectAllOptions
-): <P>(WrappedComponent: React.SFC<P>) => React.Component<P, any>
+): (WrappedComponent: React.ReactType) => React.ComponentClass<any>
 
 ///////////////////////////
 
@@ -209,11 +209,19 @@ export function getTasks(): Promise<PouchDB.Database<Task>>;
 ///////////////////////////
 
 type LocationDescription = string | number[] | null;
+type NearlyLocation = {
+	location?: string | number[];
+	geometry?: GeoJSON.GeometryObject;
+} | Location
+type NearlyField = {
+	area?: number;
+	geometry?: GeoJSON.Polygon;
+} | Field
 
-export function getLocation(loc: Location): LocationDescription
-export function getLocationString(loc: Location | LocationDescription): string
-export function getArea(field: Field): number | null;
-export function getAcres(field: Field | number | null): string;
+export function getLocation(loc: NearlyLocation): LocationDescription
+export function getLocationString(loc: NearlyLocation | LocationDescription): string
+export function getArea(field: NearlyField): number | null;
+export function getAcres(field: NearlyField | number | null): string;
 
 export function generateToday(): Promise<void>;
 export function createDefaultTypes(db: PouchDB.Database<TaskType>): Promise<void>;

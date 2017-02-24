@@ -11,6 +11,7 @@ function omit(obj, ...keys) {
 }
 
 export function defaultToFeature(doc) {
+	if (!doc || !doc.geometry) return null;
 	return {
 		type: 'Feature',
 		geometry: doc.geometry,

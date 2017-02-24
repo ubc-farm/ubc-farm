@@ -15,12 +15,9 @@ const connectToFields = connectAll<Field, {}>(
 			startkey: 'fields/',
 			endkey: 'fields/\uffff',
 		},
-		useMap: true,
+		useArray: true,
 	},
 );
-
-const mapValues = ReactComponent =>
-	({ rows }) => <ReactComponent rows={[...rows.values()]} />;
 
 /**
  * Renders the field list using values from the location database.
@@ -28,7 +25,7 @@ const mapValues = ReactComponent =>
  * state of the list
  */
 export default function createFieldList(locationDB: PouchDB.Database<Field>) {
-	const ConnectedFieldList = connectToFields(mapValues(FieldList));
+	const ConnectedFieldList = connectToFields(FieldList);
 
 	render(<ConnectedFieldList db={locationDB} />, document.getElementById('reactRoot'));
 }

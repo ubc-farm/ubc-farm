@@ -6,7 +6,7 @@ const PeopleList: SFC<{ rows: Map<string, Person> }> = ({ rows }) => {
 	const values = [...rows.values()];
 	return (
 		<AutoSizer>
-			{size => (
+			{(size: { height: number, width: number }) => (
 				<Table
 					{...size}
 					headerHeight={30}
