@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import moment from 'moment';
 import * as React from 'react';
 
@@ -196,13 +196,13 @@ export interface Task {
 
 ///////////////////////////
 
-export const equipment: PouchDB.Database<Equipment>;
-export const invoices: PouchDB.Database<Invoice>;
-export const locations: PouchDB.Database<Location>;
-export const longTerm: PouchDB.Database<LongTermEntry>;
-export const people: PouchDB.Database<Person>;
-export const taskTypes: PouchDB.Database<TaskType>;
-export const tasks: PouchDB.Database<Task>;
+export function getEquipment(): PouchDB.Database<Equipment>;
+export function getInvoices(): PouchDB.Database<Invoice>;
+export function getLocations(): PouchDB.Database<Location>;
+export function getLongTerm(): PouchDB.Database<LongTermEntry>;
+export function getPeople(): PouchDB.Database<Person>;
+export function getTaskTypes(): PouchDB.Database<TaskType>;
+export function getTasks(): PouchDB.Database<Task>;
 
 ///////////////////////////
 
@@ -214,4 +214,4 @@ export function getArea(field: Field): number | null;
 export function getAcres(field: Field | number | null): string;
 
 export function generateToday(): Promise<void>;
-export function createDefaultTypes(): Promise<void>;
+export function createDefaultTypes(db: PouchDB.Database<TaskType>): Promise<void>;

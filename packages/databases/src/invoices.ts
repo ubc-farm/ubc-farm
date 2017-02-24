@@ -22,24 +22,28 @@ export interface Invoice {
 	notes: string; // empty string by default
 }
 
-export const db = new PouchDB<Invoice>('invoices');
-export default Promise.all([
-	db.createIndex({ index: { fields: ['isPurchase'] } }),
-	db.createIndex({ index: { fields: ['date'] } }),
-]).then(() => db);
+export default async function getInvoices() {
+	const db = new PouchDB<Invoice>('invoices');
+	await Promise.all([
+		db.createIndex({ index: { fields: ['isPurchase'] } }),
+		db.createIndex({ index: { fields: ['date'] } }),
+	]);
 
-db.transform({
-	incoming(doc: Invoice): Invoice {
-		doc.isPurchase = doc.isPurchase || false;
-		doc.notes = doc.notes || '';
-		doc.items = doc.items || [];
+	db.transform({
+		incoming(doc: Invoice): Invoice {
+			doc.isPurchase = doc.isPurchase || false;
+			doc.notes = doc.notes || '';
+			doc.items = doc.items || [];
 
-		doc.date = doc.date ? moment(doc.date).valueOf() : null;
+			doc.date = doc.date ? moment(doc.date).valueOf() : null;
 
-		return doc;
-	},
-	outgoing(doc: Invoice): Invoice {
-		doc.date = doc.date ? moment(doc.date) : null;
-		return doc;
-	},
-});
+			return doc;
+		},
+		outgoing(doc: Invoice): Invoice {
+			doc.date = doc.date ? moment(doc.date) : null;
+			return doc;
+		},
+	});
+
+	return db;
+}

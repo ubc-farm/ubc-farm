@@ -9,21 +9,22 @@ export interface TaskType {
 	name?: string;
 }
 
-export const db = new PouchDB<TaskType>('task-types');
-export default db.allDocs({ limit: 0 })
-	.then(({ total_rows }) => {
-		if (total_rows === 0) return createDefaultTypes();
-	})
-	.then(() => db);
+export default async function getTaskTypes() {
+	const db = new PouchDB<TaskType>('task-types');
+	db.transform<TaskType>({
+		outgoing(doc) {
+			doc.name = startCase(doc._id);
+			return doc;
+		}
+	});
 
-db.transform({
-	outgoing(doc) {
-		doc.name = startCase(doc._id);
-		return doc;
-	}
-});
+	const { total_rows } = await db.allDocs({ limit: 0 });
+	if (total_rows === 0) await createDefaultTypes(db);
 
-export function createDefaultTypes() {
+	return db;
+}
+
+export function createDefaultTypes(db: PouchDB.Database<TaskType>) {
 	return db.bulkDocs(<TaskType[]> [
 		{ _id: 'seeding', color: '#33691e' },
 		{ _id: 'irrigation', color: '#01579b' },

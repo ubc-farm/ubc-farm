@@ -44,7 +44,15 @@ export interface Plant {
 	vitK: number;
 }
 
-export const db = new PouchDB<Plant>('plants');
-export default Promise.all([
-	db.createIndex({ index: { fields: ['commodity'] } }),
-]).then(() => db);
+export default async function getPlants() {
+	const db = new PouchDB<Plant>('plants');
+	await Promise.all([
+		db.createIndex({ index: { fields: ['commodity'] } }),
+	]);
+
+	const { total_rows } = await db.allDocs({ limit: 0 });
+	if (total_rows > 0) return db;
+
+	// TODO: Load CSV data into the plant database
+	return db;
+}

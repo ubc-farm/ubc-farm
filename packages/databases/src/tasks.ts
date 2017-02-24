@@ -16,33 +16,37 @@ export interface Task {
 	done?: boolean;
 }
 
-export const db = new PouchDB<Task>('tasks');
-
-export default Promise.all([
-	db.createIndex({ index: { fields: ['type'] } }),
-	db.createIndex({ index: { fields: ['location'] } }),
-	db.createIndex({ index: { fields: ['start'] } }),
-	db.createIndex({ index: { fields: ['end'] } }),
-]).then(() => db);
-
 function dateToMilli(date) {
 	if (!date) return null;
 	return moment(date).valueOf();
 }
 
-db.transform({
-	incoming(doc: Task): Task {
-		if (!doc._id) doc._id = generate();
+export default async function getTasks() {
+	const db = new PouchDB<Task>('tasks');
 
-		doc.start = dateToMilli(doc.start);
-		doc.end = dateToMilli(doc.end)
-			|| moment(doc.start).add(1, 'hours').valueOf();
+	await Promise.all([
+		db.createIndex({ index: { fields: ['type'] } }),
+		db.createIndex({ index: { fields: ['location'] } }),
+		db.createIndex({ index: { fields: ['start'] } }),
+		db.createIndex({ index: { fields: ['end'] } }),
+	]);
 
-		return doc;
-	},
-	outgoing(doc: Task): Task {
-		if (doc.start) doc.start = moment(doc.start);
-		if (doc.end) doc.start = moment(doc.end);
-		return doc;
-	}
-});
+	db.transform({
+		incoming(doc: Task): Task {
+			if (!doc._id) doc._id = generate();
+
+			doc.start = dateToMilli(doc.start);
+			doc.end = dateToMilli(doc.end)
+				|| moment(doc.start).add(1, 'hours').valueOf();
+
+			return doc;
+		},
+		outgoing(doc: Task): Task {
+			if (doc.start) doc.start = moment(doc.start);
+			if (doc.end) doc.start = moment(doc.end);
+			return doc;
+		}
+	});
+
+	return db;
+}
