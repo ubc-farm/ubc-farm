@@ -1,16 +1,25 @@
 {
 	"compilerOptions": {
 		"allowJs": true,
+		"alwaysStrict": true,
 		"strictNullChecks": true,
-		"jsx": "react",
-		"target": "es2017",
+		"skipLibCheck": true,
+		"noImplicitAny": true,
 		"noImplicitThis": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"suppressImplicitAnyIndexErrors": true,
+
+		"jsx": "react",
 		"jsxFactory": "createElement",
+
+		"target": "es2017",
 		"lib": [
 			"es2016", "es2017.object",
-			"dom", "dom.iterable",
-			"webworker"
-		]
+			"dom", "dom.iterable"
+		],
+		"moduleResolution": "node"
 	},
 	"include": [
 		"src/**/*",

@@ -30,9 +30,9 @@ export default class Money {
 	getCents(digits?: number): number
 
 	/** Same as getDollars() */
-	get dollars() { return this.getDollars(); }
+	readonly dollars: number;
 	/** Same as getCents(0) */
-	get cents() { return this.getCents(0); }
+	readonly cents: number;
 
 	/**
 	 * Returns the integer value of this money, stripping

@@ -6,11 +6,11 @@ import { DateString, Cents } from './utils/typedefs';
 
 export interface LongTermEntry {
 	_id: DateString;
-	_rev: string;
+	_rev?: string;
 	numEmployed: number;
-	waterUsed: number; // in liters
-	revenue: Cents;
-	expenses: Cents;
+	waterUsed?: number; // in liters
+	revenue?: Cents;
+	expenses?: Cents;
 }
 
 const db = new PouchDB<LongTermEntry>('long-term');
@@ -36,14 +36,14 @@ export async function generateToday() {
 	const today = moment().format('Y-MM-DD');
 	const [numEmployed] = await Promise.all([countEmployees()]);
 
-	let doc;
+	let base;
 	try {
-		doc = await db.get(today);
+		base = await db.get(today);
 	} catch (err) {
 		if (err.name !== 'not_found') throw err;
-		doc = { _id: today };
+		base = { _id: today };
 	}
 
-	Object.assign(doc, { numEmployed });
+	const doc = Object.assign(base, { numEmployed });
 	return db.put(doc);
 }

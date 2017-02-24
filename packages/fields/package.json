@@ -14,13 +14,14 @@
 	},
 	"devDependencies": {
 		"rollup": "^0.41.4",
-		"pouchdb": "^6.1.2"
+		"typescript": "^2.2.1"
 	},
 	"scripts": {
 		"build-index": "rollup -c -i entry/index.ts -o browser/index.js",
 		"build-edit": "rollup -c -i entry/edit.ts -o browser/edit.js",
 		"build-new": "rollup -c -i entry/new.ts -o browser/new.js",
 		"prepare": "npm run build-index && npm run build-edit && npm run build-new",
-		"prepublish": "npm run prepare"
+		"prepublish": "npm run prepare",
+		"ts": "tsc --noEmit"
 	}
 }

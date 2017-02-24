@@ -100,11 +100,11 @@ export default async function getLocations() {
 		incoming(doc) {
 			const { _id } = doc;
 
-			doc.location = getLocation(doc);
+			doc.location = getLocation(doc) || undefined;
 
 			if (_id.startsWith('field/')) {
 				const field = <Field> doc;
-				field.area = getArea(field);
+				field.area = getArea(field) || undefined;
 			}
 			return doc;
 		},

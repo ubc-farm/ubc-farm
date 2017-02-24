@@ -1,5 +1,5 @@
-/// <reference path="../../../pouch-types/pouchdb-find/index.d.ts" />
-/// <reference path="../../../pouch-types/transform-pouch/index.d.ts" />
+/// <reference path="../../../custom-types/pouchdb-find/index.d.ts" />
+/// <reference path="../../../custom-types/transform-pouch/index.d.ts" />
 
 import PouchDB from 'pouchdb';
 import find from 'pouchdb-find';

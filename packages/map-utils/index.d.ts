@@ -1,3 +1,7 @@
+/// <reference types="googlemaps" />
+
+import * as PouchDB from 'pouchdb';
+
 /**
  * Creates a map on the #googleMap element
  */
