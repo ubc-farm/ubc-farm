@@ -32,8 +32,8 @@ interface ConnectAllOptions {
 	changes?: boolean;
 	useMap?: boolean;
 	getDisplayName?: (name: string) => string;
-	allDocsOptions?: PouchDB.Core.AllDocsOptions;
-	changesOptions?: PouchDB.Core.AllDocsOptions;
+	allDocsOptions?: PouchDB.Core.AllDocsWithKeyOptions | PouchDB.Core.AllDocsWithKeysOptions | PouchDB.Core.AllDocsWithinRangeOptions;
+	changesOptions?: PouchDB.Core.ChangesOptions;
 }
 
 export function connectAll<P, T>(

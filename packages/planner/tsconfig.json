@@ -12,6 +12,10 @@
 			"webworker"
 		]
 	},
+	"include": [
+		"src/**",
+		"entry/**"
+	],
 	"exclude": [
 		"node_modules",
 		"**/node_modules",

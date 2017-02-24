@@ -1,13 +1,19 @@
 {
 	"compilerOptions": {
 		"allowJs": true,
+		"alwaysStrict": true,
 		"strictNullChecks": true,
+		"noImplicitAny": true,
 		"noImplicitThis": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"suppressImplicitAnyIndexErrors": true,
 
-		"target": "esnext",
 		"jsx": "react",
 		"jsxFactory": "createElement",
 
+		"target": "es2017",
 		"lib": [
 			"es2016", "es2017.object",
 			"dom", "dom.iterable",
@@ -17,8 +23,5 @@
 	"include": [
 		"src/**",
 		"entry/**"
-	],
-	"exclude": [
-		"node_modules"
 	]
 }
