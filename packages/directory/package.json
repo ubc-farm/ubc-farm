@@ -20,6 +20,6 @@
     "watch": "rollup -c -w -i entry/index.ts -o browser/index.js",
     "prepare": "npm run build-index --quiet",
     "prepublish": "npm run prepare --quiet",
-    "ts": "tsc --noEmit"
+    "ts": "tsc --noEmit || exit 0"
   }
 }

@@ -1,5 +1,5 @@
 import { Timeline, DataItem, DataSet, DataGroup } from 'vis';
-
+import { Task } from '@ubc-farm/databases';
 import { handleAddItem, handleTypeChange } from './createTimeline';
 
 function handleDragOver(e: DragEvent) {
@@ -10,6 +10,7 @@ function handleDragOver(e: DragEvent) {
 export default function addDragListeners(
 	timeline: Timeline,
 	items: DataSet<DataItem>,
+	taskDB: PouchDB.Database<Task>,
 ) {
 	const element = timeline.dom.center;
 
@@ -25,12 +26,16 @@ export default function addDragListeners(
 
 		switch (what) {
 			case 'background':
-				handleAddItem({
-					content: text,
-					className: group ? group.toString() : undefined,
-					start: snappedTime.valueOf(),
-					type: text,
-				}, editedItem => { if (editedItem) items.add(editedItem, 'drop') });
+				handleAddItem.call(
+					taskDB, {
+						content: text,
+						className: group ? group.toString() : undefined,
+						start: snappedTime.valueOf(),
+						type: text,
+					},
+					(editedItem: DataItem | null) => {
+						if (editedItem) items.add(editedItem, 'drop');
+					});
 				break;
 
 			case 'item': {
@@ -38,8 +43,12 @@ export default function addDragListeners(
 				const item = items.get(itemID);
 				if (item.content === item.className) item.content = text;
 				item.className = text;
-				handleTypeChange(item,
-					editedItem => { if (editedItem) items.update(editedItem, 'drop') });
+				handleTypeChange.call(
+					taskDB, item,
+					(editedItem: DataItem | null) => {
+						if (editedItem) items.update(editedItem, 'drop');
+					}
+				);
 				break;
 			}
 		}

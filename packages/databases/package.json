@@ -30,6 +30,6 @@
 		"dts": "dts-generator --project . --name databases --out index.d.ts",
 		"prepare": "npm run prepare:es && npm run prepare:umd",
 		"prepublish": "npm run prepare",
-		"ts": "tsc --noEmit"
+		"ts": "tsc --noEmit || exit 0"
 	}
 }

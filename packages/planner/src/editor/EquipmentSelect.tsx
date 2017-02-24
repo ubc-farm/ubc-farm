@@ -1,6 +1,5 @@
 import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
 import Select from 'react-select';
-import entries from 'lodash/entries';
 import { SelectProps } from './IProps';
 
 const EquipmentSelect: SFC<SelectProps> = ({ disabled, bindInput, options }) => (
@@ -9,7 +8,7 @@ const EquipmentSelect: SFC<SelectProps> = ({ disabled, bindInput, options }) => 
 		<Select
 			multi
 			className="editor-input" disabled={disabled}
-			options={entries(options).map(([value, label]) => ({ value, label }))}
+			options={Object.entries(options).map(([value, label]) => ({ value, label }))}
 			{...bindInput('equipment')}
 		/>
 	</label>

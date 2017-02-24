@@ -81,7 +81,7 @@ export function id(prefix?: string): string
  * @return {function} activate to unsubscribe from the store.
  * @see https://github.com/reactjs/redux/issues/303#issuecomment-125184409
  */
-export default function observeStore<S, T>(
+export function observeStore<S, T>(
 	store: Store<S>,
 	select: (state: S) => T,
 	onChange: (newState: T, oldState: T) => void,

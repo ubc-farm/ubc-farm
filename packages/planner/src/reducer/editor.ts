@@ -6,18 +6,18 @@ const SET_PROPERTY = 'planning/editor/SET_PROPERTY';
 
 export type IState = Task;
 
-const defaultState = Object.freeze({
-	_id: null,
-	_rev: null,
+const defaultState = {
+	_id: '',
+	_rev: '',
 	type: '',
 	name: '',
 	start: null,
 	end: null,
 	location: '',
 	equipment: [],
-});
+};
 
-export default function editorReducer(state: IState = defaultState, action) {
+export default function editorReducer(state: IState = defaultState, action: any) {
 	switch (action.type) {
 		case CLEAR:
 			return defaultState;
@@ -36,7 +36,7 @@ export default function editorReducer(state: IState = defaultState, action) {
 
 export const clearEditor = () => ({ type: CLEAR });
 export const setEditorModel = (model: IState) => ({ type: SET_MODEL, payload: model });
-export const setEditorProp = (key: string, value) => ({
+export const setEditorProp = (key: string, value: any) => ({
 	type: SET_PROPERTY, payload: { key, value }
 });
 

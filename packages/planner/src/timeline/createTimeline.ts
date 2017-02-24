@@ -1,11 +1,9 @@
-import * as PouchDB from 'pouchdb';
 import { DataItem, Timeline as visTimeline } from 'vis';
-import { Store } from 'redux';
 import { Task, TaskType, Location } from '@ubc-farm/databases';
 
 import Timeline from 'vis-timeline';
 import { generate } from 'shortid';
-import createTaskItems, { taskToItem, itemToTask } from './taskItems';
+import createTaskItems, { itemToTask } from './taskItems';
 import createLocationGroups from './locationGroups';
 
 type EditCallback = (item: DataItem | null) => void;
@@ -43,7 +41,7 @@ export async function handleTypeChange(
 	const doc = await db.get(item.id.toString(), { rev });
 	if (doc.type === item.className) return;
 
-	doc.type = item.className;
+	if (item.className) doc.type = item.className;
 	const res = await db.put(doc);
 	revs.set(item, res.rev);
 }

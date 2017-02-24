@@ -15,6 +15,8 @@
     "@types/pouchdb": "^5.4.28",
     "@types/react": "^15.0.11",
     "@types/react-dom": "^0.14.23",
+    "@types/react-redux": "^4.4.36",
+    "@types/react-select": "^1.0.42",
     "@types/react-virtualized": "^8.9.2",
     "@types/redux": "^3.6.0",
     "@types/shortid": "^0.0.28",

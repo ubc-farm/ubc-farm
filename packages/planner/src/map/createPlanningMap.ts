@@ -23,7 +23,7 @@ function rowToFeature(
 	};
 }
 
-function setProperty(datalayer: google.maps.Data, prop: string, value) {
+function setProperty(datalayer: google.maps.Data, prop: string, value: any) {
 	return (id: string) => {
 		const feature = datalayer.getFeatureById(id);
 		if (feature != null) feature.setProperty(prop, value);
@@ -63,10 +63,10 @@ export default function createPlanningMap(
 		onClick(id, feature);
 	});
 
-	setSelected.removeListeners = () => {
+	const removeListeners = () => {
 		listener.remove();
 		observers.forEach(observer => observer.then(o => o.cancel()));
 	};
 
-	return setSelected;
+	return { setSelected, removeListeners };
 }

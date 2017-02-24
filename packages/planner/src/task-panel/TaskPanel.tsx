@@ -1,8 +1,7 @@
 import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
-import entries from 'lodash/entries';
 import TaskTile from './TaskTile';
 
-type Tasks = Map<string, string> | { [name: string]: string };
+type Tasks = { [name: string]: string };
 
 /**
  * Container for the task items.
@@ -10,17 +9,14 @@ type Tasks = Map<string, string> | { [name: string]: string };
  */
 const TaskPanel: SFC<{ tasks: Tasks}> = ({ tasks }) => (
 	<div className="task-panel">
-		{entries(tasks).map(([name, color]) => (
+		{Object.entries(tasks).map(([name, color]) => (
 			<TaskTile key={name} {...{ name, color }} />
 		))}
 	</div>
 );
 
 TaskPanel.propTypes = {
-	tasks: PropTypes.oneOfType([
-		PropTypes.instanceOf(Map),
-		PropTypes.objectOf(PropTypes.string),
-	]).isRequired,
+	tasks: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default TaskPanel;

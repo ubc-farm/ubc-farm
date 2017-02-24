@@ -5,7 +5,7 @@ const CLEAR = 'planning/selected/CLEAR';
 export type IState = string[];
 interface FullState { selected: IState };
 
-export default function selectedReducer(state: IState = [], action) {
+export default function selectedReducer(state: IState = [], action: any) {
 	switch (action.type) {
 		case SET:
 			return action.payload;

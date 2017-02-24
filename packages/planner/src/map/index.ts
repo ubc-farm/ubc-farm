@@ -1,6 +1,5 @@
 import { Location } from '@ubc-farm/databases';
 import { Store } from 'redux';
-import PouchDB from 'pouchdb';
 
 import { observeStore } from '@ubc-farm/utils';
 import createPlanningMap from './createPlanningMap';
@@ -13,12 +12,12 @@ export default function attachMap(
 	store: Store<{ selected: IState }>,
 	locationsDB: PouchDB.Database<Location>,
 ) {
-	const setSelected = createPlanningMap(
+	const { setSelected, removeListeners } = createPlanningMap(
 		id => store.dispatch(toggleSelected(id)),
 		locationsDB,
 	);
 
 	const unsub = observeStore(store, getAllSelected, setSelected);
 
-	return function removeListeners() { setSelected.removeListeners(); unsub(); };
+	return function remove() { removeListeners(); unsub(); };
 }

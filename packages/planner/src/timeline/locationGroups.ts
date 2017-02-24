@@ -1,7 +1,5 @@
-import * as PouchDB from 'pouchdb';
 import { Location } from '@ubc-farm/databases';
 import { DataGroup, DataSet as visDataSet } from 'vis';
-
 import { DataSet } from 'vis-timeline';
 
 //const groupRevs = new WeakMap<DataGroup, string>();
@@ -27,7 +25,10 @@ export default async function createLocationGroups(...dbs: PouchDB.Database<Loca
 
 	const data: DataGroup[] = [];
 	for (const { rows } of results) {
-		data.push(...rows.map(row => locationToGroup(row.doc)));
+		for (const { doc } of rows) {
+			if (!doc) throw new Error();
+			data.push(locationToGroup(doc));
+		}
 	}
 
 	const groups: visDataSet<DataGroup> = new DataSet(data);
@@ -36,7 +37,10 @@ export default async function createLocationGroups(...dbs: PouchDB.Database<Loca
 		db.changes({ include_docs: true, live: true })
 		.on('change', (change) => {
 			if (change.deleted) groups.remove(change.id, 'pouch-change');
-			else groups.update(locationToGroup(change.doc), 'pouch-change');
+			else {
+				const group = change.doc && locationToGroup(change.doc);
+				if (group) groups.update(group, 'pouch-change');
+			}
 		})
 	);
 

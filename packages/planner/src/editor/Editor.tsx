@@ -1,5 +1,3 @@
-import * as PouchDB from 'pouchdb';
-
 import { createElement, PropTypes, StatelessComponent, ChangeEvent } from 'react';
 /** @jsx createElement */
 import { connectAll, Task, Equipment, Location } from '@ubc-farm/databases';

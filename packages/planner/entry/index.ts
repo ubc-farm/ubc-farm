@@ -1,3 +1,5 @@
+/// <reference path="../../custom-types/document-promises/index.d.ts" />
+
 import { parsed } from 'document-promises';
 import { getEquipment, getLocations, getTasks, getTaskTypes } from '@ubc-farm/databases';
 import connectEditor from '../src/editor/';

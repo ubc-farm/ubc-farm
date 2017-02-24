@@ -1,15 +1,23 @@
-import PouchDB from 'pouchdb';
-import { Task } from '@ubc-farm/databases';
-import { DataItem, IdType } from 'vis';
+import { Store } from 'redux';
+import { Task, TaskType, Location } from '@ubc-farm/databases';
+import { IdType } from 'vis';
 
 import { observeStore } from '@ubc-farm/utils';
 import { setSelected, getAllSelected } from '../reducer/selected';
-import createTimeline, { handleAddItem, handleTypeChange } from './createTimeline';
+import { IState } from '../reducer/'
+import createTimeline from './createTimeline';
 import addDragListeners from './addDragListeners';
 
 type SelectProperties = { items: IdType[], event: MouseEvent };
 
-export default async function setupPlannerTimeline(store, databases) {
+export default async function setupPlannerTimeline(
+	store: Store<IState>,
+	databases: {
+		tasks: PouchDB.Database<Task>,
+		taskTypes: PouchDB.Database<TaskType>,
+		locations: PouchDB.Database<Location>,
+	},
+) {
 	const { tasks } = databases;
 	const { timeline, items, cancel } = await createTimeline(databases);
 
@@ -24,7 +32,7 @@ export default async function setupPlannerTimeline(store, databases) {
 	}
 	timeline.on('select', handleSelect);
 
-	const removeDrag = addDragListeners(timeline, items);
+	const removeDrag = addDragListeners(timeline, items, tasks);
 
 	return function cancelListeners() {
 		cancel();

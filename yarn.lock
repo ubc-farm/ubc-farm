@@ -150,6 +150,19 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-redux@^4.4.36":
+  version "4.4.36"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-4.4.36.tgz#5d1e768f3291c66c8e54d8a48e42f7cb554a7d87"
+  dependencies:
+    "@types/react" "*"
+    redux "^3.6.0"
+
+"@types/react-select@^1.0.42":
+  version "1.0.42"
+  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-1.0.42.tgz#edd6a708ca89e43916eeb7c10c5028fb23247bbe"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-virtualized@^8.9.2":
   version "8.9.2"
   resolved "https://registry.yarnpkg.com/@types/react-virtualized/-/react-virtualized-8.9.2.tgz#5586a1c63f5817f8b5f622fb6f14199f889d5ddc"
@@ -2796,7 +2809,7 @@ redeyed@~1.0.0:
   dependencies:
     esprima "~3.0.0"
 
-redux@*:
+redux@*, redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:

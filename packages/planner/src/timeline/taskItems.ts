@@ -1,7 +1,5 @@
-import * as PouchDB from 'pouchdb';
 import { Task, TaskType } from '@ubc-farm/databases';
 import { DataItem, DataSet as visDataSet } from 'vis';
-
 import { DataSet } from 'vis-timeline';
 import moment from 'moment';
 
@@ -20,8 +18,10 @@ export function taskToItem(doc: Task, revMap: RevMap): DataItem {
 	const { _id, _rev, name, location, type } = doc;
 
 	let { start, end } = doc;
+	if (!start) throw new Error();
+
 	start = start.valueOf();
-	end = end.valueOf();
+	end = end && end.valueOf();
 
 	const item = {
 		id: _id,
@@ -38,11 +38,11 @@ export function taskToItem(doc: Task, revMap: RevMap): DataItem {
 }
 
 export function itemToTask(item: DataItem, revMap: RevMap): Task {
-	const type = item.className;
+	const type = item.className || '';
 	if (!item.id) throw new TypeError(`item missing ID! - ${JSON.stringify(item)}`);
 	return {
 		_id: item.id.toString(),
-		_rev: revMap.get(item),
+		_rev: revMap.get(item) || '',
 		type,
 		name: item.content === type ? '' : item.content,
 		start: moment(item.start),
@@ -61,13 +61,16 @@ export default async function createTaskItems(
 ) {
 	const { rows } = await db.allDocs({ include_docs: true });
 
-	const data = rows.map(row => taskToItem(row.doc, revMap));
+	const data = rows
+		.map(({ doc }) => (doc ? taskToItem(doc, revMap) : null))
+		.filter(item => item != null);
 	const items: visDataSet<DataItem> = new DataSet(data);
 
 	const listener = db.changes({ include_docs: true, live: true })
 	.on('change', async (change) => {
 		if (change.deleted) items.remove(change.id, 'pouch-change');
 		else {
+			if (!change.doc) throw new Error();
 			const item = taskToItem(change.doc, revMap);
 			const color = await getColor(taskTypeDb, getType(change.id));
 			if (color) item.style = `--brand-primary: ${color}`;

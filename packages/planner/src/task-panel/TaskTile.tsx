@@ -1,13 +1,17 @@
-import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
+import {
+	createElement, PropTypes, Component,
+	DragEvent, ValidationMap,
+} from 'react'; /** @jsx createElement */
 import { classlist as cx } from '@ubc-farm/utils';
 
 interface TaskTileProps { color: string, name: string }
 interface TaskTileState { dragging: boolean };
 
 export default class TaskTile extends Component<TaskTileProps, TaskTileState> {
+	static propTypes: ValidationMap<any>
 	ref: HTMLSpanElement
 
-	constructor(props) {
+	constructor(props: TaskTileProps) {
 		super(props);
 
 		this.handleDragStart = this.handleDragStart.bind(this);
@@ -20,13 +24,13 @@ export default class TaskTile extends Component<TaskTileProps, TaskTileState> {
 		this.ref.style.setProperty('--theme-color', this.props.color);
 	}
 
-	handleDragStart(e) {
+	handleDragStart(e: DragEvent<HTMLSpanElement>) {
 		this.setState({ dragging: true });
 		e.dataTransfer.dropEffect = 'copy';
 		e.dataTransfer.setData('text/plain', this.props.name);
 	}
 
-	handleDragEnd(e) {
+	handleDragEnd(e: DragEvent<HTMLSpanElement>) {
 		e.preventDefault();
 		this.setState({ dragging: false });
 	}

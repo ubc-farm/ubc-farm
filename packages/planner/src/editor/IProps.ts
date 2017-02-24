@@ -1,4 +1,4 @@
-import { SFC, EventHandler, ChangeEvent } from 'react';
+import { EventHandler, ChangeEvent } from 'react';
 
 export interface InputProps {
 	bindInput: (name: string) => {
