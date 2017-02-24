@@ -31,13 +31,14 @@ interface ConnectAllOptions {
 	loadingKey?: string;
 	changes?: boolean;
 	useMap?: boolean;
+	useArray?: boolean;
 	getDisplayName?: (name: string) => string;
 	allDocsOptions?: PouchDB.Core.AllDocsWithKeyOptions | PouchDB.Core.AllDocsWithKeysOptions | PouchDB.Core.AllDocsWithinRangeOptions;
 	changesOptions?: PouchDB.Core.ChangesOptions;
 }
 
 export function connectAll<Content, Value>(
-	transformer?: (doc: Content, id: string) => Value,
+	transformer?: (doc: Content, id: string) => Value | null | undefined,
 	options?: ConnectAllOptions
 ): <P>(WrappedComponent: React.SFC<P>) => React.Component<P & { db: PouchDB.Database<Content> }, any>
 export function connectAll(
@@ -73,12 +74,13 @@ export interface Location {
 	_id: string;
 	_rev: string;
 	name: Index<string>;
-	geometry?: Object;
+	geometry?: GeoJSON.Polygon | GeoJSON.Point;
 	location?: Index<string | number[]>;
 }
 
 export interface Field extends Location {
 	name: string;
+	geometry?: GeoJSON.Polygon;
 	area?: number;
 	crop?: {
 		variety: Index<string>;

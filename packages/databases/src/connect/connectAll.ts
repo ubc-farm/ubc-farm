@@ -6,6 +6,7 @@ interface ConnectAllOptions {
 	loadingKey?: string;
 	changes?: boolean;
 	useMap?: boolean;
+	useArray?: boolean;
 	getDisplayName?: (name: string) => string;
 	allDocsOptions?: PouchDB.Core.AllDocsOptions;
 	changesOptions?: PouchDB.Core.AllDocsOptions;
@@ -52,7 +53,8 @@ export default function connectAll<Content, Value>(
 		rowKey = 'rows',
 		loadingKey = 'loading',
 		changes = true,
-		useMap = false,
+		useArray = false,
+		useMap = options.useArray || false,
 		getDisplayName = (name: string) => `PouchConnect(${name})`,
 		allDocsOptions = { include_docs: true },
 		changesOptions = { include_docs: true, live: true },
@@ -166,10 +168,12 @@ export default function connectAll<Content, Value>(
 			render() {
 				if (this.docError) throw this.docError;
 
-				return createElement(
-					WrappedComponent,
-					Object.assign({}, this.state, this.props),
-				);
+				const childProps = Object.assign({}, this.state, this.props);
+				if (useArray) {
+					childProps[rowKey] = [...childProps[rowKey].values()];
+				}
+
+				return createElement(WrappedComponent, childProps);
 			}
 		}
 
