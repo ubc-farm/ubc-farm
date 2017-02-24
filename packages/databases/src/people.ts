@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { generate } from 'shortid';
 import phone from 'phone';
 import kebabCase from 'lodash/kebabCase';
 import startCase from 'lodash/startCase';
@@ -44,38 +43,41 @@ export interface Researcher extends Person {
 	projects?: string;
 }
 
-export const db = new PouchDB<Person>('people');
-export default Promise.all([
-	db.createIndex({ index: { fields: ['role'] } }),
-	db.createIndex({ index: { fields: ['name'] } }),
-	db.createIndex({ index: { fields: ['email'] } }),
-]).then(() => db);
+export default async function getPeople() {
+	const db = new PouchDB<Person>('people');
+	await Promise.all([
+		db.createIndex({ index: { fields: ['role'] } }),
+		db.createIndex({ index: { fields: ['name'] } }),
+		db.createIndex({ index: { fields: ['email'] } }),
+	]);
 
-db.transform({
-	incoming(doc: Person): Person {
-		if (!doc._id) doc._id = generate();
-		doc.role = kebabCase(doc.role || 'none');
+	db.transform({
+		incoming(doc: Person & { phoneNumber: string }): Person {
+			doc.role = kebabCase(doc.role || 'none');
 
-		if (!doc.addressMailing || !doc.addressPhysical) {
-			if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
-			else doc.addressMailing = doc.addressPhysical;
-		}
+			if (!doc.addressMailing || !doc.addressPhysical) {
+				if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
+				else doc.addressMailing = doc.addressPhysical;
+			}
 
-		if (doc.phoneNumber) {
-			doc.phone = { country: 'CA', number: doc.phoneNumber };
-			delete doc.phoneNumber;
-		}
+			if (doc.phoneNumber) {
+				doc.phone = { country: 'CA', number: doc.phoneNumber };
+				delete doc.phoneNumber;
+			}
 
-		if (doc.phone) {
-			const [num, country] = phone(doc.phone.number, doc.phone.country);
-			doc.phone.number = num;
-			doc.phone.country = country;
-		}
+			if (doc.phone) {
+				const [num, country] = phone(doc.phone.number, doc.phone.country);
+				doc.phone.number = num;
+				doc.phone.country = country;
+			}
 
-		return doc;
-	},
-	outgoing(doc: Person): Person {
-		doc.role = startCase(doc.role);
-		return doc;
-	},
-});
+			return doc;
+		},
+		outgoing(doc: Person): Person {
+			doc.role = startCase(doc.role);
+			return doc;
+		},
+	});
+
+	return db;
+}

@@ -1,4 +1,4 @@
-import PouchDB from 'pouchdb';
+import * as PouchDB from 'pouchdb';
 import moment from 'moment';
 import * as React from 'react';
 
@@ -32,8 +32,8 @@ interface ConnectAllOptions {
 	changes?: boolean;
 	useMap?: boolean;
 	getDisplayName?: (name: string) => string;
-	allDocsOptions?: PouchDB.Core.AllDocsOptions;
-	changesOptions?: PouchDB.Core.AllDocsOptions;
+	allDocsOptions?: PouchDB.Core.AllDocsWithKeyOptions | PouchDB.Core.AllDocsWithKeysOptions | PouchDB.Core.AllDocsWithinRangeOptions;
+	changesOptions?: PouchDB.Core.ChangesOptions;
 }
 
 export function connectAll<P, T>(
@@ -196,13 +196,13 @@ export interface Task {
 
 ///////////////////////////
 
-export const equipment: PouchDB.Database<Equipment>;
-export const invoices: PouchDB.Database<Invoice>;
-export const locations: PouchDB.Database<Location>;
-export const longTerm: PouchDB.Database<LongTermEntry>;
-export const people: PouchDB.Database<Person>;
-export const taskTypes: PouchDB.Database<TaskType>;
-export const tasks: PouchDB.Database<Task>;
+export function getEquipment(): Promise<PouchDB.Database<Equipment>>;
+export function getInvoices(): Promise<PouchDB.Database<Invoice>>;
+export function getLocations(): Promise<PouchDB.Database<Location>>;
+export function getLongTerm(): Promise<PouchDB.Database<LongTermEntry>>;
+export function getPeople(): Promise<PouchDB.Database<Person>>;
+export function getTaskTypes(): Promise<PouchDB.Database<TaskType>>;
+export function getTasks(): Promise<PouchDB.Database<Task>>;
 
 ///////////////////////////
 
@@ -214,4 +214,4 @@ export function getArea(field: Field): number | null;
 export function getAcres(field: Field | number | null): string;
 
 export function generateToday(): Promise<void>;
-export function createDefaultTypes(): Promise<void>;
+export function createDefaultTypes(db: PouchDB.Database<TaskType>): Promise<void>;

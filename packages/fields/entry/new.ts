@@ -1,9 +1,9 @@
 import { parsed } from 'document-promises';
-import { locations, Field } from '@ubc-farm/databases';
+import { getLocations, Field } from '@ubc-farm/databases';
 import setupEditorMap from '../src/field-editor/index';
 import renderFieldEditorForm from '../src/field-form/index';
 
-Promise.all([locations, parsed]).then(([db]) => {
+Promise.all([getLocations(), parsed]).then(([db]) => {
 	let field = {};
 
 	function back() { window.location.href = '/fields'; }

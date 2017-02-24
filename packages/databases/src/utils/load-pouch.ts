@@ -1,7 +1,8 @@
+/// <reference path="../../../pouch-types/pouchdb-find/index.d.ts" />
+/// <reference path="../../../pouch-types/transform-pouch/index.d.ts" />
+
 import PouchDB from 'pouchdb';
 import find from 'pouchdb-find';
 import transform from 'transform-pouch';
 
-PouchDB.plugin(find);
-PouchDB.plugin(transform);
-export default PouchDB;
+export default PouchDB.plugin(find).plugin(transform);

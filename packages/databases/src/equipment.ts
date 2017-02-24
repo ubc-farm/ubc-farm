@@ -8,7 +8,11 @@ export interface Equipment {
 	name: string;
 }
 
-export const db = new PouchDB<Equipment>('equipment');
-export default Promise.all([
-	db.createIndex({ index: { fields: ['name'] } }),
-]).then(() => db);
+export default async function getEquipment() {
+	const db = new PouchDB<Equipment>('equipment');
+	await Promise.all([
+		db.createIndex({ index: { fields: ['name'] } }),
+	]);
+
+	return db;
+}

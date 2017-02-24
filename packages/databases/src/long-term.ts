@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
 import PouchDB from './utils/load-pouch';
-import people from './people';
+import getPeople from './people';
 import { DateString, Cents } from './utils/typedefs';
 
 export interface LongTermEntry {
@@ -13,10 +13,14 @@ export interface LongTermEntry {
 	expenses: Cents;
 }
 
-export const db = new PouchDB<LongTermEntry>('long-term');
-export default Promise.resolve(db);
+const db = new PouchDB<LongTermEntry>('long-term');
+
+export default async function getLongTerm() {
+	return db;
+}
 
 async function countEmployees(): Promise<number> {
+	const people = await getPeople();
 	const { docs } = await people.find({
 		selector: { role: 'employee' },
 		fields: [],

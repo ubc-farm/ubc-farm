@@ -10,6 +10,7 @@
     "@types/geojson": "^1.0.0",
     "@types/googlemaps": "^3.26.1",
     "@types/jest": "^18.1.0",
+    "@types/moment": "^2.13.0",
     "@types/pouchdb": "^5.4.28",
     "@types/react": "^15.0.11",
     "@types/redux": "^3.6.0",

@@ -24,13 +24,6 @@ export interface Field extends Location {
 	};
 }
 
-export const db = new PouchDB<Location>('locations');
-export default Promise.all([
-	// db.createIndex({ index: { fields: ['name'] } }),
-	// db.createIndex({ index: { fields: ['location'] } }),
-	// db.createIndex({ index: { fields: ['crop.variety'] } }),
-]).then(() => db);
-
 type LocationDescription = string | number[] | null;
 /**
  * @returns {string|number[]|null}
@@ -97,19 +90,25 @@ export function getAcres(field: Field|number|null) {
 	return `${mSquared} ac`;
 }
 
-db.transform({
-	incoming(doc: Location): Location {
-		const { _id } = doc;
+export default async function getLocations() {
+	const db = new PouchDB<Location>('locations');
+	await Promise.all([
+		// db.createIndex({ index: { fields: ['name'] } }),
+		// db.createIndex({ index: { fields: ['location'] } }),
+		// db.createIndex({ index: { fields: ['crop.variety'] } }),
+	]);
 
-		doc.location = getLocation(doc);
+	db.transform({
+		incoming(doc) {
+			const { _id } = doc;
 
-		if (_id.startsWith('field/')) {
-			const field = <Field> doc;
-			field.area = getArea(field);
-		}
-		return doc;
-	},
-	outgoing(doc: Location): Location {
-		return Object.assign(doc, uri(doc._id));
-	}
-});
+			doc.location = getLocation(doc);
+
+			if (_id.startsWith('field/')) {
+				const field = <Field> doc;
+				field.area = getArea(field);
+			}
+			return doc;
+		},
+	});
+}

@@ -43,7 +43,7 @@ export default function connectAll<T>(
 ) {
 	if (typeof transformer !== 'function') {
 		options = transformer;
-		transformer = doc => doc;
+		transformer = (doc: T) => doc;
 	}
 
 	const {
@@ -70,6 +70,9 @@ export default function connectAll<T>(
 		type DBProp = { db: PouchDB.Database<T> }
 
 		class ConnectAll extends Component<P & DBProp, any> {
+			static displayName: string;
+			static propTypes: Object;
+
 			db: PouchDB.Database<T>;
 			changes: PouchDB.Core.Changes<Object> | null;
 			docError: Error | null;
