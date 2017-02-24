@@ -1,11 +1,10 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
 import { connectAll, Field } from '@ubc-farm/databases';
-import * as PouchDB from 'pouchdb';
-import pick from 'lodash/pick';
+import { pick } from 'lodash';
 import FieldList from './FieldList';
 
-const connectToFields = connectAll(
+const connectToFields = connectAll<Field, {}>(
 	(doc) => {
 		if (!doc._id.startsWith('fields/')) return null;
 		return pick(doc, '_id', 'name', 'geometry', 'crop');

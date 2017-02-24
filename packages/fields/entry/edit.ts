@@ -1,3 +1,5 @@
+/// <reference path="../../custom-types/document-promises/index.d.ts" />
+
 import { parsed } from 'document-promises';
 import { getLocations, Field } from '@ubc-farm/databases';
 import openField from '../src/openField';
@@ -16,7 +18,7 @@ Promise.all([
 	function submit() { db.put(field).then(back); }
 
 	const formProps = {
-		setProperty(name, value) {
+		setProperty(name: string, value: any) {
 			field = Object.assign({}, field, { [name]: value });
 			renderFieldEditorForm(field, formProps);
 		},
@@ -30,5 +32,7 @@ Promise.all([
 	});
 
 	renderFieldEditorForm(field, formProps);
-	renderField(field);
+	if (field.geometry != null) {
+		renderField(field);
+	}
 });

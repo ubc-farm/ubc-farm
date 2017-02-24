@@ -1,3 +1,5 @@
+/// <reference path="../../../custom-types/document-promises/index.d.ts" />
+
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import { parsed } from 'document-promises';

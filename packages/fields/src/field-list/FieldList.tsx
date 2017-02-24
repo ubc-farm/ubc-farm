@@ -7,29 +7,28 @@ import { getLocationString, getAcres, Field } from '@ubc-farm/databases';
  */
 const FieldList: SFC<{ rows: Field[] }> = ({ rows }) => (
 	<AutoSizer>
-		{({ height, width }) => (
+		{(size: { height: number, width: number }) => (
 			<Table
+				{...size}
 				headerHeight={30}
-				height={height}
 				rowCount={rows.length}
 				rowGetter={({ index }) => rows[index]}
 				rowHeight={50}
-				width={width}
 				onRowClick={({ index }) => {
 					const { _id } = rows[index];
 					window.location.href = `./info?id=${_id}`;
 				}}
 			>
-				<Column dataKey="name" label="Field" />
+				<Column dataKey="name" label="Field" width={140} />
 				<Column
-					dataKey="location" label="Location"
+					dataKey="location" label="Location" width={140}
 					cellDataGetter={({ rowData }) => getLocationString(rowData)}
 				/>
 				<Column
-					dataKey="area" label="Area"
+					dataKey="area" label="Area" width={140}
 					cellDataGetter={({ rowData }) => getAcres(rowData)}
 				/>
-				<Column dataKey="crop" label="Crop Type" />
+				<Column dataKey="crop" label="Crop Type" width={140} />
 			</Table>
 		)}
 	</AutoSizer>

@@ -22,7 +22,8 @@
 		"moduleResolution": "node"
 	},
 	"include": [
-		"index.d.ts"
+		"src/**/*",
+		"entry/**/*"
 	],
 	"exclude": [
 		"node_modules",

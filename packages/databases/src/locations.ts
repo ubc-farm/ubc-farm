@@ -8,13 +8,14 @@ export interface Location {
 	_id: string; // `${'field' || 'place'}/${hash}`
 	_rev: string;
 	name: Index<string>; // name of the location
-	geometry?: Object; // GeoJSON geometry object
+	geometry?: GeoJSON.Polygon | GeoJSON.Point; // GeoJSON geometry object
 	location?: Index<string | number[]>; // Either a string describing the
 	                                            // location or coordinates.
 }
 
 export interface Field extends Location {
 	name: string; // name of the location
+	geometry?: GeoJSON.Polygon;
 	area?: number; // Only for fields
 	crop?: {
 		variety: Index<string>; // name/id of the plant

@@ -25,9 +25,10 @@ export default function setupEditorMap(
 	setMode(defaultMode, { data: map.data, renderControls, handleChange });
 
 	return function rerenderField({ geometry, _id }: {
-		geometry: GeoJSON.Polygon,
+		geometry?: GeoJSON.Polygon,
 		_id: string,
 	}) {
+		if (!geometry) return;
 		map.data.addGeoJson({
 			name: 'Feature',
 			geometry,

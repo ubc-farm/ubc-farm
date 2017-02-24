@@ -1,3 +1,5 @@
+/// <reference path="../../custom-types/document-promises/index.d.ts" />
+
 import { parsed } from 'document-promises';
 import { getLocations } from '@ubc-farm/databases';
 import setupMap from '../src/googlemaps/index';

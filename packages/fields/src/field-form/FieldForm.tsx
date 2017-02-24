@@ -1,4 +1,5 @@
-import { createElement, PropTypes, Component } from 'react'; /** @jsx createElement */
+import { createElement, PropTypes, Component, ChangeEvent } from 'react';
+/** @jsx createElement */
 import { getLocationString, getArea, Field } from '@ubc-farm/databases';
 
 interface FieldFormProps {
@@ -14,26 +15,19 @@ interface FieldFormProps {
  * calculated by the polygon corresponding to the field.
  */
 class FieldForm extends Component<FieldFormProps, void> {
-	bindInput(name) {
+	static propTypes: Object;
+
+	bindInput(name: string) {
+		const onChange = (e: ChangeEvent<any>) =>
+			this.props.setProperty(name, e.target.value);
+
 		switch (name) {
 			case 'location':
-				return {
-					name,
-					value: getLocationString(this.props.model),
-					onChange: e => this.props.setProperty(name, e.target.value),
-				};
+				return { name, onChange, value: getLocationString(this.props.model) };
 			case 'area':
-				return {
-					name,
-					value: getArea(this.props.model) || '',
-					onChange: e => this.props.setProperty(name, e.target.value),
-				};
+				return { name, onChange, value: getArea(this.props.model) || '' };
 			default:
-				return {
-					name,
-					value: this.props.model[name],
-					onChange: e => this.props.setProperty(name, e.target.value),
-				};
+				return { name, onChange, value: this.props.model[name] };
 		}
 	}
 
