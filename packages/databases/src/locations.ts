@@ -1,8 +1,6 @@
 /* eslint-disable no-param-reassign */
 import geojsonArea from '@turf/area';
 import centroid from '@turf/centroid';
-import { generate } from 'shortid';
-import { route } from 'docuri';
 import PouchDB from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 

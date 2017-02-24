@@ -11,6 +11,8 @@ interface ConnectAllOptions {
 	changesOptions?: PouchDB.Core.AllDocsOptions;
 }
 
+const identity = (doc: any) => doc;
+
 /**
  * Connects a React component to a PouchDB database. Each row from the database
  * is set to the component under the 'rows' prop, or whatever custom rowKey
@@ -37,13 +39,13 @@ interface ConnectAllOptions {
  * @returns {function} A higher order component.
  * React.Component => React.Component
  */
-export default function connectAll<T>(
-	transformer = (doc: Object, id: string) => <T> doc,
+export default function connectAll<Content, Value>(
+	transformer: (doc: Content | undefined, id: string) => Value | null | undefined,
 	options: ConnectAllOptions = {}
 ) {
 	if (typeof transformer !== 'function') {
-		options = transformer;
-		transformer = (doc: T) => doc;
+		if (!options) options = transformer;
+		transformer = identity;
 	}
 
 	const {
@@ -51,14 +53,14 @@ export default function connectAll<T>(
 		loadingKey = 'loading',
 		changes = true,
 		useMap = false,
-		getDisplayName = name => `PouchConnect(${name})`,
+		getDisplayName = (name: string) => `PouchConnect(${name})`,
 		allDocsOptions = { include_docs: true },
 		changesOptions = { include_docs: true, live: true },
 	} = options;
 
 	const changesOpts = Object.assign({}, changesOptions, { since: 'now' });
 
-	return function wrapWithConnect<P>(WrappedComponent: SFC<P>) {
+	return function wrapWithConnect<P extends Object>(WrappedComponent: SFC<P>) {
 		const displayName = getDisplayName(
 			WrappedComponent.displayName || WrappedComponent.name || 'Component'
 		);
@@ -67,17 +69,17 @@ export default function connectAll<T>(
 			db: PropTypes.instanceOf(PouchDB).isRequired,
 		};
 
-		type DBProp = { db: PouchDB.Database<T> }
+		type DBProp = { db: PouchDB.Database<Content> }
 
 		class ConnectAll extends Component<P & DBProp, any> {
 			static displayName: string;
 			static propTypes: Object;
 
-			db: PouchDB.Database<T>;
+			db: PouchDB.Database<Content>;
 			changes: PouchDB.Core.Changes<Object> | null;
 			docError: Error | null;
 
-			constructor(props) {
+			constructor(props: P & DBProp) {
 				super(props);
 
 				this.state = {
@@ -91,7 +93,7 @@ export default function connectAll<T>(
 				this.initDatabaseSubscription();
 			}
 
-			componentWillReceiveProps(nextProps) {
+			componentWillReceiveProps(nextProps: P & DBProp) {
 				if (this.db !== nextProps.db) {
 					this.db = nextProps.db;
 					this.docError = null;
@@ -107,10 +109,10 @@ export default function connectAll<T>(
 
 			initDatabaseSubscription() {
 				const ready = this.db.allDocs(allDocsOptions).then(res =>
-					res.rows.map(row => <[string, T]> [row.id, transformer(row.doc, row.id)])
+					res.rows.map(row => <[string, Value]> [row.id, transformer(row.doc, row.id)])
 				)
 				.then((map) => {
-					let rows: { [key: string]: T } | Map<string, T>;
+					let rows: { [key: string]: Value } | Map<string, Value>;
 					if (useMap) rows = new Map(map);
 					else {
 						rows = {};
@@ -132,7 +134,7 @@ export default function connectAll<T>(
 				}
 			}
 
-			removeRow(id) {
+			removeRow(id: string) {
 				const rows = this.state[rowKey];
 				let newRows;
 				if (useMap) {
@@ -146,7 +148,9 @@ export default function connectAll<T>(
 				this.setState({ [rowKey]: newRows });
 			}
 
-			updateRow(id, data) {
+			updateRow(id: string, data: Value | null | undefined) {
+				if (data == null) return;
+
 				const rows = this.state[rowKey];
 				let newRows;
 				if (useMap) {

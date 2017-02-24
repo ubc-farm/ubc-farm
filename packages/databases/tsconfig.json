@@ -9,6 +9,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"suppressImplicitAnyIndexErrors": true,
+		"allowSyntheticDefaultImports": true,
 
 		"target": "es2017",
 		"lib": [
@@ -18,10 +19,11 @@
 		]
 	},
 	"include": [
-		"src/**",
+		"src/**/*",
 		"index.d.ts"
 	],
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		"rollup.config.js"
 	]
 }

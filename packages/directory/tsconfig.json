@@ -21,7 +21,11 @@
 		]
 	},
 	"include": [
-		"src/**",
-		"entry/**"
+		"src/**/*",
+		"entry/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"rollup.config.js"
 	]
 }

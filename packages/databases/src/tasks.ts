@@ -16,7 +16,7 @@ export interface Task {
 	done?: boolean;
 }
 
-function dateToMilli(date) {
+function dateToMilli(date?: moment.MomentInput): number | null {
 	if (!date) return null;
 	return moment(date).valueOf();
 }
