@@ -28,7 +28,7 @@ export interface Invoice {
  * Returns the total price of a sale in cents
  */
 export function salePrice(sale: Sale): Cents {
-	return sale.unitCost * sale.quantity;
+	return (sale.unitCost || 0) * (sale.quantity || 0);
 }
 
 /**
