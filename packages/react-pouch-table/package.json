@@ -8,16 +8,14 @@
 		"@ubc-farm/databases": "^2.0.0"
 	},
 	"devDependencies": {
-		"rollup": "^0.41.4",
-		"typescript": "^2.2.1"
+		"rollup": "^0.41.4"
 	},
 	"peerDependencies": {
 		"react": "^15.4.2"
 	},
 	"scripts": {
-		"ts": "tsc --noEmit || exit 0",
-		"build:es": "rollup -c -f es -i src/ReactPouchTable.tsx -o index.mjs",
-		"build:cjs": "rollup -c -f cjs -i src/ReactPouchTable.tsx -o index.js",
+		"build:es": "rollup -c -f es -i src/index.js -o index.mjs",
+		"build:cjs": "rollup -c -f cjs -i src/index.js -o index.js",
 		"prepare": "npm run build:es && npm run build:cjs",
 		"prepublish": "npm run prepare"
 	}

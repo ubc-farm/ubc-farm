@@ -14,11 +14,8 @@
 		"rollup": "^0.41.4",
 		"typescript": "^2.2.1",
 
-		"shortid": "^2.2.6",
-		"docuri": "^4.2.2",
 		"@turf/area": "^3.7.5",
 		"@turf/centroid": "^3.7.5",
-		"dts-generator": "^2.1.0",
 		"phone": "^1.0.9"
 	},
 	"optionalDependencies": {
@@ -27,7 +24,6 @@
 	"scripts": {
 		"prepare:umd": "rollup -c -i src/index.ts -o index.js -f umd",
 		"prepare:es": "rollup -c -i src/index.ts -o index.mjs -f es",
-		"dts": "dts-generator --project . --name databases --out index.d.ts",
 		"prepare": "npm run prepare:es && npm run prepare:umd",
 		"prepublish": "npm run prepare",
 		"ts": "tsc --noEmit || exit 0"
