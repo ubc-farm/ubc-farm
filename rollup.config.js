@@ -30,12 +30,12 @@ export default {
 				docuri: ['route'],
 				events: ['EventEmitter'],
 				'core-js/library/modules/es6.object.to.string.js': ['default'],
+				'react-dom': ['findDOMNode'],
 			},
 		}),
 		json(),
 		nodeGlobals(),
 		rollupTs({
-			// tsconfig: false,
 			typescript,
 			allowJs: true,
 			strictNullChecks: true,

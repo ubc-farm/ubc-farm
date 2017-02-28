@@ -44,7 +44,8 @@ const DateInput: SFC<DateInputProps> = (props) => {
 
 	if (props.value || props.defaultValue) {
 		const val = props.value ? 'value' : 'defaultValue';
-		inputProps[val] = moment(props[val]).format('Y-MM-DD');
+		if (props[val] == null) inputProps[val] = '';
+		else inputProps[val] = moment(props[val]).format('Y-MM-DD');
 	}
 
 	return createElement('input', inputProps);
