@@ -1,0 +1,17 @@
+{
+	"name": "@ubc-farm/react-inputs",
+	"version": "1.0.0",
+	"dependencies": {
+		"moment": "^2.17.1"
+	},
+	"devDependencies": {
+		"rollup": "^0.41.4",
+		"typescript": "^2.2.1"
+	},
+	"optionalDependencies": {
+		"react": "^15.4.2"
+	},
+	"scripts": {
+		"ts": "tsc --noEmit || exit 0"
+	}
+}
