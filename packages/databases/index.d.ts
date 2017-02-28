@@ -218,10 +218,25 @@ type NearlyField = {
 	geometry?: GeoJSON.Polygon;
 } | Field
 
+export function salePrice(sale: Sale): Cents;
+export function computeSubtotal(invoice: Invoice | Sale[]): Cents;
+export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents;
+export function balanceDue(invoice: Invoice, vat?: number): Cents;
+export function getInvoiceDate(invoice: Invoice): moment.Moment | null;
+export function getInvoiceDeliveryDate(invoice: Invoice): moment.Moment | null;
+
 export function getLocation(loc: NearlyLocation): LocationDescription
 export function getLocationString(loc: NearlyLocation | LocationDescription): string
 export function getArea(field: NearlyField): number | null;
 export function getAcres(field: NearlyField | number | null): string;
 
 export function generateToday(): Promise<void>;
+
+export function getRole(person: Person | string): string;
+
+export function taskTypeName(taskType: TaskType | string): string;
 export function createDefaultTypes(db: PouchDB.Database<TaskType>): Promise<void>;
+
+export function getTaskStart(task: Task): moment.Moment | null;
+export function getTaskEnd(task: Task): moment.Moment | null;
+export function getTaskRange(task: Task): moment.Moment[] | null;

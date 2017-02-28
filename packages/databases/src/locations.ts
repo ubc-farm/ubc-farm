@@ -99,14 +99,13 @@ export default async function getLocations() {
 
 	db.transform({
 		incoming(doc) {
-			const { _id } = doc;
-
 			doc.location = getLocation(doc) || undefined;
 
-			if (_id.startsWith('field/')) {
+			if (doc._id.startsWith('field/')) {
 				const field = <Field> doc;
 				field.area = getArea(field) || undefined;
 			}
+
 			return doc;
 		},
 	});

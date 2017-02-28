@@ -6,17 +6,18 @@ export interface TaskType {
 	_id: string; // Type name
 	_rev: string;
 	color: string;
-	name?: string;
+}
+
+/**
+ * Returns name of task in Start Case
+ */
+export function taskTypeName(taskType: TaskType | string) {
+	const id = typeof taskType === 'string' ? taskType : taskType._id;
+	return startCase(id);
 }
 
 export default async function getTaskTypes() {
 	const db = new PouchDB<TaskType>('task-types');
-	db.transform<TaskType>({
-		outgoing(doc) {
-			doc.name = startCase(doc._id);
-			return doc;
-		}
-	});
 
 	const { total_rows } = await db.allDocs({ limit: 0 });
 	if (total_rows === 0) await createDefaultTypes(db);

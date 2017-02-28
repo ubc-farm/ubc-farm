@@ -3,7 +3,7 @@ import phone from 'phone';
 import kebabCase from 'lodash/kebabCase';
 import startCase from 'lodash/startCase';
 import PouchDB from './utils/load-pouch';
-import { ID, Index, Address, Day } from './utils/typedefs';
+import { ID, Index, Address, Day, DateString } from './utils/typedefs';
 
 export interface Person {
 	_id: ID;
@@ -23,10 +23,10 @@ export interface Employee extends Person {
 	role: 'employee';
 	pay?: number;
 	employmentType?: 'fullTime' | 'partTime';
-	holidayDays?: Date[];
-	sickDays?: Date[];
-	paidLeaveDays?: Date[];
-	inLieHours?: Date[];
+	holidayDays?: DateString[];
+	sickDays?: DateString[];
+	paidLeaveDays?: DateString[];
+	inLieHours?: DateString[];
 	medicalLeaveTime?: Object;
 	emergencyContact?: Person;
 	workingDays?: Day[]; // set of days, should be unique
@@ -43,6 +43,15 @@ export interface Researcher extends Person {
 	projects?: string;
 }
 
+/**
+ * Returns the role of the person in Start Case.
+ * @param {Person|string} person or the role as a string
+ */
+export function getRole(person: Person | string) {
+	const role = typeof person === 'string' ? person : person.role
+	return startCase(role);
+}
+
 export default async function getPeople() {
 	const db = new PouchDB<Person>('people');
 	await Promise.all([
@@ -54,11 +63,6 @@ export default async function getPeople() {
 	db.transform({
 		incoming(doc: Person & { phoneNumber: string }): Person {
 			doc.role = kebabCase(doc.role || 'none');
-
-			if (!doc.addressMailing || !doc.addressPhysical) {
-				if (!doc.addressPhysical) doc.addressPhysical = doc.addressMailing;
-				else doc.addressMailing = doc.addressPhysical;
-			}
 
 			if (doc.phoneNumber) {
 				doc.phone = { country: 'CA', number: doc.phoneNumber };
@@ -74,7 +78,6 @@ export default async function getPeople() {
 			return doc;
 		},
 		outgoing(doc: Person): Person {
-			doc.role = startCase(doc.role);
 			return doc;
 		},
 	});

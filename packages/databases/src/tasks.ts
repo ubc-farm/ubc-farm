@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-import { generate } from 'shortid';
 import moment from 'moment';
 import PouchDB from './utils/load-pouch';
 import { ID, Index, DateNum } from './utils/typedefs';
@@ -10,15 +9,40 @@ export interface Task {
 	type: Index<ID>; // ID of some type
 	location: Index<ID>; // ID of a location
 	name?: string; // name of the task
-	start?: Index<DateNum> | moment.Moment;
-	end?: Index<DateNum> | moment.Moment;
+	start?: Index<DateNum>;
+	end?: Index<DateNum>;
 	allDay?: boolean;
 	done?: boolean;
 }
 
-function dateToMilli(date?: moment.MomentInput): number | undefined {
-	if (!date) return undefined;
-	return moment(date).valueOf();
+export function getTaskStart(task: Task) {
+	if (!task.start) return null;
+
+	const start = moment(task.start);
+	if (task.allDay) start.startOf('day');
+
+	return start;
+}
+
+export function getTaskEnd(task: Task) {
+	let end: moment.Moment;
+	if (!task.end) {
+		if (!task.start) return null;
+		end = moment(task.start).add(1, 'hour');
+	} else {
+		end = moment(task.end);
+	}
+
+	if (task.allDay) end.endOf('day');
+	return end;
+}
+
+export function getTaskRange(task: Task): moment.Moment[] | null {
+	const start = getTaskStart(task);
+	const end = getTaskEnd(task);
+	if (start == null || end == null) return null;
+
+	return [start, end];
 }
 
 export default async function getTasks() {
@@ -33,19 +57,11 @@ export default async function getTasks() {
 
 	db.transform({
 		incoming(doc: Task): Task {
-			if (!doc._id) doc._id = generate();
-
-			doc.start = dateToMilli(doc.start);
-			doc.end = dateToMilli(doc.end)
-				|| moment(doc.start).add(1, 'hours').valueOf();
+			doc.allDay = doc.allDay || false;
+			doc.done = doc.done || false;
 
 			return doc;
 		},
-		outgoing(doc: Task): Task {
-			if (doc.start) doc.start = moment(doc.start);
-			if (doc.end) doc.start = moment(doc.end);
-			return doc;
-		}
 	});
 
 	return db;
