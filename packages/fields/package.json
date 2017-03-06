@@ -6,7 +6,8 @@
 		"react-virtualized": "^8.11.4",
 		"lodash": "^4.17.4",
 		"@ubc-farm/databases": "^2.0.0",
-		"@ubc-farm/map-utils": "^1.0.0"
+		"@ubc-farm/map-utils": "^1.0.0",
+		"@ubc-farm/react-pouch-table": "^1.0.0"
 	},
 	"peerDependencies": {
 		"react": "^15.4.2",

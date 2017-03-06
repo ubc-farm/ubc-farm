@@ -29,6 +29,7 @@ export default {
 				shortid: ['generate'],
 				docuri: ['route'],
 				events: ['EventEmitter'],
+				lodash: ['pick'],
 				'node_modules/core-js/library/modules/es6.object.to-string.js': ['default'],
 				'core-js/library/modules/es6.object.to-string.js': ['default'],
 				'react-dom': ['findDOMNode'],

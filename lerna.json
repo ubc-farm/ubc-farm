@@ -2,9 +2,10 @@
   "lerna": "2.0.0-beta.38",
   "packages": ["packages/*"],
   "version": "independent",
+  "scope": "@ubc-farm/*",
   "ignore": [
-    "*page-*",
     "@ubc-farm/page-*",
     "@ubc-farm-/server"
-  ]
+  ],
+  "loglevel": "silent"
 }
