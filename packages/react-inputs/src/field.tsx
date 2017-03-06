@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react'; /** @jsx createElement */
+import { createElement, Component } from 'react'; /** @jsx createElement */
 import { generate } from 'shortid';
 
 interface FieldProps {
@@ -13,24 +13,39 @@ interface FieldProps {
  * A field that contains an input and corresponding label.
  * An ID will be auto-generated if it isn't specified.
  */
-const Field: SFC<FieldProps> = ({
-	children,
-	id, name,
-	containerProps,
-	labelProps,
-	...rest,
-}) => {
-	if (!id) {
-		id = generate();
-		if (name) id = `${name}-${id}`;
+export default class Field extends Component<FieldProps, { id: string }> {
+	hash: string;
+	constructor(props: FieldProps) {
+		super(props);
+
+		this.hash = generate();
+		this.state = {
+			id: props.name ? `${props.name}-${this.hash}` : this.hash,
+		};
 	}
 
-	return (
-		<div className="field-container" {...containerProps}>
-			<label htmlFor={id} {...labelProps}>{children}</label>
-			<input id={id} name={name} {...rest} />
-		</div>
-	);
-};
+	componentWillReceiveProps(nextProps: FieldProps) {
+		if (nextProps.name !== this.props.name) {
+			this.setState({ id: `${nextProps.name}-${this.hash}` });
+		}
+	}
 
-export default Field;
+	render() {
+		const {
+			children,
+			name,
+			containerProps,
+			labelProps,
+			...rest,
+		} = this.props;
+
+		const id = this.props.id || this.state.id;
+
+		return (
+			<div className="field-container" {...containerProps}>
+				<label htmlFor={id} {...labelProps}>{children}</label>
+				<input id={id} name={name} {...rest} />
+			</div>
+		);
+	}
+}
