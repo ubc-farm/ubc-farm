@@ -9,7 +9,8 @@
 	},
 	"devDependencies": {
 		"rollup": "^0.41.4",
-		"typescript": "^2.2.1"
+		"typescript": "^2.2.1",
+		"shortid": "^2.2.8"
 	},
 	"optionalDependencies": {
 		"react": "^15.4.2"
