@@ -1,5 +1,6 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person } from '@ubc-farm/databases';
+import { Field } from '@ubc-farm/react-inputs';
 import { ReformedProps } from './nestedReformed';
 
 /**
@@ -7,11 +8,17 @@ import { ReformedProps } from './nestedReformed';
  */
 const PersonForm: SFC<ReformedProps<Person>> = ({ bindInput }) => (
 	<fieldset>
-		<input type="text" {...bindInput<string>('name')} />
-		<input type="email" {...bindInput<string>('email')} />
-		<input type="tel" {...bindInput<string>('phone.number')} />
-		<textarea {...bindInput<string>('addressMailing')} />
-		<textarea {...bindInput<string>('addressPhysical')} />
+		<Field type="text" {...bindInput<string>('name')}>Name</Field>
+		<Field type="email" {...bindInput<string>('email')}>Email</Field>
+		<Field type="tel" {...bindInput<string>('phone.number')}>Phone</Field>
+		<div className="field-container">
+			<label htmlFor="addressMailing">Mailing Address</label>
+			<textarea id="addressMailing" {...bindInput<string>('addressMailing')} />
+		</div>
+		<div className="field-container">
+			<label htmlFor="addressPhysical">Physical Address</label>
+			<textarea id="addressPhysical" {...bindInput<string>('addressPhysical')} />
+		</div>
 	</fieldset>
 );
 

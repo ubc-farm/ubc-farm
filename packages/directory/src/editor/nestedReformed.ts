@@ -27,19 +27,32 @@ function setNestedProperty<Value>(
 ) {
 	const { model, setModel } = this;
 	const newModel = set(Object.assign({}, model), name, value);
-	return setModel(newModel);
+	setModel(newModel);
+}
+
+interface NestedInputProps<Value> {
+	name: string,
+	value: Value,
+	onChange: React.ChangeEventHandler<any>,
 }
 
 function bindNestedInput<Value>(
 	this: NestedModelProps,
 	name: string,
-) {
+): NestedInputProps<Value> {
 	return {
 		name,
 		value: <Value> get(this.model, name),
-		onChange: <React.ChangeEventHandler<any>>
-			(e => setNestedProperty.call(this, e.target.name, e.target.value)),
+		onChange: (e => setNestedProperty.call(this, e.target.name, e.target.value)),
 	};
+}
+
+function handleSubmit(
+	this: NestedModelProps & { onSubmit: (model: Object) => void },
+	e: React.FormEvent<HTMLFormElement>,
+) {
+	e.preventDefault();
+	this.onSubmit(this.model);
 }
 
 /**
@@ -48,8 +61,11 @@ function bindNestedInput<Value>(
  */
 export default compose(
 	reformed(),
-	withProps(props => ({
-		bindInput: bindNestedInput.bind(props),
-		setProperty: setNestedProperty.bind(props),
+	withProps((props: { onSubmit?: (model: Object) => void }) => ({
+		bindInput: <NestedInputProps<any>> bindNestedInput.bind(props),
+		setProperty: <(name: string, value: any) => void> setNestedProperty.bind(props),
+		handleSubmit: props.onSubmit
+			? <React.FormEventHandler<HTMLFormElement>> handleSubmit.bind(props)
+			: undefined,
 	})),
 );
