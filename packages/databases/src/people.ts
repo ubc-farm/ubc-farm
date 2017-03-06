@@ -8,8 +8,8 @@ import { ID, Index, Address, Day, DateString } from './utils/typedefs';
 export interface Person {
 	_id: ID;
 	_rev: string;
-	role: Index<string>; // employee, researcher, or something else. Default is 'none'
-	name: Index<string>; // First Last
+	role?: Index<string>; // employee, researcher, or something else. Default is 'none'
+	name?: Index<string>; // First Last
 	email?: Index<string>;
 	phone?: {
 		country: string;
@@ -48,7 +48,7 @@ export interface Researcher extends Person {
  * @param {Person|string} person or the role as a string
  */
 export function getRole(person: Person | string) {
-	const role = typeof person === 'string' ? person : person.role
+	const role = typeof person === 'string' ? person : (person.role || 'none');
 	return startCase(role);
 }
 
@@ -63,6 +63,7 @@ export default async function getPeople() {
 	db.transform({
 		incoming(doc: Person & { phoneNumber: string }): Person {
 			doc.role = kebabCase(doc.role || 'none');
+			doc.name = doc.name || '';
 
 			if (doc.phoneNumber) {
 				doc.phone = { country: 'CA', number: doc.phoneNumber };
@@ -78,6 +79,8 @@ export default async function getPeople() {
 			return doc;
 		},
 		outgoing(doc: Person): Person {
+			doc.role = doc.role || 'none';
+			doc.name = doc.name || '';
 			return doc;
 		},
 	});

@@ -4,23 +4,23 @@ import PouchDB from './utils/load-pouch';
 import { DateNum, Index, Cents } from './utils/typedefs';
 
 export interface Sale {
-	item: string;
-	description: string; // empty string by default
-	unitCost: Cents;
-	quantity: number;
+	item?: string;
+	description?: string; // empty string by default
+	unitCost?: Cents;
+	quantity?: number;
 }
 
 export interface Invoice {
 	_id: number; // invoice #
 	_rev: string;
-	isPurchase: Index<boolean>; // if true, the invoice represents something the
+	isPurchase?: Index<boolean>; // if true, the invoice represents something the
 	                            // farm bought instead of something the farm sold.
 															// false by default.
 	date?: Index<DateNum | null>;
-	items: Sale[];
+	items?: Sale[];
 	channel?: string;
-	notes: string; // empty string by default
-	amountPaid: Cents;
+	notes?: string; // empty string by default
+	amountPaid?: Cents;
 	deliveryDate?: Index<DateNum | null>;
 }
 
@@ -35,7 +35,7 @@ export function salePrice(sale: Sale): Cents {
  * Calculates the subtotal for an invoice
  */
 export function computeSubtotal(invoice: Invoice | Sale[]): Cents {
-	const sales = Array.isArray(invoice) ? invoice : invoice.items;
+	const sales = Array.isArray(invoice) ? invoice : (invoice.items || []);
 	return sales.reduce((total, sale) => total + salePrice(sale), 0);
 }
 
@@ -44,6 +44,7 @@ export function computeSubtotal(invoice: Invoice | Sale[]): Cents {
  * @param {number} vat - percentage, such as 0.04 for 4% tax.
  */
 export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents {
+	if (typeof vat !== 'number') throw new TypeError(`Invalid VAT ${vat}`);
 	return computeSubtotal(invoice) * (1 + vat);
 }
 
@@ -53,7 +54,7 @@ export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents {
  * the subtotal is used for calculations instead.
  */
 export function balanceDue(invoice: Invoice, vat: number = 0): Cents {
-	return computeTotal(invoice, vat) - invoice.amountPaid;
+	return computeTotal(invoice, vat) - (invoice.amountPaid || 0);
 }
 
 /**

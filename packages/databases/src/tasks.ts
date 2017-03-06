@@ -6,9 +6,9 @@ import { ID, Index, DateNum } from './utils/typedefs';
 export interface Task {
 	_id: ID;
 	_rev: string;
-	type: Index<ID>; // ID of some type
-	location: Index<ID>; // ID of a location
-	name?: string; // name of the task
+	type?: Index<ID>;
+	location?: Index<ID>;
+	name?: string;
 	start?: Index<DateNum>;
 	end?: Index<DateNum>;
 	allDay?: boolean;

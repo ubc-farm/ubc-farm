@@ -50,36 +50,38 @@ export function connectAll<Content>(
 export interface Equipment {
 	_id: ID;
 	_rev: string;
-	name: string;
+	name?: string;
 }
 
 export interface Sale {
-	item: string;
-	description: string;
-	unitCost: number;
-	quantity: number;
+	item?: string;
+	description?: string;
+	unitCost?: number;
+	quantity?: number;
 }
 
 export interface Invoice {
 	_id: number;
 	_rev: string;
-	isPurchase: Index<boolean>;
-	date: Index<DateNum | moment.Moment | null>;
-	items: Sale[];
+	isPurchase?: Index<boolean>;
+	date?: Index<DateNum | null>;
+	items?: Sale[];
 	channel?: string;
-	notes: string;
+	notes?: string;
+	amountPaid?: Cents;
+	deliveryDate?: Index<DateNum | null>;
 }
 
 export interface Location {
 	_id: string;
 	_rev: string;
-	name: Index<string>;
+	name?: Index<string>;
 	geometry?: GeoJSON.Polygon | GeoJSON.Point;
 	location?: Index<string | number[]>;
 }
 
 export interface Field extends Location {
-	name: string;
+	name?: string;
 	geometry?: GeoJSON.Polygon;
 	area?: number;
 	crop?: {
@@ -100,8 +102,8 @@ export interface LongTermEntry {
 export interface Person {
 	_id: ID;
 	_rev: string;
-	role: Index<string>;
-	name: Index<string>;
+	role?: Index<string>;
+	name?: Index<string>;
 	email?: Index<string>;
 	phone?: {
 		country: string;
@@ -115,10 +117,10 @@ export interface Employee extends Person {
 	role: 'employee';
 	pay?: number;
 	employmentType?: 'fullTime' | 'partTime';
-	holidayDays?: Date[];
-	sickDays?: Date[];
-	paidLeaveDays?: Date[];
-	inLieHours?: Date[];
+	holidayDays?: DateString[];
+	sickDays?: DateString[];
+	paidLeaveDays?: DateString[];
+	inLieHours?: DateString[];
 	medicalLeaveTime?: Object;
 	emergencyContact?: Person;
 	workingDays?: Day[];
@@ -181,17 +183,16 @@ export interface TaskType {
 	_id: string; // Type name
 	_rev: string;
 	color: string;
-	name?: string;
 }
 
 export interface Task {
 	_id: ID;
 	_rev: string;
-	type: Index<ID>;
-	location: Index<ID>;
+	type?: Index<ID>;
+	location?: Index<ID>;
 	name?: string;
-	start?: Index<DateNum> | moment.Moment;
-	end?: Index<DateNum> | moment.Moment;
+	start?: Index<DateNum>;
+	end?: Index<DateNum>;
 	allDay?: boolean;
 	done?: boolean;
 }
