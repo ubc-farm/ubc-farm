@@ -202,7 +202,7 @@ export interface Task {
 export function getEquipment(): Promise<PouchDB.Database<Equipment>>;
 export function getInvoices(): Promise<PouchDB.Database<Invoice>>;
 export function getLocations(): Promise<PouchDB.Database<Location>>;
-export function getLongTerm(): Promise<PouchDB.Database<LongTermEntry>>;
+export function getLongTerm(generate?: boolean): Promise<PouchDB.Database<LongTermEntry>>;
 export function getPeople(): Promise<PouchDB.Database<Person>>;
 export function getTaskTypes(): Promise<PouchDB.Database<TaskType>>;
 export function getTasks(): Promise<PouchDB.Database<Task>>;
@@ -231,7 +231,7 @@ export function getLocationString(loc: NearlyLocation | LocationDescription): st
 export function getArea(field: NearlyField): number | null;
 export function getAcres(field: NearlyField | number | null): string;
 
-export function generateToday(): Promise<void>;
+export function generateToday(db: PouchDB.Database<LongTermEntry>): Promise<void>;
 
 export function getRole(person: Person | string): string;
 

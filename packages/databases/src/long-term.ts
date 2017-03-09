@@ -13,9 +13,9 @@ export interface LongTermEntry {
 	expenses?: Cents;
 }
 
-const db = new PouchDB<LongTermEntry>('long-term');
-
-export default async function getLongTerm() {
+export default async function getLongTerm(generate = true) {
+	const db = new PouchDB<LongTermEntry>('long-term');
+	if (generate) await generateToday(db);
 	return db;
 }
 
@@ -32,7 +32,7 @@ async function countEmployees(): Promise<number> {
 /**
  * Reads current data to generate an entry for today.
  */
-export async function generateToday() {
+export async function generateToday(db: PouchDB.Database<LongTermEntry>) {
 	const today = moment().format('Y-MM-DD');
 	const [numEmployed] = await Promise.all([countEmployees()]);
 
