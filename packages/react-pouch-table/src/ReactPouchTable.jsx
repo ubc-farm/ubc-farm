@@ -1,5 +1,5 @@
-import { createElement, SFC } from 'react'; /** @jsx createElement */
-import { AutoSizer, Table, TableProps } from 'react-virtualized';
+import { createElement } from 'react'; /** @jsx createElement */
+import { AutoSizer, Table } from 'react-virtualized';
 import { connectAll } from '@ubc-farm/databases';
 
 const onRowClickFuncs = [

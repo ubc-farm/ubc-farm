@@ -34,6 +34,7 @@ const ContactForm: SFC<ContactFormProps> = (props) => {
 			</Field>
 			<PersonForm {...props} />
 			<ExtraFields {...props} />
+			<input type="submit" />
 		</form>
 	);
 }

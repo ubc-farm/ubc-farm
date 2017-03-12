@@ -1,6 +1,6 @@
 import baseConfig from '../../rollup.config.js';
 
-const [nodeResolve, commonjs, json,,, babel] = baseConfig.plugins;
+const [nodeResolve, commonjs, json, nodeGlobals,, babel] = baseConfig.plugins;
 
 export default {
 	sourceMap: true,
@@ -8,9 +8,12 @@ export default {
 		nodeResolve,
 		commonjs,
 		json,
+		nodeGlobals,
 		babel,
 	],
 	external: [
-		'react', 'pouchdb', 'pouchdb-find', 'transform-pouch', '@ubc-farm/databases'
+		'react', 'react-virtualized',
+		'pouchdb', 'pouchdb-find', 'transform-pouch',
+		'@ubc-farm/databases',
 	],
 };

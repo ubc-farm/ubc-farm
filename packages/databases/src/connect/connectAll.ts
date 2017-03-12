@@ -45,7 +45,7 @@ const identity = (doc: any) => doc;
  */
 export default function connectAll<Content, Value>(
 	transformer: (doc: Content | undefined, id: string) => Value | null | undefined,
-	options: ConnectAllOptions = {}
+	options: ConnectAllOptions,
 ) {
 	if (typeof transformer !== 'function') {
 		if (!options) options = transformer;
