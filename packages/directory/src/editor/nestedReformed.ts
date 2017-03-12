@@ -42,7 +42,7 @@ function bindNestedInput<Value>(
 ): NestedInputProps<Value> {
 	return {
 		name,
-		value: <Value> get(this.model, name),
+		value: <Value> get(this.model, name) || '',
 		onChange: (e => setNestedProperty.call(this, e.target.name, e.target.value)),
 	};
 }

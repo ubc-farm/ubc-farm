@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"dependencies": {
 		"moment": "^2.17.1",
-		"react-virtualized-select": "^2.3.0"
+		"react-virtualized-select": "^2.3.0",
+		"@ubc-farm/utils": "^4.1.0"
 	},
 	"devDependencies": {
 		"rollup": "^0.41.4",

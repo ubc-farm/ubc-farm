@@ -1,5 +1,6 @@
 import { createElement, Component } from 'react'; /** @jsx createElement */
 import { generate } from 'shortid';
+import { pick } from '@ubc-farm/utils';
 
 interface FieldProps {
 	children?: React.ReactType;
@@ -36,8 +37,8 @@ export default class Field extends Component<FieldProps, { id: string }> {
 			name,
 			containerProps,
 			labelProps,
-			...rest,
-		} = this.props;
+			rest,
+		} = pick(this.props, 'children', 'name', 'containerProps', 'labelProps');
 
 		const id = this.props.id || this.state.id;
 
