@@ -13,6 +13,7 @@
     "@types/lodash": "^4.14.52",
     "@types/phone": "^1.0.3",
     "@types/pouchdb": "^5.4.28",
+    "@types/pouchdb-find": "^0.10.0",
     "@types/react": "^15.0.11",
     "@types/react-dom": "^0.14.23",
     "@types/react-redux": "^4.4.36",
