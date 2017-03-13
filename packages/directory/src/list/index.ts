@@ -9,5 +9,14 @@ import PeopleList from './PeopleList';
 export default async function createPeopleList() {
 	const [db] = await Promise.all([getPeople(), parsed]);
 
-	render(createElement(PeopleList, { db }), document.getElementById('reactRoot'));
+	render(
+		createElement(PeopleList, {
+			db,
+			width: 500,
+			height: 800,
+			headerHeight: 20,
+			rowHeight: 30,
+		}),
+		document.getElementById('reactRoot'),
+	);
 }

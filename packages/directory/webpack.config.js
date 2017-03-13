@@ -1,24 +1,8 @@
-const { resolve } = require('path');
+const generateConfig = require('../../webpack.config.js')
 
-module.exports = {
-	entry: './entry/index.ts',
-	output: {
-		filename: 'index.js',
-		path: resolve(__dirname, 'browser'),
+module.exports = generateConfig({
+	entry: {
+		index: './entry/index.ts',
+		new: './entry/new.ts',
 	},
-	resolve: {
-		extensions: ['.ts', '.tsx', '.js', '.jsx'],
-	},
-	devtool: 'source-map',
-	module: {
-		rules: [
-			{
-				test: /\.(ts|tsx)$/,
-				loader: 'ts-loader',
-				options: {
-					transpileOnly: true, // Editor handles typechecks
-				},
-			},
-		],
-	},
-};
+}, __dirname);

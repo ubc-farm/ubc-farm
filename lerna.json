@@ -6,6 +6,5 @@
   "ignore": [
     "@ubc-farm/page-*",
     "@ubc-farm-/server"
-  ],
-  "loglevel": "silent"
+  ]
 }

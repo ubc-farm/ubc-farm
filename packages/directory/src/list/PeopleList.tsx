@@ -1,12 +1,13 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, getRole } from '@ubc-farm/databases';
-import { ReactPouchTable, Column, ReactPouchTableProps } from '@ubc-farm/react-pouch-table';
+import PouchTable, { Column } from './PouchTable';
 
-const PeopleList: SFC<ReactPouchTableProps<Person>> = ({ db }) => (
-	<ReactPouchTable
-		headerHeight={30}
-		rowHeight={50}
+const PeopleList: SFC<{ db: PouchDB.Database<Person> }> = ({ db }) => (
+	<PouchTable
 		db={db}
+		headerHeight={20} rowHeight={30}
+		height={800} width={500}
+		startkey="person/" endkey="person/\uffff"
 	>
 		<Column label="Name" dataKey="name" width={140} />
 		<Column
@@ -21,7 +22,7 @@ const PeopleList: SFC<ReactPouchTableProps<Person>> = ({ db }) => (
 			}}
 		/>
 		<Column label="Phone" dataKey="phone.number" width={140} />
-	</ReactPouchTable>
-);
+	</PouchTable>
+)
 
 export default PeopleList;
