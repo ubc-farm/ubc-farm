@@ -1,29 +1,29 @@
 {
-	"name": "@ubc-farm/fields",
-	"version": "1.0.0",
+  "name": "@ubc-farm/fields",
+  "version": "1.0.1",
   "private": true,
-	"dependencies": {
-		"document-promises": "^3.0.0",
-		"react-virtualized": "^8.11.4",
-		"lodash": "^4.17.4",
-		"@ubc-farm/databases": "^2.0.0",
-		"@ubc-farm/map-utils": "^1.0.0",
-		"@ubc-farm/react-pouch-table": "^1.0.0"
-	},
-	"peerDependencies": {
-		"react": "^15.4.2",
-		"react-dom": "^15.4.2"
-	},
-	"devDependencies": {
-		"rollup": "^0.41.4",
-		"typescript": "^2.2.1"
-	},
-	"scripts": {
-		"build-index": "rollup -c -i entry/index.ts -o browser/index.js",
-		"build-edit": "rollup -c -i entry/edit.ts -o browser/edit.js",
-		"build-new": "rollup -c -i entry/new.ts -o browser/new.js",
-		"prepare": "npm run build-index && npm run build-edit && npm run build-new",
-		"prepublish": "npm run prepare",
-		"ts": "tsc --noEmit || exit 0"
-	}
+  "dependencies": {
+    "document-promises": "^3.0.0",
+    "react-virtualized": "^8.11.4",
+    "lodash": "^4.17.4",
+    "@ubc-farm/databases": "^2.0.1",
+    "@ubc-farm/map-utils": "^1.0.2",
+    "@ubc-farm/react-pouch-table": "^1.0.0"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "rollup": "^0.41.4",
+    "typescript": "^2.2.1"
+  },
+  "scripts": {
+    "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
+    "build-edit": "rollup -c -i entry/edit.ts -o browser/edit.js",
+    "build-new": "rollup -c -i entry/new.ts -o browser/new.js",
+    "prepare": "npm run build-index && npm run build-edit && npm run build-new",
+    "prepublish": "npm run prepare",
+    "ts": "tsc --noEmit || exit 0"
+  }
 }

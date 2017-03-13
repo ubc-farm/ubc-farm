@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/page-directory",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Directory page listing members of the farm",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
@@ -11,7 +11,7 @@
     "server-plugin": "api.js"
   },
   "dependencies": {
-    "@ubc-farm/money": "^3.0.0",
+    "@ubc-farm/money": "^3.1.1",
     "document-promises": "^2.0.0",
     "joi": "^10.0.5",
     "pouchdb": "^6.1.0",
@@ -27,7 +27,7 @@
     "react-dom": "^15.3.0"
   },
   "devDependencies": {
-    "@ubc-farm/utils": "^4.1.0",
+    "@ubc-farm/utils": "^4.3.1",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "reselect": "^2.5.3"

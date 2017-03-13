@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/utils",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "description": "Utilities used by various ubc-farm sibling packages",
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/utils",

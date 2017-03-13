@@ -1,11 +1,11 @@
 {
   "name": "@ubc-farm/directory",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "dependencies": {
-    "@ubc-farm/utils": "^4.2.0",
-    "@ubc-farm/databases": "^2.0.0",
-    "@ubc-farm/react-inputs": "^1.0.0",
+    "@ubc-farm/utils": "^4.3.1",
+    "@ubc-farm/databases": "^2.0.1",
+    "@ubc-farm/react-inputs": "^1.0.1",
     "document-promises": "^3.1.2",
     "react-virtualized": "^9.0.0",
     "react-reformed": "^1.0.1",
@@ -14,14 +14,14 @@
     "@ubc-farm/react-pouch-table": "^1.0.0"
   },
   "peerDependencies": {
-		"react": "^15.4.2",
-		"react-dom": "^15.4.2"
-	},
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
   "devDependencies": {
-		"rollup": "^0.41.4",
+    "rollup": "^0.41.4",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1"
-	},
+  },
   "scripts": {
     "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
     "pack": "webpack --watch",

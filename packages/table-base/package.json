@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/table-base",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Code for a react powered table",
   "author": "Tiger Oakes <tigeroakes@gmail.com> (http://tigeroakes.com)",
   "license": "MIT",
@@ -14,7 +14,7 @@
   "devDependencies": {
     "@types/react": "^0.14.43",
     "rollup": "^0.41.4",
-    "@ubc-farm/utils": "^4.1.0",
+    "@ubc-farm/utils": "^4.3.1",
     "babel-plugin-external-helpers": "^6.18.0",
     "babel-plugin-transform-react-jsx": "^6.8.0"
   },

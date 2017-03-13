@@ -1,18 +1,18 @@
 {
   "name": "@ubc-farm/graphs",
-	"version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "document-promises": "^3.1.2",
     "victory": "^0.15.0",
-		"@ubc-farm/databases": "^2.0.0"
+    "@ubc-farm/databases": "^2.0.1"
   },
   "devDependencies": {
     "rollup": "^0.41.4",
-		"typescript": "^2.2.1"
-	},
+    "typescript": "^2.2.1"
+  },
   "scripts": {
     "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
     "prepare": "npm run build-index --quiet",
