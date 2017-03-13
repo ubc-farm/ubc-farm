@@ -1,6 +1,7 @@
 {
   "name": "@ubc-farm/frontend",
   "main": "_scipts/code/build.js",
+  "private": true,
   "dependencies": {
     "denodeify": "^1.2.1",
     "fs-extra": "^2.0.0",

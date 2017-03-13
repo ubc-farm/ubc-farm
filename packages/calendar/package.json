@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Tiger Oakes",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
     "@kadira/storybook": "^2.35.2",
     "benthos": "^0.3.0",

@@ -1,6 +1,6 @@
 {
 	"name": "@ubc-farm/react-pouch-table",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"module": "index.mjs",
 	"main": "index.js",
 	"dependencies": {
@@ -14,9 +14,7 @@
 		"react": "^15.4.2"
 	},
 	"scripts": {
-		"build:es": "rollup -c -f es -i src/index.js -o index.mjs",
-		"build:cjs": "rollup -c -f cjs -i src/index.js -o index.js",
-		"prepare": "npm run build:es && npm run build:cjs",
+		"prepare": "rollup -c",
 		"prepublish": "npm run prepare"
 	}
 }

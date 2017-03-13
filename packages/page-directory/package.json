@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "https://github.com/ubc-farm/page-directory",
   "browser": "public/index.js",
+  "private": true,
   "ubc-farm": {
     "server-plugin": "api.js"
   },

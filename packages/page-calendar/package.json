@@ -7,6 +7,7 @@
   "repository": "https://github.com/ubc-farm/page-calendar",
   "browser": "public/index.js",
   "main": "api.js",
+  "private": true,
   "ubc-farm": {
     "server-plugin": "api.js"
   },

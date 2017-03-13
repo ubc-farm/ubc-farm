@@ -1,6 +1,7 @@
 {
-  "name": "@ubc-farm/page-graphs",
+  "name": "@ubc-farm/graphs",
 	"version": "1.0.0",
+  "private": true,
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

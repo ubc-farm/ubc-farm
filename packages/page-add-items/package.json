@@ -6,6 +6,7 @@
   "license": "MIT",
   "repository": "https://github.com/NotWoods/ubc-farm/page-add-items",
   "browser": "dist/index.iife.js",
+  "private": true,
   "ubc-farm": {
     "server-plugin": "dist/server.js"
   },

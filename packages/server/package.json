@@ -4,6 +4,7 @@
   "description": "Server for the ubc-farm program suite",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
+  "private": true,
   "bin": {
     "ubc-farm-server": "bin/ubc-farm-server.js"
   },

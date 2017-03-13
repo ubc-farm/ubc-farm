@@ -1,6 +1,7 @@
 {
 	"name": "@ubc-farm/fields",
 	"version": "1.0.0",
+  "private": true,
 	"dependencies": {
 		"document-promises": "^3.0.0",
 		"react-virtualized": "^8.11.4",
