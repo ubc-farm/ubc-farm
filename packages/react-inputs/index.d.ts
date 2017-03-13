@@ -4,8 +4,8 @@ import moment from 'moment';
 export const Field: React.SFC<{
 	children?: React.ReactType;
 	id?: string;
-	containerProps?: Object;
-	labelProps?: Object;
+	containerProps?: object;
+	labelProps?: object;
 	[inputProp: string]: any;
 }>
 

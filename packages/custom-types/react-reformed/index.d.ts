@@ -7,7 +7,7 @@ import * as React from 'react';
 declare module 'react-reformed' {
 	export interface ReformedProps<V> {
 		setProperty: (key: string, value: V) => void;
-		setModel: (model: Object) => Object;
+		setModel: (model: object) => object;
 		bindInput: (key: string) => {
 			name: string,
 			value: V,
@@ -22,6 +22,6 @@ declare module 'react-reformed' {
 	 * This is really just for experimentation and to keep the API open for the future.
 	 */
 	export default function reformed<V>(
-		middleware: (props: Object) => Object
+		middleware: (props: object) => object
 	): (WrappedComponent: React.ReactType) => React.ComponentClass<ReformedProps<V>>
 }

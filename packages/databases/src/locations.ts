@@ -36,7 +36,7 @@ export function getLocation({ location, geometry }: Location): LocationDescripti
 }
 
 /**
- * @param {Object|string|number[]|null} field or location from getLocation()
+ * @param {object|string|number[]|null} field or location from getLocation()
  * @returns {string} If a custom location string is defined, that is returned.
  * Otherwise, `Lat: ${}, Long: ${}` is returned if the location is defined as a
  * point. If the location not defined, an empty string is returned.
@@ -58,7 +58,7 @@ export function getLocationString(field: Location|LocationDescription) {
 
 /**
  * Computes the area of a field
- * @param {Object} field
+ * @param {object} field
  * @param {number} [field.area] area in acres
  * @param {GeoJSON.Polygon} [field.geometry] polygon representing the field
  * @returns {number|null} area in acres. Null if neither area or geometry is present
@@ -76,7 +76,7 @@ export function getArea({ area, geometry }: Field) {
 }
 
 /**
- * @param {Object|number|null} field or area from getArea
+ * @param {object|number|null} field or area from getArea
  * @returns {string} string representing acres. Empty string if no defined area,
  * or a number followed by ' ac'.
  */

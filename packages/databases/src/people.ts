@@ -27,7 +27,7 @@ export interface Employee extends Person {
 	sickDays?: DateString[];
 	paidLeaveDays?: DateString[];
 	inLieHours?: DateString[];
-	medicalLeaveTime?: Object;
+	medicalLeaveTime?: object;
 	emergencyContact?: Person;
 	workingDays?: Day[]; // set of days, should be unique
 }

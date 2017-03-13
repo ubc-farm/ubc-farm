@@ -16,8 +16,8 @@ export interface ReformedProps<Model> {
 }
 
 interface NestedModelProps {
-	model: Object;
-	setModel: (model: Object) => Object
+	model: object;
+	setModel: (model: object) => object
 }
 
 function setNestedProperty<Value>(
@@ -48,7 +48,7 @@ function bindNestedInput<Value>(
 }
 
 function handleSubmit(
-	this: NestedModelProps & { onSubmit: (model: Object) => void },
+	this: NestedModelProps & { onSubmit: (model: object) => void },
 	e: React.FormEvent<HTMLFormElement>,
 ) {
 	e.preventDefault();
@@ -61,7 +61,7 @@ function handleSubmit(
  */
 export default compose(
 	reformed(),
-	withProps((props: { onSubmit?: (model: Object) => void }) => ({
+	withProps((props: { onSubmit?: (model: object) => void }) => ({
 		bindInput: <NestedInputProps<any>> bindNestedInput.bind(props),
 		setProperty: <(name: string, value: any) => void> setNestedProperty.bind(props),
 		handleSubmit: props.onSubmit

@@ -30,8 +30,8 @@ const identity = (doc: any) => doc;
  * the component.
  *
  * @param {function} [transformer] a function that transforms a document
- * into a value stored in a prop for the child component. (Object, string) => T
- * @param {Object} [options]
+ * into a value stored in a prop for the child component. (object, string) => T
+ * @param {object} [options]
  * @param {string} [options.rowKey=rows]
  * @param {string} [options.loadingKey=loading]
  * @param {boolean} [options.changes=true]
@@ -82,7 +82,7 @@ export default function connectAll<Content, Value>(
 			static propTypes: ValidationMap<any>;
 
 			db: PouchDB.Database<Content>;
-			changes: PouchDB.Core.Changes<Object> | null;
+			changes: PouchDB.Core.Changes<object> | null;
 			docError: Error | null;
 
 			constructor(props: DBProp) {

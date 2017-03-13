@@ -43,7 +43,7 @@ export function arrayToObjectMap<T extends Object>(
 /**
  * Transforms a map into an object. Non-string and non-number keys are ignored.
  * @param {Map} map
- * @returns {Object}
+ * @returns {object}
  */
 export function mapToObject<T>(map: Map<string|number, T>): { [key: string]: T }
 

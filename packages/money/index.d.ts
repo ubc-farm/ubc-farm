@@ -61,7 +61,7 @@ export default class Money {
 	 * Returns a formatted currency string.
 	 * If value is NaN, an empty string is returned.
 	 * @param {string} [locale]
-	 * @param {Object} [options]
+	 * @param {object} [options]
 	 * @param {boolean} [options.parentheses] - wrap negative numbers
 	 * in parentheses
 	 * @param {string} [options.currency=USD] - currency locale to return
@@ -83,7 +83,7 @@ export default class Money {
  * If value is NaN, an empty string is returned.
  * @param {number} cents
  * @param {string} [locale]
- * @param {Object} [options]
+ * @param {object} [options]
  * @param {boolean} [options.parentheses] - wrap negative numbers
  * in parentheses
  * @param {string} [options.currency=CAD] - currency locale to return
