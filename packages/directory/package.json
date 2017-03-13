@@ -11,7 +11,7 @@
     "react-reformed": "^1.0.1",
     "recompose": "^0.22.0",
     "shortid": "^2.2.8",
-    "@ubc-farm/react-pouch-table": "^1.0.0"
+    "@ubc-farm/react-pouch-table": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^15.4.2",

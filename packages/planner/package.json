@@ -24,10 +24,6 @@
     "typescript": "^2.2.1"
   },
   "scripts": {
-    "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
-    "watch": "rollup -c -w -i entry/index.ts -o browser/index.js",
-    "prepare": "npm run build-index",
-    "prepublish": "npm run prepare",
     "ts": "tsc --noEmit || exit 0"
   }
 }

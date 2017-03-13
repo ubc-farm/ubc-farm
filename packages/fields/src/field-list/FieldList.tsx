@@ -1,12 +1,12 @@
 import { createElement, PropTypes, SFC } from 'react'; /** @jsx createElement */
-import { ReactPouchTable, Column, ReactPouchTableProps } from '@ubc-farm/react-pouch-table';
+import { AutoSizedTable, Column, AutoSizedPouchTableProps } from '@ubc-farm/react-pouch-table';
 import { getLocationString, getAcres, Field } from '@ubc-farm/databases';
 
 /**
  * A component that displays a list of all fields in the farm.
  */
-const FieldList: SFC<ReactPouchTableProps<Field>> = ({ db }) => (
-	<ReactPouchTable
+const FieldList: SFC<AutoSizedPouchTableProps> = ({ db }) => (
+	<AutoSizedTable
 		headerHeight={30}
 		rowHeight={50}
 		onRowClick={({ _id }) => {
@@ -24,7 +24,7 @@ const FieldList: SFC<ReactPouchTableProps<Field>> = ({ db }) => (
 			cellDataGetter={({ rowData }) => getAcres(rowData)}
 		/>
 		<Column dataKey="crop" label="Crop Type" width={140} />
-	</ReactPouchTable>
+	</AutoSizedTable>
 );
 
 export default FieldList;

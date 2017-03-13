@@ -10,13 +10,11 @@
     "@ubc-farm/databases": "^2.0.1"
   },
   "devDependencies": {
-    "rollup": "^0.41.4",
+    "webpack": "^2.2.1",
     "typescript": "^2.2.1"
   },
   "scripts": {
-    "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
-    "prepare": "npm run build-index --quiet",
-    "prepublish": "npm run prepare --quiet",
+
     "ts": "tsc --noEmit || exit 0"
   }
 }

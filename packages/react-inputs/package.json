@@ -18,9 +18,7 @@
   },
   "scripts": {
     "ts": "tsc --noEmit || exit 0",
-    "build:es": "rollup -c -f es -i src/index.ts -o index.mjs",
-    "build:cjs": "rollup -c -f cjs -i src/index.ts -o index.js",
-    "prepare": "npm run build:es && npm run build:cjs",
+    "prepare": "rollup -c",
     "prepublish": "npm run prepare"
   }
 }
