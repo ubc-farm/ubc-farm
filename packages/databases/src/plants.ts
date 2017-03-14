@@ -13,6 +13,7 @@ export interface Plant {
 	lipid: number;
 	energy: number;
 	calcium: number;
+	iron: number;
 	magnesium: number;
 	ph: number;
 	potassium: number;
@@ -42,6 +43,7 @@ export interface Plant {
 	folate: number;
 	vitB12: number;
 	vitK: number;
+	pollDep: number;
 }
 
 export default async function getPlants() {
@@ -55,4 +57,54 @@ export default async function getPlants() {
 
 	// TODO: Load CSV data into the plant database
 	return db;
+}
+
+function convertRow(row: { [key: string]: string }): Plant {
+	let refuse;
+	if (row.Refuse === 'NA') {
+		refuse = null;
+	} else {
+		refuse = { name: row.Refuse, percent: parseFloat(row.Percentrefuse) / 100 };
+	}
+
+	return {
+		_id: row['Crop map file name'],
+		_rev: '',
+		commodity: row.Commodity,
+		refuse,
+		lipid: parseFloat(row.Lipid),
+		energy: parseFloat(row.Energy),
+		calcium: parseFloat(row.Ca),
+		iron: parseFloat(row.Fe),
+		magnesium: parseFloat(row.Mg),
+		ph: parseFloat(row.Ph),
+		potassium: parseFloat(row.K),
+		sodium: parseFloat(row.Na),
+		zinc: parseFloat(row.Zn),
+		copper: parseFloat(row.Cu),
+		flerovium: parseFloat(row.Fl),
+		manganese: parseFloat(row.Mn),
+		selenium: parseFloat(row.Se),
+		vitA: parseFloat(row.VitA),
+		vitA_RAE: parseFloat(row.VitA_RAE),
+		betaC: parseFloat(row.betaC),
+		alphaC: parseFloat(row.alphaC),
+		vitE: parseFloat(row.VitE),
+		crypto: parseFloat(row.Crypto),
+		lycopene: parseFloat(row.Lycopene),
+		lutein: parseFloat(row.Lutein),
+		betaT: parseFloat(row.betaT),
+		gammaT: parseFloat(row.gammaT),
+		deltaT: parseFloat(row.deltaT),
+		vitC: parseFloat(row.VitC),
+		thiamin: parseFloat(row.Thiamin),
+		riboflavin: parseFloat(row.Riboflavin),
+		niacin: parseFloat(row.Niacin),
+		pantothenic: parseFloat(row.Pantothenic),
+		vitB6: parseFloat(row.VitB6),
+		folate: parseFloat(row.Folate),
+		vitB12: parseFloat(row.VitB12),
+		vitK: parseFloat(row.VitK),
+		pollDep: parseFloat(row['poll.dep']),
+	};
 }

@@ -6,5 +6,5 @@ export default function createOutputDump(
 	getInputStream: () => NodeJS.ReadableStream,
 	getOutputStream: () => NodeJS.WritableStream,
 	getOldOutput?: () => NodeJS.ReadableStream,
-	transformer?: (row: any) => any,
+	transformer?: (row: object) => object,
 ): Promise<void>
