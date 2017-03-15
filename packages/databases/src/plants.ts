@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import csvFileToPouch from '@ubc-farm/csv-to-pouch';
 import PouchDB from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 
@@ -44,19 +45,6 @@ export interface Plant {
 	vitB12: number;
 	vitK: number;
 	pollDep: number;
-}
-
-export default async function getPlants() {
-	const db = new PouchDB<Plant>('plants');
-	await Promise.all([
-		db.createIndex({ index: { fields: ['commodity'] } }),
-	]);
-
-	const { total_rows } = await db.allDocs({ limit: 0 });
-	if (total_rows > 0) return db;
-
-	// TODO: Load CSV data into the plant database
-	return db;
 }
 
 function convertRow(row: { [key: string]: string }): Plant {
@@ -108,3 +96,17 @@ function convertRow(row: { [key: string]: string }): Plant {
 		pollDep: parseFloat(row['poll.dep']),
 	};
 }
+
+export default async function getPlants() {
+	const db = new PouchDB<Plant>('plants');
+	await Promise.all([
+		db.createIndex({ index: { fields: ['commodity'] } }),
+	]);
+
+	const { total_rows } = await db.allDocs({ limit: 0 });
+	if (total_rows > 0) return db;
+
+	// TODO: Load CSV data into the plant database
+	return db;
+}
+
