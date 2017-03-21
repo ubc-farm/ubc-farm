@@ -11,7 +11,7 @@ export interface TaskType {
 /**
  * Returns name of task in Start Case
  */
-export function taskTypeName(taskType: TaskType | string) {
+export function taskTypeName(taskType: Partial<TaskType> | string) {
 	const id = typeof taskType === 'string' ? taskType : taskType._id;
 	return startCase(id);
 }

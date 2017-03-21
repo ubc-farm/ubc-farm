@@ -4,7 +4,7 @@ import { ID, Cents, DateNum } from './utils/typedefs';
 import moment from 'moment';
 
 // TODO may need to modify
-interface Item {
+export interface Item {
 	label?: string;
 	product?: string;
 	description?: string;
@@ -19,7 +19,7 @@ interface Item {
 	location?: ID;
 }
 
-interface Fertilizer extends Item {
+export interface Fertilizer extends Item {
 	label: 'fertilizer';
 	composition?: {
 		tc?: number;
@@ -31,7 +31,7 @@ interface Fertilizer extends Item {
 	h20MixRatio?: string;
 }
 
-interface Pesticide extends Item {
+export interface Pesticide extends Item {
 	label: 'pesticide';
 	activeIngredients?: { [ingredient: string]: number };
 	applicationLocation?: string;
@@ -40,7 +40,7 @@ interface Pesticide extends Item {
 	harvestInterval?: moment.Duration;
 }
 
-interface Seeds extends Item {
+export interface Seeds extends Item {
 	label: 'seeds';
 	spacing?: {
 		width?: number

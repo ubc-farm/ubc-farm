@@ -15,7 +15,7 @@ export interface Task {
 	done?: boolean;
 }
 
-export function getTaskStart(task: Task) {
+export function getTaskStart(task: Partial<Task>) {
 	if (!task.start) return null;
 
 	const start = moment(task.start);
@@ -24,7 +24,7 @@ export function getTaskStart(task: Task) {
 	return start;
 }
 
-export function getTaskEnd(task: Task) {
+export function getTaskEnd(task: Partial<Task>) {
 	let end: moment.Moment;
 	if (!task.end) {
 		if (!task.start) return null;
@@ -37,7 +37,7 @@ export function getTaskEnd(task: Task) {
 	return end;
 }
 
-export function getTaskRange(task: Task): moment.Moment[] | null {
+export function getTaskRange(task: Partial<Task>): moment.Moment[] | null {
 	const start = getTaskStart(task);
 	const end = getTaskEnd(task);
 	if (start == null || end == null) return null;

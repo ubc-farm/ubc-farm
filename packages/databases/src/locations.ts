@@ -4,11 +4,12 @@ import centroid from '@turf/centroid';
 import PouchDB from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 
+type LocationGeometry = GeoJSON.Polygon | GeoJSON.Point;
 export interface Location {
 	_id: string; // `${'field' || 'place'}/${hash}`
 	_rev: string;
 	name?: Index<string>; // name of the location
-	geometry?: GeoJSON.Polygon | GeoJSON.Point; // GeoJSON geometry object
+	geometry?: LocationGeometry; // GeoJSON geometry object
 	location?: Index<string | number[]>; // Either a string describing the
 	                                            // location or coordinates.
 }
@@ -27,10 +28,10 @@ type LocationDescription = string | number[] | null;
 /**
  * @returns {string|number[]|null}
  */
-export function getLocation({ location, geometry }: Location): LocationDescription {
+export function getLocation({ location, geometry }: Partial<Location>): LocationDescription {
 	if (location) return location;
 	else if (geometry) {
-		const center = centroid(<GeoJSON.Feature<any>> { type: 'Feature', geometry });
+		const center = centroid({ type: 'Feature', geometry } as GeoJSON.Feature<LocationGeometry>);
 		return center.geometry.coordinates;
 	} else return null;
 }
@@ -41,7 +42,7 @@ export function getLocation({ location, geometry }: Location): LocationDescripti
  * Otherwise, `Lat: ${}, Long: ${}` is returned if the location is defined as a
  * point. If the location not defined, an empty string is returned.
  */
-export function getLocationString(field: Location|LocationDescription) {
+export function getLocationString(field: Partial<Location>|LocationDescription) {
 	let location;
 	if (typeof field === 'string' || field == null || Array.isArray(field)) {
 		location = field;
@@ -64,7 +65,7 @@ export function getLocationString(field: Location|LocationDescription) {
  * @returns {number|null} area in acres. Null if neither area or geometry is present
  * @see http://gis.stackexchange.com/questions/124853/converting-area-of-a-polygon-from-steradians-to-square-kilometers-using-d3-js
  */
-export function getArea({ area, geometry }: Field) {
+export function getArea({ area, geometry }: Partial<Field>) {
 	if (area) return area;
 	else if (geometry) {
 		const polyArea = geojsonArea(<GeoJSON.Feature<any>> { type: 'Feature', geometry });
@@ -80,7 +81,7 @@ export function getArea({ area, geometry }: Field) {
  * @returns {string} string representing acres. Empty string if no defined area,
  * or a number followed by ' ac'.
  */
-export function getAcres(field: Field|number|null) {
+export function getAcres(field: Partial<Field>|number|null) {
 	let mSquared;
 	if (typeof field === 'number' || field == null) mSquared = field;
 	else mSquared = getArea(field);

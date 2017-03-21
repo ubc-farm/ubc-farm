@@ -47,7 +47,7 @@ export interface Researcher extends Person {
  * Returns the role of the person in Start Case.
  * @param {Person|string} person or the role as a string
  */
-export function getRole(person: Person | string) {
+export function getRole(person: Partial<Person> | string) {
 	const role = typeof person === 'string' ? person : (person.role || 'none');
 	return startCase(role);
 }

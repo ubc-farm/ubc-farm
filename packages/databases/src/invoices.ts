@@ -34,7 +34,7 @@ export function salePrice(sale: Sale): Cents {
 /**
  * Calculates the subtotal for an invoice
  */
-export function computeSubtotal(invoice: Invoice | Sale[]): Cents {
+export function computeSubtotal(invoice: Partial<Invoice> | Sale[]): Cents {
 	const sales = Array.isArray(invoice) ? invoice : (invoice.items || []);
 	return sales.reduce((total, sale) => total + salePrice(sale), 0);
 }
@@ -43,7 +43,7 @@ export function computeSubtotal(invoice: Invoice | Sale[]): Cents {
  * Calculate total, including VAT tax
  * @param {number} vat - percentage, such as 0.04 for 4% tax.
  */
-export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents {
+export function computeTotal(invoice: Partial<Invoice> | Sale[], vat: number): Cents {
 	if (typeof vat !== 'number') throw new TypeError(`Invalid VAT ${vat}`);
 	return computeSubtotal(invoice) * (1 + vat);
 }
@@ -53,14 +53,14 @@ export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents {
  * @param {number} [vat] - percentage, such as 0.04 for 4% tax. If omitted,
  * the subtotal is used for calculations instead.
  */
-export function balanceDue(invoice: Invoice, vat: number = 0): Cents {
+export function balanceDue(invoice: Partial<Invoice>, vat: number = 0): Cents {
 	return computeTotal(invoice, vat) - (invoice.amountPaid || 0);
 }
 
 /**
  * Returns the invoice date as a moment
  */
-export function getInvoiceDate(invoice: Invoice) {
+export function getInvoiceDate(invoice: Partial<Invoice>) {
 	if (invoice.date) return moment(invoice.date);
 	else return null;
 }
@@ -68,7 +68,7 @@ export function getInvoiceDate(invoice: Invoice) {
 /**
  * Returns the delivery date as a moment
  */
-export function getInvoiceDeliveryDate(invoice: Invoice) {
+export function getInvoiceDeliveryDate(invoice: Partial<Invoice>) {
 	if (invoice.deliveryDate) return moment(invoice.deliveryDate);
 	else return null;
 }
