@@ -26,19 +26,19 @@ export function classlist(...classes: Array<ClassListItem | ClassListItem[]>): s
  * Transforms an array of objects into a keyed map, using the specified
  * key property as the key used in the Map.
  */
-export function arrayToMap<T extends Object>(
+export function arrayToMap<T extends Object, K extends keyof T>(
 	array: T[],
-	idKey: string
-): Map<string, T>
+	idKey: K
+): Map<K, T>
 
 /**
  * Transforms an array of objects into a keyed object, using the specified
  * key property as the key used in the new object.
  */
-export function arrayToObjectMap<T extends Object>(
+export function arrayToObjectMap<T extends Object, K extends keyof T>(
 	array: T[],
-	idKey: string
-): { [id: string]: T }
+	idKey: K
+): { [id: K]: T }
 
 /**
  * Transforms a map into an object. Non-string and non-number keys are ignored.
@@ -52,7 +52,7 @@ export function mapToObject<T>(map: Map<string|number, T>): { [key: string]: T }
  * returns a genrator object that is immediately
  * ready for input via `next()`
  */
-export function coroutine<T>(generator): (...any) => IterableIterator<T>;
+export function coroutine<T>(generator): (...args: any[]) => IterableIterator<T>;
 
 /**
  * Generate unique IDs. Guaranteed to be unique when compared to other strings

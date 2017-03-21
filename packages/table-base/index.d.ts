@@ -6,7 +6,7 @@ export interface ColumnProps<T, Row> {
 	isKey?: boolean;
 	format?: (cell: T, row: Row) => React.ReactType;
 	hidden?: boolean;
-	columnClassName?: string | (cell: T, row: Row, rowIndex: number) => string;
+	columnClassName?: string | ((cell: T, row: Row, rowIndex: number) => string);
 	headerClassName?: string;
 	onHeaderClick?: React.ClickEventHandler<any>;
 	onCellClick?: (cell: T, row: Row, rowIndex: number) => void;
@@ -17,7 +17,7 @@ export interface TableProps<Row> {
 	children: Column[];
 	tableData: Row[] | Set<Row> | Map<string, Row> | { [key: string]: Row };
 	keyField?: string;
-	rowClassName?: string | (row: Row, rowIndex: number) => string;
+	rowClassName?: string | ((row: Row, rowIndex: number) => string);
 	tableClassName?: string;
 	headClassName?: string;
 	bodyClassName?: string;

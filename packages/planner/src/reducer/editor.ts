@@ -11,8 +11,8 @@ const defaultState = {
 	_rev: '',
 	type: '',
 	name: '',
-	start: null,
-	end: null,
+	start: undefined,
+	end: undefined,
 	location: '',
 	equipment: [],
 };
@@ -36,8 +36,8 @@ export default function editorReducer(state: IState = defaultState, action: any)
 
 export const clearEditor = () => ({ type: CLEAR });
 export const setEditorModel = (model: IState) => ({ type: SET_MODEL, payload: model });
-export const setEditorProp = (key: string, value: any) => ({
-	type: SET_PROPERTY, payload: { key, value }
-});
+export function setEditorProp<K extends keyof IState>(key: K, value: IState[K]) {
+	return { type: SET_PROPERTY, payload: { key, value } };
+}
 
 export const getModel = (state: { editor: IState }) => state.editor;

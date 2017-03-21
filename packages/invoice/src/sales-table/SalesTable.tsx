@@ -15,7 +15,7 @@ interface SalesTableState {
 }
 
 export default class SalesTable extends Component<SalesTableProps, SalesTableState> {
-	constructor(props) {
+	constructor(props: SalesTableProps) {
 		super(props);
 		this.state = { editing: new Set() };
 	}

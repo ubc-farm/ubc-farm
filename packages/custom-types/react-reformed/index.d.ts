@@ -5,12 +5,13 @@
 import * as React from 'react';
 
 declare module 'react-reformed' {
-	export interface ReformedProps<V> {
-		setProperty: (key: string, value: V) => void;
-		setModel: (model: object) => object;
-		bindInput: (key: string) => {
-			name: string,
-			value: V,
+	export interface ReformedProps<Model, P extends keyof Model> {
+		model: Readonly<Model>,
+		setProperty: (key: P, value: Model[P]) => void;
+		setModel: (model: Model) => Model;
+		bindInput: (key: P) => {
+			name: P,
+			value: Model[P],
 			onChange: React.ChangeEventHandler<any>;
 		};
 	}
@@ -21,7 +22,7 @@ declare module 'react-reformed' {
 	 * that will transform the props that `reformed` applies to the wrapped component.
 	 * This is really just for experimentation and to keep the API open for the future.
 	 */
-	export default function reformed<V>(
-		middleware: (props: object) => object
-	): (WrappedComponent: React.ReactType) => React.ComponentClass<ReformedProps<V>>
+	export default function reformed<M>(
+		middleware: (props: M) => M
+	): (WrappedComponent: React.ReactType) => React.ComponentClass<ReformedProps<M, keyof M>>
 }

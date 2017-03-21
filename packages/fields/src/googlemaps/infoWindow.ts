@@ -1,12 +1,16 @@
-import { getLocation } from '@ubc-farm/databases';
+import { getLocation, Field } from '@ubc-farm/databases';
 const { InfoWindow, Data } = google.maps;
+
+interface FieldFeature extends GeoJSON.Feature<GeoJSON.Polygon> {
+	properties: { [K in keyof Field]: Field[K] }
+}
 
 /**
  * on polygon click, open info window at field centroid
  */
 export default function createInfoWindow(
 	dataLayer: google.maps.Data,
-	db: PouchDB.Database<{ name: string }>
+	db: PouchDB.Database<Partial<Field>>
 ) {
 	const infoWindow = new InfoWindow();
 
@@ -15,7 +19,7 @@ export default function createInfoWindow(
 	}
 
 	dataLayer.addListener('click', ({ feature }: google.maps.Data.MouseEvent) => {
-		feature.toGeoJson((json: GeoJSON.Feature<GeoJSON.Polygon>) => {
+		feature.toGeoJson((json: FieldFeature) => {
 			const location = getLocation({
 				location: json.properties && json.properties.location,
 				geometry: json.geometry
@@ -28,8 +32,9 @@ export default function createInfoWindow(
 			infoWindow.open();
 		});
 
-		db.get(feature.getId().toString())
-			.then(doc => infoWindow.setContent(doc.name));
+		db.get(feature.getId().toString()).then(doc => {
+			infoWindow.setContent(doc.name || '');
+		});
 	});
 
 	return infoWindow;

@@ -13,8 +13,9 @@ Promise.all([getLocations(), parsed]).then(([db]) => {
 	function submit() { db.put(field).then(back); }
 
 	const formProps = {
-		setProperty(name: string, value: any) {
-			field = Object.assign({}, field, { [name]: value });
+		setProperty<K extends keyof Field>(name: K, value: Field[K]) {
+			field = Object.assign({}, field);
+			field[name] = value;
 			renderFieldEditorForm(<Field> field, formProps);
 		},
 		onSubmit: submit,
