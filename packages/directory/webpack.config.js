@@ -1,4 +1,4 @@
-const generateConfig = require('../../webpack.config.js')
+const generateConfig = require('../../webpack.config.js');
 
 module.exports = generateConfig({
 	entry: {
