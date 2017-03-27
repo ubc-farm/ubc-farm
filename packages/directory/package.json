@@ -18,15 +18,11 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "rollup": "^0.41.4",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "build-index": "rollup -c -i entry/index.ts -o browser/index.js",
-    "pack": "webpack --watch",
-    "build-new": "rollup -c -i entry/new.ts -o browser/new.js",
-    "prepare": "npm run pack",
+    "prepare": "webpack",
     "prepublish": "npm run prepare --quiet",
     "ts": "tsc --noEmit || exit 0"
   }
