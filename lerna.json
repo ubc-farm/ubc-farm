@@ -9,5 +9,12 @@
   "ignore": [
     "@ubc-farm/page-*",
     "@ubc-farm-/server"
-  ]
+  ],
+  "commands": {
+    "publish": {
+      "ignore": [
+        "pages/*"
+      ]
+    }
+  }
 }

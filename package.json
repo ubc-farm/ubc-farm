@@ -4,7 +4,11 @@
   "license": "MIT",
   "scripts": {
     "serve": "http-server ./packages/frontend/_site",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "publish": "lerna publish",
+    "updated": "lerna updated",
+    "clean": "lerna clean",
+    "ls": "lerna ls"
   },
   "devDependencies": {
     "@types/geojson": "^1.0.0",
