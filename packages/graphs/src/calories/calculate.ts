@@ -12,9 +12,9 @@ async function getCropQuantities(
 	});
 
 	return docs.reduce((map, doc: Field) => {
-		const { variety, quantity = 0 } = doc.crop;
-		if (!variety) return map;
+		if (!doc.crop || !doc.crop.variety) return map;
 
+		const { variety, quantity = 0 } = doc.crop;
 		return map.set(variety, (map.get(variety) || 0) + quantity);
 	}, new Map());
 }
@@ -32,9 +32,14 @@ export default async function calculateFarmCalorieCount() {
 		include_docs: true,
 	});
 
-	return rows.map(plant => ({
-		plant: plant.commodity,
-		calories: plant.energy * (cropAmounts.get(plant._id) || 0),
-	}))
+	return rows.map(plant => {
+		if (!plant.doc)
+			throw new Error('Missing doc property. Did you use `include_docs`?');
+
+		return {
+			plant: plant.doc.commodity,
+			calories: plant.doc.energy * (cropAmounts.get(plant.id) || 0),
+		};
+	})
 	.sort((a, b) => a.calories - b.calories);
 }

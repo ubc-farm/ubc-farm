@@ -177,7 +177,7 @@ export default function connectAll<Content, Value>(
 					childProps[rowKey] = [...childProps[rowKey].values()];
 				}
 
-				return createElement(WrappedComponent, childProps);
+				return createElement(<any> WrappedComponent, childProps);
 			}
 		}
 

@@ -1,4 +1,3 @@
-/// <reference path="../../../custom-types/pouchdb-find/index.d.ts" />
 /// <reference path="../../../custom-types/transform-pouch/index.d.ts" />
 
 import PouchDB from 'pouchdb';

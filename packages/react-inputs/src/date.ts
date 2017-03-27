@@ -5,7 +5,7 @@ import {
 } from 'react'; /** @jsx createElement */
 import moment from 'moment';
 
-interface DateTarget {
+interface DateTarget extends EventTarget {
 	name: string,
 	value: moment.Moment
 }
@@ -21,7 +21,7 @@ export function handleChange(
 	e: ChangeEvent<DateTarget>,
 ) {
 	const event = Object.assign({}, e);
-	const target: DateTarget = Object.assign({}, e.currentTarget, {
+	const target = Object.assign({}, e.currentTarget, {
 		value: moment(e.currentTarget.value)
 	});
 

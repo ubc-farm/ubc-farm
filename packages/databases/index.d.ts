@@ -204,6 +204,7 @@ export function getInvoices(): Promise<PouchDB.Database<Invoice>>;
 export function getLocations(): Promise<PouchDB.Database<Location>>;
 export function getLongTerm(generate?: boolean): Promise<PouchDB.Database<LongTermEntry>>;
 export function getPeople(): Promise<PouchDB.Database<Person>>;
+export function getPlants(): Promise<PouchDB.Database<Plant>>;
 export function getTaskTypes(): Promise<PouchDB.Database<TaskType>>;
 export function getTasks(): Promise<PouchDB.Database<Task>>;
 

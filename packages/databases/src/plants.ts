@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import csvFileToPouch from '@ubc-farm/csv-to-pouch';
+// import csvFileToPouch from 'csv-to-pouch';
 import PouchDB from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 
