@@ -8,7 +8,7 @@
   "scope": "@ubc-farm/*",
   "ignore": [
     "@ubc-farm/page-*",
-    "@ubc-farm-/server"
+    "@ubc-farm-/server-2"
   ],
   "commands": {
     "publish": {

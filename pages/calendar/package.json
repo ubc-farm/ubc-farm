@@ -25,7 +25,7 @@
     "typescript": "^2.2.1"
   },
   "scripts": {
-    "prepare": "webpack",
+    "prepare": "echo \"TODO: webpack\"",
     "prepublish": "npm run prepare",
     "storybook": "start-storybook -p 9001 -c .storybook"
   }
