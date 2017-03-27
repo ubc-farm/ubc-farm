@@ -12,7 +12,7 @@ function hasAssociatedLayout(data: { page?: { layout?: string } }) {
 	return data.page && data.page.layout;
 }
 
-export function getDestinationPath(filePath, data): string {
+function getDestinationPath(filePath, data): string {
 	if (data.page && data.page.permalink) {
 		let { permalink } = data.page;
 		if (permalink.endsWith('/')) permalink = join(permalink, 'index.html');
@@ -28,22 +28,27 @@ export function getDestinationPath(filePath, data): string {
 	}
 }
 
-export default async function compileFile(file: string, { context, cwd }) {
-	let text = await readFile(join(cwd, file), 'utf8');
+export default async function compileFile(
+	file: string, context
+): Promise<{ out: string, path: string }> {
+	let text = await readFile(file, 'utf8');
 	const hasFrontMatter = matter.test(text);
 
-	const data = { ...context };
+	context = { ...context };
 	if (hasFrontMatter) {
 		const matterResult = matter(text);
-		data.page = matterResult.page;
+		context.page = matterResult.page;
 		text = matterResult.content;
 	}
 
 	const template = Handlebars.compile(text, { noEscape: true });
 
-	if (hasAssociatedLayout(data)) {
-		return useLayout(template, data.page.layout, data);
+	let out: string;
+	if (hasAssociatedLayout(context)) {
+		out = useLayout(template, context.page.layout, context);
 	} else {
-		return template(data);
+		out = template(context);
 	}
+
+	return { out, path: getDestinationPath(file, context) };
 }

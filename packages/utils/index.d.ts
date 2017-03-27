@@ -105,7 +105,7 @@ export function observeStore<S, T>(
  * }
  * hello() //TypeError: Missing required function parameter target
  */
-export function required(message?: string): void
+export function required(message?: string): never
 
 /**
  * Acts like Object.assign, but for Map objects instead.
