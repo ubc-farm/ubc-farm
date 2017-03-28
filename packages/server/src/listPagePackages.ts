@@ -59,7 +59,7 @@ export default async function listPagePackages(): Promise<Map<string, string>> {
 
 	return results.reduce((map, pkg) => {
 		if (pkg !== null && pkg.package.www) {
-			return map.set(pkg.package.name, resolve(pkg.path, pkg.package.www));
+			return map.set(pkg.package.name, join(pkg.path, pkg.package.www));
 		}	else
 			return map;
 	}, new Map());
