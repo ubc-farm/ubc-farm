@@ -16,7 +16,7 @@ export function listPagePackages(): Promise<Map<string, string>>
 /**
  * Loads data from the data directory and returns it.
  */
-export function readData(): Promise<any>
+export function readData(): Promise<{ [filename: string]: any }>
 
 interface ViewOptions {
 	from: string,
