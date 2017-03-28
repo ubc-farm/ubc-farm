@@ -1,6 +1,10 @@
 # ubc-farm
 Server tool and core code for the ubc-farm program suite.
 
+The server is a static file server that maps to folders in each page package.
+Rather than have the server handle templates and data, files are precompiled
+with other tools in this package.
+
 ## server
 Creates and launches a static web server.
 Files are loaded from the www folder, along with files from other page packages.

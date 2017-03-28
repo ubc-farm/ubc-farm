@@ -1,5 +1,5 @@
 import { readFile } from './fs-awaitable';
-import { join, parse, resolve } from 'path';
+import { parse, resolve } from 'path';
 import Handlebars from 'handlebars';
 import walkFolder from './walkFolder';
 

@@ -1,5 +1,5 @@
-import resolveCallback from 'resolve';
-import denodeify from 'denodeify';
+import * as resolveCallback from 'resolve';
+import * as denodeify from 'denodeify';
 import { resolve as resolvePath, join, dirname } from 'path';
 import parseData from './utils/parseData';
 

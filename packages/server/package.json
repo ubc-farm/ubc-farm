@@ -1,17 +1,20 @@
 {
   "name": "@ubc-farm/server",
   "version": "3.0.0",
-  "description": "Server for the ubc-farm program suite",
+  "description": "Server tool and core code for the ubc-farm program suite.",
+  "main": "out/index.js",
   "dependencies": {
     "handlebars": "^4.0.5",
     "minimist": "^1.2.0",
     "resolve": "^1.1.7",
     "denodeify": "^1.2.1",
     "express": "^4.15.2",
-    "gray-matter": "^2.1.1"
+    "gray-matter": "^2.1.1",
+    "js-yaml": "^3.8.2"
   },
   "devDependencies": {
-    "blue-tape": "^1.0.0"
+    "blue-tape": "^1.0.0",
+    "typescript": "^2.2.2"
   },
   "optionalDependencies": {
     "@ubc-farm/calendar": "*",

@@ -8,6 +8,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"suppressImplicitAnyIndexErrors": true,
+		"skipLibCheck": true,
 
 		"jsx": "react",
 		"jsxFactory": "createElement",
@@ -18,6 +19,7 @@
 			"dom", "dom.iterable"
 		],
 		"moduleResolution": "node",
+		"module": "commonjs",
 
 		"outDir": "out"
 	},

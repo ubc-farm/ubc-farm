@@ -28,11 +28,15 @@ function getDestinationPath(filePath, data): string {
 	}
 }
 
+function test(matter: any, text: string) {
+	return matter.test(text);
+}
+
 export default async function compileFile(
 	file: string, context
 ): Promise<{ out: string, path: string }> {
 	let text = await readFile(file, 'utf8');
-	const hasFrontMatter = matter.test(text);
+	const hasFrontMatter = test(matter, text);
 
 	context = { ...context };
 	if (hasFrontMatter) {

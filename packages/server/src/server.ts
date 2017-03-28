@@ -1,4 +1,4 @@
-import express from 'express';
+import * as express from 'express';
 import { resolve } from 'path';
 
 import listPagePackages from './listPagePackages';

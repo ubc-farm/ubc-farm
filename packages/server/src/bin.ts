@@ -1,5 +1,5 @@
 import { FSWatcher } from 'fs';
-import parseArgs from 'minimist';
+import * as parseArgs from 'minimist';
 import {
 	server,
 	listPagePackages,
@@ -54,6 +54,7 @@ export default async function main(options: Options) {
 				console.log(`Server listening on port ${options.port}`);
 
 				app.use((req, res, next) => {
+					res = res;
 					console.log(`${req.method}: ${req.path}`);
 					next();
 				});
