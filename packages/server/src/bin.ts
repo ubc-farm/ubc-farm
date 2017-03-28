@@ -25,12 +25,25 @@ interface CompileOptions {
 }
 
 interface CompileAllOptions {
-	mode: 'compileAll',
+	mode: 'compile-all',
 	watch?: boolean,
 }
 
+interface HelpOptions {
+	mode: 'help'
+}
+
 export type Options = ServerOptions | ListOptions
-	| CompileOptions | CompileAllOptions;
+	| CompileOptions | CompileAllOptions | HelpOptions;
+
+const helpDialog = `
+Example usage:
+	ubc-farm server --port 8080
+	ubc-farm list
+	ubc-farm compile -f ./views -t ./www
+	ubc-farm compile-all --watch
+	ubc-farm help
+`;
 
 export default async function main(options: Options) {
 	try {
@@ -68,7 +81,7 @@ export default async function main(options: Options) {
 						console.log(`Change at ${filename}, will recompile`));
 				}
 				break;
-			case 'compileAll':
+			case 'compile-all':
 				console.log('Compiling files in all packages');
 				const allWatchers: FSWatcher[] = <any> await compileAll(options);
 
@@ -81,6 +94,9 @@ export default async function main(options: Options) {
 					})
 				}
 				break;
+			case 'help':
+				console.log(helpDialog);
+				break;
 		}
 	} catch (err) {
 		console.error(err.message);
@@ -89,7 +105,7 @@ export default async function main(options: Options) {
 }
 
 if (require.main === module) {
-	const { _, from, to, watch, paths, port } = parseArgs(process.argv, {
+	const { _, port, ...args } = parseArgs(process.argv, {
 		boolean: ['watch', 'paths'],
 		string: ['from', 'to', 'port'],
 		alias: {
@@ -99,5 +115,5 @@ if (require.main === module) {
 			watch: 'w',
 		},
 	});
-	main({ mode: _[0], from, to, watch, paths, port: parseInt(port, 10) });
+	main({ ...args, mode: _[0], port: parseInt(port, 10) });
 }

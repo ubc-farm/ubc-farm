@@ -1,7 +1,6 @@
 import resolveCallback from 'resolve';
 import denodeify from 'denodeify';
 import { resolve as resolvePath, join, dirname } from 'path';
-import { readdir } from './utils/fs-awaitable';
 import parseData from './utils/parseData';
 
 const resolve = denodeify(resolveCallback);
@@ -12,30 +11,12 @@ interface PackageJSON {
 }
 
 /**
- * Returns all possible page package names. In production mode, a set
- * list of names is used. In development mode, the pages folder in the monorepo
- * is scanned and all of the packages from that is returned.
+ * Returns all possible page package names. The optional dependencies from this
+ * module's package.json are used.
  */
-async function getAllPages(): Promise<string[]> {
-	if (process.env.NODE_ENV === 'production') {
-		return [
-			'@ubc-farm/calendar',
-			'@ubc-farm/directory',
-			'@ubc-farm/fields',
-			'@ubc-farm/graphs',
-			'@ubc-farm/invoice',
-			'@ubc-farm/planner',
-		]
-	}
-
-	const pageFolder = resolvePath(__dirname, '../../../pages');
-	const packages: string[] = await readdir(pageFolder);
-
-	const namesReady = packages.filter(name => !name.startsWith('page-'))
-		.map(name => join(pageFolder, name, 'package.json'))
-		.map(path => parseData(path).then((pkg: PackageJSON) =>  pkg.name))
-
-	return Promise.all(namesReady);
+function getAllPages(): string[] {
+	const pkg = require(resolvePath(__dirname, '../package.json'));
+	return Object.keys(pkg.optionalDependencies);
 }
 
 /**
@@ -43,7 +24,7 @@ async function getAllPages(): Promise<string[]> {
  * in the filesystem.
  */
 export default async function listPagePackages(): Promise<Map<string, string>> {
-	const fullList = await getAllPages();
+	const fullList = getAllPages();
 
 	const results = await Promise.all(fullList.map(async packageName => {
 		try {

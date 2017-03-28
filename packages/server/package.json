@@ -8,13 +8,24 @@
     "resolve": "^1.1.7",
     "denodeify": "^1.2.1",
     "express": "^4.15.2",
-    "glob": "^7.1.1"
+    "gray-matter": "^2.1.1"
   },
   "devDependencies": {
     "blue-tape": "^1.0.0"
   },
+  "optionalDependencies": {
+    "@ubc-farm/calendar": "*",
+    "@ubc-farm/directory": "*",
+    "@ubc-farm/fields": "*",
+		"@ubc-farm/graphs": "*",
+		"@ubc-farm/invoice": "*",
+		"@ubc-farm/planner": "*"
+  },
+  "bin": {
+    "ubc-farm": "./out/bin.js"
+  },
   "scripts": {
-    "prepare": "echo \"TODO: tsc\"",
+    "prepare": "tsc",
     "prepublish": "npm run prepare"
   }
 }
