@@ -1,6 +1,6 @@
 import resolveCallback from 'resolve';
 import denodeify from 'denodeify';
-import { resolve as resolvePath } from 'path';
+import { resolve as resolvePath, join, dirname } from 'path';
 import { readdir } from './utils/fs-awaitable';
 import parseData from './utils/parseData';
 
@@ -32,7 +32,7 @@ async function getAllPages(): Promise<string[]> {
 	const packages: string[] = await readdir(pageFolder);
 
 	const namesReady = packages.filter(name => !name.startsWith('page-'))
-		.map(name => resolvePath(pageFolder, name, 'package.json'))
+		.map(name => join(pageFolder, name, 'package.json'))
 		.map(path => parseData(path).then((pkg: PackageJSON) =>  pkg.name))
 
 	return Promise.all(namesReady);
@@ -51,7 +51,7 @@ export default async function listPagePackages(): Promise<Map<string, string>> {
 				extensions: ['.json'],
 			});
 			const pkg: PackageJSON = await parseData(pkgPath);
-			return { package: pkg, path: pkgPath };
+			return { package: pkg, path: dirname(pkgPath) };
 		} catch (err) {
 			return null;
 		}

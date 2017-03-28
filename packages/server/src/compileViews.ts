@@ -1,5 +1,5 @@
 import { watch, FSWatcher } from 'fs';
-import { resolve } from 'path';
+import { join } from 'path';
 import { writeFile } from './utils/fs-awaitable';
 import walkFolder from './utils/walkFolder';
 import prepareData from './utils/prepareData';
@@ -16,7 +16,7 @@ interface ViewOptions {
 function copyFile(from: string, to: string, context: any): Promise<void> {
 	return compileFile(from, context)
 		.then(({ out, path }) => {
-			const dest = resolve(to, path);
+			const dest = join(to, path);
 			return writeFile(dest, out, 'utf8');
 		})
 		.then(() => {})
@@ -31,10 +31,13 @@ async function compileViews(
 ): Promise<FSWatcher>
 async function compileViews(
 	options: ViewOptions
-): Promise<void> {
+): Promise<void>
+async function compileViews(
+	options: ViewOptions
+): Promise<FSWatcher | void> {
 	const { from, to } = options;
 
-	const results = await Promise.all([
+	const results: any[] = await Promise.all([
 		walkFolder(from, path => path),
 		readData(),
 		listPagePackages(),
@@ -49,8 +52,9 @@ async function compileViews(
 	await Promise.all(paths.map(path => copyFile(path, to, context)));
 
 	if (options.watch) {
-		const watcher = watch(from, { recursive: true }, (event, filename) => {
-			copyFile(resolve(from, filename), to, context);
+		return watch(from, { recursive: true }, (event, filename: string) => {
+			if (event === 'change')
+				copyFile(join(from, filename), to, context);
 		});
 	}
 }

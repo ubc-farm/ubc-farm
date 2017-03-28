@@ -21,8 +21,8 @@ function getDestinationPath(filePath, data): string {
 	} else {
 		const ext = extname(filePath);
 		if (ext === '.hbs') {
-			const { dir, name } = parse(filePath);
-			return format({ dir, name, ext: '.html' });
+			const parsedPath = parse(filePath);
+			return format({ ...parsedPath, ext: '.html' });
 		}
 		else return filePath;
 	}
