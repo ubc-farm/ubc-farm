@@ -39,6 +39,7 @@ Compiles the view files from the given folder and saves them to the given output
 folder. Can be set to watch for futher changes. If watch is true, the files
 in the from folder will be watched and recompiled when changes are made.
 A FSWatcher object is returned.
+If a folder starts with an underscore, it is ignored.
 
 ```typescript
 function compileViews(options: { from: string, to: string, watch: true }): Promise<fs.FSWatcher>

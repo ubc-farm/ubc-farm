@@ -49,7 +49,10 @@ async function compileViews(
 
 	const context = { data: { ...data, pages: [...pages.keys()] } };
 
-	await Promise.all(paths.map(path => copyFile(path, to, context)));
+	await Promise.all(paths.map(path => {
+		if (!path.startsWith('_')) return copyFile(path, to, context);
+		else return Promise.resolve();
+	}));
 
 	if (options.watch) {
 		return watch(from, { recursive: true }, (event, filename: string) => {

@@ -40,7 +40,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 		devtool: 'source-map',
 		output: {
 			filename: '[name].js',
-			path: resolve(dirname, 'browser'),
+			path: resolve(dirname, 'www'),
 		},
 		context: dirname,
 		// watch: process.env.npm_config_watch,

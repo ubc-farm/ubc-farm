@@ -1,4 +1,8 @@
 node_modules
 packages/*/browser
+pages/*/browser
+pages/*/www/*.html
+pages/*/www/*.js
+pages/*/www/*.js.map
 .vscode
 *.map

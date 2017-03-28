@@ -1,7 +1,0 @@
-title: UBC Farm Research Project
-logo: /images/logo.png
-logo-srcset:
-  - /images/logo-2x.png 2x
-  - /images/logo-3x.png 3x
-  - /images/logo-4x.png 4x
-server: http://localhost:3000

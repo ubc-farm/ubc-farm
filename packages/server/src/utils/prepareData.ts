@@ -7,7 +7,7 @@ import walkFolder from './walkFolder';
 
 function registerIncludes(): Promise<void> {
 	return walkFolder(
-		resolve(__dirname, '../../views/partials'),
+		resolve(__dirname, '../../views/_partials'),
 		async filepath => {
 			const { name } = parse(filepath);
 
@@ -23,7 +23,7 @@ const layoutFiles = new Map<string, string>();
 
 async function prepareLayouts(): Promise<void> {
 	return walkFolder(
-		resolve(__dirname, '../../views/layouts'),
+		resolve(__dirname, '../../views/_layouts'),
 		async filepath => {
 			const { name } = parse(filepath);
 
