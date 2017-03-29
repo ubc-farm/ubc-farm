@@ -10,7 +10,8 @@
     "denodeify": "^1.2.1",
     "express": "^4.15.2",
     "gray-matter": "^2.1.1",
-    "js-yaml": "^3.8.2"
+    "js-yaml": "^3.8.2",
+    "handlebars-helpers": "^0.8.0"
   },
   "devDependencies": {
     "blue-tape": "^1.0.0",

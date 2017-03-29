@@ -13,7 +13,7 @@ export default async function server(port = 8080): Promise<express.Application> 
 
 	app.use(express.static(resolve(__dirname, '../www')));
 	for (const { url, paths } of packages) {
-		app.use(express.static(`/${url}`, paths.www));
+		app.use(express.static(url, paths.www));
 	}
 
 	await new Promise(resolve => app.listen(port, resolve));

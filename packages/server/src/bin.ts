@@ -1,5 +1,5 @@
 import { FSWatcher } from 'fs';
-import { relative } from 'path';
+import { relative, join } from 'path';
 import * as parseArgs from 'minimist';
 import {
 	server,
@@ -77,11 +77,38 @@ export default async function main(options: Options) {
 				break;
 			case 'compile':
 				const { from, to } = options;
-				if (!from) throw new Error('Missing option "from"');
+				if (!from && !to) {
+					try {
+						const cwdPackage = require(join(process.cwd(), 'package.json'));
+						if (cwdPackage['ubc-farm']) {
+							const { www, views } = cwdPackage['ubc-farm'];
+							main({
+								mode: 'compile',
+								from: views || 'views',
+								to: www || 'www',
+								watch: options.watch,
+							});
+							return;
+						} else {
+							throw new Error('Either specify --from and --to, ' +
+								'or use the "ubc-farm" property in your package.json');
+						}
+					} catch (err) {
+						if (err.code !== 'MODULE_NOT_FOUND') throw err;
+						else
+							throw new Error('Missing package.json. Specify --from and --to');
+					}
+				}
+				else if (!from) throw new Error('Missing option "from"');
 				else if (!to) throw new Error('Missing option "to"');
 
 				console.log(`Compiling files in ${from}, saving to ${to}`);
-				const watcher: FSWatcher = <any> await compileViews(options);
+				const watcher: FSWatcher = <any> await compileViews({
+					from: join(process.cwd(), from),
+					to: join(process.cwd(), to),
+					watch: options.watch,
+				});
+
 				if (options.watch) {
 					console.log('Inital compilation complete. Watching...');
 					watcher.on('error', err => console.error(err));

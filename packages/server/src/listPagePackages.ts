@@ -65,9 +65,9 @@ export default async function listPagePackages(): Promise<PageData[]> {
 
 			if (farmData.url) pageData.url = farmData.url;
 			else if (name.startsWith('@ubc-farm/'))
-				pageData.url = name.slice('@ubc-farm/'.length) + '/';
+				pageData.url = name.slice('@ubc-farm/'.length - 1) + '/';
 			else
-				pageData.url = name + '/';
+				pageData.url = `/${name}/`
 
 			pageData.paths.www = farmData.www || 'www';
 			pageData.paths.www = join(path, pageData.paths.www);

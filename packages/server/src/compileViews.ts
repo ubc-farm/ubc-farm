@@ -1,5 +1,5 @@
 import { watch, FSWatcher } from 'fs';
-import { join } from 'path';
+import { join, relative } from 'path';
 import { writeFile } from './utils/fs-awaitable';
 import walkFolder from './utils/walkFolder';
 import prepareData from './utils/prepareData';
@@ -11,15 +11,6 @@ interface ViewOptions {
 	from: string,
 	to: string,
 	watch?: boolean,
-}
-
-function copyFile(from: string, to: string, context: any): Promise<void> {
-	return compileFile(from, context)
-		.then(({ out, path }) => {
-			const dest = join(to, path);
-			return writeFile(dest, out, 'utf8');
-		})
-		.then(() => {})
 }
 
 /**
@@ -47,17 +38,24 @@ async function compileViews(
 	const data: any = results[1];
 	const pages: PageData[] = results[2];
 
-	const context = { data: { ...data, pages: pages.map(p => p.name) } };
+	const context = { data: { ...data, pages } };
 
-	await Promise.all(paths.map(path => {
-		if (!path.startsWith('_')) return copyFile(path, to, context);
-		else return Promise.resolve();
-	}));
+	async function copyFile(fromFile: string): Promise<void> {
+		const shouldIgnore = relative(from, fromFile).startsWith('_');
+		if (shouldIgnore) return;
+
+		const { out, path } = await compileFile(fromFile, from, context);
+
+		const dest = join(to, path);
+		await writeFile(dest, out, 'utf8');
+	}
+
+	await Promise.all(paths.map(copyFile));
 
 	if (options.watch) {
 		return watch(from, { recursive: true }, (event, filename: string) => {
-			if (event === 'change')
-				copyFile(join(from, filename), to, context);
+			const path = join(from, filename);
+			if (event === 'change') copyFile(path);
 		});
 	}
 }
