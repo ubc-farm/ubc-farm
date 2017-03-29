@@ -46,6 +46,7 @@ Example usage:
 `;
 
 export default async function main(options: Options) {
+	const { mode } = options;
 	try {
 		switch (options.mode) {
 			case 'serve':
@@ -60,8 +61,8 @@ export default async function main(options: Options) {
 				});
 				break;
 			case 'list':
-				const packages = await listPagePackages();
-				console.log('Page Packages');
+				const packages = await listPagePackages(w => console.warn(w));
+				console.log('\nPage Packages');
 				console.log('-------------\n');
 				if (options.paths)
 					packages.forEach((path, name) => console.log(`- ${name}: ${path}`));
@@ -98,6 +99,9 @@ export default async function main(options: Options) {
 			case 'help':
 				console.log(helpDialog);
 				break;
+			default:
+				if (!mode) throw new Error('Missing mode argument');
+				else throw new Error(`Invalid mode ${mode}`);
 		}
 	} catch (err) {
 		console.error(err.message);
@@ -106,7 +110,10 @@ export default async function main(options: Options) {
 }
 
 if (require.main === module) {
-	const { _, port, ...args } = parseArgs(process.argv, {
+	const argv = process.argv0.includes('node')
+		? process.argv.slice(2)
+		: process.argv.slice(1);
+	const { _, port, ...args } = parseArgs(argv, {
 		boolean: ['watch', 'paths'],
 		string: ['from', 'to', 'port'],
 		alias: {

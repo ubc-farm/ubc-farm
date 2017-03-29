@@ -7,8 +7,8 @@ import { readFile } from './fs-awaitable';
  * @param path to file
  */
 export default async function parseData(path: string): Promise<any> {
-	const data = await readFile(path);
-	const extension = extname(data);
+	const data = await readFile(path, 'utf8');
+	const extension = extname(path);
 
 	switch (extension) {
 		case '.yaml': case '.yml':

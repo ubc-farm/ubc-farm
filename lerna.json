@@ -7,13 +7,13 @@
   "version": "independent",
   "scope": "@ubc-farm/*",
   "ignore": [
-    "@ubc-farm/page-*",
-    "@ubc-farm-/server-2"
+    "@ubc-farm/page-*"
   ],
   "commands": {
     "publish": {
       "ignore": [
-        "pages/*"
+        "pages/*",
+        "pages/page-*"
       ]
     }
   }

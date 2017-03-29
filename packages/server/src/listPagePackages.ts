@@ -23,13 +23,16 @@ function getAllPages(): string[] {
  * Obtains a list of ubc-farm page packages, along with their absolute paths
  * in the filesystem.
  */
-export default async function listPagePackages(): Promise<Map<string, string>> {
+export default async function listPagePackages(
+	onWarn?: (warning: string) => void,
+): Promise<Map<string, string>> {
 	const fullList = getAllPages();
 
 	const results = await Promise.all(fullList.map(async packageName => {
 		try {
 			const pkgPath: string = await resolve(`${packageName}/package.json`, {
 				extensions: ['.json'],
+				basedir: process.cwd(),
 			});
 			const pkg: PackageJSON = await parseData(pkgPath);
 			return { package: pkg, path: dirname(pkgPath) };
@@ -39,8 +42,13 @@ export default async function listPagePackages(): Promise<Map<string, string>> {
 	}));
 
 	return results.reduce((map, pkg) => {
-		if (pkg !== null && pkg.package.www) {
-			return map.set(pkg.package.name, join(pkg.path, pkg.package.www));
+		if (pkg !== null) {
+			if (pkg.package.www) {
+				return map.set(pkg.package.name, join(pkg.path, pkg.package.www));
+			} else if (onWarn) {
+				onWarn(`${pkg.package.name} detected, but missing "www" property`);
+			}
+			return map;
 		}	else
 			return map;
 	}, new Map());

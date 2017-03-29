@@ -1,4 +1,4 @@
-import denodeify from 'denodeify';
+import * as denodeify from 'denodeify';
 import {
 	readdir,
 	stat,
