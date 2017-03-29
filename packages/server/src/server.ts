@@ -12,8 +12,8 @@ export default async function server(port = 8080): Promise<express.Application> 
 	const app = express();
 
 	app.use(express.static(resolve(__dirname, '../www')));
-	for (const [packageName, path] of packages) {
-		app.use(express.static(`/${packageName}`, path));
+	for (const { url, paths } of packages) {
+		app.use(express.static(`/${url}`, paths.www));
 	}
 
 	await new Promise(resolve => app.listen(port, resolve));

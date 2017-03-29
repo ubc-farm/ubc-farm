@@ -17,11 +17,27 @@ function server(port?: number): Promise<express.Application>
 
 ## listPagePackages
 Obtains a list of ubc-farm page packages, along with their absolute paths in
-the filesystem. The path points to the folder listed under `www` in the
-package.json for the package.
+the filesystem. Each package.json must have a "ubc-farm" property to be detected.
+Additional data can be specified in the "ubc-farm" object, but if unspecified
+defaults will be used.
+
+- **url**: The name of the package, without the @ubc-farm prefix if present.
+- **www**: The path to the folder containing public files. Defaults to "www".
+- **views**: The path to the folder containing template files. Defaults to "views".
+
+Paths are relative to the package.json location.
 
 ```typescript
-function listPagePackages(): Promise<Map<string, string>>
+interface PageData {
+	name: string
+	url: string
+	paths: {
+		www: string
+		views: string
+	}
+}
+
+function listPagePackages(): Promise<PageData[]>
 ```
 
 ## readData

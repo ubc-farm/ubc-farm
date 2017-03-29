@@ -4,7 +4,7 @@ import { writeFile } from './utils/fs-awaitable';
 import walkFolder from './utils/walkFolder';
 import prepareData from './utils/prepareData';
 import compileFile from './utils/compileFile';
-import listPagePackages from './listPagePackages'
+import listPagePackages, { PageData } from './listPagePackages'
 import readData from './readData';
 
 interface ViewOptions {
@@ -45,9 +45,9 @@ async function compileViews(
 	]);
 	const paths: string[] = results[0];
 	const data: any = results[1];
-	const pages: Map<string, string> = results[2];
+	const pages: PageData[] = results[2];
 
-	const context = { data: { ...data, pages: [...pages.keys()] } };
+	const context = { data: { ...data, pages: pages.map(p => p.name) } };
 
 	await Promise.all(paths.map(path => {
 		if (!path.startsWith('_')) return copyFile(path, to, context);

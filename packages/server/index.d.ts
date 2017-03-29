@@ -7,11 +7,20 @@ import express from 'express'
  */
 export function server(port?: number): Promise<express.Application>
 
+interface PageData {
+	name: string
+	url: string
+	paths: {
+		www: string
+		views: string
+	}
+}
+
 /**
  * Obtains a list of ubc-farm page packages, along with their absolute paths
  * in the filesystem.
  */
-export function listPagePackages(): Promise<Map<string, string>>
+export function listPagePackages(): Promise<PageData[]>
 
 /**
  * Loads data from the data directory and returns it.
@@ -35,20 +44,11 @@ interface ViewOptions {
 export function compileViews(options: ViewOptions & { watch: true }): Promise<fs.FSWatcher>
 export function compileViews(options: ViewOptions): Promise<void>
 
-interface CompileOptions {
-	viewFolder?: (packageName: string) => Promise<string> | string,
-	watch?: boolean,
-}
-
 /**
  * Compiles files from every packages' view folder and optionally watches them.
  * Takes results from `listPagePackages` to pick paths to watch.
- * By default, the view folder is a sibling of the www folder named views.
- * This can be changed by altering the `viewFolder` option.
  * @param options object
- * @param options.viewFolder function to get the path to the view folder,
- * relative to the www folder.
  * @param options.watch - if true, returns an array of FSWatchers for each package.
  */
-export function compileAll(options?: CompileOptions & { watch: true }): Promise<fs.FSWatcher[]>
-export function compileAll(options?: CompileOptions): Promise<void>
+export function compileAll(options: { watch: true }): Promise<fs.FSWatcher[]>
+export function compileAll(options?: { watch?: boolean }): Promise<void>

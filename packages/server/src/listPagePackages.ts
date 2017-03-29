@@ -8,6 +8,20 @@ const resolve = denodeify(resolveCallback);
 interface PackageJSON {
 	name: string
 	www?: string
+	'ubc-farm'?: {
+		www?: string
+		views?: string
+		url?: string
+	}
+}
+
+export interface PageData {
+	name: string
+	url: string
+	paths: {
+		www: string
+		views: string
+	}
 }
 
 /**
@@ -23,33 +37,47 @@ function getAllPages(): string[] {
  * Obtains a list of ubc-farm page packages, along with their absolute paths
  * in the filesystem.
  */
-export default async function listPagePackages(
-	onWarn?: (warning: string) => void,
-): Promise<Map<string, string>> {
+export default async function listPagePackages(): Promise<PageData[]> {
 	const fullList = getAllPages();
 
-	const results = await Promise.all(fullList.map(async packageName => {
+	const packageData = await Promise.all(fullList.map(async packageName => {
 		try {
 			const pkgPath: string = await resolve(`${packageName}/package.json`, {
 				extensions: ['.json'],
 				basedir: process.cwd(),
 			});
 			const pkg: PackageJSON = await parseData(pkgPath);
-			return { package: pkg, path: dirname(pkgPath) };
+			return { packageJson: pkg, path: dirname(pkgPath) };
 		} catch (err) {
 			return null;
 		}
 	}));
 
-	return results.reduce((map, pkg) => {
-		if (pkg !== null) {
-			if (pkg.package.www) {
-				return map.set(pkg.package.name, join(pkg.path, pkg.package.www));
-			} else if (onWarn) {
-				onWarn(`${pkg.package.name} detected, but missing "www" property`);
-			}
-			return map;
-		}	else
-			return map;
-	}, new Map());
+	const dataList: PageData[] = [];
+	for (const pkg of packageData) {
+		if (pkg === null) continue;
+		const { packageJson, path } = pkg;
+		const { name, 'ubc-farm': farmData } = packageJson;
+
+		if (farmData) {
+			if (!name) throw new Error('package.json missing name property');
+			const pageData = { name, url: '', paths: { www: '', views: '' } };
+
+			if (farmData.url) pageData.url = farmData.url;
+			else if (name.startsWith('@ubc-farm/'))
+				pageData.url = name.slice('@ubc-farm/'.length) + '/';
+			else
+				pageData.url = name + '/';
+
+			pageData.paths.www = farmData.www || 'www';
+			pageData.paths.www = join(path, pageData.paths.www);
+
+			pageData.paths.views = farmData.views || 'views';
+			pageData.paths.views = join(path, pageData.paths.views);
+
+			dataList.push(pageData);
+		}
+	}
+
+	return dataList;
 }

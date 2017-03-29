@@ -61,13 +61,13 @@ export default async function main(options: Options) {
 				});
 				break;
 			case 'list':
-				const packages = await listPagePackages(w => console.warn(w));
+				const packages = await listPagePackages();
 				console.log('\nPage Packages');
 				console.log('-------------\n');
 				if (options.paths)
-					packages.forEach((path, name) => console.log(`- ${name}: ${path}`));
+					packages.forEach(({ name, paths }) => console.log(`- ${name}:`, paths));
 				else
-					Array.from(packages.keys(), name => console.log(`- ${name}`));
+					packages.forEach(({ name }) => console.log(`- ${name}`));
 				break;
 			case 'compile':
 				const { from, to } = options;
