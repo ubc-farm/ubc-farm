@@ -2,6 +2,7 @@
   "name": "@ubc-farm/graphs",
   "version": "1.0.1",
   "private": true,
+  "ubc-farm": {},
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

@@ -6,6 +6,7 @@
   "author": "Tiger Oakes",
   "license": "MIT",
   "private": true,
+  "ubc-farm": {},
   "devDependencies": {
     "@kadira/storybook": "^2.35.2",
     "benthos": "^0.3.0",

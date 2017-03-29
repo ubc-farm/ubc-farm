@@ -2,6 +2,7 @@
   "name": "@ubc-farm/planner",
   "version": "2.0.1",
   "private": true,
+  "ubc-farm": {},
   "dependencies": {
     "redux": "^3.5.2",
     "react-redux": "^4.4.5",

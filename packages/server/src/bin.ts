@@ -1,4 +1,5 @@
 import { FSWatcher } from 'fs';
+import { relative } from 'path';
 import * as parseArgs from 'minimist';
 import {
 	server,
@@ -63,11 +64,16 @@ export default async function main(options: Options) {
 			case 'list':
 				const packages = await listPagePackages();
 				console.log('\nPage Packages');
-				console.log('-------------\n');
+				console.log('-------------');
 				if (options.paths)
-					packages.forEach(({ name, paths }) => console.log(`- ${name}:`, paths));
+					packages.forEach(({ name, paths }) => {
+						console.log(`+ ${name}:`);
+						console.log(`    www: ${relative(process.cwd(), paths.www)}`);
+						console.log(`    views: ${relative(process.cwd(), paths.views)}`);
+					});
 				else
-					packages.forEach(({ name }) => console.log(`- ${name}`));
+					packages.forEach(({ name }) => console.log(`+ ${name}`));
+				console.log('');
 				break;
 			case 'compile':
 				const { from, to } = options;

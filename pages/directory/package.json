@@ -2,6 +2,7 @@
   "name": "@ubc-farm/directory",
   "version": "2.1.1",
   "private": true,
+  "ubc-farm": {},
   "dependencies": {
     "@ubc-farm/utils": "^4.3.1",
     "@ubc-farm/databases": "^2.0.1",
