@@ -55,14 +55,5 @@ export default async function getTasks() {
 		db.createIndex({ index: { fields: ['end'] } }),
 	]);
 
-	db.transform({
-		incoming(doc: Task): Task {
-			doc.allDay = doc.allDay || false;
-			doc.done = doc.done || false;
-
-			return doc;
-		},
-	});
-
 	return db;
 }

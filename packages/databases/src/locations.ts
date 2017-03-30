@@ -98,16 +98,5 @@ export default async function getLocations() {
 		// db.createIndex({ index: { fields: ['crop.variety'] } }),
 	]);
 
-	db.transform({
-		incoming(doc) {
-			doc.location = getLocation(doc) || undefined;
-
-			if (doc._id.startsWith('field/')) {
-				const field = <Field> doc;
-				field.area = getArea(field) || undefined;
-			}
-
-			return doc;
-		},
-	});
+	return db;
 }

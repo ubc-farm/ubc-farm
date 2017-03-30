@@ -80,25 +80,5 @@ export default async function getInvoices() {
 		db.createIndex({ index: { fields: ['date'] } }),
 	]);
 
-	db.transform({
-		incoming(doc: Invoice): Invoice {
-			doc.isPurchase = doc.isPurchase || false;
-			doc.notes = doc.notes || '';
-			doc.items = doc.items || [];
-			doc.amountPaid = doc.amountPaid || 0;
-
-			for (const sale of doc.items) {
-				sale.description = sale.description || '';
-				sale.quantity = sale.quantity || 0;
-				sale.unitCost = sale.unitCost || 0;
-			}
-
-			return doc;
-		},
-		outgoing(doc: Invoice): Invoice {
-			return doc;
-		},
-	});
-
 	return db;
 }

@@ -52,6 +52,21 @@ export function getRole(person: Partial<Person> | string) {
 	return startCase(role);
 }
 
+export function setPhone(person: Partial<Person>, number: string): void
+export function setPhone(
+	person: Partial<Person>, phone: { number: string, country: string }
+): void
+export function setPhone(
+	doc: Partial<Person>, _phone: string | { number: string, country: string }
+): void {
+	if (typeof _phone === 'string') {
+		doc.phone = { country: 'CA', number: _phone };
+	} else if (typeof _phone === 'object') {
+		const [number, country] = phone(_phone.number, _phone.country);
+		doc.phone = { country, number };
+	}
+}
+
 export default async function getPeople() {
 	const db = new PouchDB<Person>('people');
 	await Promise.all([
@@ -63,7 +78,6 @@ export default async function getPeople() {
 	db.transform({
 		incoming(doc: Person & { phoneNumber: string }): Person {
 			doc.role = kebabCase(doc.role || 'none');
-			doc.name = doc.name || '';
 
 			if (doc.phoneNumber) {
 				doc.phone = { country: 'CA', number: doc.phoneNumber };
@@ -76,11 +90,6 @@ export default async function getPeople() {
 				doc.phone.country = country;
 			}
 
-			return doc;
-		},
-		outgoing(doc: Person): Person {
-			doc.role = doc.role || 'none';
-			doc.name = doc.name || '';
 			return doc;
 		},
 	});
