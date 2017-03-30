@@ -1,6 +1,7 @@
 import { FSWatcher } from 'fs';
 import { relative, join } from 'path';
 import * as parseArgs from 'minimist';
+import * as morgan from 'morgan';
 import {
 	server,
 	listPagePackages,
@@ -48,97 +49,88 @@ Example usage:
 
 export default async function main(options: Options) {
 	const { mode } = options;
-	try {
-		switch (options.mode) {
-			case 'serve':
-				console.log(`Creating server`);
-				const app = await server(options.port);
-				console.log(`Server listening on port ${options.port}`);
+	switch (options.mode) {
+		case 'serve':
+			console.log(`Creating server`);
+			const app = await server(options.port);
+			console.log(`Server listening on port ${app.get('port')}`);
 
-				app.use((req, res, next) => {
-					res = res;
-					console.log(`${req.method}: ${req.path}`);
-					next();
+			app.use(morgan('tiny'));
+			break;
+		case 'list':
+			const packages = await listPagePackages();
+			console.log('\nPage Packages');
+			console.log('-------------');
+			if (options.paths)
+				packages.forEach(({ name, paths }) => {
+					console.log(`+ ${name}:`);
+					console.log(`    www: ${relative(process.cwd(), paths.www)}`);
+					console.log(`    views: ${relative(process.cwd(), paths.views)}`);
 				});
-				break;
-			case 'list':
-				const packages = await listPagePackages();
-				console.log('\nPage Packages');
-				console.log('-------------');
-				if (options.paths)
-					packages.forEach(({ name, paths }) => {
-						console.log(`+ ${name}:`);
-						console.log(`    www: ${relative(process.cwd(), paths.www)}`);
-						console.log(`    views: ${relative(process.cwd(), paths.views)}`);
-					});
-				else
-					packages.forEach(({ name }) => console.log(`+ ${name}`));
-				console.log('');
-				break;
-			case 'compile':
-				const { from, to } = options;
-				if (!from && !to) {
-					try {
-						const cwdPackage = require(join(process.cwd(), 'package.json'));
-						if (cwdPackage['ubc-farm']) {
-							const { www, views } = cwdPackage['ubc-farm'];
-							main({
-								mode: 'compile',
-								from: views || 'views',
-								to: www || 'www',
-								watch: options.watch,
-							});
-							return;
-						} else {
-							throw new Error('Either specify --from and --to, ' +
-								'or use the "ubc-farm" property in your package.json');
-						}
-					} catch (err) {
-						if (err.code !== 'MODULE_NOT_FOUND') throw err;
-						else
-							throw new Error('Missing package.json. Specify --from and --to');
+			else
+				packages.forEach(({ name }) => console.log(`+ ${name}`));
+			console.log('');
+			break;
+		case 'compile':
+			const { from, to } = options;
+			if (!from && !to) {
+				try {
+					const cwdPackage = require(join(process.cwd(), 'package.json'));
+					if (cwdPackage['ubc-farm']) {
+						const { www, views } = cwdPackage['ubc-farm'];
+						main({
+							mode: 'compile',
+							from: views || 'views',
+							to: www || 'www',
+							watch: options.watch,
+						});
+						return;
+					} else {
+						throw new Error('Either specify --from and --to, ' +
+							'or use the "ubc-farm" property in your package.json');
 					}
+				} catch (err) {
+					if (err.code !== 'MODULE_NOT_FOUND') throw err;
+					else
+						throw new Error('Missing package.json. Specify --from and --to');
 				}
-				else if (!from) throw new Error('Missing option "from"');
-				else if (!to) throw new Error('Missing option "to"');
+			}
+			else if (!from) throw new Error('Missing option "from"');
+			else if (!to) throw new Error('Missing option "to"');
 
-				console.log(`Compiling files in ${from}, saving to ${to}`);
-				const watcher: FSWatcher = <any> await compileViews({
-					from: join(process.cwd(), from),
-					to: join(process.cwd(), to),
-					watch: options.watch,
-				});
+			console.log(`Compiling files in ${from}, saving to ${to}`);
+			const watcher: FSWatcher = <any> await compileViews({
+				from: join(process.cwd(), from),
+				to: join(process.cwd(), to),
+				watch: options.watch,
+			});
 
-				if (options.watch) {
-					console.log('Inital compilation complete. Watching...');
-					watcher.on('error', err => console.error(err));
-					watcher.on('change', filename =>
+			if (options.watch) {
+				console.log('Inital compilation complete. Watching...');
+				watcher.on('error', err => console.error(err));
+				watcher.on('change', filename =>
+					console.log(`Change at ${filename}, will recompile`));
+			}
+			break;
+		case 'compile-all':
+			console.log('Compiling files in all packages');
+			const allWatchers: FSWatcher[] = <any> await compileAll(options);
+
+			if (options.watch) {
+				console.log('Inital compilation complete. Watching...');
+				allWatchers.forEach(watch => {
+					watch.on('error', err => console.error(err));
+					watch.on('change', filename =>
 						console.log(`Change at ${filename}, will recompile`));
-				}
-				break;
-			case 'compile-all':
-				console.log('Compiling files in all packages');
-				const allWatchers: FSWatcher[] = <any> await compileAll(options);
-
-				if (options.watch) {
-					console.log('Inital compilation complete. Watching...');
-					allWatchers.forEach(watch => {
-						watch.on('error', err => console.error(err));
-						watch.on('change', filename =>
-							console.log(`Change at ${filename}, will recompile`));
-					})
-				}
-				break;
-			case 'help':
-				console.log(helpDialog);
-				break;
-			default:
-				if (!mode) throw new Error('Missing mode argument');
-				else throw new Error(`Invalid mode ${mode}`);
-		}
-	} catch (err) {
-		console.error(err.message);
-		process.exit(1);
+				})
+			}
+			break;
+		case 'help':
+			console.log(helpDialog);
+			break;
+		default:
+			if (!mode) throw new Error('Missing mode argument');
+			else throw new Error(`Invalid mode ${mode}`);
 	}
 }
 
@@ -156,5 +148,13 @@ if (require.main === module) {
 			watch: 'w',
 		},
 	});
-	main({ ...args, mode: _[0], port: parseInt(port, 10) });
+
+	main({
+		...args,
+		mode: _[0],
+		port: parseInt(port, 10) || undefined,
+	}).catch(err => {
+		console.error(err.message);
+		process.exit(1);
+	});
 }
