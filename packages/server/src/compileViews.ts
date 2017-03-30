@@ -29,7 +29,7 @@ async function compileViews(
 	const { from, to } = options;
 
 	const results: any[] = await Promise.all([
-		walkFolder(from, path => path),
+		walkFolder(from, entryInfo => entryInfo.fullPath),
 		readData(),
 		listPagePackages(),
 		prepareData(),

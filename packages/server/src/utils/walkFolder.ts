@@ -1,8 +1,17 @@
-import { readdir, stat } from './fs-awaitable';
-import { join } from 'path';
+import * as entryStream from 'readdirp';
+import { Stats } from 'fs';
+
+export interface EntryInfo {
+	parentDir: string,
+	fullParentDir: string,
+	name: string,
+	path: string,
+	fullPath: string,
+	stat: Stats
+}
 
 type Resolveable<T> = Promise<T> | T;
-type WallCallback<T> = (path: string) => Resolveable<T>;
+type WallCallback<T> = (entry: EntryInfo) => Resolveable<T>;
 
 /**
  * Walks a folder and calls the callback with the path of every file and subfile
@@ -11,37 +20,19 @@ type WallCallback<T> = (path: string) => Resolveable<T>;
  * @param folder
  * @param callback
  */
-function walkFolder<T>(
-	folder: string,
-	resultList: Resolveable<T>[],
-	callback: WallCallback<T>,
-): Promise<T[]>
-function walkFolder<T>(
+export default function walkFolder<T>(
 	folder: string,
 	callback: WallCallback<T>,
-): Promise<T[]>
-async function walkFolder<T>(
-	folder: string,
-	_resultList: any,
-	cb?: WallCallback<T>,
 ): Promise<T[]> {
-	const files = await readdir(folder);
-	let resultList: Resolveable<T>[] = cb ? _resultList : [];
-	const callback: WallCallback<T> = cb ? cb : _resultList;
+	let results: Resolveable<T>[];
 
-	await Promise.all(files.map(async file => {
-		const filepath = join(folder, file);
-		const stats = await stat(filepath);
-		if (stats.isDirectory()) {
-			const subfolderResults = await walkFolder(filepath, resultList, callback);
-			resultList.push(...subfolderResults);
-		} else {
-			const result = callback(filepath);
-			resultList.push(result);
-		}
-	}))
-
-	return Promise.all(resultList);
+	return new Promise((resolve, reject) => entryStream(
+		{ root: folder },
+		(info: EntryInfo) => results.push(callback(info)),
+		(err) => {
+			if (err) reject(err);
+			else resolve();
+		},
+	))
+	.then(() => Promise.all(results));
 }
-
-export default walkFolder;

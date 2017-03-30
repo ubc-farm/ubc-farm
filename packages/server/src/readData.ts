@@ -6,16 +6,15 @@ import walkFolder from './utils/walkFolder';
  * Loads data from the data directory and returns it.
  */
 export default async function readData(): Promise<{ [filename: string]: any }> {
-	const dataset = await walkFolder(
+	const result: { [filename: string]: any } = {};
+
+	await walkFolder(
 		resolve(__dirname, '../data'),
-		async filepath => {
-			const data = await parseData(filepath);
-			return { filepath, data };
+		async entryInfo => {
+			const data = await parseData(entryInfo.fullParentDir);
+			result[basename(entryInfo.name)] = data;
 		}
 	);
 
-	return dataset.reduce((obj, { filepath, data }) => {
-		obj[basename(filepath)] = data;
-		return obj;
-	}, {});
+	return result;
 }
