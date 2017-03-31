@@ -9,7 +9,8 @@
     "lodash": "^4.17.4",
     "@ubc-farm/databases": "^2.0.1",
     "@ubc-farm/map-utils": "^1.0.2",
-    "@ubc-farm/react-pouch-table": "^2.0.0"
+    "@ubc-farm/react-pouch-table": "^2.0.0",
+    "shortid": "^2.2.8"
   },
   "peerDependencies": {
     "react": "^15.4.2",

@@ -2,6 +2,10 @@ const { readdirSync } = require('fs');
 const { resolve, basename } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+/**
+ * @param {string|Array<string>|object} entries
+ * @param {string} dirname
+ */
 module.exports = function generateWebpackConfig(entries, dirname) {
 	let entry = {};
 	if (typeof entries === 'string') {
@@ -19,7 +23,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 	const config = {
 		entry,
 		plugins: Object.keys(entry).map(key => new HtmlWebpackPlugin({
-			filename: `./www/${key}.html`,
+			filename: `./${key}.html`,
 			// template: '',
 			chunks: [key],
 		})),
@@ -43,6 +47,10 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 			path: resolve(dirname, 'www'),
 		},
 		context: dirname,
+		externals: {
+			react: 'React',
+			'react-dom': 'ReactDOM',
+		},
 		// watch: process.env.npm_config_watch,
 	};
 

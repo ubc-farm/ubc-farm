@@ -21,7 +21,7 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "rollup": "^0.41.4",
+    "webpack": "^2.3.2",
     "typescript": "^2.2.1"
   },
   "scripts": {
