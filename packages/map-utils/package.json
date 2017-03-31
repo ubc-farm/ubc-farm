@@ -8,7 +8,7 @@
     "rollup": "^0.41.4"
   },
   "scripts": {
-    "prepare": "rollup -m -f cjs -i src/index.js -o index.js",
+    "prepare": "rollup -c",
     "prepublish": "npm run prepare"
   }
 }

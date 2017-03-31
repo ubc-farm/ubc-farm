@@ -1,7 +1,7 @@
 {
   "name": "@ubc-farm/databases",
   "version": "2.0.1",
-  "module": "index.mjs",
+  "module": "index.es.js",
   "main": "index.js",
   "dependencies": {
     "pouchdb": "^6.1.2",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "prepare:umd": "rollup -c -i src/index.ts -o index.js -f umd",
-    "prepare:es": "rollup -c -i src/index.ts -o index.mjs -f es",
+    "prepare:es": "rollup -c -i src/index.ts -o index.es.js -f es",
     "prepare": "npm run prepare:es && npm run prepare:umd",
     "prepublish": "npm run prepare",
     "ts": "tsc --noEmit || exit 0"

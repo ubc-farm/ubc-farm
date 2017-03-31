@@ -18,8 +18,7 @@
   },
   "files": [
     "dist",
-    "lib",
-    "GeoJSON",
-    "index.js"
+    "index.d.ts",
+    "lib", "index.js"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "name": "@ubc-farm/react-pouch-table",
   "version": "2.0.1",
-  "module": "index.mjs",
+  "module": "index.es.js",
   "main": "index.js",
   "dependencies": {
     "react-virtualized": "^9.1.0",

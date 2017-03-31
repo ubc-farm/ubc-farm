@@ -10,10 +10,8 @@ export default {
 		nodeResolve(),
 	],
 	sourceMap: true,
-	moduleName: 'UBCFarmTable',
 	targets: [
 		{ dest: 'dist/index.node.js', format: 'cjs' },
 		{ dest: 'dist/index.es.js', format: 'es' },
-		{ dest: 'dist/index.iife.js', format: 'iife' },
 	],
 };

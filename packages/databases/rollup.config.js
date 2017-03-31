@@ -1,15 +1,34 @@
-import baseConfig from '../../rollup.config.js';
-
-const [nodeResolve, commonjs, json,, typescript] = baseConfig.plugins;
+import commonjs from 'rollup-plugin-commonjs';
+import json from 'rollup-plugin-json';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import rollupTs from 'rollup-plugin-typescript';
+import typescript from 'typescript';
 
 export default {
 	sourceMap: true,
 	moduleName: 'databases',
+	targets: [
+		{ dest: 'index.js', format: 'umd' },
+		{ dest: 'index.es.js', format: 'es' },
+	],
 	plugins: [
-		nodeResolve,
-		commonjs,
-		json,
-		typescript,
+		nodeResolve({
+			jsnext: true,
+			extensions: ['.js', '.ts'],
+		}),
+		commonjs({
+			namedExports: {
+				shortid: ['generate'],
+				docuri: ['route'],
+				events: ['EventEmitter'],
+				lodash: ['pick', 'get', 'set'],
+				'node_modules/core-js/library/modules/es6.object.to-string.js': ['default'],
+				'core-js/library/modules/es6.object.to-string.js': ['default'],
+				'react-dom': ['findDOMNode'],
+			},
+		}),
+		json(),
+		rollupTs({ typescript }),
 	],
 	external: [
 		'react', 'pouchdb', 'pouchdb-find', 'transform-pouch', 'moment', 'lodash',
