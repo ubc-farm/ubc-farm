@@ -14,7 +14,8 @@
     "handlebars-helpers": "^0.8.0",
     "express-pouchdb": "^2.3.6",
     "morgan": "^1.8.1",
-    "readdirp": "^2.1.0"
+    "readdirp": "^2.1.0",
+    "@ubc-farm/databases": "^2.0.1"
   },
   "devDependencies": {
     "blue-tape": "^1.0.0",
@@ -40,6 +41,7 @@
   "scripts": {
     "prepare": "tsc",
     "prepublish": "npm run prepare",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "serve": "node ./out/bin serve"
   }
 }

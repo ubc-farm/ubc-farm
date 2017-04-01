@@ -3,12 +3,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "serve": "http-server ./packages/frontend/_site",
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish",
     "updated": "lerna updated",
     "clean": "lerna clean",
-    "ls": "lerna ls"
+    "ls": "lerna ls",
+    "serve": "lerna run serve"
   },
   "devDependencies": {
     "@types/blue-tape": "^0.1.30",

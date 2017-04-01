@@ -1,13 +1,17 @@
 {
   "name": "@ubc-farm/invoice",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "The invoice page for the farm, providing and interactive data table to write and generate invoices",
   "private": true,
   "ubc-farm": {},
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "document-promises": "^3.1.2",
-    "@ubc-farm/databases": "^2.0.1"
+    "@ubc-farm/databases": "^2.0.1",
+    "@ubc-farm/react-inputs": "*",
+    "@ubc-farm/money": "*",
+    "@ubc-farm/utils": "*"
   },
   "devDependencies": {
     "webpack": "^2.2.1",
