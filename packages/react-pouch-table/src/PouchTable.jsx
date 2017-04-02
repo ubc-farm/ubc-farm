@@ -1,6 +1,9 @@
 import { createElement, Component } from 'react'; /** @jsx createElement */
 import { InfiniteLoader, Table } from 'react-virtualized';
 
+const clickNames = ['onRowClick', 'onRowDoubleClick', 'onRowMouseOut', 'onRowMouseOver'];
+const getNames = ['rowClassName', 'rowHeight', 'rowStyle'];
+
 export default class PouchTable extends Component {
 	constructor(props) {
 		super(props);
@@ -34,6 +37,33 @@ export default class PouchTable extends Component {
 	isRowLoaded({ index }) {
 		const row = this.rows[index];
 		return row.doc || row.loading;
+	}
+
+	wrapClick(funcName) {
+		const clickFunc = this.props[funcName];
+		if (typeof clickFunc !== 'function') return undefined;
+
+		return ({ index }) => {
+			const { id } = this.rows[index];
+			return clickFunc({ id, index });
+		};
+	}
+
+	wrapGetter(funcName) {
+		const getterFunc = this.props[funcName];
+		if (typeof getterFunc !== 'function') return getterFunc;
+
+		return ({ index }) => {
+			const { id } = this.rows[index];
+			return getterFunc({ id, index });
+		};
+	}
+
+	wrappers() {
+		const _wrappers = {};
+		clickNames.forEach((name) => { _wrappers[name] = this.wrapClick(name); });
+		getNames.forEach((name) => { _wrappers[name] = this.wrapGetter(name); });
+		return _wrappers;
 	}
 
 	async loadMoreRows({ startIndex, stopIndex }) {
@@ -74,6 +104,7 @@ export default class PouchTable extends Component {
 						rowCount={this.rows.length}
 						rowGetter={({ index }) => this.rows[index].doc || {}}
 						{...tableProps}
+						{...this.wrappers()}
 					>
 						{tableProps.children}
 					</Table>

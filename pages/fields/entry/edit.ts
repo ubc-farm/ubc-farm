@@ -1,10 +1,10 @@
-/// <reference path="../../custom-types/document-promises/index.d.ts" />
+/// <reference path="../../../packages/custom-types/document-promises/index.d.ts" />
 
 import { parsed } from 'document-promises';
 import { getLocations, Field } from '@ubc-farm/databases';
 import openField from '../src/openField';
-import setupEditorMap from '../src/field-editor/index';
-import renderFieldEditorForm from '../src/field-form/index';
+import setupEditorMap from '../src/field-editor';
+import renderFieldEditorForm from '../src/field-form';
 
 const locations = getLocations();
 Promise.all([
@@ -27,8 +27,9 @@ Promise.all([
 		onCancel: back,
 	};
 
-	const renderField = setupEditorMap((n, geometry) => {
-		field = Object.assign({}, field, { geometry });
+	const renderField = setupEditorMap((key, geometry) => {
+		if (key !== 'geometry') throw new Error();
+		field = { ...field, geometry };
 		renderFieldEditorForm(field, formProps);
 	});
 

@@ -7,7 +7,7 @@ import { DataSet } from 'vis-timeline';
 function locationToGroup(doc: Location): DataGroup {
 	const group = {
 		id: doc._id,
-		content: doc.name,
+		content: doc.name || doc._id,
 	};
 
 	//groupRevs.set(group, doc._rev);

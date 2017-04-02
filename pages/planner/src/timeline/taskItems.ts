@@ -16,6 +16,7 @@ type RevMap = WeakMap<DataItem, string>;
 const hourInMilli = 3.6e+6;
 export function taskToItem(doc: Task, revMap: RevMap): DataItem {
 	const { _id, _rev, name, location, type } = doc;
+	if (!type) throw new Error('Missing type on task');
 
 	let { start, end } = doc;
 	if (!start) throw new Error();
@@ -40,13 +41,17 @@ export function taskToItem(doc: Task, revMap: RevMap): DataItem {
 export function itemToTask(item: DataItem, revMap: RevMap): Task {
 	const type = item.className || '';
 	if (!item.id) throw new TypeError(`item missing ID! - ${JSON.stringify(item)}`);
+
+	const start = moment(item.start);
+	const end = item.end ? moment(item.end) : moment(start).add(1, 'hour');
+
 	return {
 		_id: item.id.toString(),
 		_rev: revMap.get(item) || '',
 		type,
 		name: item.content === type ? '' : item.content,
-		start: moment(item.start),
-		end: moment(item.end),
+		start: start.valueOf(),
+		end: end.valueOf(),
 		location: item.group,
 	};
 }

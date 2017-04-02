@@ -1,4 +1,4 @@
-/// <reference path="../../custom-types/document-promises/index.d.ts" />
+/// <reference path="../../../packages/custom-types/document-promises/index.d.ts" />
 
 import { parsed } from 'document-promises';
 import { getLocations } from '@ubc-farm/databases';

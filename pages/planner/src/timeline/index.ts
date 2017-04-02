@@ -37,7 +37,7 @@ export default async function setupPlannerTimeline(
 	return function cancelListeners() {
 		cancel();
 		unsub();
-		timeline.off('select', handleSelect);
+		timeline.off('select', <any> handleSelect);
 		removeDrag();
 	};
 }

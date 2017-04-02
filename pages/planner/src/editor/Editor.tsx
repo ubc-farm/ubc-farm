@@ -7,7 +7,7 @@ import LocationSelect from './LocationSelect';
 import EquipmentSelect from './EquipmentSelect';
 
 interface EditorProps {
-	disabled?: boolean;
+	disabled: boolean;
 	model: Task;
 	onSubmit: (model: Task) => void;
 	setProperty: (key: string, value: any) => void;

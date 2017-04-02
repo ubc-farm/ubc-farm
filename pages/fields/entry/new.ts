@@ -1,4 +1,4 @@
-/// <reference path="../../custom-types/document-promises/index.d.ts" />
+/// <reference path="../../../packages/custom-types/document-promises/index.d.ts" />
 
 import { parsed } from 'document-promises';
 import { generate } from 'shortid';
@@ -22,7 +22,8 @@ Promise.all([getLocations(), parsed]).then(([db]) => {
 		onCancel: back,
 	};
 
-	setupEditorMap((n, geometry) => {
+	setupEditorMap((key, geometry) => {
+		if (key !== 'geometry') throw new Error();
 		field = Object.assign({}, field, { geometry });
 		renderFieldEditorForm(<Field> field, formProps);
 	});

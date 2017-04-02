@@ -23,7 +23,7 @@ interface SetModeProps {
 function useViewingMode(props: SetModeProps) {
 	const { data } = props;
 
-	data.setDrawingMode(null);
+	data.setDrawingMode(null as any);
 	const listener = data.addListener(
 		'dblclick', () => setMode(EDITING, props));
 
@@ -57,7 +57,7 @@ function useDrawingMode(props: SetModeProps) {
 function useEditingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
-	data.setDrawingMode(null);
+	data.setDrawingMode(null as any);
 	data.forEach(field => field.setProperty('editable', true));
 	const listener = data.addListener('setgeometry', ({ feature }) => {
 		handleChange(feature);
@@ -77,7 +77,7 @@ function useEditingMode(props: SetModeProps) {
 function useDeletingMode(props: SetModeProps) {
 	const { data, handleChange } = props;
 
-	data.setDrawingMode(null);
+	data.setDrawingMode(null as any);
 	const listeners = [
 		data.addListener('click', ({ feature }) => {
 			data.remove(feature);

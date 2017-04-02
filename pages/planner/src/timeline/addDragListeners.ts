@@ -12,7 +12,8 @@ export default function addDragListeners(
 	items: DataSet<DataItem>,
 	taskDB: PouchDB.Database<Task>,
 ) {
-	const element = timeline.dom.center;
+	const { dom } = <any> timeline;
+	const element: HTMLElement = dom.center;
 
 	/**
 	 * Handles drop event from task types on timeline.
