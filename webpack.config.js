@@ -20,6 +20,25 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 		entry = entries;
 	}
 
+	const pkg = require(resolve(dirname, './package.json'));
+	const externals = {};
+	if (pkg.peerDependencies) {
+		for (const packageName of Object.keys(pkg.peerDependencies)) {
+			let data;
+			switch (packageName) {
+				case 'react':
+					data = 'React';
+					break;
+				case 'react-dom':
+					data = 'ReactDOM';
+					break;
+				default: data = packageName; break;
+			}
+
+			externals[packageName] = data;
+		}
+	}
+
 	const config = {
 		entry,
 		plugins: Object.keys(entry).map(key => new HtmlWebpackPlugin({
@@ -39,7 +58,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 			],
 		},
 		resolve: {
-			extensions: ['.ts', '.tsx', '.js', '.jsx'],
+			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
 		},
 		devtool: 'source-map',
 		output: {
@@ -47,10 +66,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 			path: resolve(dirname, 'www'),
 		},
 		context: dirname,
-		externals: {
-			react: 'React',
-			'react-dom': 'ReactDOM',
-		},
+		externals,
 		// watch: process.env.npm_config_watch,
 	};
 

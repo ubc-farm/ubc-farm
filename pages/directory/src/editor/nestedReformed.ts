@@ -1,18 +1,20 @@
-/// <reference path="../../../custom-types/react-reformed/index.d.ts" />
+/// <reference path="../../../../packages/custom-types/react-reformed/index.d.ts" />
 
 import reformed from 'react-reformed';
 import { compose, withProps } from 'recompose';
 import { get, set } from 'lodash';
 
+export interface InputProps<Value> {
+	name: string,
+	value: Value,
+	onChange: React.ChangeEventHandler<any>;
+}
+
 export interface ReformedProps<Model, Key extends keyof Model> {
 	model: Model;
 	setProperty: (key: Key, value: Model[Key]) => void;
 	setModel: (model: Model) => Model;
-	bindInput: (key: Key) => {
-		name: Key,
-		value: Model[Key],
-		onChange: React.ChangeEventHandler<any>;
-	};
+	bindInput: (key: Key) => InputProps<Model[Key]> & { name: Key };
 }
 
 interface NestedModelProps<Model> {
@@ -39,7 +41,7 @@ interface NestedInputProps<Model, Key extends keyof Model> {
 function bindNestedInput<Model, Key extends keyof Model>(
 	this: NestedModelProps<Model>,
 	name: Key,
-	defaultValue: Model[Key] = <Model[Key]> '',
+	defaultValue: Model[Key] = <any> '',
 ): NestedInputProps<Model, Key> {
 	return {
 		name,

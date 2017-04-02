@@ -1,4 +1,3 @@
-import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -40,6 +39,6 @@ export default {
 	],
 	external: [
 		...Object.keys(pkg.dependencies),
-		...Object.keys(pkg.optionalDependencies),
+		...Object.keys(pkg.peerDependencies),
 	],
 };

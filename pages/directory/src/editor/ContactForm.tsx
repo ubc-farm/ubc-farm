@@ -6,17 +6,20 @@ import PersonForm from './PersonForm';
 import EmployeeForm from './EmployeeForm';
 import ResearcherForm from './ResearcherForm';
 
-type ContactFormProps = { handleSubmit: React.FormEventHandler<any> }
-	& ReformedProps<Person | Employee | Researcher>;
+type AnyPerson = Person | Employee | Researcher;
+
+interface ContactFormProps extends ReformedProps<AnyPerson, keyof AnyPerson> {
+	handleSubmit: React.FormEventHandler<any>
+}
 
 const ExtraFields: SFC<ContactFormProps> = (props) => {
 	switch (props.model.role) {
 		case 'employee':
-			return <EmployeeForm {...props as ReformedProps<Employee>} />;
+			return <EmployeeForm {...props as ReformedProps<Employee, keyof Employee>} />;
 		case 'researcher':
-			return <ResearcherForm {...props as ReformedProps<Researcher>} />;
+			return <ResearcherForm {...props as ReformedProps<Researcher, keyof Researcher>} />;
 		default:
-			return null;
+			return null as any;
 	}
 }
 
@@ -29,7 +32,7 @@ const ContactForm: SFC<ContactFormProps> = (props) => {
 				<option value="employee" />
 				<option value="researcher" />
 			</datalist>
-			<Field type="text" list="roles" {...bindInput<string>('role')}>
+			<Field type="text" list="roles" {...bindInput('role')}>
 				Role
 			</Field>
 			<PersonForm {...props} />

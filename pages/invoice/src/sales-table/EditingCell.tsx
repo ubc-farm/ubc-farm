@@ -22,7 +22,7 @@ function handleChange({ onChange, rowIndex, rowData }: EditingCellProps, e) {
 
 const EditingCell: SFC<EditingCellProps> = (props) => {
 	const { type = 'text', input = 'input', dataKey, rowIndex, cellData } = props;
-	return createElement(input, {
+	return createElement(input as SFC<any>, {
 		type,
 		name: `${dataKey}-${rowIndex}`,
 		value: cellData,

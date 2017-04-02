@@ -12,10 +12,11 @@
     "react-reformed": "^1.0.1",
     "recompose": "^0.22.0",
     "shortid": "^2.2.8",
-    "@ubc-farm/react-pouch-table": "^2.0.0"
+    "@ubc-farm/react-pouch-table": "^2.0.0",
+    "react-addons-shallow-compare": "^15.4.2",
+    "react": "^15.4.2"
   },
   "peerDependencies": {
-    "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
@@ -23,7 +24,7 @@
     "webpack": "^2.2.1"
   },
   "scripts": {
-    "prepare": "webpack",
+    "prepare": "echo \"TODO webpack\"",
     "prepublish": "npm run prepare --quiet",
     "ts": "tsc --noEmit || exit 0"
   }
