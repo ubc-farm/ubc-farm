@@ -7,8 +7,8 @@ import nodeGlobals from 'rollup-plugin-node-globals';
 export default {
 	entry: 'src/index.js',
 	targets: [
-		{ dest: 'index.es.js', format: 'es' },
-		{ dest: 'index.js', format: 'cjs' },
+		{ dest: 'out/index.es.js', format: 'es' },
+		{ dest: 'out/index.cjs.js', format: 'cjs' },
 	],
 	sourceMap: true,
 	plugins: [
@@ -34,8 +34,7 @@ export default {
 		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 	],
 	external: [
-		'react', 'react-virtualized',
-		'pouchdb', 'pouchdb-find', 'transform-pouch',
-		'@ubc-farm/databases',
+		'react', //'react-virtualized',
+		'react-dom',
 	],
 };

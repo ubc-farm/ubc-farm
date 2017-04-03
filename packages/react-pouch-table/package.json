@@ -1,16 +1,17 @@
 {
   "name": "@ubc-farm/react-pouch-table",
-  "version": "2.0.1",
-  "module": "index.es.js",
-  "main": "index.js",
-  "dependencies": {
+  "version": "2.1.1",
+  "module": "out/index.es.js",
+  "main": "out/index.cjs.js",
+  "devDependencies": {
+    "rollup": "^0.41.4",
+
+    "interval-tree-1d": "^1.0.3",
     "react-virtualized": "^9.5.0"
   },
-  "devDependencies": {
-    "rollup": "^0.41.4"
-  },
   "peerDependencies": {
-    "react": "^15.4.2"
+    "react": "^15.3.0 || ^16.0.0-alpha",
+    "react-dom": "^15.3.0 || ^16.0.0-alpha"
   },
   "scripts": {
     "prepare": "rollup -c",

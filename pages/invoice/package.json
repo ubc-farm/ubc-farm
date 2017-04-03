@@ -5,7 +5,7 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
-    "@ubc-farm/databases": "^2.0.1",
+    "@ubc-farm/databases": "^3.0.0",
     "@ubc-farm/money": "^3.1.1",
     "@ubc-farm/react-inputs": "^1.0.1",
     "@ubc-farm/utils": "^4.3.1",

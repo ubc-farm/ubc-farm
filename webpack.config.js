@@ -59,6 +59,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 		},
 		resolve: {
 			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+			mainFields: ['browser', 'module', 'jsnext:main', 'main'],
 		},
 		devtool: 'source-map',
 		output: {
