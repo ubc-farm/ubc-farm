@@ -1,5 +1,3 @@
-export { default as connectAll } from './connect/connectAll';
-
 export { default as getEquipment } from './equipment';
 export {
 	default as getInvoices,

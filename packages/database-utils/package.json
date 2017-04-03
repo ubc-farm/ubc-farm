@@ -1,0 +1,19 @@
+{
+  "name": "@ubc-farm/database-utils",
+  "version": "1.0.0",
+  "module": "out/index.es.js",
+  "main": "out/index.cjs.js",
+  "types": "index.d.ts",
+  "devDependencies": {
+    "react": "^15.4.2",
+    "rollup": "^0.41.4"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2",
+		"@ubc-farm/databases": "^3.0.0"
+  },
+  "scripts": {
+    "prepare": "rollup -c",
+    "prepublish": "npm run prepare"
+  }
+}

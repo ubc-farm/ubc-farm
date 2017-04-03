@@ -26,27 +26,6 @@ export enum Day {
 
 ///////////////////////////
 
-interface ConnectAllOptions {
-	rowKey?: string;
-	loadingKey?: string;
-	changes?: boolean;
-	useMap?: boolean;
-	useArray?: boolean;
-	getDisplayName?: (name: string) => string;
-	allDocsOptions?: PouchDB.Core.AllDocsWithKeyOptions | PouchDB.Core.AllDocsWithKeysOptions | PouchDB.Core.AllDocsWithinRangeOptions;
-	changesOptions?: PouchDB.Core.ChangesOptions;
-}
-
-export function connectAll<Content, Value>(
-	transformer?: (doc: Content, id: string) => Value | null | undefined,
-	options?: ConnectAllOptions
-): (WrappedComponent: React.ReactType) => React.ComponentClass<any>
-export function connectAll<Content>(
-	options?: ConnectAllOptions
-): (WrappedComponent: React.ReactType) => React.ComponentClass<any>
-
-///////////////////////////
-
 export interface Equipment {
 	_id: ID;
 	_rev: string;

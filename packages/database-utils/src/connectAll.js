@@ -1,21 +1,6 @@
-import PouchDB from 'pouchdb';
-import {
-	Component, PropTypes, createElement,
-	ReactType, ComponentClass, ComponentState, ValidationMap
-} from 'react';
+import { Component, createElement } from 'react';
 
-interface ConnectAllOptions {
-	rowKey?: string;
-	loadingKey?: string;
-	changes?: boolean;
-	useMap?: boolean;
-	useArray?: boolean;
-	getDisplayName?: (name: string) => string;
-	allDocsOptions?: PouchDB.Core.AllDocsOptions;
-	changesOptions?: PouchDB.Core.AllDocsOptions;
-}
-
-const identity = (doc: any) => doc;
+const identity = doc => doc;
 
 /**
  * Connects a React component to a PouchDB database. Each row from the database
@@ -43,10 +28,7 @@ const identity = (doc: any) => doc;
  * @returns {function} A higher order component.
  * React.Component => React.Component
  */
-export default function connectAll<Content, Value>(
-	transformer: (doc: Content | undefined, id: string) => Value | null | undefined,
-	options: ConnectAllOptions,
-) {
+export default function connectAll(transformer, options) {
 	if (typeof transformer !== 'function') {
 		if (!options) options = transformer;
 		transformer = identity;
@@ -58,34 +40,22 @@ export default function connectAll<Content, Value>(
 		changes = true,
 		useArray = false,
 		useMap = options.useArray || false,
-		getDisplayName = (name: string) => `PouchConnect(${name})`,
+		getDisplayName = name => `PouchConnect(${name})`,
 		allDocsOptions = { include_docs: true },
 		changesOptions = { include_docs: true, live: true },
-	} = options;
+	} = options || {};
 
 	const changesOpts = Object.assign({}, changesOptions, { since: 'now' });
 
-	interface DBProp { db: PouchDB.Database<Content> }
-	return function wrapWithConnect(WrappedComponent: ReactType): ComponentClass<any> {
+	return function wrapWithConnect(WrappedComponent) {
 		const displayName = getDisplayName(
 			typeof WrappedComponent === 'string'
 				? 'Component'
 				: WrappedComponent.displayName || WrappedComponent.name
 		);
 
-		const propTypes = {
-			db: PropTypes.instanceOf(PouchDB).isRequired,
-		};
-
-		class ConnectAll extends Component<DBProp, ComponentState> {
-			static displayName: string;
-			static propTypes: ValidationMap<any>;
-
-			db: PouchDB.Database<Content>;
-			changes: PouchDB.Core.Changes<object> | null;
-			docError: Error | null;
-
-			constructor(props: DBProp) {
+		class ConnectAll extends Component {
+			constructor(props) {
 				super(props);
 
 				this.state = {
@@ -99,7 +69,7 @@ export default function connectAll<Content, Value>(
 				this.initDatabaseSubscription();
 			}
 
-			componentWillReceiveProps(nextProps: DBProp) {
+			componentWillReceiveProps(nextProps) {
 				if (this.db !== nextProps.db) {
 					this.db = nextProps.db;
 					this.docError = null;
@@ -114,33 +84,37 @@ export default function connectAll<Content, Value>(
 			}
 
 			initDatabaseSubscription() {
-				const ready = this.db.allDocs(allDocsOptions).then(res =>
-					res.rows.map(row => <[string, Value]> [row.id, transformer(row.doc, row.id)])
-				)
-				.then((map) => {
-					let rows: { [key: string]: Value } | Map<string, Value>;
-					if (useMap) rows = new Map(map);
-					else {
-						rows = {};
-						map.forEach(([k, v]) => { rows[k] = v; });
+				const ready = (async () => {
+					try {
+						const res = await this.db.allDocs(allDocsOptions);
+						const map = res.rows.map(row => [row.id, transformer(row.doc, row.id)]);
+
+						let rows;
+						if (useMap) rows = new Map(map);
+						else {
+							rows = {};
+							map.forEach(([k, v]) => { rows[k] = v; });
+						}
+
+						this.setState({ [rowKey]: rows });
+					} catch (err) {
+						this.docError = err;
 					}
 
-					this.setState({ [rowKey]: rows });
-				})
-				.catch((err) => { this.docError = err; })
-				.then(() => this.setState({ [loadingKey]: false }));
+					this.setState({ [loadingKey]: false });
+				})();
 
 				if (changes) {
-					this.changes = this.db.changes(changesOpts).on('change', res =>
-						ready.then(() => {
-							if (res.deleted) this.removeRow(res.id);
-							else this.updateRow(res.id, transformer(res.doc, res.id));
-						})
-					);
+					this.changes = this.db.changes(changesOpts)
+					.on('change', async (res) => {
+						await ready;
+						if (res.deleted) this.removeRow(res.id);
+						else this.updateRow(res.id, transformer(res.doc, res.id));
+					});
 				}
 			}
 
-			removeRow(id: string) {
+			removeRow(id) {
 				const rows = this.state[rowKey];
 				let newRows;
 				if (useMap) {
@@ -154,7 +128,7 @@ export default function connectAll<Content, Value>(
 				this.setState({ [rowKey]: newRows });
 			}
 
-			updateRow(id: string, data: Value | null | undefined) {
+			updateRow(id, data) {
 				if (data == null) return;
 
 				const rows = this.state[rowKey];
@@ -177,12 +151,11 @@ export default function connectAll<Content, Value>(
 					childProps[rowKey] = [...childProps[rowKey].values()];
 				}
 
-				return createElement(<any> WrappedComponent, childProps);
+				return createElement(WrappedComponent, childProps);
 			}
 		}
 
 		ConnectAll.displayName = displayName;
-		ConnectAll.propTypes = propTypes;
 
 		return ConnectAll;
 	};
