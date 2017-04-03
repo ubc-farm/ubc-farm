@@ -4,15 +4,15 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
+    "@ubc-farm/databases": "^2.0.1",
+    "document-promises": "^3.1.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "document-promises": "^3.1.2",
-    "victory": "^0.15.0",
-    "@ubc-farm/databases": "^2.0.1"
+    "victory": "^0.15.0"
   },
   "devDependencies": {
-    "webpack": "^2.2.1",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
   },
   "scripts": {
     "prepare": "echo \"TODO webpack\"",

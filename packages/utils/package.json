@@ -8,8 +8,8 @@
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "devDependencies": {
-    "tape": "^4.6.0",
-    "rollup": "^0.41.4"
+    "rollup": "^0.41.4",
+    "tape": "^4.6.0"
   },
   "scripts": {
     "prepare": "rollup -c",

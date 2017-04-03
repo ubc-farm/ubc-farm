@@ -4,28 +4,28 @@
   "description": "Server tool and core code for the ubc-farm program suite.",
   "main": "out/index.js",
   "dependencies": {
-    "handlebars": "^4.0.5",
-    "minimist": "^1.2.0",
-    "resolve": "^1.1.7",
     "denodeify": "^1.2.1",
     "express": "^4.15.2",
-    "gray-matter": "^2.1.1",
-    "js-yaml": "^3.8.2",
-    "handlebars-helpers": "^0.8.0",
     "express-pouchdb": "^2.3.6",
+    "gray-matter": "^2.1.1",
+    "handlebars": "^4.0.5",
+    "handlebars-helpers": "^0.8.0",
+    "js-yaml": "^3.8.2",
+    "minimist": "^1.2.0",
     "morgan": "^1.8.1",
     "readdirp": "^2.1.0",
-    "@ubc-farm/databases": "^2.0.1"
+    "resolve": "^1.1.7"
   },
   "devDependencies": {
-    "blue-tape": "^1.0.0",
-    "typescript": "^2.2.2",
+    "@ubc-farm/databases": "^2.0.1",
     "@ubc-farm/calendar": "*",
     "@ubc-farm/directory": "*",
     "@ubc-farm/fields": "*",
 		"@ubc-farm/graphs": "*",
 		"@ubc-farm/invoice": "*",
-		"@ubc-farm/planner": "*"
+		"@ubc-farm/planner": "*",
+    "blue-tape": "^1.0.0",
+    "typescript": "^2.2.2"
   },
   "optionalDependencies": {
     "@ubc-farm/calendar": "*",

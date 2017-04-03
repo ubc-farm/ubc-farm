@@ -5,15 +5,15 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
-    "document-promises": "^3.0.0",
-    "react-virtualized": "^8.11.4",
-    "lodash": "^4.17.4",
     "@ubc-farm/databases": "^2.0.1",
     "@ubc-farm/map-utils": "^1.0.2",
-    "@ubc-farm/utils": "*",
     "@ubc-farm/react-pouch-table": "^2.0.0",
+    "@ubc-farm/utils": "*",
+    "document-promises": "^3.0.0",
+    "lodash": "^4.17.4",
     "shortid": "^2.2.8",
     "react-redux": "^4.4.5",
+    "react-virtualized": "^9.4.2",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.3"
@@ -23,8 +23,8 @@
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
-    "webpack": "^2.2.1",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
   },
   "scripts": {
     "prepare": "webpack",

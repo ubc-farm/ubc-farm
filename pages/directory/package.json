@@ -4,17 +4,17 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
-    "@ubc-farm/utils": "^4.3.1",
     "@ubc-farm/databases": "^2.0.1",
     "@ubc-farm/react-inputs": "^1.0.1",
-    "document-promises": "^3.1.2",
-    "react-virtualized": "^9.0.0",
-    "react-reformed": "^1.0.1",
-    "recompose": "^0.22.0",
-    "shortid": "^2.2.8",
     "@ubc-farm/react-pouch-table": "^2.0.0",
+    "@ubc-farm/utils": "^4.3.1",
+    "document-promises": "^3.1.2",
+    "react": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
-    "react": "^15.4.2"
+    "react-reformed": "^1.0.1",
+    "react-virtualized": "^9.0.0",
+    "recompose": "^0.22.0",
+    "shortid": "^2.2.8"
   },
   "peerDependencies": {
     "react-dom": "^15.4.2"
