@@ -1,14 +1,4 @@
-import * as entryStream from 'readdirp';
-import { Stats } from 'fs';
-
-export interface EntryInfo {
-	parentDir: string,
-	fullParentDir: string,
-	name: string,
-	path: string,
-	fullPath: string,
-	stat: Stats
-}
+import { entryStream, EntryInfo } from './denodeify';
 
 type Resolveable<T> = Promise<T> | T;
 type WallCallback<T> = (entry: EntryInfo) => Resolveable<T>;
@@ -26,13 +16,9 @@ export default function walkFolder<T>(
 ): Promise<T[]> {
 	let results: Resolveable<T>[];
 
-	return new Promise((resolve, reject) => entryStream(
+	return entryStream(
 		{ root: folder },
 		(info: EntryInfo) => results.push(callback(info)),
-		(err) => {
-			if (err) reject(err);
-			else resolve();
-		},
-	))
+	)
 	.then(() => Promise.all(results));
 }

@@ -1,6 +1,6 @@
-import { readFile } from './fs-awaitable';
+import { readFile } from './denodeify';
 import { basename, resolve } from 'path';
-import Handlebars from 'handlebars';
+import * as Handlebars from 'handlebars';
 import walkFolder from './walkFolder';
 
 /////

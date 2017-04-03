@@ -1,8 +1,16 @@
 import * as express from 'express';
 import * as pouchExpress from 'express-pouchdb';
 import { resolve } from 'path';
-import * as db from '@ubc-farm/databases';
-
+import {
+	getEquipment,
+	getInvoices,
+	getLocations,
+	getLongTerm,
+	getPeople,
+	getPlants,
+	getTaskTypes,
+	getTasks,
+} from '@ubc-farm/databases';
 import listPagePackages from './listPagePackages';
 
 /**
@@ -23,14 +31,14 @@ export default async function server(port = 8080, {
 	if (useDB) {
 		app.use('/db', pouchExpress());
 		await Promise.all([
-			db.getEquipment(),
-			db.getInvoices(),
-			db.getLocations(),
-			db.getLongTerm(),
-			db.getPeople(),
-			db.getPlants(),
-			db.getTaskTypes(),
-			db.getTasks(),
+			getEquipment(),
+			getInvoices(),
+			getLocations(),
+			getLongTerm(),
+			getPeople(),
+			getPlants(),
+			getTaskTypes(),
+			getTasks(),
 		]);
 	}
 

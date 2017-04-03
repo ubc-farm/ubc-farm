@@ -1,4 +1,4 @@
-import { readFile } from './fs-awaitable';
+import { readFile } from './denodeify';
 import { join, parse, extname, format, relative } from 'path';
 import * as matter from 'gray-matter';
 import * as Handlebars from 'handlebars';

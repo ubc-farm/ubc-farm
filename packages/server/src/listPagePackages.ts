@@ -1,9 +1,6 @@
-import * as resolveCallback from 'resolve';
-import * as denodeify from 'denodeify';
 import { resolve as resolvePath, join, dirname } from 'path';
+import { resolve } from './utils/denodeify';
 import parseData from './utils/parseData';
-
-const resolve = denodeify(resolveCallback);
 
 interface PackageJSON {
 	name: string

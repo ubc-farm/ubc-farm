@@ -1,6 +1,6 @@
 import { extname } from 'path';
 import { safeLoad } from 'js-yaml';
-import { readFile } from './fs-awaitable';
+import { readFile } from './denodeify';
 
 /**
  * Loads and parses YAML and JSON files, and returns parsed content.

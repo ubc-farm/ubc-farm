@@ -1,6 +1,6 @@
 import { watch, FSWatcher } from 'fs';
 import { join, relative } from 'path';
-import { writeFile } from './utils/fs-awaitable';
+import { writeFile } from './utils/denodeify';
 import walkFolder from './utils/walkFolder';
 import prepareData from './utils/prepareData';
 import compileFile from './utils/compileFile';
