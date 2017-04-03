@@ -1,4 +1,5 @@
-import { connectAll, TaskType } from '@ubc-farm/databases';
+import { TaskType } from '@ubc-farm/databases';
+import { connectAll } from '@ubc-farm/database-utils';
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
 import TaskPanel from './TaskPanel';

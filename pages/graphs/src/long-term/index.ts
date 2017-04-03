@@ -1,7 +1,8 @@
 import { parsed } from 'document-promises';
 import { createElement } from 'react';
 import { render } from 'react-dom';
-import { getLongTerm, connectAll } from '@ubc-farm/databases';
+import { getLongTerm } from '@ubc-farm/databases';
+import { connectAll } from '@ubc-farm/database-utils';
 import LongTermChart from './LongTermChart';
 
 const LongTermDBChart = connectAll({

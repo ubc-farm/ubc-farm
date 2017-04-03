@@ -5,7 +5,8 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
-    "@ubc-farm/databases": "^2.0.1",
+    "@ubc-farm/databases": "^3.0.0",
+    "@ubc-farm/database-utils": "^1.0.0",
     "@ubc-farm/map-utils": "^1.0.2",
     "@ubc-farm/react-pouch-table": "^2.0.0",
     "@ubc-farm/utils": "*",

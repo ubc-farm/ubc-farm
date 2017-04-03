@@ -1,6 +1,7 @@
 import { createElement, PropTypes, StatelessComponent, ChangeEvent } from 'react';
 /** @jsx createElement */
-import { connectAll, Task, Equipment, Location } from '@ubc-farm/databases';
+import { Task, Equipment, Location } from '@ubc-farm/databases';
+import { connectAll } from '@ubc-farm/database-utils';
 import TaskNameInput from './TaskNameInput';
 import TaskTimeInput from './TaskTimeInput';
 import LocationSelect from './LocationSelect';

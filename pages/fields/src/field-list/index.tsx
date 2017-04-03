@@ -1,6 +1,7 @@
 import { createElement } from 'react'; /** @jsx createElement */
 import { render } from 'react-dom';
-import { connectAll, Field } from '@ubc-farm/databases';
+import { Field } from '@ubc-farm/databases';
+import { connectAll } from '@ubc-farm/database-utils';
 import { pick } from 'lodash';
 import FieldList from './FieldList';
 

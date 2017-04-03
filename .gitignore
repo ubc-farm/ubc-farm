@@ -1,5 +1,7 @@
 node_modules
 packages/*/browser
+packages/*/out
+packages/*/www/*.html
 pages/*/browser
 pages/*/www/*.html
 pages/*/www/*.js

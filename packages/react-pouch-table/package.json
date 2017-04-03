@@ -4,8 +4,7 @@
   "module": "index.es.js",
   "main": "index.js",
   "dependencies": {
-    "@ubc-farm/databases": "^2.0.1",
-    "react-virtualized": "^9.1.0"
+    "react-virtualized": "^9.5.0"
   },
   "devDependencies": {
     "rollup": "^0.41.4"
