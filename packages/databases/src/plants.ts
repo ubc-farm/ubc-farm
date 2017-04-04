@@ -97,8 +97,8 @@ function convertRow(row: { [key: string]: string }): Plant {
 	};
 }
 
-export default async function getPlants() {
-	const db = new PouchDB<Plant>('plants');
+export default async function getPlants(prefix = '') {
+	const db = new PouchDB<Plant>(prefix + 'plants');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['commodity'] } }),
 	]);

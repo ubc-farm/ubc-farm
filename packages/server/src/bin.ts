@@ -50,9 +50,9 @@ export default async function main(options: Options) {
 	const { mode } = options;
 	switch (options.mode) {
 		case 'serve':
-			console.log(`Creating server`);
+			console.log(`Creating server...`);
 			const app = await server(options.port);
-			console.log(`Server ready`);
+			console.log(`Server ready!`);
 
 			app.use((req, res, next) => {
 				const { method, path: url } = req;

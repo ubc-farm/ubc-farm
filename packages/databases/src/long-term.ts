@@ -13,9 +13,8 @@ export interface LongTermEntry {
 	expenses?: Cents;
 }
 
-export default async function getLongTerm(generate = true) {
-	const db = new PouchDB<LongTermEntry>('long-term');
-	if (generate) await generateToday(db);
+export default async function getLongTerm(prefix = '') {
+	const db = new PouchDB<LongTermEntry>(prefix + 'long-term');
 	return db;
 }
 

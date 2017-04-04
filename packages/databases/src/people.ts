@@ -67,8 +67,8 @@ export function setPhone(
 	}
 }
 
-export default async function getPeople() {
-	const db = new PouchDB<Person>('people');
+export default async function getPeople(prefix = '') {
+	const db = new PouchDB<Person>(prefix + 'people');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['role'] } }),
 		db.createIndex({ index: { fields: ['name'] } }),

@@ -64,8 +64,8 @@ export interface Equipment extends Item {
 	label: 'equipment';
 }
 
-export default async function getEquipment() {
-	const db = new PouchDB<Equipment>('equipment');
+export default async function getEquipment(prefix = '') {
+	const db = new PouchDB<Equipment>(prefix + 'equipment');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['name'] } }),
 	]);

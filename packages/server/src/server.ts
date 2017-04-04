@@ -13,6 +13,19 @@ import {
 } from '@ubc-farm/databases';
 import listPagePackages from './listPagePackages';
 
+function getDatabases(prefix?: string) {
+	return Promise.all([
+		getEquipment(prefix),
+		getInvoices(prefix),
+		getLocations(prefix),
+		getLongTerm(prefix),
+		getPeople(prefix),
+		getPlants(prefix),
+		getTaskTypes(prefix),
+		getTasks(prefix),
+	]);
+}
+
 /**
  * Creates and starts the server
  */
@@ -30,16 +43,7 @@ export default async function server(port = 8080, {
 
 	if (useDB) {
 		app.use('/db', pouchExpress());
-		await Promise.all([
-			getEquipment(),
-			getInvoices(),
-			getLocations(),
-			getLongTerm(),
-			getPeople(),
-			getPlants(),
-			getTaskTypes(),
-			getTasks(),
-		]);
+		await getDatabases('./db/');
 	}
 
 	await new Promise(resolve => app.listen(port, resolve));

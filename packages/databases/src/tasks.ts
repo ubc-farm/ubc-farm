@@ -45,8 +45,8 @@ export function getTaskRange(task: Partial<Task>): moment.Moment[] | null {
 	return [start, end];
 }
 
-export default async function getTasks() {
-	const db = new PouchDB<Task>('tasks');
+export default async function getTasks(prefix = '') {
+	const db = new PouchDB<Task>(prefix + 'tasks');
 
 	await Promise.all([
 		db.createIndex({ index: { fields: ['type'] } }),

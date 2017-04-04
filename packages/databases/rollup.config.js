@@ -9,8 +9,8 @@ export default {
 	sourceMap: true,
 	moduleName: 'databases',
 	targets: [
-		{ dest: 'index.js', format: 'umd' },
-		{ dest: 'index.es.js', format: 'es' },
+		{ dest: 'out/index.cjs.js', format: 'umd' },
+		{ dest: 'out/index.es.js', format: 'es' },
 	],
 	plugins: [
 		nodeResolve({

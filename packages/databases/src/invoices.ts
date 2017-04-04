@@ -73,8 +73,8 @@ export function getInvoiceDeliveryDate(invoice: Partial<Invoice>) {
 	else return null;
 }
 
-export default async function getInvoices() {
-	const db = new PouchDB<Invoice>('invoices');
+export default async function getInvoices(prefix = '') {
+	const db = new PouchDB<Invoice>(prefix + 'invoices');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['isPurchase'] } }),
 		db.createIndex({ index: { fields: ['date'] } }),

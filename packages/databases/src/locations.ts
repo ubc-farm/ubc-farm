@@ -90,8 +90,8 @@ export function getAcres(field: Partial<Field>|number|null) {
 	return `${mSquared} ac`;
 }
 
-export default async function getLocations() {
-	const db = new PouchDB<Location>('locations');
+export default async function getLocations(prefix = '') {
+	const db = new PouchDB<Location>(prefix + 'locations');
 	await Promise.all([
 		// db.createIndex({ index: { fields: ['name'] } }),
 		// db.createIndex({ index: { fields: ['location'] } }),

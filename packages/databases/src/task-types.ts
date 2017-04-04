@@ -16,8 +16,8 @@ export function taskTypeName(taskType: Partial<TaskType> | string) {
 	return startCase(id);
 }
 
-export default async function getTaskTypes() {
-	const db = new PouchDB<TaskType>('task-types');
+export default async function getTaskTypes(prefix = '') {
+	const db = new PouchDB<TaskType>(prefix + 'task-types');
 
 	const { total_rows } = await db.allDocs({ limit: 0 });
 	if (total_rows === 0) await createDefaultTypes(db);
