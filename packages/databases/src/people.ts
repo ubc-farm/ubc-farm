@@ -2,7 +2,7 @@
 import phone from 'phone';
 import kebabCase from 'lodash/kebabCase';
 import startCase from 'lodash/startCase';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { ID, Index, Address, Day, DateString } from './utils/typedefs';
 
 export interface Person {
@@ -67,7 +67,7 @@ export function setPhone(
 	}
 }
 
-export default async function getPeople(prefix = '') {
+export default async function getPeople(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Person>(prefix + 'people');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['role'] } }),

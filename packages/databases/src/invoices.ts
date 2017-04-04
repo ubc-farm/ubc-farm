@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { DateNum, Index, Cents } from './utils/typedefs';
 
 export interface Sale {
@@ -73,7 +73,7 @@ export function getInvoiceDeliveryDate(invoice: Partial<Invoice>) {
 	else return null;
 }
 
-export default async function getInvoices(prefix = '') {
+export default async function getInvoices(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Invoice>(prefix + 'invoices');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['isPurchase'] } }),

@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as pouchExpress from 'express-pouchdb';
 import { resolve } from 'path';
+
 import {
 	getEquipment,
 	getInvoices,
@@ -11,18 +12,24 @@ import {
 	getTaskTypes,
 	getTasks,
 } from '@ubc-farm/databases';
+import * as Pouch from 'pouchdb';
+import * as find from 'pouchdb-find';
+import * as transform from 'transform-pouch';
+
 import listPagePackages from './listPagePackages';
 
+const PouchDB: PouchDB.Static = <any> Pouch.plugin(find).plugin(transform)
+	.defaults({ prefix: './db/' } as any);
 function getDatabases(prefix?: string) {
 	return Promise.all([
-		getEquipment(prefix),
-		getInvoices(prefix),
-		getLocations(prefix),
-		getLongTerm(prefix),
-		getPeople(prefix),
-		getPlants(prefix),
-		getTaskTypes(prefix),
-		getTasks(prefix),
+		getEquipment(prefix, PouchDB),
+		getInvoices(prefix, PouchDB),
+		getLocations(prefix, PouchDB),
+		getLongTerm(prefix, PouchDB),
+		getPeople(prefix, PouchDB),
+		getPlants(prefix, PouchDB),
+		getTaskTypes(prefix, PouchDB),
+		getTasks(prefix, PouchDB),
 	]);
 }
 
@@ -42,8 +49,8 @@ export default async function server(port = 8080, {
 	}
 
 	if (useDB) {
-		app.use('/db', pouchExpress());
-		await getDatabases('./db/');
+		app.use('/db', pouchExpress(PouchDB));
+		await getDatabases();
 	}
 
 	await new Promise(resolve => app.listen(port, resolve));

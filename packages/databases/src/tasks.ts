@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { ID, Index, DateNum } from './utils/typedefs';
 
 export interface Task {
@@ -45,7 +45,7 @@ export function getTaskRange(task: Partial<Task>): moment.Moment[] | null {
 	return [start, end];
 }
 
-export default async function getTasks(prefix = '') {
+export default async function getTasks(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Task>(prefix + 'tasks');
 
 	await Promise.all([

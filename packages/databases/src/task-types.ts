@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign,no-use-before-define */
 import startCase from 'lodash/startCase';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 
 export interface TaskType {
 	_id: string; // Type name
@@ -16,7 +16,7 @@ export function taskTypeName(taskType: Partial<TaskType> | string) {
 	return startCase(id);
 }
 
-export default async function getTaskTypes(prefix = '') {
+export default async function getTaskTypes(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<TaskType>(prefix + 'task-types');
 
 	const { total_rows } = await db.allDocs({ limit: 0 });

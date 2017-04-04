@@ -178,14 +178,38 @@ export interface Task {
 
 ///////////////////////////
 
-export function getEquipment(prefix?: string): Promise<PouchDB.Database<Equipment>>;
-export function getInvoices(prefix?: string): Promise<PouchDB.Database<Invoice>>;
-export function getLocations(prefix?: string): Promise<PouchDB.Database<Location>>;
-export function getLongTerm(prefix?: string): Promise<PouchDB.Database<LongTermEntry>>;
-export function getPeople(prefix?: string): Promise<PouchDB.Database<Person>>;
-export function getPlants(prefix?: string): Promise<PouchDB.Database<Plant>>;
-export function getTaskTypes(prefix?: string): Promise<PouchDB.Database<TaskType>>;
-export function getTasks(prefix?: string): Promise<PouchDB.Database<Task>>;
+export function getEquipment(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Equipment>>;
+export function getInvoices(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Invoice>>;
+export function getLocations(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Location>>;
+export function getLongTerm(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<LongTermEntry>>;
+export function getPeople(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Person>>;
+export function getPlants(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Plant>>;
+export function getTaskTypes(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<TaskType>>;
+export function getTasks(
+	prefix?: string,
+	PouchDB?: PouchDB.Static,
+): Promise<PouchDB.Database<Task>>;
 
 ///////////////////////////
 

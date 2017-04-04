@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { ID, Cents, DateNum } from './utils/typedefs';
 import moment from 'moment';
 
@@ -64,7 +64,7 @@ export interface Equipment extends Item {
 	label: 'equipment';
 }
 
-export default async function getEquipment(prefix = '') {
+export default async function getEquipment(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Equipment>(prefix + 'equipment');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['name'] } }),

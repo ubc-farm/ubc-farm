@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 // import csvFileToPouch from 'csv-to-pouch';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 
 export interface Plant {
@@ -97,7 +97,7 @@ function convertRow(row: { [key: string]: string }): Plant {
 	};
 }
 
-export default async function getPlants(prefix = '') {
+export default async function getPlants(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Plant>(prefix + 'plants');
 	await Promise.all([
 		db.createIndex({ index: { fields: ['commodity'] } }),

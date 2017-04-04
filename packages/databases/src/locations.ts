@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import geojsonArea from '@turf/area';
 import centroid from '@turf/centroid';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import { Index } from './utils/typedefs';
 
 type LocationGeometry = GeoJSON.Polygon | GeoJSON.Point;
@@ -90,7 +90,7 @@ export function getAcres(field: Partial<Field>|number|null) {
 	return `${mSquared} ac`;
 }
 
-export default async function getLocations(prefix = '') {
+export default async function getLocations(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<Location>(prefix + 'locations');
 	await Promise.all([
 		// db.createIndex({ index: { fields: ['name'] } }),

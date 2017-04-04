@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
-import PouchDB from './utils/load-pouch';
+import Pouch from './utils/load-pouch';
 import getPeople from './people';
 import { DateString, Cents } from './utils/typedefs';
 
@@ -13,7 +13,7 @@ export interface LongTermEntry {
 	expenses?: Cents;
 }
 
-export default async function getLongTerm(prefix = '') {
+export default async function getLongTerm(prefix = '', PouchDB = Pouch) {
 	const db = new PouchDB<LongTermEntry>(prefix + 'long-term');
 	return db;
 }
