@@ -12,8 +12,8 @@ interface DateTarget extends EventTarget {
 
 export interface DateInputProps {
 	onChange?: ChangeEventHandler<DateTarget>;
-	value?: moment.Moment;
-	defaultValue?: moment.Moment;
+	value?: moment.Moment | number;
+	defaultValue?: moment.Moment | number;
 }
 
 export function handleChange(

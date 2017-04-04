@@ -226,20 +226,20 @@ type NearlyField = {
 } | Field
 
 export function salePrice(sale: Sale): Cents;
-export function computeSubtotal(invoice: Invoice | Sale[]): Cents;
-export function computeTotal(invoice: Invoice | Sale[], vat: number): Cents;
-export function balanceDue(invoice: Invoice, vat?: number): Cents;
-export function getInvoiceDate(invoice: Invoice): moment.Moment | null;
-export function getInvoiceDeliveryDate(invoice: Invoice): moment.Moment | null;
+export function computeSubtotal(invoice: Partial<Invoice> | Sale[]): Cents;
+export function computeTotal(invoice: Partial<Invoice> | Sale[], vat: number): Cents;
+export function balanceDue(invoice: Partial<Invoice>, vat?: number): Cents;
+export function getInvoiceDate(invoice: Partial<Invoice>): moment.Moment | null;
+export function getInvoiceDeliveryDate(invoice: Partial<Invoice>): moment.Moment | null;
 
-export function getLocation(loc: NearlyLocation): LocationDescription
-export function getLocationString(loc: NearlyLocation | LocationDescription): string
-export function getArea(field: NearlyField): number | null;
-export function getAcres(field: NearlyField | number | null): string;
+export function getLocation(loc: Partial<Location>): LocationDescription
+export function getLocationString(loc: Partial<Location> | LocationDescription): string
+export function getArea(field: Partial<Field>): number | null;
+export function getAcres(field: Partial<Field> | number | null): string;
 
 export function generateToday(db: PouchDB.Database<LongTermEntry>): Promise<void>;
 
-export function getRole(person: Person | string): string;
+export function getRole(person: Partial<Person> | string): string;
 
 export function taskTypeName(taskType: TaskType | string): string;
 export function createDefaultTypes(db: PouchDB.Database<TaskType>): Promise<void>;
