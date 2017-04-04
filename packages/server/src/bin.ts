@@ -1,7 +1,6 @@
 import { FSWatcher } from 'fs';
 import { relative, join } from 'path';
 import * as parseArgs from 'minimist';
-import * as morgan from 'morgan';
 import {
 	server,
 	listPagePackages,
@@ -53,9 +52,14 @@ export default async function main(options: Options) {
 		case 'serve':
 			console.log(`Creating server`);
 			const app = await server(options.port);
-			console.log(`Server listening on port ${app.get('port')}`);
+			console.log(`Server ready`);
 
-			app.use(morgan('tiny'));
+			app.use((req, res, next) => {
+				const { method, path: url } = req;
+				const { statusCode } = res;
+				console.log(`${method} ${url} ${statusCode}`);
+				next();
+			});
 			break;
 		case 'list':
 			const packages = await listPagePackages();
@@ -154,7 +158,7 @@ if (require.main === module) {
 		mode: _[0],
 		port: parseInt(port, 10) || undefined,
 	}).catch(err => {
-		console.error(err.message);
+		console.error(err);
 		process.exit(1);
 	});
 }

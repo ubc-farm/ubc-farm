@@ -25,7 +25,7 @@ export default async function server(port = 8080, {
 
 	app.use(express.static(resolve(__dirname, '../www')));
 	for (const { url, paths } of packages) {
-		app.use(express.static(url, paths.www));
+		app.use(url, express.static(paths.www));
 	}
 
 	if (useDB) {
