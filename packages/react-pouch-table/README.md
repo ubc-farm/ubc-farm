@@ -10,3 +10,10 @@ Many props are the same as [Table](https://github.com/bvaughn/react-virtualized/
 from `react-virtualized`.
 `rowCount`, `rowGetter`, `height`, and `width` are set by this
 component.
+
+
+## Table Features (TODO)
+
+Let items be selected, then deleted.
+Click to open item
+Sort items

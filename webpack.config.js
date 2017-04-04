@@ -2,6 +2,8 @@ const { readdirSync } = require('fs');
 const { resolve, basename } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const serverPath = resolve(__dirname, './packages/server');
+
 /**
  * @param {string|Array<string>|object} entries
  * @param {string} dirname
@@ -43,7 +45,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 		entry,
 		plugins: Object.keys(entry).map(key => new HtmlWebpackPlugin({
 			filename: `./${key}.html`,
-			// template: '',
+			// template: './packages/server/views/_page.hbs',
 			chunks: [key],
 		})),
 		module: {
@@ -55,6 +57,19 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 						transpileOnly: true, // Editor handles typechecks
 					},
 				},
+				/*{
+					test: /\.(hbs|handlebars)$/,
+					loader: 'handlebars-loader',
+					options: {
+						runtime: resolve(serverPath, './node_modules/handlebars/runtime.js'),
+						helperDirs: [
+							resolve(serverPath, './node_modules/handlebars-helpers/lib'),
+						],
+						partialDirs: [
+							resolve(serverPath, './views/_partials'),
+						],
+					},
+				},*/
 			],
 		},
 		resolve: {

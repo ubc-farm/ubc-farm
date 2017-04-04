@@ -2,6 +2,8 @@ import * as PouchDB from 'pouchdb';
 import moment from 'moment';
 import * as React from 'react';
 
+/// <reference types="geojson" />
+
 export type ID = string;
 export type Index<T> = T;
 export type DateNum = number;
