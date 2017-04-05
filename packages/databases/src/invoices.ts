@@ -14,8 +14,8 @@ export interface Invoice {
 	_id: number; // invoice #
 	_rev: string;
 	isPurchase?: Index<boolean>; // if true, the invoice represents something the
-	                            // farm bought instead of something the farm sold.
-															// false by default.
+	                             // farm bought instead of something the farm sold.
+															 // false by default.
 	date?: Index<DateNum | null>;
 	items?: Sale[];
 	channel?: string;

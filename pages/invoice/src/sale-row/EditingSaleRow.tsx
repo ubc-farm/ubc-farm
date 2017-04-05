@@ -8,13 +8,14 @@ import DeleteButton from './DeleteButton';
 interface EditSaleRowProps {
 	sale: Sale,
 	onChange(e: React.ChangeEvent<any>): void,
+	onClick(e: React.MouseEvent<HTMLTableRowElement>): void,
 }
 
 /**
  * A modified version of SaleRow that can be edited.
  */
-const EditingSaleRow: SFC<EditSaleRowProps> = ({ sale, onChange }) => (
-	<tr className="invoice-row">
+const EditingSaleRow: SFC<EditSaleRowProps> = ({ sale, onChange, onClick }) => (
+	<tr className="invoice-row" onClick={onClick}>
 		<td className="item-col">
 			<input
 				name="item" type="text" value={sale.item || ''}
