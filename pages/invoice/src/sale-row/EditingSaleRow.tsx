@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react'; /** @jsx createElement */
+import { createElement, PureComponent } from 'react'; /** @jsx createElement */
 import { Sale } from '@ubc-farm/databases'
 import { MoneyInput } from '@ubc-farm/react-inputs';
 
@@ -7,44 +7,59 @@ import DeleteButton from './DeleteButton';
 
 interface EditSaleRowProps {
 	sale: Sale,
-	onChange(e: React.ChangeEvent<any>): void,
-	onClick(e: React.MouseEvent<HTMLTableRowElement>): void,
+	index: number,
+	onChange(index:number, e: React.ChangeEvent<any>): void,
+	onClick(index:number, e: React.MouseEvent<HTMLTableRowElement>): void,
 }
 
 /**
  * A modified version of SaleRow that can be edited.
  */
-const EditingSaleRow: SFC<EditSaleRowProps> = ({ sale, onChange, onClick }) => (
-	<tr className="invoice-row" onClick={onClick}>
-		<td className="item-col">
-			<input
-				name="item" type="text" value={sale.item || ''}
-				onChange={onChange}
-			/>
-		</td>
-		<td className="description-col">
-			<input
-				name="description" type="text" value={sale.description || ''}
-				onChange={onChange}
-			/>
-		</td>
-		<td className="unit-cost-col">
-			<MoneyInput
-				name="unitCost"
-				value={sale.unitCost || null}
-				onChange={onChange}
-			/>
-		</td>
-		<td className="quantity-col">
-			<input
-				name="quantity" type="number" value={sale.quantity || ''}
-				onChange={onChange}
-			/>
-		</td>
+export default class EditingSaleRow extends PureComponent<EditSaleRowProps, void> {
+	handleClick: (e: React.MouseEvent<HTMLTableRowElement>) => void
+	handleChange: (e: React.ChangeEvent<any>) => void
 
-		<PriceField sale={sale} />
-		<DeleteButton blank />
-	</tr>
-);
+	constructor(props) {
+		super(props);
 
-export default EditingSaleRow;
+		this.handleClick = props.onClick.bind(this, props.index);
+		this.handleChange = props.onChange.bind(this, props.index);
+	}
+
+	render() {
+		const { handleClick, handleChange, props: { sale } } = this;
+
+		return (
+			<tr className="invoice-row" onClick={handleClick}>
+				<td className="item-col">
+					<input
+						name="item" type="text" value={sale.item || ''}
+						onChange={handleChange}
+					/>
+				</td>
+				<td className="description-col">
+					<input
+						name="description" type="text" value={sale.description || ''}
+						onChange={handleChange}
+					/>
+				</td>
+				<td className="unit-cost-col">
+					<MoneyInput
+						name="unitCost"
+						value={sale.unitCost || null}
+						onChange={handleChange}
+					/>
+				</td>
+				<td className="quantity-col">
+					<input
+						name="quantity" type="number" value={sale.quantity || ''}
+						onChange={handleChange}
+					/>
+				</td>
+
+				<PriceField sale={sale} />
+				<DeleteButton blank />
+			</tr>
+		)
+	}
+}

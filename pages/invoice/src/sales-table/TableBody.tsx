@@ -46,8 +46,8 @@ export default class TableBody extends PureComponent<BodyProps, BodyState> {
 	handleRowClick(index: number) {
 		const clicked = this.props.sales[index];
 
-		this.setState(prevState => ({
-			editing: new Set(prevState.editing).add(clicked)
+		this.setState(last => ({
+			editing: new Set(last.editing).add(clicked)
 		}));
 	}
 
@@ -56,21 +56,21 @@ export default class TableBody extends PureComponent<BodyProps, BodyState> {
 
 		return (
 			<tbody>
-				{this.props.sales.map((sale, key) => {
+				{this.props.sales.map((sale, index) => {
 					if (editing.has(sale)) {
 						return (
 							<EditingSaleRow
-								sale={sale} key={key}
-								onChange={this.handleRowChange.bind(this, key)}
-								onClick={this.handleRowClick.bind(this, key)}
+								sale={sale} key={index} index={index}
+								onChange={this.handleRowChange}
+								onClick={this.handleRowClick}
 							/>
 						);
 					} else {
 						return (
 							<SaleRow
-								sale={sale} key={key}
-								onDelete={this.handleRowDelete.bind(this, key)}
-								onClick={this.handleRowClick.bind(this, key)}
+								sale={sale} key={index} index={index}
+								onDelete={this.handleRowDelete}
+								onClick={this.handleRowClick}
 							/>
 						);
 					}

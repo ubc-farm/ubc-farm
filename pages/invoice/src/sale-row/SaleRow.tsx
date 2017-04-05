@@ -1,4 +1,4 @@
-import { createElement, SFC } from 'react'; /** @jsx createElement */
+import { createElement, PureComponent, MouseEvent } from 'react'; /** @jsx createElement */
 import { Sale } from '@ubc-farm/databases'
 import { centsToString } from '@ubc-farm/money';
 
@@ -7,22 +7,37 @@ import DeleteButton from './DeleteButton';
 
 interface SaleRowProps {
 	sale: Sale,
-	onDelete: (e: React.MouseEvent<HTMLButtonElement>) => void,
-	onClick(e: React.MouseEvent<HTMLTableRowElement>): void,
+	index: number,
+	onDelete(index: number, e: MouseEvent<HTMLButtonElement>): void,
+	onClick(index: number, e: MouseEvent<HTMLTableRowElement>): void,
 }
 
-const SaleRow: SFC<SaleRowProps> = ({ sale, onDelete, onClick }) => (
-	<tr className="invoice-row" onClick={onClick}>
-		<td className="item-col">{sale.item}</td>
-		<td className="description-col">{sale.description}</td>
-		<td className="unit-cost-col">
-			{sale.unitCost ? centsToString(sale.unitCost) : ''}
-		</td>
-		<td className="quantity-col">{sale.quantity}</td>
+export default class SaleRow extends PureComponent<SaleRowProps, void> {
+	handleClick: (e: MouseEvent<HTMLTableRowElement>) => void
+	handleDelete: (e: MouseEvent<HTMLButtonElement>) => void
 
-		<PriceField sale={sale} />
-		<DeleteButton onDelete={onDelete} />
-	</tr>
-);
+	constructor(props: SaleRowProps) {
+		super(props);
 
-export default SaleRow;
+		this.handleClick = props.onClick.bind(this, props.index);
+		this.handleDelete = props.onDelete.bind(this, props.index);
+	}
+
+	render() {
+		const { handleClick, handleDelete, props: { sale } } = this;
+
+		return (
+			<tr className="invoice-row" onClick={handleClick}>
+				<td className="item-col">{sale.item}</td>
+				<td className="description-col">{sale.description}</td>
+				<td className="unit-cost-col">
+					{sale.unitCost ? centsToString(sale.unitCost) : ''}
+				</td>
+				<td className="quantity-col">{sale.quantity}</td>
+
+				<PriceField sale={sale} />
+				<DeleteButton onDelete={handleDelete} />
+			</tr>
+		);
+	}
+}
