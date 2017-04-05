@@ -1,7 +1,18 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 
-const TableHead: SFC<void> = () => (
+interface HeadProps {
+	onAdd(): void,
+}
+
+const TableHead: SFC<HeadProps> = ({ onAdd }) => (
 	<thead>
+		<tr>
+			<th>
+				<button type="button" onClick={onAdd}>
+					Add
+				</button>
+			</th>
+		</tr>
 		<tr>
 			<th>Item</th>
 			<th>Description</th>

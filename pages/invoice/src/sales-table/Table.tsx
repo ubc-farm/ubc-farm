@@ -13,6 +13,7 @@ export default class Table extends PureComponent<TableProps, void> {
 		super(props);
 
 		this.handleSaleChange = this.handleSaleChange.bind(this);
+		this.handleSaleAdd = this.handleSaleAdd.bind(this);
 	}
 
 	handleSaleChange(newSales: Sale[]) {
@@ -22,10 +23,19 @@ export default class Table extends PureComponent<TableProps, void> {
 		});
 	}
 
+	handleSaleAdd() {
+		const toAdd: Sale = {};
+
+		const { items } = this.props.invoice;
+		this.handleSaleChange(items
+			? [...items, toAdd]
+			: [toAdd]);
+	}
+
 	render() {
 		return (
 			<table>
-				<TableHead />
+				<TableHead onAdd={this.handleSaleAdd} />
 				<TableBody
 					sales={this.props.invoice.items || []}
 					onChange={this.handleSaleChange}
