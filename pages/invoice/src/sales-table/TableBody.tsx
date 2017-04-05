@@ -1,6 +1,6 @@
 import { createElement, PureComponent } from 'react'; /** @jsx createElement */
 import { Sale } from '@ubc-farm/databases'
-import { SaleRow, EditingSaleRow } from '../sale-row'
+import { SaleRow, EditingSaleRow } from './sale-row'
 
 interface BodyProps {
 	sales: Sale[]
