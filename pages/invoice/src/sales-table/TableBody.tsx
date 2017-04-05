@@ -3,29 +3,28 @@ import { Sale } from '@ubc-farm/databases'
 import { SaleRow, EditingSaleRow } from './sale-row'
 
 interface BodyProps {
-	sales: Sale[]
-	onChange(newSales: Sale[]): void,
-}
-
-interface BodyState {
+	sales: Sale[],
 	editing: Set<Sale>,
+	onChange(newSales: Sale[]): void,
+	addEditing(sale: Sale): void,
+	deleteEditing(sale: Sale): void,
 }
 
-export default class TableBody extends PureComponent<BodyProps, BodyState> {
+export default class TableBody extends PureComponent<BodyProps, void> {
 	constructor(props) {
 		super(props);
 
-		this.state = { editing: new Set() };
+		this.handleRowChange = this.handleRowChange.bind(this);
+		this.handleRowClick = this.handleRowClick.bind(this);
+		this.handleRowDelete = this.handleRowDelete.bind(this);
 	}
 
 	handleRowDelete(index: number) {
 		const sales = [...this.props.sales];
 		const [deleted] = sales.splice(index, 1);
 
-		if (this.state.editing.has(deleted)) {
-			const editing = new Set(this.state.editing);
-			editing.delete(deleted);
-			this.setState({ editing });
+		if (this.props.editing.has(deleted)) {
+			this.props.deleteEditing(deleted);
 		}
 
 		this.props.onChange(sales);
@@ -45,18 +44,15 @@ export default class TableBody extends PureComponent<BodyProps, BodyState> {
 
 	handleRowClick(index: number) {
 		const clicked = this.props.sales[index];
-
-		this.setState(last => ({
-			editing: new Set(last.editing).add(clicked)
-		}));
+		this.props.addEditing(clicked);
 	}
 
 	render() {
-		const { editing } = this.state;
+		const { sales, editing } = this.props;
 
 		return (
 			<tbody>
-				{this.props.sales.map((sale, index) => {
+				{sales.map((sale, index) => {
 					if (editing.has(sale)) {
 						return (
 							<EditingSaleRow

@@ -8,12 +8,20 @@ interface TableProps {
 	onChange(newInvoice: Invoice): void,
 }
 
-export default class Table extends PureComponent<TableProps, void> {
-	constructor(props) {
+interface TableState {
+	editing: Set<Sale>,
+}
+
+export default class Table extends PureComponent<TableProps, TableState> {
+	constructor(props: TableProps) {
 		super(props);
+
+		this.state = { editing: new Set() };
 
 		this.handleSaleChange = this.handleSaleChange.bind(this);
 		this.handleSaleAdd = this.handleSaleAdd.bind(this);
+		this.addEditing = this.addEditing.bind(this);
+		this.deleteEditing = this.deleteEditing.bind(this);
 	}
 
 	handleSaleChange(newSales: Sale[]) {
@@ -27,9 +35,22 @@ export default class Table extends PureComponent<TableProps, void> {
 		const toAdd: Sale = {};
 
 		const { items } = this.props.invoice;
+		this.addEditing(toAdd);
 		this.handleSaleChange(items
 			? [...items, toAdd]
 			: [toAdd]);
+	}
+
+	addEditing(sale: Sale) {
+		this.setState(last => ({ editing: new Set(last.editing).add(sale) }));
+	}
+
+	deleteEditing(sale: Sale) {
+		this.setState(last => {
+			const editing = new Set(last.editing);
+			editing.delete(sale);
+			return { editing }
+		});
 	}
 
 	render() {
@@ -39,6 +60,9 @@ export default class Table extends PureComponent<TableProps, void> {
 				<TableBody
 					sales={this.props.invoice.items || []}
 					onChange={this.handleSaleChange}
+					editing={this.state.editing}
+					addEditing={this.addEditing}
+					deleteEditing={this.deleteEditing}
 				/>
 			</table>
 		);
