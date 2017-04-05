@@ -12,23 +12,20 @@ interface DetailsProps {
  * date and balance due.
  */
 const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
-	const { _id = '', date } = invoice;
+	const { _id, date } = invoice;
 	return (
 		<div className="invoice-details">
 			<div className="invoice-detail-row">
-				<label htmlFor="invoice-id-input">
+				<span className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Invoice #</h6>
-				</label>
-				<input
-					id="invoice-id-input" type="number"
-					name="_id"
-					className="invoice-details-value"
-					value={_id} onChange={onChange}
-				/>
+				</span>
+				<span className="invoice-details-value">
+					{_id}
+				</span>
 			</div>
 
 			<div className="invoice-detail-row">
-				<label htmlFor="invoice-date-input">
+				<label htmlFor="invoice-date-input" className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Date</h6>
 				</label>
 				<input
@@ -41,12 +38,10 @@ const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
 			</div>
 
 			<div className="invoice-detail-row">
-				<label>
+				<label className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Balance Due</h6>
 				</label>
-				<span
-					className="invoice-details-value"
-				>
+				<span className="invoice-details-value">
 					{balanceDue(invoice)}
 				</span>
 			</div>

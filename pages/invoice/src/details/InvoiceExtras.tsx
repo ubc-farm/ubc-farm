@@ -15,7 +15,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 	return (
 		<div className="invoice-details">
 			<div className="invoice-detail-row">
-				<label htmlFor="invoice-delivery-input">
+				<label htmlFor="invoice-delivery-input" className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Delivery Date</h6>
 				</label>
 				<input
@@ -28,7 +28,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 			</div>
 
 			<div className="invoice-detail-row">
-				<label htmlFor="invoice-channel-input">
+				<label htmlFor="invoice-channel-input" className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Channel</h6>
 				</label>
 				<input
@@ -40,7 +40,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 			</div>
 
 			<div className="invoice-detail-row">
-				<label htmlFor="invoice-notes-input">
+				<label htmlFor="invoice-notes-input" className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Notes</h6>
 				</label>
 				<textarea
