@@ -6,7 +6,7 @@ import Table from './sales-table'
 
 interface FormProps {
 	defaultInvoice: Invoice,
-	onSubmit(invoice: Invoice): void,
+	onSubmit?(invoice: Invoice): void,
 }
 
 interface FormState {
@@ -23,8 +23,10 @@ export default class InvoiceForm extends PureComponent<FormProps, FormState> {
 	}
 
 	handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
-		this.props.onSubmit(this.state.invoice);
+		if (this.props.onSubmit) {
+			e.preventDefault();
+			this.props.onSubmit(this.state.invoice);
+		}
 	}
 
 	handleChange(invoice: Invoice) {

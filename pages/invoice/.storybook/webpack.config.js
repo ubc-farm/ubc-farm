@@ -10,9 +10,17 @@ module.exports = {
   plugins: [
     // your custom plugins
   ],
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', ''],
+  },
   module: {
     loaders: [
-      // add your custom loaders.
+      {
+				test: /\.(ts|tsx)$/,
+				loader: 'ts-loader?' + JSON.stringify({
+          transpileOnly: true,
+        }),
+			},
     ],
   },
 };

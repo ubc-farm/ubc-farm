@@ -57,23 +57,10 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 						transpileOnly: true, // Editor handles typechecks
 					},
 				},
-				/*{
-					test: /\.(hbs|handlebars)$/,
-					loader: 'handlebars-loader',
-					options: {
-						runtime: resolve(serverPath, './node_modules/handlebars/runtime.js'),
-						helperDirs: [
-							resolve(serverPath, './node_modules/handlebars-helpers/lib'),
-						],
-						partialDirs: [
-							resolve(serverPath, './views/_partials'),
-						],
-					},
-				},*/
 			],
 		},
 		resolve: {
-			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', ''],
 			mainFields: ['browser', 'module', 'jsnext:main', 'main'],
 		},
 		devtool: 'source-map',
