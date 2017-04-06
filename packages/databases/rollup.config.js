@@ -14,6 +14,7 @@ export default {
 	],
 	plugins: [
 		nodeResolve({
+			browser: true,
 			jsnext: true,
 			extensions: ['.js', '.ts'],
 		}),
@@ -32,7 +33,7 @@ export default {
 		rollupTs({ typescript }),
 	],
 	external: [
-		'react', 'pouchdb', 'pouchdb-find', 'transform-pouch', 'moment', 'lodash',
+		'react', 'pouchdb', 'moment', 'lodash',
 	],
 	globals: {
 		react: 'React',
