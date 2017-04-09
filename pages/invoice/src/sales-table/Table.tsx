@@ -20,7 +20,7 @@ export default class Table extends PureComponent<TableProps, TableState> {
 
 		this.handleSaleChange = this.handleSaleChange.bind(this);
 		this.handleSaleAdd = this.handleSaleAdd.bind(this);
-		this.addEditing = this.addEditing.bind(this);
+		this.toggleEditing = this.toggleEditing.bind(this);
 		this.deleteEditing = this.deleteEditing.bind(this);
 	}
 
@@ -35,14 +35,20 @@ export default class Table extends PureComponent<TableProps, TableState> {
 		const toAdd: Sale = {};
 
 		const { items } = this.props.invoice;
-		this.addEditing(toAdd);
+		this.toggleEditing(toAdd);
 		this.handleSaleChange(items
 			? [...items, toAdd]
 			: [toAdd]);
 	}
 
-	addEditing(sale: Sale) {
-		this.setState(last => ({ editing: new Set(last.editing).add(sale) }));
+	toggleEditing(sale: Sale) {
+		this.setState(last => {
+			const editing = new Set(last.editing);
+			if (editing.has(sale)) editing.delete(sale);
+			else editing.add(sale);
+
+			return { editing };
+		});
 	}
 
 	deleteEditing(sale: Sale) {
@@ -61,7 +67,7 @@ export default class Table extends PureComponent<TableProps, TableState> {
 					sales={this.props.invoice.items || []}
 					onChange={this.handleSaleChange}
 					editing={this.state.editing}
-					addEditing={this.addEditing}
+					toggleEditing={this.toggleEditing}
 					deleteEditing={this.deleteEditing}
 				/>
 			</table>

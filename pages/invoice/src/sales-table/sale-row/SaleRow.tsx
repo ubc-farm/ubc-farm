@@ -27,7 +27,7 @@ export default class SaleRow extends PureComponent<SaleRowProps, void> {
 		const { handleClick, handleDelete, props: { sale } } = this;
 
 		return (
-			<tr className="invoice-row" onClick={handleClick}>
+			<tr className="invoice-row" onDoubleClick={handleClick}>
 				<td className="item-col">{sale.item}</td>
 				<td className="description-col">{sale.description}</td>
 				<td className="unit-cost-col">

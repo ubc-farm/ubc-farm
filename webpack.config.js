@@ -52,7 +52,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 	}
 	plugins.push(
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-		new webpack.BannerPlugin('/* eslint-disable */', { raw: true })
+		new webpack.BannerPlugin({ banner: '/* eslint-disable */', raw: true })
 	);
 
 	const config = {

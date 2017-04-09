@@ -6,7 +6,7 @@ interface BodyProps {
 	sales: Sale[],
 	editing: Set<Sale>,
 	onChange(newSales: Sale[]): void,
-	addEditing(sale: Sale): void,
+	toggleEditing(sale: Sale): void,
 	deleteEditing(sale: Sale): void,
 }
 
@@ -44,7 +44,7 @@ export default class TableBody extends PureComponent<BodyProps, void> {
 
 	handleRowClick(index: number) {
 		const clicked = this.props.sales[index];
-		this.props.addEditing(clicked);
+		this.props.toggleEditing(clicked);
 	}
 
 	render() {

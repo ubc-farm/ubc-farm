@@ -30,7 +30,7 @@ export default class EditingSaleRow extends PureComponent<EditSaleRowProps, void
 		const { handleClick, handleChange, props: { sale } } = this;
 
 		return (
-			<tr className="invoice-row" onClick={handleClick}>
+			<tr className="invoice-row editing" onDoubleClick={handleClick}>
 				<td className="item-col">
 					<input
 						name="item" type="text" value={sale.item || ''}

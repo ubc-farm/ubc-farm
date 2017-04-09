@@ -13,8 +13,8 @@ const DeleteButton: SFC<DeleteButtonProps> = ({ onDelete, blank }) => {
 	return (
 		<td className="delete-button-col">
 			{blank
-				? <button type="button" onClick={onDelete}>Delete</button>
-				: null}
+				? null
+				: <button type="button" onClick={onDelete}>Delete</button>}
 		</td>
 	)
 }
