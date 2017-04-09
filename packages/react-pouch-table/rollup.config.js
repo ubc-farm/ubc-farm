@@ -34,7 +34,8 @@ export default {
 		babel({ exclude: 'node_modules/**', include: 'src/**/*.jsx' }),
 	],
 	external: [
-		'react', //'react-virtualized',
+		'react', // 'react-virtualized',
 		'react-dom',
 	],
+	banner: '/* eslint-disable */',
 };

@@ -1,5 +1,6 @@
 const { readdirSync } = require('fs');
 const { resolve, basename } = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const serverPath = resolve(__dirname, './packages/server');
@@ -41,13 +42,22 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 		}
 	}
 
+	const plugins = [];
+	for (const key of Object.keys(entry)) {
+		plugins.push(new HtmlWebpackPlugin({
+			filename: `./${key}.html`,
+			template: resolve(__dirname, './packages/server/views/_page.ejs'),
+			chunks: [key],
+		}));
+	}
+	plugins.push(
+		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+		new webpack.BannerPlugin('/* eslint-disable */', { raw: true })
+	);
+
 	const config = {
 		entry,
-		plugins: Object.keys(entry).map(key => new HtmlWebpackPlugin({
-			filename: `./${key}.html`,
-			// template: './packages/server/views/_page.hbs',
-			chunks: [key],
-		})),
+		plugins,
 		module: {
 			rules: [
 				{
@@ -60,7 +70,7 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 			],
 		},
 		resolve: {
-			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', ''],
+			extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
 			mainFields: ['browser', 'module', 'jsnext:main', 'main'],
 		},
 		devtool: 'source-map',

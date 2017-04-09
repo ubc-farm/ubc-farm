@@ -4,5 +4,6 @@ export default {
 	targets: [
 		{ dest: 'index.js', format: 'cjs' },
 		// { dest: 'index.es.js', format: 'es' },
-	]
+	],
+	banner: '/* eslint-disable */',
 };

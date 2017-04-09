@@ -41,4 +41,5 @@ export default {
 		pouchdb: 'PouchDB',
 		lodash: '_',
 	},
+	banner: '/* eslint-disable */',
 };

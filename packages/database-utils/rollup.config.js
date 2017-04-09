@@ -8,4 +8,5 @@ export default {
 	external: [
 		'react',
 	],
+	banner: '/* eslint-disable */',
 };

@@ -14,4 +14,5 @@ export default {
 		{ dest: 'dist/index.node.js', format: 'cjs' },
 		{ dest: 'dist/index.es.js', format: 'es' },
 	],
+	banner: '/* eslint-disable */',
 };
