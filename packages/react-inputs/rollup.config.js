@@ -1,17 +1,15 @@
 import commonjs from 'rollup-plugin-commonjs';
-import json from 'rollup-plugin-json';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import nodeGlobals from 'rollup-plugin-node-globals';
-import rollupTs from 'rollup-plugin-typescript';
-import typescript from 'typescript';
+// import json from 'rollup-plugin-json';
+// import nodeGlobals from 'rollup-plugin-node-globals';
 
 const pkg = require('./package.json');
 
 export default {
-	entry: 'src/index.ts',
+	entry: 'src/index.js',
 	targets: [
-		{ dest: 'index.es.js', format: 'es' },
-		{ dest: 'index.js', format: 'cjs' },
+		{ dest: 'out/index.es.js', format: 'es' },
+		{ dest: 'out/index.cjs.js', format: 'cjs' },
 	],
 	sourceMap: true,
 	moduleName: 'react_inputs',
@@ -33,12 +31,12 @@ export default {
 				'react-dom': ['findDOMNode'],
 			},
 		}),
-		json(),
-		nodeGlobals(),
-		rollupTs({ typescript }),
+		// json(),
+		// nodeGlobals(),
 	],
 	external: [
 		...Object.keys(pkg.dependencies),
 		...Object.keys(pkg.peerDependencies),
 	],
+	banner: '/* eslint-disable */',
 };

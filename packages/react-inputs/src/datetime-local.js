@@ -1,14 +1,13 @@
-import { createElement, SFC, HTMLAttributes } from 'react'; /** @jsx createElement */
+import { createElement } from 'react';
 import moment from 'moment';
-import { DateInputProps, handleChange } from './date';
+import { handleChange } from './date';
 
 /**
  * Wraps datetime-local input so that value is a moment object instead of a
  * string.
  */
-const DateTimeInput: SFC<DateInputProps> = (props) => {
-	const inputProps: HTMLAttributes<any> =
-		Object.assign({ type: 'datetime-local' }, props);
+export default function DateTimeInput(props) {
+	const inputProps = Object.assign({ type: 'datetime-local' }, props);
 
 	if (props.onChange) {
 		inputProps.onChange = handleChange.bind(null, props.onChange);
@@ -21,5 +20,3 @@ const DateTimeInput: SFC<DateInputProps> = (props) => {
 
 	return createElement('input', inputProps);
 }
-
-export default DateTimeInput;

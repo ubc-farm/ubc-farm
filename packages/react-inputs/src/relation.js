@@ -1,29 +1,19 @@
-import { Component, createElement } from 'react'; /** @jsx createElement */
+import { Component, createElement } from 'react';
 import VirtualizedSelect from 'react-virtualized-select';
-
-interface RelationSelectProps {
-	db: PouchDB.Database<any>;
-	nameKey?: string;
-	changes?: boolean;
-	multi?: boolean;
-}
-
-interface RelationSelectState {
-	options: Map<string, string>;
-	loading: boolean;
-}
 
 /**
  * Select component that lets the user select an item from a list of rows in
  * some PouchDB database. The result is returned as the _id of that row.
  */
-export default class RelationSelect extends Component<RelationSelectProps, RelationSelectState> {
-	static defaultProps: Object;
-	db: PouchDB.Database<any>;
-	changes: PouchDB.Core.Changes<any> | null;
-	docError: Error | null;
-
-	constructor(props: RelationSelectProps) {
+export default class RelationSelect extends Component {
+	static get defaultProps() {
+		return {
+			nameKey: 'name',
+			changes: true,
+			multi: false,
+		};
+	}
+	constructor(props) {
 		super(props);
 
 		this.state = { options: new Map(), loading: true };
@@ -34,7 +24,7 @@ export default class RelationSelect extends Component<RelationSelectProps, Relat
 		this.initDatabaseSubscription();
 	}
 
-	componentWillReceiveProps(nextProps: RelationSelectProps) {
+	componentWillReceiveProps(nextProps) {
 		if (this.db !== nextProps.db) {
 			this.db = nextProps.db;
 			this.docError = null;
@@ -61,7 +51,7 @@ export default class RelationSelect extends Component<RelationSelectProps, Relat
 
 			this.setState({ options });
 		})
-		.catch(err => { this.docError = err; })
+		.catch((err) => { this.docError = err; })
 		.then(() => this.setState({ loading: false }));
 
 		if (this.props.changes) {
@@ -71,7 +61,7 @@ export default class RelationSelect extends Component<RelationSelectProps, Relat
 			}).on('change', async (res) => {
 				await ready;
 				if (res.deleted) {
-					this.setState(prevState => {
+					this.setState((prevState) => {
 						const options = new Map(prevState.options);
 						options.delete(res.id);
 						return { options };
@@ -87,21 +77,15 @@ export default class RelationSelect extends Component<RelationSelectProps, Relat
 	}
 
 	render() {
-		const options: { value: string, label: string }[]  = [];
+		const options = [];
 		this.state.options.forEach((value, label) => options.push({ value, label }));
 
-		return (
-			<VirtualizedSelect
-				{...this.props}
-				options={options}
-				isLoading={this.state.loading}
-			/>
+		return createElement(
+			VirtualizedSelect,
+			Object.assign(this.props, {
+				options,
+				isLoading: this.state.loading,
+			})
 		);
 	}
 }
-
-RelationSelect.defaultProps = {
-	nameKey: 'name',
-	changes: true,
-	multi: false,
-};

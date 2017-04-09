@@ -1,25 +1,7 @@
-import {
-	createElement,
-	SFC, HTMLAttributes,
-	ChangeEvent, ChangeEventHandler,
-} from 'react'; /** @jsx createElement */
+import { createElement } from 'react';
 import moment from 'moment';
 
-interface DateTarget extends EventTarget {
-	name: string,
-	value: moment.Moment
-}
-
-export interface DateInputProps {
-	onChange?: ChangeEventHandler<DateTarget>;
-	value?: moment.Moment | number;
-	defaultValue?: moment.Moment | number;
-}
-
-export function handleChange(
-	onChange: ChangeEventHandler<DateTarget>,
-	e: ChangeEvent<DateTarget>,
-) {
+export function handleChange(onChange, e) {
 	const event = Object.assign({}, e);
 	const target = Object.assign({}, e.currentTarget, {
 		value: moment(e.currentTarget.value)
@@ -35,8 +17,8 @@ export function handleChange(
  * Wraps date input so that value is a moment object instead of a
  * string.
  */
-const DateInput: SFC<DateInputProps> = (props) => {
-	const inputProps: HTMLAttributes<any> = Object.assign({ type: 'date' }, props);
+export default function DateInput(props) {
+	const inputProps = Object.assign({ type: 'date' }, props);
 
 	if (props.onChange) {
 		inputProps.onChange = handleChange.bind(null, props.onChange);
@@ -50,5 +32,3 @@ const DateInput: SFC<DateInputProps> = (props) => {
 
 	return createElement('input', inputProps);
 }
-
-export default DateInput;
