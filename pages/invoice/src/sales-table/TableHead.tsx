@@ -17,12 +17,12 @@ const TableHead: SFC<HeadProps> = ({ onAdd }) => (
 			</th>
 		</tr>
 		<tr>
-			<th>Item</th>
-			<th>Description</th>
-			<th>Unit Cost</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th></th>
+			<th className="item-col">Item</th>
+			<th className="description-col">Description</th>
+			<th className="unit-cost-col">Unit Cost</th>
+			<th className="quantity-col">Quantity</th>
+			<th className="price-col">Price</th>
+			<th className="delete-button-col"></th>
 		</tr>
 	</thead>
 );

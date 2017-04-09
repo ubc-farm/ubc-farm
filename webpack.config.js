@@ -2,6 +2,7 @@ const { readdirSync } = require('fs');
 const { resolve, basename } = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const serverPath = resolve(__dirname, './packages/server');
 
@@ -52,7 +53,8 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 	}
 	plugins.push(
 		new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-		new webpack.BannerPlugin({ banner: '/* eslint-disable */', raw: true })
+		new webpack.BannerPlugin({ banner: '/* eslint-disable */', raw: true }),
+		new ExtractTextPlugin('styles.css')
 	);
 
 	const config = {
@@ -66,6 +68,13 @@ module.exports = function generateWebpackConfig(entries, dirname) {
 					options: {
 						transpileOnly: true, // Editor handles typechecks
 					},
+				},
+				{
+					test: /\.(css)$/,
+					use: ExtractTextPlugin.extract({
+						fallback: 'style-loader',
+						use: 'css-loader',
+					}),
 				},
 			],
 		},

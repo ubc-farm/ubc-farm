@@ -4,7 +4,7 @@ packages/*/out
 packages/*/www/*.html
 pages/*/browser
 pages/*/www/*.html
+pages/*/www/styles.css
 pages/*/www/*.js
-pages/*/www/*.js.map
 .vscode
 *.map

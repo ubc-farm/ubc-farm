@@ -51,7 +51,6 @@ export default class TableBody extends PureComponent<BodyProps, void> {
 
 	render() {
 		const { sales, editing } = this.props;
-		console.log(editing, sales);
 
 		return (
 			<tbody>

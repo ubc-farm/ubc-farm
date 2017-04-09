@@ -1,0 +1,28 @@
+table {
+	min-width: 58em;
+	width: 100%;
+	border-spacing: 1em;
+}
+
+.unit-cost-col, .quantity-col, .price-col {
+	text-align: right;
+	width: 5em;
+}
+
+.delete-button-col {
+	width: 4em;
+	text-align: center;
+}
+
+table input {
+	width: 100%;
+
+	text-align: inherit;
+	border: 0;
+	border-radius: 0;
+	border-bottom: 1px dashed black;
+}
+
+table input:focus {
+	border-bottom-style: solid;
+}

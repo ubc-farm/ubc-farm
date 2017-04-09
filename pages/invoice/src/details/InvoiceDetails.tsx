@@ -19,7 +19,7 @@ const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<span className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Invoice #</h6>
 				</span>
-				<span className="invoice-details-value">
+				<span className="invoice-detail-value">
 					{_id}
 				</span>
 			</div>
@@ -31,7 +31,7 @@ const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<input
 					id="invoice-date-input" type="date"
 					name="date"
-					className="invoice-details-value"
+					className="invoice-detail-value"
 					value={date ? moment(date || undefined).format('Y-MM-DD') : ''}
 					onChange={onChange}
 				/>
@@ -41,7 +41,7 @@ const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<label className="invoice-detail-label">
 					<h6 className="invoice-detail-header">Balance Due</h6>
 				</label>
-				<span className="invoice-details-value">
+				<span className="invoice-detail-value">
 					{balanceDue(invoice)}
 				</span>
 			</div>

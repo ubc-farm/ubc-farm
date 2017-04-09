@@ -1,0 +1,24 @@
+.invoice-details {
+	display: inline-block;
+
+	border: 1px solid black;
+	line-height: 2em;
+}
+
+.invoice-detail-row {
+	display: flex;
+	align-items: center;
+}
+
+.invoice-detail-header {
+	margin: 0;
+}
+
+.invoice-detail-label {
+	margin-right: 1em;
+	align-self: stretch;
+
+	width: 5em;
+	font-size: 1.1em;
+	background: #ccc;
+}

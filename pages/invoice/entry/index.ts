@@ -5,6 +5,9 @@ import { render } from 'react-dom';
 import InvoiceForm from '../src/InvoiceForm';
 import openInvoice from '../src/openInvoice';
 
+import '../www/styles/details.css';
+import '../www/styles/table.css';
+
 const dbReady = getInvoices();
 Promise.all([
 	dbReady.then(db => openInvoice(db)),

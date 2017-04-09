@@ -21,7 +21,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<input
 					id="invoice-delivery-input" type="date"
 					name="deliveryDate"
-					className="invoice-details-value"
+					className="invoice-detail-value"
 					value={deliveryDate ? moment(deliveryDate).format('Y-MM-DD') : ''}
 					onChange={onChange}
 				/>
@@ -34,7 +34,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<input
 					id="invoice-channel-input" type="text"
 					name="channel"
-					className="invoice-details-value"
+					className="invoice-detail-value"
 					value={channel} onChange={onChange}
 				/>
 			</div>
@@ -46,7 +46,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 				<textarea
 					id="invoice-notes-input" type="text"
 					name="notes"
-					className="invoice-details-value"
+					className="invoice-detail-value"
 					value={notes} onChange={onChange}
 				/>
 			</div>
