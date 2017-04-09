@@ -1,20 +1,23 @@
 import { createElement, PureComponent } from 'react'; /** @jsx createElement */
-import { Invoice, Sale } from '@ubc-farm/databases';
+import { IdInvoice, IdSale } from './types';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
 
 interface TableProps {
-	invoice: Invoice
-	onChange(newInvoice: Invoice): void,
+	invoice: IdInvoice,
+	onChange(newInvoice: IdInvoice): void,
 }
 
 interface TableState {
-	editing: Set<Sale>,
+	editing: Set<symbol>,
 }
 
 export default class Table extends PureComponent<TableProps, TableState> {
+	i: number;
+
 	constructor(props: TableProps) {
 		super(props);
+		this.i = 0;
 
 		this.state = { editing: new Set() };
 
@@ -24,7 +27,7 @@ export default class Table extends PureComponent<TableProps, TableState> {
 		this.deleteEditing = this.deleteEditing.bind(this);
 	}
 
-	handleSaleChange(newSales: Sale[]) {
+	handleSaleChange(newSales: IdSale[]) {
 		this.props.onChange({
 			...this.props.invoice,
 			items: newSales,
@@ -32,30 +35,30 @@ export default class Table extends PureComponent<TableProps, TableState> {
 	}
 
 	handleSaleAdd() {
-		const toAdd: Sale = {};
+		const toAdd: IdSale = { id: Symbol(`Sale Row ${this.i++}`) };
 
 		const { items } = this.props.invoice;
-		this.toggleEditing(toAdd);
+		this.toggleEditing(toAdd.id);
 		this.handleSaleChange(items
 			? [...items, toAdd]
 			: [toAdd]);
 	}
 
-	toggleEditing(sale: Sale) {
+	toggleEditing(id: symbol): void {
 		this.setState(last => {
 			const editing = new Set(last.editing);
-			if (editing.has(sale)) editing.delete(sale);
-			else editing.add(sale);
+			if (editing.has(id)) editing.delete(id);
+			else editing.add(id);
 
 			return { editing };
 		});
 	}
 
-	deleteEditing(sale: Sale) {
+	deleteEditing(id: symbol): void {
 		this.setState(last => {
 			const editing = new Set(last.editing);
-			editing.delete(sale);
-			return { editing }
+			editing.delete(id);
+			return { editing };
 		});
 	}
 

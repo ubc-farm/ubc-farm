@@ -1,6 +1,6 @@
 import { createElement, SFC, ChangeEvent } from 'react'; /** @jsx createElement */
 import { Invoice } from '@ubc-farm/databases';
-import * as moment from 'moment';
+import moment from 'moment';
 
 interface DetailsProps {
 	invoice: Partial<Invoice>,
@@ -32,7 +32,7 @@ const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 					<h6 className="invoice-detail-header">Channel</h6>
 				</label>
 				<input
-					id="invoice-channel-input" type="date"
+					id="invoice-channel-input" type="text"
 					name="channel"
 					className="invoice-details-value"
 					value={channel} onChange={onChange}

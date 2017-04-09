@@ -7,9 +7,9 @@ import DeleteButton from './DeleteButton';
 
 interface EditSaleRowProps {
 	sale: Sale,
-	index: number,
-	onChange(index:number, e: React.ChangeEvent<any>): void,
-	onClick(index:number, e: React.MouseEvent<HTMLTableRowElement>): void,
+	id: symbol,
+	onChange(id: symbol, e: React.ChangeEvent<any>): void,
+	onClick(id: symbol, e: React.MouseEvent<HTMLTableRowElement>): void,
 }
 
 /**
@@ -22,8 +22,8 @@ export default class EditingSaleRow extends PureComponent<EditSaleRowProps, void
 	constructor(props) {
 		super(props);
 
-		this.handleClick = props.onClick.bind(this, props.index);
-		this.handleChange = props.onChange.bind(this, props.index);
+		this.handleClick = props.onClick.bind(this, props.id);
+		this.handleChange = props.onChange.bind(this, props.id);
 	}
 
 	render() {

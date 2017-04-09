@@ -1,6 +1,6 @@
 import { createElement, SFC, ChangeEvent } from 'react'; /** @jsx createElement */
 import { balanceDue, Invoice } from '@ubc-farm/databases';
-import * as moment from 'moment';
+import moment from 'moment';
 
 interface DetailsProps {
 	invoice: Partial<Invoice>,

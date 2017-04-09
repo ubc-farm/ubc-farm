@@ -7,9 +7,9 @@ import DeleteButton from './DeleteButton';
 
 interface SaleRowProps {
 	sale: Sale,
-	index: number,
-	onDelete(index: number, e: MouseEvent<HTMLButtonElement>): void,
-	onClick(index: number, e: MouseEvent<HTMLTableRowElement>): void,
+	id: symbol,
+	onDelete(id: symbol, e: MouseEvent<HTMLButtonElement>): void,
+	onClick(id: symbol, e: MouseEvent<HTMLTableRowElement>): void,
 }
 
 export default class SaleRow extends PureComponent<SaleRowProps, void> {
@@ -19,8 +19,8 @@ export default class SaleRow extends PureComponent<SaleRowProps, void> {
 	constructor(props: SaleRowProps) {
 		super(props);
 
-		this.handleClick = props.onClick.bind(this, props.index);
-		this.handleDelete = props.onDelete.bind(this, props.index);
+		this.handleClick = props.onClick.bind(this, props.id);
+		this.handleDelete = props.onDelete.bind(this, props.id);
 	}
 
 	render() {

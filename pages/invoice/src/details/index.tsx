@@ -1,6 +1,6 @@
 import { createElement, Component, ChangeEvent } from 'react'; /** @jsx createElement */
 import { Invoice } from '@ubc-farm/databases';
-import * as moment from 'moment';
+import moment from 'moment';
 
 import InvoiceDetails from './InvoiceDetails';
 import InvoiceExtras from './InvoiceExtras';

@@ -11,6 +11,9 @@ const TableHead: SFC<HeadProps> = ({ onAdd }) => (
 				<button type="button" onClick={onAdd}>
 					Add
 				</button>
+				<button type="submit">
+					Submit
+				</button>
 			</th>
 		</tr>
 		<tr>

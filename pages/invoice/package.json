@@ -16,14 +16,11 @@
   },
   "devDependencies": {
     "typescript": "^2.2.1",
-    "webpack": "^2.2.1",
-    "@kadira/storybook": "^2.21.0"
+    "webpack": "^2.2.1"
   },
   "scripts": {
     "prepare": "webpack",
     "prepublish": "npm run prepare",
-    "ts": "tsc --noEmit || exit 0",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "ts": "tsc --noEmit || exit 0"
   }
 }
