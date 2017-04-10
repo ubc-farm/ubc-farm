@@ -46,7 +46,7 @@ export default class EditingSaleRow extends PureComponent<EditSaleRowProps, void
 				<td className="unit-cost-col">
 					<MoneyInput
 						name="unitCost"
-						value={sale.unitCost || null}
+						value={sale.unitCost}
 						onChange={handleChange}
 					/>
 				</td>

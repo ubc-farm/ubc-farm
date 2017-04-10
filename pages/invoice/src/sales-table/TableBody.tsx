@@ -37,6 +37,8 @@ export default class TableBody extends PureComponent<BodyProps, void> {
 		const index = sales.findIndex(sale => sale.id === id);
 		const prev = sales[index];
 
+		console.log(e.target.name, e.target.value);
+
 		sales[index] = {
 			...prev,
 			[e.target.name]: e.target.value,

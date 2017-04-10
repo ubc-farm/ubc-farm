@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/react-inputs",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "module": "out/index.es.js",
   "main": "out/index.cjs.js",
   "dependencies": {

@@ -50,7 +50,7 @@ export default class TableFooter extends PureComponent<FooterProps, void> {
 					</th>
 					<td>
 						<MoneyInput
-							value={invoice.amountPaid || 0}
+							value={invoice.amountPaid}
 							onChange={this.handleChange}
 						/>
 					</td>

@@ -8,47 +8,66 @@ export default class MoneyInput extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { focused: false };
-		this.handleChange = this.handleChange.bind(this);
+		this.state = {
+			focused: false,
+			textValue: '',
+		};
+
+		this.handleChange = e => this.setState({ textValue: e.target.value });
+		this.handleFocus = () => this.setState({ focused: true });
+		this.handleBlur = this.handleBlur.bind(this);
 	}
 
-	/**
-	 * @returns {string}
-	 */
-	getValue() {
-		const { value } = this.props;
-		if (!value && value !== 0) return '';
-		else if (!this.isValid()) {
-			return '$--';
-		} else if (this.state.focused) {
-			return (value / 100).toString(10);
-		} else {
-			return centsToString(value);
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.value !== this.props.value) {
+			this.setState({ textValue: centsToString(nextProps.value) })
 		}
 	}
 
-	/**
-	 * @returns {boolean}
-	 */
-	isValid() {
-		const { value } = this.props;
-		return value ? !Number.isNaN(value) : true;
+	getBlurText() {
+		const cents = this.props.value;
+		if (cents == null) return '';
+		if (Number.isNaN(cents)) return `--`;
+		else return centsToString(cents);
 	}
 
-	handleChange(e) {
-		const value = stringToCents(e.target.value);
+	handleBlur(e) {
+		this.setState({ focused: false });
 
-		const event = Object.assign({}, e);
-		event.target = Object.assign({}, e.target, { value });
+		const target = {
+			name: e.currentTarget.name,
+			value: this.state.textValue,
+		}
 
+		const event = Object.assign({}, e, { target, currentTarget: target });
+		event.target.value = stringToCents(this.state.textValue);
 		this.props.onChange(event);
 	}
 
 	render() {
+		const { value } = this.props;
+		const { focused, textValue } = this.state;
+
+		const text = focused ? textValue : this.getBlurText();
+
+		let invalid = false;
+		if (value != null) {
+			invalid = Number.isNaN(value);
+		}
+
+		const classes = [this.props.className, invalid ? 'is-danger' : ''];
+		const className = classes.filter(Boolean).join(' ');
+
 		return createElement('input', Object.assign(
 			{ type: 'text', inputMode: 'number' },
 			this.props,
-			{ value: this.getValue(), onChange: this.handleChange }
+			{
+				value: text,
+				className,
+				onChange: this.handleChange,
+				onFocus: this.handleFocus,
+				onBlur: this.handleBlur,
+			}
 		));
 	}
 }

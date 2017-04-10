@@ -40,7 +40,7 @@ export const DateTimeInput: React.SFC<DateInputProps>
  * An input for money values that translates user input into a cents integer.
  */
 export const MoneyInput: React.ComponentClass<{
-	value: number | null;
+	value: number | null | undefined;
 	onChange: (e: React.ChangeEvent<any>) => void;
 	[inputProp: string]: any;
 }>
