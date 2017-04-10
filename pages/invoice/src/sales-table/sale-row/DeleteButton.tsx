@@ -10,11 +10,16 @@ interface DeleteButtonProps {
  * invoice sales.
  */
 const DeleteButton: SFC<DeleteButtonProps> = ({ onDelete, blank }) => {
+	if (blank) return <td className="delete-button-col" />;
+
 	return (
 		<td className="delete-button-col">
-			{blank
-				? null
-				: <button type="button" onClick={onDelete}>Delete</button>}
+			<button
+				type="button"
+				onClick={onDelete}
+				className="delete"
+				title="Delete"
+			/>
 		</td>
 	)
 }

@@ -38,9 +38,20 @@ export default class DetailsHeader extends Component<DetailsProps, void> {
 
 		return (
 			<header>
-				<UBCAddress />
-				<InvoiceDetails {...childProps} />
-				<InvoiceExtras {...childProps} />
+				<div className="columns">
+					<div className="column is-half">
+						<UBCAddress />
+					</div>
+					<div className="column is-half">
+						<InvoiceDetails {...childProps} />
+					</div>
+				</div>
+				<div className="columns">
+					<div className="column is-half"/>
+					<div className="column is-half">
+						<InvoiceExtras {...childProps} />
+					</div>
+				</div>
 			</header>
 		);
 	}

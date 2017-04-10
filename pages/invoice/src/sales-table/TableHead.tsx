@@ -2,16 +2,21 @@ import { createElement, SFC } from 'react'; /** @jsx createElement */
 
 interface HeadProps {
 	onAdd(): void,
+	state: 'loading' | 'normal' | 'error' | 'success'
 }
 
-const TableHead: SFC<HeadProps> = ({ onAdd }) => (
+const TableHead: SFC<HeadProps> = ({ onAdd, state }) => (
 	<thead>
 		<tr>
-			<th>
-				<button type="button" onClick={onAdd}>
+			<th colSpan={6} className="has-text-centered">
+				<button type="button" onClick={onAdd} className="button">
 					Add
 				</button>
-				<button type="submit">
+				{' '}
+				<button
+					type="submit"
+					className={'button' + (state === 'normal' ? '' : ` is-${state}`)}
+				>
 					Submit
 				</button>
 			</th>

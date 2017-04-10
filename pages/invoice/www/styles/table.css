@@ -21,8 +21,15 @@ table input {
 	border: 0;
 	border-radius: 0;
 	border-bottom: 1px dashed black;
+	background: transparent;
+	font-size: inherit;
+	color: inherit;
 }
 
 table input:focus {
 	border-bottom-style: solid;
+}
+
+tfoot th {
+	text-align: right;
 }

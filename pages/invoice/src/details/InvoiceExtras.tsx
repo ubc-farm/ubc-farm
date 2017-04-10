@@ -13,42 +13,64 @@ interface DetailsProps {
 const InvoiceExtras: SFC<DetailsProps> = ({ invoice, onChange }) => {
 	const { deliveryDate, channel = '', notes = '' } = invoice;
 	return (
-		<div className="invoice-details">
-			<div className="invoice-detail-row">
-				<label htmlFor="invoice-delivery-input" className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Delivery Date</h6>
-				</label>
-				<input
-					id="invoice-delivery-input" type="date"
-					name="deliveryDate"
-					className="invoice-detail-value"
-					value={deliveryDate ? moment(deliveryDate).format('Y-MM-DD') : ''}
-					onChange={onChange}
-				/>
+		<div className="box">
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label" htmlFor="invoice-delivery-input">
+						Delivery Date
+					</label>
+				</div>
+				<div className="field-body">
+					<div className="field">
+						<div className="control">
+							<input
+								id="invoice-delivery-input" type="date"
+								name="deliveryDate"
+								className="input"
+								value={deliveryDate ? moment(deliveryDate).format('Y-MM-DD') : ''}
+								onChange={onChange}
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div className="invoice-detail-row">
-				<label htmlFor="invoice-channel-input" className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Channel</h6>
-				</label>
-				<input
-					id="invoice-channel-input" type="text"
-					name="channel"
-					className="invoice-detail-value"
-					value={channel} onChange={onChange}
-				/>
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label" htmlFor="invoice-channel-input">
+						Channel
+					</label>
+				</div>
+				<div className="field-body">
+					<div className="field">
+						<div className="control">
+							<input
+								id="invoice-channel-input" type="text"
+								name="channel"
+								className="input"
+								value={channel} onChange={onChange}
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div className="invoice-detail-row">
-				<label htmlFor="invoice-notes-input" className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Notes</h6>
-				</label>
-				<textarea
-					id="invoice-notes-input" type="text"
-					name="notes"
-					className="invoice-detail-value"
-					value={notes} onChange={onChange}
-				/>
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label" htmlFor="invoice-notes-input">Notes</label>
+				</div>
+				<div className="field-body">
+					<div className="field">
+						<div className="control">
+							<textarea
+								id="invoice-notes-input" type="text"
+								name="notes"
+								className="textarea"
+								value={notes} onChange={onChange}
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	)

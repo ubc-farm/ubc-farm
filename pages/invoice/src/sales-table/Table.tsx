@@ -2,6 +2,7 @@ import { createElement, PureComponent } from 'react'; /** @jsx createElement */
 import { IdInvoice, IdSale } from './types';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
+import TableFooter from './TableFooter';
 
 interface TableProps {
 	invoice: IdInvoice,
@@ -23,6 +24,7 @@ export default class Table extends PureComponent<TableProps, TableState> {
 
 		this.handleSaleChange = this.handleSaleChange.bind(this);
 		this.handleSaleAdd = this.handleSaleAdd.bind(this);
+		this.handleAmountPaidChange = this.handleAmountPaidChange.bind(this);
 		this.toggleEditing = this.toggleEditing.bind(this);
 		this.deleteEditing = this.deleteEditing.bind(this);
 	}
@@ -42,6 +44,13 @@ export default class Table extends PureComponent<TableProps, TableState> {
 		this.handleSaleChange(items
 			? [...items, toAdd]
 			: [toAdd]);
+	}
+
+	handleAmountPaidChange(amountPaid: number) {
+		this.props.onChange({
+			...this.props.invoice,
+			amountPaid,
+		});
 	}
 
 	toggleEditing(id: symbol): void {
@@ -64,14 +73,19 @@ export default class Table extends PureComponent<TableProps, TableState> {
 
 	render() {
 		return (
-			<table>
-				<TableHead onAdd={this.handleSaleAdd} />
+			<table className="table is-striped">
+				<TableHead onAdd={this.handleSaleAdd} state="normal" />
 				<TableBody
 					sales={this.props.invoice.items || []}
 					onChange={this.handleSaleChange}
 					editing={this.state.editing}
 					toggleEditing={this.toggleEditing}
 					deleteEditing={this.deleteEditing}
+				/>
+				<TableFooter
+					invoice={this.props.invoice}
+					onChange={this.handleAmountPaidChange}
+					vat={0}
 				/>
 			</table>
 		);

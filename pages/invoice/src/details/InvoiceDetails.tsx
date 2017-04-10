@@ -1,11 +1,14 @@
 import { createElement, SFC, ChangeEvent } from 'react'; /** @jsx createElement */
 import { balanceDue, Invoice } from '@ubc-farm/databases';
+import { centsToString } from '@ubc-farm/money';
 import moment from 'moment';
 
 interface DetailsProps {
 	invoice: Partial<Invoice>,
 	onChange(e: ChangeEvent<HTMLInputElement>): void,
 }
+
+const padTop = { paddingTop: '0.375em' };
 
 /**
  * Shows a detail box displaying the invoice id #, as well as the invoice
@@ -14,36 +17,42 @@ interface DetailsProps {
 const InvoiceDetails: SFC<DetailsProps> = ({ invoice, onChange }) => {
 	const { _id, date } = invoice;
 	return (
-		<div className="invoice-details">
-			<div className="invoice-detail-row">
-				<span className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Invoice #</h6>
-				</span>
-				<span className="invoice-detail-value">
-					{_id}
-				</span>
+		<div className="box">
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label">Invoice #</label>
+				</div>
+				<div className="field-body">
+					<span style={padTop}>{_id}</span>
+				</div>
 			</div>
 
-			<div className="invoice-detail-row">
-				<label htmlFor="invoice-date-input" className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Date</h6>
-				</label>
-				<input
-					id="invoice-date-input" type="date"
-					name="date"
-					className="invoice-detail-value"
-					value={date ? moment(date || undefined).format('Y-MM-DD') : ''}
-					onChange={onChange}
-				/>
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label" htmlFor="invoice-date-input">Date</label>
+				</div>
+				<div className="field-body">
+					<div className="field">
+						<div className="control">
+							<input
+								id="invoice-date-input" type="date"
+								name="date"
+								className="input"
+								value={date ? moment(date || undefined).format('Y-MM-DD') : ''}
+								onChange={onChange}
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 
-			<div className="invoice-detail-row">
-				<label className="invoice-detail-label">
-					<h6 className="invoice-detail-header">Balance Due</h6>
-				</label>
-				<span className="invoice-detail-value">
-					{balanceDue(invoice)}
-				</span>
+			<div className="field is-horizontal">
+				<div className="field-label">
+					<label className="label">Balance Due</label>
+				</div>
+				<div className="field-body">
+					<span style={padTop}>{centsToString(balanceDue(invoice))}</span>
+				</div>
 			</div>
 		</div>
 	)
