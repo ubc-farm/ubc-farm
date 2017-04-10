@@ -1,26 +1,45 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Employee } from '@ubc-farm/databases';
-import { Field } from '@ubc-farm/react-inputs';
+import { MoneyInput } from '@ubc-farm/react-inputs';
 import { ReformedProps, InputProps } from './nestedReformed';
 
 /**
  * Form with employee fields
  */
 const EmployeeForm: SFC<ReformedProps<Employee, keyof Employee>> = ({ bindInput }) => (
-	<fieldset>
-		<Field type="text" {...bindInput('pay')}>Pay</Field>
-		<div className="field-container">
-			<label htmlFor="employmentType-input">Employment Type</label>
-			<select
-				id="employmentType-input"
-				{...bindInput('employmentType') as InputProps<string>}
-			>
-				<option value=""></option>
-				<option value="fullTime">Full Time</option>
-				<option value="partTime">Part Time</option>
-			</select>
+	<div>
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Pay</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<MoneyInput {...bindInput('pay')} />
+					</div>
+				</div>
+			</div>
 		</div>
-	</fieldset>
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Employment Type</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<div className="select is-fullwidth">
+							<select {...bindInput('employmentType')}>
+								<option value=""></option>
+								<option value="fullTime">Full Time</option>
+								<option value="partTime">Part Time</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 );
 
 export default EmployeeForm;

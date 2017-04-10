@@ -1,6 +1,5 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, Employee, Researcher } from '@ubc-farm/databases';
-import { Field } from '@ubc-farm/react-inputs';
 import nestedReformed, { ReformedProps } from './nestedReformed';
 import PersonForm from './PersonForm';
 import EmployeeForm from './EmployeeForm';
@@ -32,9 +31,20 @@ const ContactForm: SFC<ContactFormProps> = (props) => {
 				<option value="employee" />
 				<option value="researcher" />
 			</datalist>
-			<Field type="text" list="roles" {...bindInput('role')}>
-				Role
-			</Field>
+
+			<div className="field is-horizontal">
+				<div className="field-label is-normal">
+					<label className="label">Role</label>
+				</div>
+				<div className="field-body">
+					<div className="field">
+						<div className="control">
+							<input className="input" list="roles" type="text" {...bindInput('role')} />
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<PersonForm {...props} />
 			<ExtraFields {...props} />
 			<input type="submit" />

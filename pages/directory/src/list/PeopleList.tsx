@@ -1,28 +1,33 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, getRole } from '@ubc-farm/databases';
-import PouchTable, { Column } from './PouchTable';
+import { BootstrapTable, TableHeaderColumn as Column } from 'react-bootstrap-table';
 
-const PeopleList: SFC<{ db: PouchDB.Database<Person> }> = ({ db }) => (
-	<PouchTable
-		db={db}
-		headerHeight={20} rowHeight={30}
-		height={800} width={500}
-		startkey="person/" endkey="person/\uffff"
+const PeopleList: SFC<{ data: Person[] }> = ({ data }) => (
+	<BootstrapTable
+		className="table"
+		data={data}
+		keyField="_id"
 	>
-		<Column label="Name" dataKey="name" width={140} />
+		<Column dataField="name">Name</Column>
 		<Column
-			label="Role" dataKey="role" width={140}
-			cellDataGetter={({ rowData }) => getRole(rowData)}
-		/>
+			label="Role" dataField="role"
+			dataFormat={(cell, row) => getRole(row)}
+		>
+			Role
+		</Column>
 		<Column
-			label="Email" dataKey="email"	width={140}
-			cellRenderer={({ cellData: email }) => {
+			dataField="email"
+			dataFormat={(email) => {
 				if (email == null) return '';
 				return <a href={`mailto:${email}`} title="Send email">{email}</a>;
 			}}
-		/>
-		<Column label="Phone" dataKey="phone.number" width={140} />
-	</PouchTable>
+		>
+			Email
+		</Column>
+		<Column dataField="phone.number">
+			Phone
+		</Column>
+	</BootstrapTable>
 )
 
 export default PeopleList;

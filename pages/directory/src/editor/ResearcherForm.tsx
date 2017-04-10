@@ -7,24 +7,98 @@ import { ReformedProps, InputProps } from './nestedReformed';
  * Form with researcher fields
  */
 const ResearcherForm: SFC<ReformedProps<Researcher, keyof Researcher>> = ({ bindInput }) => (
-	<fieldset>
-		<Field type="text" {...bindInput('position')}>Position</Field>
-		<Field type="text" {...bindInput('faculty')}>Faculty</Field>
-		<Field type="text" {...bindInput('department')}>Department</Field>
-		<Field type="url" {...bindInput('labWebsite')}>Lab Website</Field>
-		<div className="field-container">
-			<label htmlFor="expertise">Expertise</label>
-			<textarea id="expertise" {...bindInput('expertise') as InputProps<string>} />
+	<div>
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Position</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<input className="input" type="text" {...bindInput('position')} />
+					</div>
+				</div>
+			</div>
 		</div>
-		<div className="field-container">
-			<label htmlFor="coursesTaught">Courses Taught</label>
-			<textarea id="coursesTaught" {...bindInput('coursesTaught') as InputProps<string>} />
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Faculty</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<input className="input" type="text" {...bindInput('faculty')} />
+					</div>
+				</div>
+			</div>
 		</div>
-		<div className="field-container">
-			<label htmlFor="projects">Projects</label>
-			<textarea id="projects" {...bindInput('projects') as InputProps<string>} />
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Department</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<input className="input" type="text" {...bindInput('department')} />
+					</div>
+				</div>
+			</div>
 		</div>
-	</fieldset>
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Lab Website</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<input className="input" type="url" {...bindInput('labWebsite')} />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Expertise</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<textarea className="textarea" {...bindInput('expertise')} />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Courses Taught</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<textarea className="textarea" {...bindInput('coursesTaught')} />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div className="field is-horizontal">
+			<div className="field-label is-normal">
+				<label className="label">Projects</label>
+			</div>
+			<div className="field-body">
+				<div className="field">
+					<div className="control">
+						<textarea className="textarea" {...bindInput('projects')} />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 );
 
 export default ResearcherForm;

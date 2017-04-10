@@ -24,27 +24,22 @@ export default class Field extends Component {
 	}
 
 	render() {
-		const mainProps = {};
-		const inputProps = {};
-
-		for (const [key, value] of Object.entries(this.props)) {
-			if (mainKeys.has(key)) mainProps[key] = value;
-			else inputProps[key] = value;
-		}
-
-		const { containerProps, labelProps, children, name } = mainProps;
 		const id = this.props.id || this.state.id;
+		const { label, children } = this.props;
 
-		containerProps.className = 'field-container';
-		labelProps.htmlFor = id;
-		inputProps.id = id;
-		inputProps.name = name;
+		const htmlFor = id;
 
-		return h(
-			'div', containerProps, [
-				h('label', labelProps, children),
-				h('input', inputProps),
-			]
+		return h('div', { className: 'field is-horizontal' },
+			h('div', { className: 'field-label is-normal' },
+				h('label', { className: 'label', htmlFor }, label)
+			),
+			h('div', { className: 'field-body' },
+				h('div', { className: 'field' },
+					h('div', { className: 'control' },
+						children
+					)
+				)
+			),
 		);
 	}
 }
