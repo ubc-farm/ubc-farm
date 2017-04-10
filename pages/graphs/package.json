@@ -18,7 +18,7 @@
     "@kadira/storybook": "^2.21.0"
   },
   "scripts": {
-    "prepare": "echo \"TODO webpack\"",
+    "prepare": "webpack",
     "prepublish": "npm run prepare",
     "ts": "tsc --noEmit || exit 0",
     "storybook": "start-storybook -p 6006",
