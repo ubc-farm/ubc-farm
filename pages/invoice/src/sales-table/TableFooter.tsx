@@ -25,44 +25,34 @@ export default class TableFooter extends PureComponent<FooterProps, void> {
 		this.props.onChange(e.target.value);
 	}
 
-	render() {
+	getData() {
 		const { invoice, vat } = this.props;
 
+		return {
+			Subtotal: centsToString(computeSubtotal(invoice)),
+			Total: centsToString(computeTotal(invoice, vat)),
+			'Amount Paid': (
+				<MoneyInput
+					value={invoice.amountPaid}
+					onChange={this.handleChange}
+				/>
+			),
+			'Balance Due': centsToString(balanceDue(invoice, vat)),
+		};
+	}
+
+	render() {
 		return (
 			<tfoot>
-				<tr>
-					<th colSpan={4}>
-						<div className="has-text-right">Subtotal</div>
-					</th>
-					<td>{centsToString(computeSubtotal(invoice))}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th colSpan={4}>
-						<div className="has-text-right">Total</div>
-					</th>
-					<td>{centsToString(computeTotal(invoice, vat))}</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th colSpan={4}>
-						<div className="has-text-right">Amount Paid</div>
-					</th>
-					<td>
-						<MoneyInput
-							value={invoice.amountPaid}
-							onChange={this.handleChange}
-						/>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<th colSpan={4}>
-						<div className="has-text-right">Balance Due</div>
-					</th>
-					<td>{centsToString(balanceDue(invoice, vat))}</td>
-					<td></td>
-				</tr>
+				{Object.entries(this.getData()).map(([header, element]) => (
+					<tr key={header}>
+						<th colSpan={4}>
+							<div className="has-text-right">{header}</div>
+						</th>
+						<td className="price-col">{element}	</td>
+						<td/>
+					</tr>
+				))}
 			</tfoot>
 		);
 	}

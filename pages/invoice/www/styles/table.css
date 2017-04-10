@@ -8,6 +8,9 @@ table {
 	text-align: right;
 	width: 5em;
 }
+.price-col {
+	width: 8em;
+}
 
 .delete-button-col {
 	width: 4em;
