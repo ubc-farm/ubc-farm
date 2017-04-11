@@ -1,17 +1,16 @@
 {
-  "name": "@ubc-farm/react-inputs",
-  "version": "2.0.0",
+  "name": "@ubc-farm/react-doc-editor",
+  "version": "1.0.0",
+  "description": "React element to edit a PouchDB document in a form",
   "module": "out/index.es.js",
   "main": "out/index.cjs.js",
   "dependencies": {
-    "moment": "^2.18.1"
+    "@ubc-farm/react-inputs": "^2.0.0",
+    "@ubc-farm/utils": "^4.1.0",
+    "prop-types": "^15.5.6"
   },
   "devDependencies": {
-    "@ubc-farm/money": "^3.1.0",
-    "lodash-es": "^4.17.4",
     "rollup": "^0.41.6",
-    "shortid": "^2.2.8",
-    "typescript": "^2.2.1",
     "react": "^15.5.3",
     "react-reformed": "^1.0.1"
   },

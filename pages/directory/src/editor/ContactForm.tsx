@@ -1,7 +1,7 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, Employee, Researcher } from '@ubc-farm/databases';
 import { Field, reformed, ReformedProps } from '@ubc-farm/react-inputs';
-import { DocEditor } from '../doc-editor';
+import { DocEditor } from '@ubc-farm/react-doc-editor';
 import PersonForm from './PersonForm';
 import EmployeeForm from './EmployeeForm';
 import ResearcherForm from './ResearcherForm';

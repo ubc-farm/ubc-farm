@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"alwaysStrict": true,
+		"strictNullChecks": true,
+		"skipLibCheck": true,
+		"noImplicitThis": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"allowSyntheticDefaultImports": true,
+
+		"jsx": "react",
+		"jsxFactory": "createElement",
+
+		"target": "es2017",
+		"lib": [
+			"es2016", "es2017.object",
+			"dom", "dom.iterable"
+		],
+		"moduleResolution": "node"
+	},
+	"include": [
+		"src/**/*",
+		"index.d.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"rollup.config.js"
+	]
+}
