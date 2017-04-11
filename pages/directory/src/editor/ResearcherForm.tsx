@@ -1,103 +1,39 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Researcher } from '@ubc-farm/databases';
-import { Field } from '@ubc-farm/react-inputs';
-import { ReformedProps, InputProps } from './nestedReformed';
+import { Field, ReformedProps } from '@ubc-farm/react-inputs';
 
 /**
  * Form with researcher fields
  */
-const ResearcherForm: SFC<ReformedProps<Researcher, keyof Researcher>> = ({ bindInput }) => (
+const ResearcherForm: SFC<ReformedProps<Researcher>> = ({ bindInput }) => (
 	<div>
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Position</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="text" {...bindInput('position')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Position" name="position">
+			<input className="input" type="text" {...bindInput('position')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Faculty</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="text" {...bindInput('faculty')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Faculty" name="faculty">
+			<input className="input" type="text" {...bindInput('faculty')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Department</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="text" {...bindInput('department')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Department" name="department">
+			<input className="input" type="text" {...bindInput('department')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Lab Website</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="url" {...bindInput('labWebsite')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Lab Website" name="labWebsite">
+			<input className="input" type="text" {...bindInput('labWebsite')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Expertise</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<textarea className="textarea" {...bindInput('expertise')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Expertise" name="expertise">
+			<input className="input" type="text" {...bindInput('expertise')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Courses Taught</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<textarea className="textarea" {...bindInput('coursesTaught')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Courses Taught" name="coursesTaught">
+			<textarea className="textarea" {...bindInput('coursesTaught')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Projects</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<textarea className="textarea" {...bindInput('projects')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Projects" name="projects">
+			<textarea className="textarea" {...bindInput('projects')} />
+		</Field>
 	</div>
 );
 

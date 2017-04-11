@@ -1,10 +1,10 @@
-import { createElement, SFC } from 'react';
+import { createElement } from 'react';
 import { render } from 'react-dom';
 import { parsed } from 'document-promises';
-import { getPeople, People } from '@ubc-farm/databases';
+import { getPeople, Person } from '@ubc-farm/databases';
 import PeopleList from './PeopleList';
 
-function renderTable(data: People[]) {
+function renderTable(data: Person[]) {
 	render(
 		createElement(PeopleList, { data }),
 		document.getElementById('reactRoot'),
@@ -13,6 +13,7 @@ function renderTable(data: People[]) {
 
 export default async function createPeopleList() {
 	const peopleReady = getPeople();
+	await parsed;
 	renderTable([]);
 
 	const db = await peopleReady;
@@ -22,5 +23,5 @@ export default async function createPeopleList() {
 		endkey: 'person/\uffff',
 	});
 
-	renderTable(rows);
+	renderTable(rows.map(row => row.doc as Person));
 }

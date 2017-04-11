@@ -11,7 +11,7 @@ const PeopleList: SFC<{ data: Person[] }> = ({ data }) => (
 		<Column dataField="name">Name</Column>
 		<Column
 			label="Role" dataField="role"
-			dataFormat={(cell, row) => getRole(row)}
+			dataFormat={(cell, row: Person) => getRole(row)}
 		>
 			Role
 		</Column>

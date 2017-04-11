@@ -18,10 +18,3 @@ the value instead of a string.
 ## MoneyInput
 An input that translates money values typed by the user into a cents
 integer value.
-
-## RelationSelect
-A [VirtualizedSelect](https://github.com/bvaughn/react-virtualized-select)
-that loads possible values from a `PouchDB` database. Most props are the same
-as VirtualizedSelect, but you must also pass a `PouchDB` instance through the
-`db` prop.
-

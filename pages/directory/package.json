@@ -5,7 +5,7 @@
   "ubc-farm": {},
   "dependencies": {
     "@ubc-farm/databases": "^3.0.0",
-    "@ubc-farm/react-inputs": "^1.0.1",
+    "@ubc-farm/react-inputs": "^2.0.0",
     "@ubc-farm/react-pouch-table": "^2.0.0",
     "@ubc-farm/utils": "^4.3.1",
     "document-promises": "^3.1.2",

@@ -1,7 +1,6 @@
-import { createElement as h, Component } from 'react';
+import { createElement as h, cloneElement, Component } from 'react';
 import { generate } from 'shortid';
-
-const mainKeys = new Set(['children', 'name', 'containerProps', 'labelProps']);
+import { camelCase, startCase } from 'lodash';
 
 /**
  * A field that contains an input and corresponding label.
@@ -10,33 +9,47 @@ const mainKeys = new Set(['children', 'name', 'containerProps', 'labelProps']);
 export default class Field extends Component {
 	constructor(props) {
 		super(props);
-
 		this.hash = generate();
-		this.state = {
-			id: props.name ? `${props.name}-${this.hash}` : this.hash,
-		};
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.name !== this.props.name) {
-			this.setState({ id: `${nextProps.name}-${this.hash}` });
+	getID() {
+		const { htmlFor, name, label } = this.props;
+		if (htmlFor) return htmlFor;
+		else if (name) return `${name}-${this.hash}`;
+		else if (label) return `${camelCase(label)}-${this.hash}`;
+		else return this.hash;
+	}
+
+	getLabel(htmlFor) {
+		const { label, name } = this.props;
+		let labelText;
+		if (!label) {
+			if (!name) return null;
+			labelText = startCase(name);
+		} else if (typeof label === 'string') {
+			labelText = label;
 		}
+
+		if (labelText) return h('label', { className: 'label', htmlFor }, label);
+		else return cloneElement(label, { htmlFor });
 	}
 
 	render() {
-		const id = this.props.id || this.state.id;
-		const { label, children } = this.props;
+		const id = this.getID();
+		const { label, children, name } = this.props;
 
-		const htmlFor = id;
+		const inputProps = {};
+		if (!this.props.htmlFor) inputProps.id = id;
+		if (name) inputProps.name = name;
 
 		return h('div', { className: 'field is-horizontal' },
 			h('div', { className: 'field-label is-normal' },
-				h('label', { className: 'label', htmlFor }, label)
+				this.getLabel(),
 			),
 			h('div', { className: 'field-body' },
 				h('div', { className: 'field' },
 					h('div', { className: 'control' },
-						children
+						cloneElement(children, inputProps)
 					)
 				)
 			),

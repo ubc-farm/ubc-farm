@@ -25,7 +25,7 @@ export default {
 				shortid: ['generate'],
 				docuri: ['route'],
 				events: ['EventEmitter'],
-				lodash: ['pick', 'get', 'set'],
+				lodash: ['pick', 'get', 'set', 'camelCase', 'startCase'],
 				'node_modules/core-js/library/modules/es6.object.to-string.js': ['default'],
 				'core-js/library/modules/es6.object.to-string.js': ['default'],
 				'react-dom': ['findDOMNode'],
@@ -38,5 +38,8 @@ export default {
 		...Object.keys(pkg.dependencies),
 		...Object.keys(pkg.peerDependencies),
 	],
+	paths: {
+		lodash: 'lodash-es',
+	},
 	banner: '/* eslint-disable */',
 };

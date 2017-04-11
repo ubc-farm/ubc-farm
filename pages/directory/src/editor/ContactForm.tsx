@@ -1,55 +1,47 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, Employee, Researcher } from '@ubc-farm/databases';
-import nestedReformed, { ReformedProps } from './nestedReformed';
+import { Field, reformed, ReformedProps } from '@ubc-farm/react-inputs';
+import { DocEditor } from '../doc-editor';
 import PersonForm from './PersonForm';
 import EmployeeForm from './EmployeeForm';
 import ResearcherForm from './ResearcherForm';
 
 type AnyPerson = Person | Employee | Researcher;
 
-interface ContactFormProps extends ReformedProps<AnyPerson, keyof AnyPerson> {
-	handleSubmit: React.FormEventHandler<any>
+interface ContactFormProps extends ReformedProps<AnyPerson> {
+	onDone(): void,
+	db: PouchDB.Database<AnyPerson>,
 }
 
 const ExtraFields: SFC<ContactFormProps> = (props) => {
 	switch (props.model.role) {
 		case 'employee':
-			return <EmployeeForm {...props as ReformedProps<Employee, keyof Employee>} />;
+			return <EmployeeForm {...props as ReformedProps<Employee>} />;
 		case 'researcher':
-			return <ResearcherForm {...props as ReformedProps<Researcher, keyof Researcher>} />;
+			return <ResearcherForm {...props as ReformedProps<Researcher>} />;
 		default:
 			return null as any;
 	}
 }
 
 const ContactForm: SFC<ContactFormProps> = (props) => {
-	const { bindInput, handleSubmit } = props;
-
 	return (
-		<form onSubmit={handleSubmit}>
+		<DocEditor {...props}>
 			<datalist id="roles">
 				<option value="employee" />
 				<option value="researcher" />
 			</datalist>
-
-			<div className="field is-horizontal">
-				<div className="field-label is-normal">
-					<label className="label">Role</label>
-				</div>
-				<div className="field-body">
-					<div className="field">
-						<div className="control">
-							<input className="input" list="roles" type="text" {...bindInput('role')} />
-						</div>
-					</div>
-				</div>
-			</div>
+			<Field label="Role" name="role">
+				<input
+					className="input" list="roles" type="text"
+					{...props.bindInput('role')}
+				/>
+			</Field>
 
 			<PersonForm {...props} />
 			<ExtraFields {...props} />
-			<input type="submit" />
-		</form>
+		</DocEditor>
 	);
 }
 
-export default nestedReformed(ContactForm);
+export default reformed()(ContactForm);

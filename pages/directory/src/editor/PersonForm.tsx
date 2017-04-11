@@ -1,76 +1,31 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person } from '@ubc-farm/databases';
-import { ReformedProps, InputProps } from './nestedReformed';
+import { Field, ReformedProps } from '@ubc-farm/react-inputs';
 
 /**
  * Form with person fields
  */
-const PersonForm: SFC<ReformedProps<Person, keyof Person>> = ({ bindInput }) => (
+const PersonForm: SFC<ReformedProps<Person>> = ({ bindInput }) => (
 	<div>
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Name</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="text" {...bindInput('name')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Name" name="name">
+			<input className="input" type="text" {...bindInput('name')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Email</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="email" {...bindInput('email')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Email" name="email">
+			<input className="input" type="email" {...bindInput('email')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Phone</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<input className="input" type="tel" {...bindInput('phone.number')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Phone" name="phone.number">
+			<input className="input" type="tel" {...bindInput('phone.number')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Mailing Address</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<textarea className="textarea" {...bindInput('addressMailing')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Mailing Address" name="addressMailing">
+			<textarea className="textarea" {...bindInput('addressMailing')} />
+		</Field>
 
-		<div className="field is-horizontal">
-			<div className="field-label is-normal">
-				<label className="label">Physical Address</label>
-			</div>
-			<div className="field-body">
-				<div className="field">
-					<div className="control">
-						<textarea className="textarea" {...bindInput('addressPhysical')} />
-					</div>
-				</div>
-			</div>
-		</div>
+		<Field label="Physical Address" name="addressMailing">
+			<textarea className="textarea" {...bindInput('addressPhysical')} />
+		</Field>
 	</div>
 );
 
