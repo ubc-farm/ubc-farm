@@ -1,12 +1,20 @@
 import { createElement } from 'react';
-import { getPeople } from '@ubc-farm/databases';
+import { getInvoices } from '@ubc-farm/databases';
 import { render } from 'react-dom';
 import { parsed } from 'document-promises';
 import { createList } from '@ubc-farm/database-utils';
-import columns from './columns';
+
+import 'react-table/react-table.css'
+
+const columns = [
+	{
+		name: 'ID',
+		accessor: '_id'
+	}
+];
 
 export default async function main() {
-	const listReady = getPeople().then(db => createList(db));
+	const listReady = getInvoices().then(db => createList(db));
 	const [List] = await Promise.all([listReady, parsed]);
 
 	render(
