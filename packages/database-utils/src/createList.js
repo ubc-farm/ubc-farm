@@ -1,26 +1,32 @@
 import { createElement } from 'react';
-import { render } from 'react-dom';
-import { parsed } from 'document-promises';
-import { configureStore } from '@ubc-farm/database-utils';
 import { connect } from 'react-redux';
 import ReactTable from 'react-table';
+import configureStore from './internal-store/configureStore.js';
 
 const ConnectedTable = connect(
 	state => ({ data: state.data || [] })
 )(ReactTable);
 
+function getTdProps(state, rowInfo) {
+	return {
+		onClick() {
+			if (!rowInfo) return;
+			window.location.href = `./edit?id=${rowInfo.row._id}`;
+		}
+	};
+}
+
 /**
- * @param {Promise<PouchDB>} database
- * @param {object} props
+ * Table element to display items from a PouchDB database.
+ * @param {PouchDB} db
+ * @returns {React.SFC<any>}
  */
-export default async function createList(database, props) {
-	const [db] = await Promise.all([database, parsed]);
+export default function createList(db) {
 	const store = configureStore(db, {
 		changeFilter(doc) { return !doc._id.startsWith('_design/'); }
 	});
 
-	render(
-		createElement(ConnectedTable, Object.assign({ store }, props)),
-		document.getElementById('reactRoot'),
-	);
+	const PouchList = props =>
+		createElement(ConnectedTable, Object.assign({ store, getTdProps }, props));
+	return PouchList;
 }

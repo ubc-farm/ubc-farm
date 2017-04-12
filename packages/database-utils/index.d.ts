@@ -58,3 +58,8 @@ export function configureStore<T>(
 	db: PouchDB.Database<T>,
 	options?: ConfigureStoreOptions
 ): redux.Store<{ data: T[] }>
+
+/**
+ * Table element to display items from a PouchDB database.
+ */
+export function createList(db: PouchDB.Database<any>): React.SFC<any>

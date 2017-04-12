@@ -1,13 +1,17 @@
 {
   "name": "@ubc-farm/database-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "module": "out/index.es.js",
   "main": "out/index.cjs.js",
   "types": "index.d.ts",
+  "dependencies": {
+    "react-redux": "^5.0.4",
+    "react-table": "^5.5.0",
+    "redux": "^3.6.0"
+  },
   "devDependencies": {
     "pouch-redux-middleware": "^0.6.1",
     "react": "^15.4.2",
-    "redux": "^3.6.0",
     "rollup": "^0.41.4"
   },
   "peerDependencies": {

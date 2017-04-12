@@ -1,30 +1,18 @@
 import { createElement } from 'react';
-import { getPeople, getRole } from '@ubc-farm/databases';
+import { getPeople } from '@ubc-farm/databases';
+import { render } from 'react-dom';
+import { parsed } from 'document-promises';
 import createList from './createList';
+import columns from './columns';
 
-const columns = [
-	{
-		header: 'Name',
-		accessor: 'name',
-	},
-	{
-		header: 'Role',
-		id: 'role',
-		accessor: getRole,
-	},
-	{
-		header: 'Email',
-		accessor: 'email',
-		render({ value }) {
-			if (value == null) return '';
-			return <a href={`mailto:${value}`} title="Send email">{value}</a>;
-		}
-	},
-	{
-		header: 'Phone',
-		id: 'phone.number',
-		accessor: d => d.phone ? d.phone.number : null,
-	},
-];
+export default async function main() {
+	const listReady = getPeople().then(db => createList(db));
+	const [List] = await Promise.all([listReady, parsed]);
 
-createList(getPeople(), { columns });
+	render(
+		createElement(List, { columns }),
+		document.getElementById('reactRoot')
+	);
+}
+
+
