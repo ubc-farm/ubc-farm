@@ -5,7 +5,9 @@
   "main": "out/index.cjs.js",
   "types": "index.d.ts",
   "devDependencies": {
+    "pouch-redux-middleware": "^0.6.1",
     "react": "^15.4.2",
+    "redux": "^3.6.0",
     "rollup": "^0.41.4"
   },
   "peerDependencies": {

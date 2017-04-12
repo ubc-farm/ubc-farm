@@ -1,5 +1,6 @@
 import * as PouchDB from 'pouchdb';
 import * as React from 'react';
+import * as redux from 'redux';
 
 interface ConnectAllOptions {
 	rowKey?: string;
@@ -45,3 +46,15 @@ export function connectAll<Content, Value>(
 export function connectAll<Content>(
 	options?: ConnectAllOptions
 ): (WrappedComponent: React.ReactType) => React.ComponentClass<any>
+
+
+interface ConfigureStoreOptions<T> {
+	changeFilter?(doc: T): boolean,
+	handleResponse?(error?: Error | null, data?: any): Promise<void> | void,
+	initialBatchDispatched?(): void,
+}
+
+export function configureStore<T>(
+	db: PouchDB.Database<T>,
+	options?: ConfigureStoreOptions
+): redux.Store<{ data: T[] }>

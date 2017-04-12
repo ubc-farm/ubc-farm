@@ -1,27 +1,23 @@
 import { createElement } from 'react';
 import { render } from 'react-dom';
 import { parsed } from 'document-promises';
-import { getPeople, Person } from '@ubc-farm/databases';
+import { getPeople } from '@ubc-farm/databases';
+import { configureStore } from '@ubc-farm/database-utils';
+import { connect } from 'react-redux';
 import PeopleList from './PeopleList';
 
-function renderTable(data: Person[]) {
-	render(
-		createElement(PeopleList, { data }),
-		document.getElementById('reactRoot'),
-	);
-}
+const ConnectedPeopleList = connect(
+	state => ({ data: state.data })
+)(PeopleList);
 
 export default async function createPeopleList() {
-	const peopleReady = getPeople();
-	await parsed;
-	renderTable([]);
-
-	const db = await peopleReady;
-	const { rows } = await db.allDocs({
-		include_docs: true,
-		startkey: 'person/',
-		endkey: 'person/\uffff',
+	const [db] = await Promise.all([getPeople(), parsed]);
+	const store = configureStore(db, {
+		changeFilter(doc) { return !doc._id.startsWith('_design/'); }
 	});
 
-	renderTable(rows.map(row => row.doc as Person));
+	render(
+		createElement(ConnectedPeopleList, { store }),
+		document.getElementById('reactRoot'),
+	);
 }

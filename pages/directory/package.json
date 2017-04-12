@@ -5,6 +5,7 @@
   "ubc-farm": {},
   "dependencies": {
     "@ubc-farm/databases": "^3.0.0",
+    "@ubc-farm/database-utils": "^1.0.0",
     "@ubc-farm/react-doc-editor": "^1.0.0",
     "@ubc-farm/react-inputs": "^2.0.0",
     "@ubc-farm/react-pouch-table": "^2.0.0",
@@ -12,9 +13,10 @@
     "document-promises": "^3.1.2",
     "react": "^15.4.2",
     "react-addons-shallow-compare": "^15.4.2",
-    "react-bootstrap-table": "^3.1.7",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.4",
     "react-reformed": "^1.0.1",
+    "react-table": "^5.5.0",
     "react-virtualized": "^9.0.0",
     "recompose": "^0.22.0",
     "shortid": "^2.2.8"

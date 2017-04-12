@@ -30,9 +30,14 @@ export default class DocForm extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	async componentDidMount() {
+	componentDidMount() {
 		if (this.props.noInit) return;
+		this.reloadDoc();
+	}
+
+	async reloadDoc() {
 		const { db, setModel, onError } = this.props;
+		this.setState({ loading: true });
 
 		try {
 			const model = await db.get(this.id);
@@ -50,12 +55,17 @@ export default class DocForm extends Component {
 		e.preventDefault();
 
 		const { db, model, onError, onSuccess } = this.props;
+		this.setState({ loading: true });
+
 		try {
 			const res = await db.put(model);
+			await this.reloadDoc();
 			if (onSuccess) onSuccess(res);
 		} catch (err) {
 			if (onError) onError(err);
 		}
+
+		this.setState({ loading: false });
 	}
 
 	render() {

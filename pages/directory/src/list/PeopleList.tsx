@@ -1,33 +1,37 @@
 import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { Person, getRole } from '@ubc-farm/databases';
-import { BootstrapTable, TableHeaderColumn as Column } from 'react-bootstrap-table';
+import ReactTable from 'react-table';
 
 const PeopleList: SFC<{ data: Person[] }> = ({ data }) => (
-	<BootstrapTable
-		className="table"
-		data={data}
+	<ReactTable
+		data={data || []}
+		loading={!data}
 		keyField="_id"
-	>
-		<Column dataField="name">Name</Column>
-		<Column
-			label="Role" dataField="role"
-			dataFormat={(cell, row: Person) => getRole(row)}
-		>
-			Role
-		</Column>
-		<Column
-			dataField="email"
-			dataFormat={(email) => {
-				if (email == null) return '';
-				return <a href={`mailto:${email}`} title="Send email">{email}</a>;
-			}}
-		>
-			Email
-		</Column>
-		<Column dataField="phone.number">
-			Phone
-		</Column>
-	</BootstrapTable>
+		columns={[
+			{
+				header: 'Name',
+				accessor: 'name',
+			},
+			{
+				header: 'Role',
+				id: 'role',
+				accessor: getRole,
+			},
+			{
+				header: 'Email',
+				accessor: 'email',
+				render({ value }) {
+					if (value == null) return '';
+					return <a href={`mailto:${value}`} title="Send email">{value}</a>;
+				}
+			},
+			{
+				header: 'Phone',
+				id: 'phone.number',
+				accessor: d => d.phone ? d.phone.number : null,
+			},
+		]}
+	/>
 )
 
 export default PeopleList;
