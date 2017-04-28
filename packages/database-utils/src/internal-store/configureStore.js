@@ -3,7 +3,8 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer, { deleteDoc, insertDoc, updateDoc } from './reducer.js';
 
 /**
- * Builds a redux store that uses pouch-redux-middleware
+ * Builds a redux store that contains rows from a PouchDB database.
+ * Rows are loaded into the `data` property of the state.
  * @param {PouchDB.Database} db
  */
 export default function configureStore(db, {
