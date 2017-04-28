@@ -1,3 +1,4 @@
+// @ts-check
 import { createElement, Component } from 'react'; /** @jsx createElement */
 import { InfiniteLoader, Table } from 'react-virtualized';
 

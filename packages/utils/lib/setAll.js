@@ -1,7 +1,7 @@
 /**
  * Acts like Object.assign, but for Map objects instead.
  * @param {Map} target
- * @param {...Iterable<K, V>} sources
+ * @param {...(Iterable<[any, any]>|object)} sources
  * @returns {Map} target
  */
 export default function setAll(target, ...sources) {
@@ -11,6 +11,7 @@ export default function setAll(target, ...sources) {
 
 	for (const source of sources) {
 		if (typeof source[Symbol.iterator] === 'function') {
+			// @ts-ignore
 			for (const [key, value] of source) target.set(key, value);
 		} else if (typeof source === 'object' && source != null) {
 			Object.keys(source).forEach(key => target.set(key, source[key]));

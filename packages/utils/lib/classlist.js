@@ -2,6 +2,7 @@
  * A simple javascript utility for conditionally joining classNames together.
  * Slight ES6 adjustments from the fork.
  * @see https://github.com/JedWatson/classnames
+ * @returns {string}
  */
 export default function classList(...classes) {
 	const list = [];

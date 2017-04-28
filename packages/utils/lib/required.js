@@ -15,6 +15,7 @@
  *   return 'Hello ' + target;
  * }
  * hello() //TypeError: Missing required function parameter target
+ * @returns {never}
  */
 export default function required(message) {
 	const append = message ? ` ${message}` : '';

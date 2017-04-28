@@ -18,8 +18,8 @@ function getTdProps(state, rowInfo) {
 
 /**
  * Table element to display items from a PouchDB database.
- * @param {PouchDB} db
- * @returns {React.SFC<any>}
+ * @param {PouchDB.Database} db
+ * @returns {React.StatelessComponent}
  */
 export default function createList(db) {
 	const store = configureStore(db, {

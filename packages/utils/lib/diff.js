@@ -5,15 +5,15 @@ export const REMOVED = Symbol('Removed item');
 /**
  * Returns an object only containing properties that have changed between
  * the two given objects.
- * @param {Object} oldStore
- * @param {Object} newStore
- * @returns {Object[]} an object with only updated keys. Removed keys are
+ * @param {object} oldStore
+ * @param {object} newStore
+ * @returns {object[]} an object with only updated keys. Removed keys are
  * given a value of the REMOVED Symbol.
  */
 export default function diff(oldStore, newStore) {
 	if (oldStore === newStore) return undefined;
 	if (typeof newStore !== typeof oldStore) return newStore;
-	else if (Array.isArray(newStore)) {
+	else if (Array.isArray(newStore) && Array.isArray(oldStore)) {
 		const clone = [...newStore];
 		return oldStore.reduce((difference, oldValue) => {
 			const newIndex = clone.indexOf(oldValue);

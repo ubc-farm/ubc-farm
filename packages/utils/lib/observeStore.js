@@ -1,6 +1,7 @@
+// @ts-nocheck
 /**
  * Utility for running function only when the given redux state changes.
- * @param {Store} store - store created by redux
+ * @param {any} store - store created by redux
  * @param {function} select - selector that takes the state as a param
  * and returns a subset of the state. To activate on any state change,
  * the function would be state => state.

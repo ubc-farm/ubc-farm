@@ -12,7 +12,8 @@
   "devDependencies": {
     "pouch-redux-middleware": "^0.6.1",
     "react": "^15.4.2",
-    "rollup": "^0.41.4"
+    "rollup": "^0.41.4",
+    "typescript": "^2.3.1"
   },
   "peerDependencies": {
     "react": "^15.4.2",

@@ -14,9 +14,9 @@ const identity = doc => doc;
  * be done externally. Changes to the database are automatically reflected in
  * the component.
  *
- * @param {function} [transformer] a function that transforms a document
+ * @param {function|any} [transformer] a function that transforms a document
  * into a value stored in a prop for the child component. (object, string) => T
- * @param {object} [options]
+ * @param {any} [options]
  * @param {string} [options.rowKey=rows]
  * @param {string} [options.loadingKey=loading]
  * @param {boolean} [options.changes=true]

@@ -36,7 +36,7 @@ export default class Field extends Component {
 
 	render() {
 		const id = this.getID();
-		const { label, children, name } = this.props;
+		const { children, name } = this.props;
 
 		const inputProps = {};
 		if (!this.props.htmlFor) inputProps.id = id;

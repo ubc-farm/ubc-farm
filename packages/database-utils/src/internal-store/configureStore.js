@@ -2,10 +2,14 @@ import PouchMiddleware from 'pouch-redux-middleware';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer, { deleteDoc, insertDoc, updateDoc } from './reducer.js';
 
+/**
+ * Builds a redux store that uses pouch-redux-middleware
+ * @param {PouchDB.Database} db
+ */
 export default function configureStore(db, {
-	changeFilter,
-	handleResponse,
-	initialBatchDispatched,
+	changeFilter = undefined,
+	handleResponse = undefined,
+	initialBatchDispatched = undefined,
 } = {}) {
 	const middlewarePath = {
 		path: '/data',

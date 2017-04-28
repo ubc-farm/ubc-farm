@@ -19,7 +19,7 @@ export default class Money {
 	constructor(thing) {
 		let value = null;
 
-		if (!(thing instanceof this.constructor)) {
+		if (!(thing instanceof Money)) {
 			switch (typeof thing) {
 				case 'number':
 					value = floatToCents(thing);
@@ -39,7 +39,7 @@ export default class Money {
 						if (!(err instanceof TypeError)) throw err;
 					} finally {
 						if (typeof val !== 'number' && typeof val !== 'string') break;
-						value = new this.constructor(val).value;
+						value = new Money(val).value;
 					}
 					break;
 				}
@@ -51,7 +51,11 @@ export default class Money {
 
 		if (value == null) value = NaN;
 
-		Reflect.defineProperty(this, 'value', { value });
+		/**
+		 * @member Money#value
+		 * @type {number}
+		 */
+		Object.defineProperty(this, 'value', { value });
 	}
 
 	/**

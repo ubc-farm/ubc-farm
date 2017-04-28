@@ -1,3 +1,4 @@
+// @ts-ignore
 const { Data } = window.google.maps;
 
 function omit(obj, ...keys) {
@@ -23,10 +24,10 @@ export function defaultToFeature(doc) {
 /**
  * Observes a PouchDB database and adds any new documents to the Google Map
  * data layer, or deleted them if removed.
- * @param {PouchDB} db
+ * @param {PouchDB.Database} db
  * @param {google.maps.Data} mapDataLayer
- * @param {function} options.toFeature (Object) => GeoJSON.Feature
- * @returns {Promise<EventEmitter>} returns changes emitter.
+ * @param {function} options.toFeature (object) => GeoJSON.Feature
+ * @returns {Promise} returns changes emitter.
  */
 export default async function observeDatabase(
 	db,
@@ -55,7 +56,8 @@ export default async function observeDatabase(
 			const feature = mapDataLayer.getFeatureById(id);
 			if (feature != null) mapDataLayer.remove(feature);
 		} else {
-			mapDataLayer.addGeoJson(toFeature(doc));
+			const feature = toFeature(doc);
+			if (feature) mapDataLayer.addGeoJson(feature);
 		}
 	});
 }

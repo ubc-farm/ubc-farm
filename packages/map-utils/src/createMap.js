@@ -14,6 +14,7 @@ const defaultStyle = {
 
 /**
  * Creates a map on the #googleMap element
+ * @returns {google.maps.Map}
  */
 export default function createMap(style = defaultStyle) {
 	return new Map(document.getElementById('googleMap'), style);

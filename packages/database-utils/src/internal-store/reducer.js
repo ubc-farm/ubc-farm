@@ -5,8 +5,8 @@ const UPDATE_DOC = 'database-utils/UPDATE-DOC';
 /**
  * Binary search function for state.
  * @see https://pouchdb.com/2015/02/28/efficiently-managing-ui-state-in-pouchdb.html
- * @param {Array<T>} array
- * @param {T} docId
+ * @param {Array<{ _id: string }>} array
+ * @param {string} docId
  * @returns {number}
  */
 function binarySearch(array, docId) {

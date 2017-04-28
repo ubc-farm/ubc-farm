@@ -3,9 +3,10 @@ import id from './id.js';
 /**
  * Transforms an array of objects into a keyed map, using the specified
  * key property as the key used in the Map.
- * @param {Array<Object>} array
+ * @template T
+ * @param {Array<T>} array
  * @param {string} [idKey]
- * @returns {Map<string, Object>}
+ * @returns {Map<string, T>}
  */
 export function arrayToMap(array, idKey) {
 	return array.reduce((map, obj) => (
@@ -16,9 +17,10 @@ export function arrayToMap(array, idKey) {
 /**
  * Transforms an array of objects into a keyed object, using the specified
  * key property as the key used in the new object.
- * @param {Array<Object>} array
+ * @template T
+ * @param {Array<T>} array
  * @param {string} [idKey]
- * @returns {Object}
+ * @returns {{ [key: string]: t }}
  */
 export function arrayToObjectMap(array, idKey) {
 	if (!Array.isArray(array)) {
@@ -34,7 +36,7 @@ export function arrayToObjectMap(array, idKey) {
 /**
  * Transforms a map into an object. Non-string and non-number keys are ignored.
  * @param {Map} map
- * @returns {Object}
+ * @returns {object}
  */
 export function mapToObject(map) {
 	const obj = {};
