@@ -6,17 +6,26 @@ import { getLocations, getPlants, Field } from '@ubc-farm/databases';
 async function getCropQuantities(
 	fieldDB: PouchDB.Database<Field>
 ): Promise<Map<string, number>> {
+	// Get all documents with a crop property
 	const { docs } = await fieldDB.find({
 		selector: { crop: { $exists: true } },
 		fields: ['crop.variety', 'crop.quantity'],
 	});
 
-	return docs.reduce((map, doc: Field) => {
-		if (!doc.crop || !doc.crop.variety) return map;
-
+	const amountsOfCrops = new Map<string, number>();
+	for (const doc of docs) {
+		// Skip items without a variety property
+		if (!doc.crop || !doc.crop.variety) continue;
 		const { variety, quantity = 0 } = doc.crop;
-		return map.set(variety, (map.get(variety) || 0) + quantity);
-	}, new Map());
+
+		// Add the quantity to the total quantity calculated so far for this
+		// crop variety
+		let totalSoFar = amountsOfCrops.get(variety) || 0;
+		totalSoFar += quantity;
+		amountsOfCrops.set(variety, totalSoFar);
+	}
+
+	return amountsOfCrops;
 }
 
 /**
