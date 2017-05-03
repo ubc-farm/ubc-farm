@@ -3,6 +3,7 @@ export { default as chain } from './chain.js';
 export { default as classlist } from './classlist.js';
 export * from './convertToMap.js';
 export { default as coroutine } from './coroutine.js';
+export { default as DefaultMap } from './DefaultMap.js';
 export { default as diff, REMOVED } from './diff.js';
 export { default as id } from './id.js';
 export { default as setAll } from './setAll.js';
