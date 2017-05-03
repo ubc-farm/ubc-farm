@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/react-db-googlemap",
-  "version": "1.0.0",
+  "version": "0.0.0",
 	"main": "out/index.cjs.js",
 	"module": "out/index.es.js",
 	"dependencies": {

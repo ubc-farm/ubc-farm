@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export interface ColumnProps<T, Row> {
 	field: string;
-	children?: React.ReactType;
+	// children?: React.ReactType;
 	isKey?: boolean;
 	format?: (cell: T, row: Row) => React.ReactType;
 	hidden?: boolean;
@@ -14,7 +14,7 @@ export interface ColumnProps<T, Row> {
 export const Column: React.SFC<ColumnProps<any, any>>;
 
 export interface TableProps<Row> {
-	children: Column[];
+	// children: Column[];
 	tableData: Row[] | Set<Row> | Map<string, Row> | { [key: string]: Row };
 	keyField?: string;
 	rowClassName?: string | ((row: Row, rowIndex: number) => string);

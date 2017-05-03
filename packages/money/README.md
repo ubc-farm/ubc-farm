@@ -1,3 +1,7 @@
+# money
+Code to work with money. Money values should be stored as an integer representing
+cents, and some functions for helping with that are provided here.
+
 ## Classes
 
 <dl>
@@ -28,9 +32,13 @@ If value is NaN, an empty string is returned.</p>
 <a name="Money"></a>
 
 ## Money
-A class used to represent money. Internally the money value is storedas cents, so most of the time it will be an integer which can be usedfor math without floating point troubles.It can also be formatted with the toString() function, utilizingNumber.toLocaleString().
+A class used to represent money. Internally the money value is stored
+as cents, so most of the time it will be an integer which can be used
+for math without floating point troubles.
+It can also be formatted with the toString() function, utilizing
+Number.toLocaleString().
 
-**Kind**: global class  
+**Kind**: global class
 
 * [Money](#Money)
     * [new Money(thing)](#new_Money_new)
@@ -59,25 +67,25 @@ A class used to represent money. Internally the money value is storedas cents, 
 ### money.dollars
 Same as getDollars()
 
-**Kind**: instance property of <code>[Money](#Money)</code>  
+**Kind**: instance property of <code>[Money](#Money)</code>
 <a name="Money+cents"></a>
 
 ### money.cents
 Same as getCents(0)
 
-**Kind**: instance property of <code>[Money](#Money)</code>  
+**Kind**: instance property of <code>[Money](#Money)</code>
 <a name="Money+getDollars"></a>
 
 ### money.getDollars() ⇒ <code>number</code>
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - the dollar value of this money  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**Returns**: <code>number</code> - the dollar value of this money
 <a name="Money+getCents"></a>
 
 ### money.getCents(digits) ⇒ <code>number</code>
 Returns the cents of this money.
 
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - will always be between -100 and 100  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**Returns**: <code>number</code> - will always be between -100 and 100
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -86,24 +94,28 @@ Returns the cents of this money.
 <a name="Money+toInteger"></a>
 
 ### money.toInteger() ⇒ <code>number</code>
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - the integer value of this money, strippingany fractional cents. Useful for doing money related math,as integers won't suffer from floating point problems.  
-**Example**  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**Returns**: <code>number</code> - the integer value of this money, stripping
+any fractional cents. Useful for doing money related math,
+as integers won't suffer from floating point problems.
+**Example**
 ```js
 new Money('$10.99').toInteger() === 1099
 ```
 <a name="Money+valueOf"></a>
 
 ### money.valueOf() ⇒ <code>number</code>
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>number</code> - float representation of the moneyWill be NaN if the internal value is null.  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**Returns**: <code>number</code> - float representation of the money
+Will be NaN if the internal value is null.
 <a name="Money+toString"></a>
 
 ### money.toString([locale], [options])
-Returns a formatted currency string.If value is NaN, an empty string is returned.
+Returns a formatted currency string.
+If value is NaN, an empty string is returned.
 
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -115,29 +127,30 @@ Returns a formatted currency string.If value is NaN, an empty string is returne
 <a name="Money+toJSON"></a>
 
 ### money.toJSON() ⇒ <code>string</code>
-**Kind**: instance method of <code>[Money](#Money)</code>  
-**Returns**: <code>string</code> - The money as a simple string  
+**Kind**: instance method of <code>[Money](#Money)</code>
+**Returns**: <code>string</code> - The money as a simple string
 <a name="Money.fromInteger"></a>
 
 ### Money.fromInteger(cents) ⇒ <code>[Money](#Money)</code>
-**Kind**: static method of <code>[Money](#Money)</code>  
-**Returns**: <code>[Money](#Money)</code> - with a value based off the provided cent amount  
+**Kind**: static method of <code>[Money](#Money)</code>
+**Returns**: <code>[Money](#Money)</code> - with a value based off the provided cent amount
 
 | Param | Type | Description |
 | --- | --- | --- |
 | cents | <code>number</code> | an integer like that returned by Money#toInteger |
 
-**Example**  
+**Example**
 ```js
 Money.fromInteger(1099) == new Money('$10.99')
 ```
 <a name="centsToString"></a>
 
 ## centsToString(cents, [locale], [options])
-Returns a formatted currency string.If value is NaN, an empty string is returned.
+Returns a formatted currency string.
+If value is NaN, an empty string is returned.
 
-**Kind**: global function  
-**See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString  
+**Kind**: global function
+**See**: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -152,7 +165,7 @@ Returns a formatted currency string.If value is NaN, an empty string is returne
 ## stringToCents(str) ⇒ <code>number</code>
 Converts a string representing money to a number representing cents
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -164,18 +177,18 @@ Converts a string representing money to a number representing cents
 ## floatToCents(float)
 Converts a float representing dollars to a number representing cents
 
-**Kind**: global function  
+**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
 | float | <code>number</code> | to convert into cents. |
 | [options.trunc] | <code>boolean</code> | truncate fractional cents. If true, an integer will be returned. |
 
-**Example**  
+**Example**
 ```js
 floatToCents(1.99) === 199
 ```
-**Example**  
+**Example**
 ```js
 floatToCents(8.959, { trunc: false }) === 895.9
 ```

@@ -1,6 +1,6 @@
 {
   "name": "@ubc-farm/react-doc-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React element to edit a PouchDB document in a form",
   "module": "out/index.es.js",
   "main": "out/index.cjs.js",

@@ -2,6 +2,8 @@ import { createElement, SFC } from 'react'; /** @jsx createElement */
 import { AutoSizedTable, Column, AutoSizedPouchTableProps } from '@ubc-farm/react-pouch-table';
 import { getLocationString, getAcres } from '@ubc-farm/databases';
 
+// TODO: react-pouch-table should be replaced with database-utils' createList
+
 /**
  * A component that displays a list of all fields in the farm.
  */
