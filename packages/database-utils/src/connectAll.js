@@ -69,6 +69,9 @@ export default function connectAll(transformer, options) {
 				this.initDatabaseSubscription();
 			}
 
+			/**
+			 * If the db prop changes, update the database and clear database errors.
+			 */
 			componentWillReceiveProps(nextProps) {
 				if (this.db !== nextProps.db) {
 					this.db = nextProps.db;
@@ -79,24 +82,32 @@ export default function connectAll(transformer, options) {
 				}
 			}
 
+			/**
+			 * When the component unmounts, delete the change event listener.
+			 */
 			componentWillUnmount() {
 				if (this.changes) this.changes.cancel();
 			}
 
+			/**
+			 * Get the current state of the database and initializes a change
+			 * listener for futher updates
+			 */
 			initDatabaseSubscription() {
 				const ready = (async () => {
 					try {
 						const res = await this.db.allDocs(allDocsOptions);
-						const map = res.rows.map(row => [row.id, transformer(row.doc, row.id)]);
+						const map = new Map(res.rows.map(
+							row => [row.id, transformer(row.doc, row.id)]
+						));
 
-						let rows;
-						if (useMap) rows = new Map(map);
-						else {
-							rows = {};
-							map.forEach(([k, v]) => { rows[k] = v; });
+						if (useMap) {
+							this.setState({ [rowKey]: map });
+						} else {
+							const rows = {};
+							map.forEach((k, v) => { rows[k] = v; });
+							this.setState({ [rowKey]: rows });
 						}
-
-						this.setState({ [rowKey]: rows });
 					} catch (err) {
 						this.docError = err;
 					}
@@ -114,6 +125,10 @@ export default function connectAll(transformer, options) {
 				}
 			}
 
+			/**
+			 * Deletes row from the state object
+			 * @param {string} id
+			 */
 			removeRow(id) {
 				const rows = this.state[rowKey];
 				let newRows;
@@ -128,6 +143,11 @@ export default function connectAll(transformer, options) {
 				this.setState({ [rowKey]: newRows });
 			}
 
+			/**
+			 * Sets data for a row in the state object
+			 * @param {string} id
+			 * @param {any} data
+			 */
 			updateRow(id, data) {
 				if (data == null) return;
 

@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 import ReactTable from 'react-table';
 import configureStore from './internal-store/configureStore.js';
 
+/** Wrapper around ReactTable for redux */
 const ConnectedTable = connect(
 	state => ({ data: state.data || [] })
 )(ReactTable);
 
+/**
+ * Generates click events for rows in the table
+ * @param {any} state
+ * @param {{row:{_id: string}}} rowInfo
+ * @returns {{onClick: () => void)}}
+ */
 function getTdProps(state, rowInfo) {
 	return {
 		onClick() {
@@ -26,7 +33,9 @@ export default function createList(db) {
 		changeFilter(doc) { return !doc._id.startsWith('_design/'); }
 	});
 
-	const PouchList = props =>
-		createElement(ConnectedTable, Object.assign({ store, getTdProps }, props));
+	const PouchList = props => createElement(ConnectedTable,
+		Object.assign({ store, getTdProps }, props)
+	);
+
 	return PouchList;
 }
