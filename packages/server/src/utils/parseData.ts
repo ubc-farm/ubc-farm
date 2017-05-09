@@ -4,6 +4,7 @@ import { readFile } from './denodeify';
 
 /**
  * Loads and parses YAML and JSON files, and returns parsed content.
+ * Uses js-yaml for YAML, and `JSON.parse` for JSON.
  * @param path to file
  */
 export default async function parseData(path: string): Promise<any> {

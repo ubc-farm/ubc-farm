@@ -63,16 +63,12 @@ function compileViews(options: { from: string, to: string }): Promise<void>
 ```
 
 ## compileAll
-Runs `compileViews` in every packages' view folder (including this one).
-The files can optionally be watched. By default, the view folder is a
-sibling of the www folder named 'views'. This can be changed by altering
-the `viewFolder` option.
+Runs `compileViews` in every packages' view folder and optionally watches them.
+ * Takes results from `listPagePackages` to pick paths to watch.
 
 ```typescript
-type GetViewFolder = (packageName: string) => Promise<string> | string;
-
-function compileAll(options?: { viewFolder?: GetViewFolder, watch: true }): Promise<fs.FSWatcher[]>
-function compileAll(options?: { viewFolder?: GetViewFolder }): Promise<void>
+function compileAll(options?: { watch: true }): Promise<fs.FSWatcher[]>
+function compileAll(options?: { watch?: boolean }): Promise<void>
 ```
 
 

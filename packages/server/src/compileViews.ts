@@ -4,7 +4,7 @@ import { writeFile } from './utils/denodeify';
 import walkFolder from './utils/walkFolder';
 import prepareData from './utils/prepareData';
 import compileFile from './utils/compileFile';
-import listPagePackages, { PageData } from './listPagePackages'
+import listPagePackages from './listPagePackages'
 import readData from './readData';
 
 interface ViewOptions {
@@ -14,32 +14,32 @@ interface ViewOptions {
 }
 
 /**
- * Compiles the view files in the given folder and saves them in the given
- * output folder. Can be set to watch for futher changes.
+ * Compiles the view files from the given folder and saves them to the given output
+ * folder. Can be set to watch for futher changes. If watch is true, the files
+ * in the from folder will be watched and recompiled when changes are made.
+ * A FSWatcher object is returned.
+ * If a folder starts with an underscore, it is ignored.
  */
-async function compileViews(
-	options: { watch: true } & ViewOptions
-): Promise<FSWatcher>
-async function compileViews(
-	options: ViewOptions
-): Promise<void>
-async function compileViews(
-	options: ViewOptions
-): Promise<FSWatcher | void> {
+async function compileViews(options: { watch: true } & ViewOptions): Promise<FSWatcher>
+async function compileViews(options: ViewOptions): Promise<void>
+async function compileViews(options: ViewOptions): Promise<FSWatcher | void> {
 	const { from, to } = options;
 
-	const results: any[] = await Promise.all([
+	const [paths, data, pages] = await Promise.all([
 		walkFolder(from, entryInfo => entryInfo.fullPath),
 		readData(),
 		listPagePackages(),
 		prepareData(),
 	]);
-	const paths: string[] = results[0];
-	const data: any = results[1];
-	const pages: PageData[] = results[2];
 
 	const context = { data: { ...data, pages } };
 
+	/**
+	 * Copies a file from the specified source path.
+	 * The output path is determined based on the
+	 * file body and path (see utils/compileFile).
+	 * Files starting with '_' are ignored.
+	 */
 	async function copyFile(fromFile: string): Promise<void> {
 		const shouldIgnore = relative(from, fromFile).startsWith('_');
 		if (shouldIgnore) return;

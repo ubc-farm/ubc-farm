@@ -8,6 +8,10 @@ import {
 import * as entryStream from 'readdirp';
 import * as resolve from 'resolve';
 
+/**
+ * Functions in this module use promises rather than callbacks.
+ */
+
 type FileDescriptor = string | Buffer | number;
 
 interface ReadFile {
@@ -15,6 +19,7 @@ interface ReadFile {
 	(file: FileDescriptor, encoding: string): Promise<string>
 }
 
+/** Promise-returning version of `fs.readFile` */
 const readFileAsync = denodeify(readFile) as ReadFile;
 
 interface WriteFile {
@@ -22,6 +27,7 @@ interface WriteFile {
 	(file: FileDescriptor, data: Buffer | Uint8Array): Promise<void>
 }
 
+/** Promise-returning version of `fs.writeFile` */
 const writeFileAsync = denodeify(writeFile) as WriteFile;
 
 export interface EntryInfo {
@@ -35,6 +41,10 @@ export interface EntryInfo {
 
 type Filter = string | string[] | ((entryInfo: EntryInfo) => boolean);
 
+/**
+ * Promise-returning version of `require('readdirp')`
+ * @param fileProcessed called when a file is found
+ */
 const entryStreamAsync = denodeify(entryStream) as (
 	options: {
 		root?: string,
@@ -47,6 +57,7 @@ const entryStreamAsync = denodeify(entryStream) as (
 	fileProcessed: (entryInfo: EntryInfo) => void,
 ) => Promise<EntryInfo[]>;
 
+/** Promise-returning version of `require('resolve')` */
 const resolveAsync = denodeify(resolve) as (id: string, opts?: {
 	basedir?: string,
 	package?: any,

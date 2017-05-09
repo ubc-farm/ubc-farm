@@ -3,7 +3,10 @@ import parseData from './utils/parseData';
 import walkFolder from './utils/walkFolder';
 
 /**
- * Loads data from the data directory and returns it.
+ * YAML and JSON data files in the data folder represent information that is
+ * provided to the handlebars templates. `readData` returns all the data in that
+ * folder. The keys of the returned object correspond to the filenames of each
+ * file in the data folder.
  */
 export default async function readData(): Promise<{ [filename: string]: any }> {
 	const result: { [filename: string]: any } = {};
