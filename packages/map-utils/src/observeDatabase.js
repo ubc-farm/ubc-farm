@@ -36,7 +36,7 @@ export default async function observeDatabase(
 		toFeature = defaultToFeature,
 		allDocsOptions = { include_docs: true },
 		changeOptions = { include_docs: true, live: true },
-	} = {},
+	} = {}
 ) {
 	if (!(mapDataLayer instanceof Data)) {
 		throw new TypeError('mapDataLayer must be google.maps.Data');

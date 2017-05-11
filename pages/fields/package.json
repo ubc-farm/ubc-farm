@@ -5,19 +5,22 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
-    "@ubc-farm/databases": "^3.0.0",
     "@ubc-farm/database-utils": "^1.0.0",
+    "@ubc-farm/databases": "^3.0.0",
     "@ubc-farm/map-utils": "^1.0.2",
     "@ubc-farm/react-pouch-table": "^2.0.0",
     "@ubc-farm/utils": "*",
     "document-promises": "^3.0.0",
     "lodash": "^4.17.4",
-    "shortid": "^2.2.8",
+    "node-gyp": "^3.6.1",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-redux": "^4.4.5",
     "react-virtualized": "^9.4.2",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "reselect": "^2.5.3"
+    "reselect": "^2.5.3",
+    "shortid": "^2.2.8"
   },
   "peerDependencies": {
     "react": "^15.4.2",

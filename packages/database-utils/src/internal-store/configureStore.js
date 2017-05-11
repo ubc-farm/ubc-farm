@@ -34,7 +34,7 @@ export default function configureStore(db, {
 	const store = createStore(
 		rootReducer,
 		undefined,
-		applyMiddleware(PouchMiddleware(middlewarePath)),
+		applyMiddleware(PouchMiddleware(middlewarePath))
 	);
 
 	return store;

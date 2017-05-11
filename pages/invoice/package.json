@@ -5,15 +5,19 @@
   "private": true,
   "ubc-farm": {},
   "dependencies": {
+    "@ubc-farm/database-utils": "^1.0.0",
     "@ubc-farm/databases": "^3.0.0",
     "@ubc-farm/money": "^3.1.1",
-    "@ubc-farm/react-inputs": "^1.0.1",
     "@ubc-farm/react-doc-editor": "^1.0.0",
+    "@ubc-farm/react-inputs": "^1.0.1",
     "@ubc-farm/utils": "^4.3.1",
     "document-promises": "^3.1.2",
     "moment": "^2.17.1",
+    "node-gyp": "^3.6.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-table": "^5.6.0",
+    "style-loader": "^0.17.0"
   },
   "devDependencies": {
     "typescript": "^2.2.1",
