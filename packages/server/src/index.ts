@@ -9,5 +9,5 @@ export {
 	listPagePackages,
 	readData,
 	compileViews,
-	compileAll,
+	compileAll
 }

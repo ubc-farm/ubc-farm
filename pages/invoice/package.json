@@ -28,4 +28,5 @@
     "prepublish": "npm run prepare",
     "ts": "tsc --noEmit || exit 0"
   }
+  
 }
